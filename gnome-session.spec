@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.8.0
-Release: 4
+Release: 6
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/gnome-session/2.7/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -47,6 +47,7 @@ Patch3: gnome-session-2.0.5-dithering.patch
 Patch4: gnome-session-2.2.0.2-splash-repaint.patch
 Patch5: gnome-session-2.7.4-read-desktop-entries.patch
 Patch6: gnome-session-2.8.0-null-program-name.patch
+Patch7: gnome-session-2.8.0-fix-tamil-translation.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -76,6 +77,7 @@ GNOME components and handles logout and saving the session.
 %patch4 -p1 -b .splash-repaint
 %patch5 -p1 -b .read-desktop-entries
 %patch6 -p1 -b .null-program-name
+%patch7 -p1 -b .fix-tamil-translation
 
 %build
 
@@ -150,6 +152,13 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Tue Nov 02 2004 Ray Strode <rstrode@redhat.com> 2.8.0-6
+- Rebuild for devel branch
+
+ * Tue Nov 02 2004 Ray Strode <rstrode@redhat.com> 2.8.0-5
+- Convert Tamil translation to UTF8 
+  (Patch from Lawrence Lim <llim@redhat.com>, bug 135351)
+
 * Fri Oct 08 2004 Ray Strode <rstrode@redhat.com> 2.8.0-4
 - Add g-v-m to default session since it wasn't already (?).
 - Remove g-v-m from default session on s390
