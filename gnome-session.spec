@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.0.5
-Release: 2
+Release: 3
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
 Source2: redhat-default-session
@@ -102,6 +102,9 @@ done
 %{_sysconfdir}/gconf/schemas/*.schemas
 
 %changelog
+* Wed Aug 14 2002 Havoc Pennington <hp@redhat.com>
+- put rhn applet in default session
+
 * Wed Aug 14 2002 Havoc Pennington <hp@redhat.com>
 - fix the session file, should speed up login a lot
 - put magicdev in default session
