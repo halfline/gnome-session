@@ -1,24 +1,24 @@
 %define glib2_version 2.2.0
 %define pango_version 1.2.0
 %define gtk2_version 2.2.0
-%define libgnome_version 2.2.0
-%define libgnomeui_version 2.2.0
-%define libbonobo_version 2.2.0
-%define libbonoboui_version 2.2.0
-%define gnome_vfs2_version 2.2.0
-%define bonobo_activation_version 2.2.0
+%define libgnome_version 2.3.0
+%define libgnomeui_version 2.3.0
+%define libbonobo_version 2.3.0
+%define libbonoboui_version 2.3.0
+%define gnome_vfs2_version 2.3.0
 %define gconf2_version 2.2.0
 
 %define po_package gnome-session-2.0
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.2.0.2
-Release: 4
+Version: 2.4.0
+Release: 1
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
 Source2: redhat-default-session
+Source3: gnome.desktop
 License: GPL 
 Group: User Interface/Desktops
 BuildRoot: %{_tmppath}/%{name}-root
@@ -27,19 +27,17 @@ Requires: redhat-artwork >= 0.20
 Requires: /usr/share/pixmaps/splash/gnome-splash.png
 # required to get gconf-sanity-check-2 in the right place
 Requires: GConf2 >= %{gconf2_version}
+# Needed for gnome-settings-daemon
+Requires: control-center
 
 ## we conflict with gdm that contains the GNOME gdm session
-Conflicts: gdm < 2.4.0.7-7
+Conflicts: gdm < 1:2.4.0.7-7
 
-Patch1: gnome-session-2.1.90-icons.patch
-Patch2: gnome-session-2.0.1-gtk1theme.patch
-Patch3: gnome-session-2.0.5-login.patch
-Patch5: gnome-session-2.0.5-dithering.patch
-Patch6: gnome-session-2.1.90-noseparator.patch
-## http://bugzilla.gnome.org/show_bug.cgi?id=106037
-Patch7: gnome-session-2.2.0.2-themed-icons.patch
+Patch1: gnome-session-2.2.2-icons.patch
+Patch2: gnome-session-2.0.5-login.patch
+Patch3: gnome-session-2.0.5-dithering.patch
 ## http://bugzilla.gnome.org/show_bug.cgi?id=106450
-Patch8: gnome-session-2.2.0.2-splash-repaint.patch
+Patch4: gnome-session-2.2.0.2-splash-repaint.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -49,7 +47,6 @@ BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: libbonobo-devel >= %{libbonobo_version}
 BuildRequires: libbonoboui-devel >= %{libbonoboui_version}
 BuildRequires: gnome-vfs2-devel >= %{gnome_vfs2_version}
-BuildRequires: bonobo-activation-devel >= %{bonobo_activation_version}
 BuildRequires: fontconfig
 
 # this is so the configure checks find /usr/bin/halt etc.
@@ -64,14 +61,14 @@ GNOME components and handles logout and saving the session.
 %setup -q
 
 %patch1 -p1 -b .icons
-%patch2 -p1 -b .gtk1theme
-%patch3 -p1 -b .login
-%patch5 -p1 -b .dithering
-%patch6 -p1 -b .noseparator
-%patch7 -p0 -b .themed-icons
-%patch8 -p1 -b .splash-repaint
+%patch2 -p1 -b .login
+%patch3 -p1 -b .dithering
+%patch4 -p1 -b .splash-repaint
 
 %build
+automake-1.4
+autoheader
+autoconf
 
 %configure --with-halt-command=/usr/bin/poweroff --with-reboot-command=/usr/bin/reboot
 make
@@ -86,10 +83,13 @@ unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
 ./mkinstalldirs $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/
 install -m 755 %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/GNOME
 
+./mkinstalldirs $RPM_BUILD_ROOT/etc/X11/dm/Sessions/
+install -m 755 %{SOURCE3} $RPM_BUILD_ROOT/etc/X11/dm/Sessions/
+
 /bin/rm $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
 install -m 644 %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
 
-/bin/rm -r $RPM_BUILD_ROOT/var/scrollkeeper
+#/bin/rm -r $RPM_BUILD_ROOT/var/scrollkeeper
 
 ## remove splash screen
 rm -r $RPM_BUILD_ROOT%{_datadir}/pixmaps/splash
@@ -114,13 +114,46 @@ done
 
 %{_datadir}/gnome
 %{_datadir}/control-center-2.0
-%{_datadir}/omf
 %{_datadir}/man/man*/*
 %{_bindir}/*
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_sysconfdir}/X11/gdm
+%{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Fri Aug 29 2003 Alexander Larsson <alexl@redhat.com> 2.3.7-3
+- fix up gnome.desktop location
+
+* Fri Aug 29 2003 Alexander Larsson <alexl@redhat.com> 2.3.7-2
+- add gnome.desktop session for new gdm
+
+* Wed Aug 27 2003 Alexander Larsson <alexl@redhat.com> 2.3.7-1
+- update to 2.3.7
+- require control-center (#100562)
+
+* Fri Aug 15 2003 Alexander Larsson <alexl@redhat.com> 2.3.6.2-1
+- update for gnome 2.3
+
+* Sun Aug 10 2003 Elliot Lee <sopwith@redhat.com> 2.2.2-4
+- Rebuild
+
+* Tue Jul 22 2003 Jonathan Blandford <jrb@redhat.com>
+- at-startup patch to add let at's start
+
+* Wed Jun 04 2003 Elliot Lee <sopwith@redhat.com>
+- rebuilt
+
+* Tue Jun  3 2003 Jeff Johnson <jbj@redhat.com>
+- add explicit epoch's where needed.
+
+* Tue May 27 2003 Alexander Larsson <alexl@redhat.com> 2.2.2-1
+- Update to 2.2.2
+- Add XRandR backport
+- Fix up old patches, patch7 was upstream
+
+* Mon Feb 24 2003 Owen Taylor <otaylor@redhat.com> 2.2.0.2-5
+- Wait for GSD to start before continuing with session
+
 * Tue Feb 18 2003 Havoc Pennington <hp@redhat.com> 2.2.0.2-4
 - repaint proper area of text in splash screen, #84527
 
