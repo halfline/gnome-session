@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.8.0
-Release: 1
+Release: 2
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/gnome-session/2.7/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -93,8 +93,8 @@ unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
 desktop-file-install --vendor gnome --delete-original                   \
   --dir $RPM_BUILD_ROOT%{_datadir}/control-center-2.0/capplets          \
   --add-only-show-in GNOME                                              \
-  --add-category X-Red-Hat-Base                                         \
-  --remove-category Settings                                            \
+  --add-category Settings                                               \
+  --add-category AdvancedSettings                                       \
   $RPM_BUILD_ROOT%{_datadir}/control-center-2.0/capplets/*
 
 ./mkinstalldirs $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/
@@ -138,6 +138,9 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Fri Sep 24 2004 Ray Strode <rstrode@redhat.com> 2.8.0-2
+- Add "Session" item to More Preferences menu
+
 * Fri Sep 17 2004 Ray Strode <rstrode@redhat.com> 2.8.0-1
 - Update to 2.8.0 
 - Remove "Session" item from Preferences menu
