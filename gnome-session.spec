@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.8.0
-Release: 3
+Release: 4
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/gnome-session/2.7/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -32,6 +32,10 @@ Requires: /usr/share/pixmaps/splash/gnome-splash.png
 Requires: GConf2 >= %{gconf2_version}
 # Needed for gnome-settings-daemon
 Requires: control-center
+
+%ifnarch s390 s390x
+Requires: gnome-volume-manager
+%endif
 
 ## we conflict with gdm that contains the GNOME gdm session
 Conflicts: gdm < 1:2.4.0.7-7
@@ -106,6 +110,12 @@ install -m 755 %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/GNOME
 install -m 755 %{SOURCE3} $RPM_BUILD_ROOT/etc/X11/dm/Sessions/
 
 /bin/rm $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
+
+# Bad evilness to remove gnome-volume-manager dependency on s390
+%ifarch s390 s390x
+sed -i -e 's/num_clients=7/num_clients=6/' -e '/^6,.*$/d' %{SOURCE2}
+%endif
+
 install -m 644 %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
 
 #/bin/rm -r $RPM_BUILD_ROOT/var/scrollkeeper
@@ -140,6 +150,10 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Fri Oct 08 2004 Ray Strode <rstrode@redhat.com> 2.8.0-4
+- Add g-v-m to default session since it wasn't already (?).
+- Remove g-v-m from default session on s390
+
 * Thu Oct 07 2004 Ray Strode <rstrode@redhat.com> 2.8.0-3
 - Check for NULL program name when looking for client
   match in session.
