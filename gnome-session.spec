@@ -14,9 +14,10 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.0.5
-Release: 5
+Release: 6
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
+Source1: Gnome.session
 Source2: redhat-default-session
 License: GPL 
 Group: User Interface/Desktops
@@ -27,10 +28,14 @@ Requires: /usr/share/pixmaps/splash/gnome-splash.png
 # required to get gconf-sanity-check-2 in the right place
 Requires: GConf2 >= %{gconf2_version}
 
+## we conflict with gdm that contains the GNOME gdm session
+Conflicts: gdm < 2.4.0.7-7
+
 Patch1: gnome-session-1.5.16-metacity-default.patch
 Patch2: gnome-session-2.0.1-gtk1theme.patch
 Patch3: gnome-session-2.0.5-login.patch
 Patch4: gnome-session-2.0.5-splash-fixes.patch
+Patch5: gnome-session-2.0.5-dithering.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -59,6 +64,7 @@ GNOME components and handles logout and saving the session.
 %patch2 -p1 -b .gtk1theme
 %patch3 -p1 -b .login
 %patch4 -p1 -b .splash-fixes
+%patch5 -p1 -b .dithering
 
 %build
 
@@ -71,6 +77,9 @@ rm -rf $RPM_BUILD_ROOT
 export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 %makeinstall
 unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
+
+./mkinstalldirs $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/
+install -m 755 %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/GNOME
 
 /bin/rm $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
 install -m 644 %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
@@ -104,8 +113,14 @@ done
 %{_datadir}/man/man*/*
 %{_bindir}/*
 %{_sysconfdir}/gconf/schemas/*.schemas
+%{_sysconfdir}/X11/gdm
 
 %changelog
+* Wed Aug 28 2002 Havoc Pennington <hp@redhat.com>
+- put gdm session in here, conflict with old gdm
+- use DITHER_MAX for dithering to make splash screen look good in 16
+  bit
+
 * Tue Aug 27 2002 Havoc Pennington <hp@redhat.com>
 - fix missing icons and misaligned text in splash
 
