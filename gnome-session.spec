@@ -12,8 +12,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.7.91
-Release: 2
+Version: 2.8.0
+Release: 1
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/gnome-session/2.7/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -90,10 +90,11 @@ export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 %makeinstall
 unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
 
-desktop-file-install --vendor  gnome --delete-original                  \
+desktop-file-install --vendor gnome --delete-original                   \
   --dir $RPM_BUILD_ROOT%{_datadir}/control-center-2.0/capplets          \
   --add-only-show-in GNOME                                              \
   --add-category X-Red-Hat-Base                                         \
+  --remove-category Settings                                            \
   $RPM_BUILD_ROOT%{_datadir}/control-center-2.0/capplets/*
 
 ./mkinstalldirs $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/
@@ -137,6 +138,10 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Fri Sep 17 2004 Ray Strode <rstrode@redhat.com> 2.8.0-1
+- Update to 2.8.0 
+- Remove "Session" item from Preferences menu
+
 * Fri Sep 03 2004 Ray Strode <rstrode@redhat.com> 2.7.91-2
 - Fix from Federico for infamous hanging splash screen problem.
   (http://bugzilla.gnome.org/show_bug.cgi?id=151664)
