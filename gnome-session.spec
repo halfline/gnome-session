@@ -1,26 +1,37 @@
 %define glib2_version 2.0.0
+%define pango_version 1.0.99
 %define gtk2_version 2.0.3-3
-%define libgnome_version 1.117.2
-%define libgnomeui_version 1.117.2
+%define libgnome_version 2.0.0
+%define libgnomeui_version 2.0.1
 %define libbonobo_version 2.0.0
-%define libbonoboui_version 1.118.0
-%define gnome_vfs2_version 1.9.16
+%define libbonoboui_version 2.0.0
+%define gnome_vfs2_version 2.0.0
 %define bonobo_activation_version 1.0.0
+%define gconf2_version 1.2.1
+
+%define po_package gnome-session-2.0
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.0.0
-Release: 3
+Version: 2.0.5
+Release: 2
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
-Source1: gnome-redhat-splash.png
+Source2: redhat-default-session
 License: GPL 
 Group: User Interface/Desktops
 BuildRoot: %{_tmppath}/%{name}-root
 
+Requires: redhat-artwork >= 0.20
+Requires: /usr/share/pixmaps/splash/gnome-splash.png
+# required to get gconf-sanity-check-2 in the right place
+Requires: GConf2 >= %{gconf2_version}
+
 Patch1: gnome-session-1.5.16-metacity-default.patch
+Patch2: gnome-session-2.0.1-gtk1theme.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
+BuildRequires: pango-devel >= %{pango_version}
 BuildRequires: gtk2-devel >= %{gtk2_version}
 BuildRequires: libgnome-devel >= %{libgnome_version}
 BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
@@ -43,23 +54,29 @@ GNOME components and handles logout and saving the session.
 %setup -q
 
 %patch1 -p1 -b .metacity-default
-
-cp -f %{SOURCE1} gnome-session/gnome-splash.png
-
-## temporary hack until I rebuild libs
-perl -pi -e 's/REQUIRED=2.0.0/REQUIRED=1.117.0/g' configure configure.in
+%patch2 -p1 -b .gtk1theme
 
 %build
 
-%configure
+%configure --with-halt-command=/usr/bin/poweroff --with-reboot-command=/usr/bin/reboot
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
+export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 %makeinstall
+unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
 
-%find_lang %{name}
+/bin/rm $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
+install -m 644 %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
+
+/bin/rm -r $RPM_BUILD_ROOT/var/scrollkeeper
+
+## remove splash screen
+rm -r $RPM_BUILD_ROOT%{_datadir}/pixmaps/splash
+
+%find_lang %{po_package}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -72,12 +89,11 @@ for S in $SCHEMAS; do
 done
 /sbin/ldconfig
 
-%files -f %{name}.lang
+%files -f %{po_package}.lang
 %defattr(-,root,root)
 
 %doc AUTHORS COPYING ChangeLog NEWS README
 
-%{_datadir}/pixmaps
 %{_datadir}/gnome
 %{_datadir}/control-center-2.0
 %{_datadir}/omf
@@ -86,6 +102,38 @@ done
 %{_sysconfdir}/gconf/schemas/*.schemas
 
 %changelog
+* Wed Aug 14 2002 Havoc Pennington <hp@redhat.com>
+- fix the session file, should speed up login a lot
+- put magicdev in default session
+
+* Thu Aug  8 2002 Havoc Pennington <hp@redhat.com>
+- 2.0.5 with more translations
+
+* Tue Aug  6 2002 Havoc Pennington <hp@redhat.com>
+- 2.0.4
+- remove gnome-settings-daemon from default session
+
+* Wed Jul 31 2002 Havoc Pennington <hp@redhat.com>
+- 2.0.3
+- remove splash screen, require redhat-artwork instead
+
+* Wed Jul 24 2002 Owen Taylor <otaylor@redhat.com>
+- Set GTK_RC_FILES so we can change the gtk1 theme
+
+* Tue Jul 16 2002 Havoc Pennington <hp@redhat.com>
+- pass --with-halt-command=/usr/bin/poweroff
+  --with-reboot-command=/usr/bin/reboot
+
+* Tue Jun 25 2002 Owen Taylor <otaylor@redhat.com>
+- Version 2.0.1, fixing missing po files
+
+* Wed Jun 19 2002 Havoc Pennington <hp@redhat.com>
+- put in new default session with pam-panel-icon
+- disable schema install in make install, fixes rebuild failure.
+
+* Sun Jun 16 2002 Havoc Pennington <hp@redhat.com>
+- rebuild with new libraries
+
 * Thu Jun 13 2002 Havoc Pennington <hp@redhat.com>
 - rebuild in different environment
 
