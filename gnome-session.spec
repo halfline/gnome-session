@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.0.5
-Release: 4
+Release: 5
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
 Source2: redhat-default-session
@@ -30,6 +30,7 @@ Requires: GConf2 >= %{gconf2_version}
 Patch1: gnome-session-1.5.16-metacity-default.patch
 Patch2: gnome-session-2.0.1-gtk1theme.patch
 Patch3: gnome-session-2.0.5-login.patch
+Patch4: gnome-session-2.0.5-splash-fixes.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -57,6 +58,7 @@ GNOME components and handles logout and saving the session.
 %patch1 -p1 -b .metacity-default
 %patch2 -p1 -b .gtk1theme
 %patch3 -p1 -b .login
+%patch4 -p1 -b .splash-fixes
 
 %build
 
@@ -104,6 +106,9 @@ done
 %{_sysconfdir}/gconf/schemas/*.schemas
 
 %changelog
+* Tue Aug 27 2002 Havoc Pennington <hp@redhat.com>
+- fix missing icons and misaligned text in splash
+
 * Fri Aug 23 2002 Tim Waugh <twaugh@redhat.com>
 - Fix login sound disabling (bug #71664).
 
