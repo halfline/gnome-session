@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.6.0
-Release: 6
+Release: 7
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -41,6 +41,7 @@ Patch2: gnome-session-2.0.5-login.patch
 Patch3: gnome-session-2.0.5-dithering.patch
 ## http://bugzilla.gnome.org/show_bug.cgi?id=106450
 Patch4: gnome-session-2.2.0.2-splash-repaint.patch
+Patch5: gnome-session-2.6.0-vino-activation.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -68,6 +69,7 @@ GNOME components and handles logout and saving the session.
 %patch2 -p1 -b .login
 %patch3 -p1 -b .dithering
 %patch4 -p1 -b .splash-repaint
+%patch5 -p1 -b .vino-activation
 
 %build
 
@@ -135,6 +137,10 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Wed Jul 14 2004 root <markmc@localhost.localdomain> - 2.6.0-7
+- Add patch to activate vino based on the "remote_access/enabled"
+  preference
+
 * Tue Jun 15 2004 Elliot Lee <sopwith@redhat.com>
 - rebuilt
 
