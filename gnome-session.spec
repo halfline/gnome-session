@@ -12,8 +12,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.6.0
-Release: 7
+Version: 2.7.4
+Release: 1
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -137,6 +137,9 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Fri Jul 30 2004 Ray Strode <rstrode@redhat.com> 2.7.4-1
+- Update to 2.7.4
+
 * Wed Jul 14 2004 root <markmc@localhost.localdomain> - 2.6.0-7
 - Add patch to activate vino based on the "remote_access/enabled"
   preference
