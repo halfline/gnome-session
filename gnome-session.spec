@@ -12,10 +12,10 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.7.4
-Release: 3
+Version: 2.7.91
+Release: 1
 URL: http://www.gnome.org
-Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
+Source0: ftp://ftp.gnome.org/pub/GNOME/sources/gnome-session/2.7/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
 Source2: redhat-default-session
 Source3: gnome.desktop
@@ -41,8 +41,7 @@ Patch2: gnome-session-2.0.5-login.patch
 Patch3: gnome-session-2.0.5-dithering.patch
 ## http://bugzilla.gnome.org/show_bug.cgi?id=106450
 Patch4: gnome-session-2.2.0.2-splash-repaint.patch
-Patch5: gnome-session-2.6.0-vino-activation.patch
-Patch6: gnome-session-2.7.4-read-desktop-entries.patch
+Patch5: gnome-session-2.7.4-read-desktop-entries.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -70,8 +69,7 @@ GNOME components and handles logout and saving the session.
 %patch2 -p1 -b .login
 %patch3 -p1 -b .dithering
 %patch4 -p1 -b .splash-repaint
-%patch5 -p1 -b .vino-activation
-%patch6 -p1 -b .read-desktop-entries
+%patch5 -p1 -b .read-desktop-entries
 
 %build
 
@@ -139,6 +137,9 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Tue Aug 31 2004 Ray Strode <rstrode@redhat.com> 2.7.91-1
+- Update to 2.7.91
+
 * Wed Aug 18 2004 Ray Strode <rstrode@redhat.com> 2.7.4-3
 - Change folder name from "autostart" to more aptly named
   "session-upgrades" from suggestion by Colin Walters.
