@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.7.4
-Release: 1
+Release: 2
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -42,6 +42,7 @@ Patch3: gnome-session-2.0.5-dithering.patch
 ## http://bugzilla.gnome.org/show_bug.cgi?id=106450
 Patch4: gnome-session-2.2.0.2-splash-repaint.patch
 Patch5: gnome-session-2.6.0-vino-activation.patch
+Patch6: gnome-session-2.7.4-read-desktop-entries.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -70,6 +71,7 @@ GNOME components and handles logout and saving the session.
 %patch3 -p1 -b .dithering
 %patch4 -p1 -b .splash-repaint
 %patch5 -p1 -b .vino-activation
+%patch6 -p1 -b .read-desktop-entries
 
 %build
 
@@ -137,6 +139,10 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Mon Aug 30 2004 Ray Strode <rstrode@redhat.com> 2.7.4-2
+- Provide drop-a-desktop-file method of adding programs
+  to the user's session.
+
 * Fri Jul 30 2004 Ray Strode <rstrode@redhat.com> 2.7.4-1
 - Update to 2.7.4
 
