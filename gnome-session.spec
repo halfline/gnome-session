@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.7.91
-Release: 1
+Release: 2
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/gnome-session/2.7/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -137,6 +137,10 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Fri Sep 03 2004 Ray Strode <rstrode@redhat.com> 2.7.91-2
+- Fix from Federico for infamous hanging splash screen problem.
+  (http://bugzilla.gnome.org/show_bug.cgi?id=151664)
+
 * Tue Aug 31 2004 Ray Strode <rstrode@redhat.com> 2.7.91-1
 - Update to 2.7.91
 
