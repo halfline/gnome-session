@@ -1,20 +1,20 @@
-%define glib2_version 2.0.0
-%define pango_version 1.0.99
-%define gtk2_version 2.0.3-3
-%define libgnome_version 2.0.0
-%define libgnomeui_version 2.0.1
-%define libbonobo_version 2.0.0
-%define libbonoboui_version 2.0.0
-%define gnome_vfs2_version 2.0.0
-%define bonobo_activation_version 1.0.0
-%define gconf2_version 1.2.1
+%define glib2_version 2.2.0
+%define pango_version 1.2.0
+%define gtk2_version 2.2.0
+%define libgnome_version 2.2.0
+%define libgnomeui_version 2.2.0
+%define libbonobo_version 2.2.0
+%define libbonoboui_version 2.2.0
+%define gnome_vfs2_version 2.2.0
+%define bonobo_activation_version 2.2.0
+%define gconf2_version 2.2.0
 
 %define po_package gnome-session-2.0
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.0.5
-Release: 7
+Version: 2.2.0.2
+Release: 4
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -31,14 +31,15 @@ Requires: GConf2 >= %{gconf2_version}
 ## we conflict with gdm that contains the GNOME gdm session
 Conflicts: gdm < 2.4.0.7-7
 
-Patch1: gnome-session-1.5.16-metacity-default.patch
+Patch1: gnome-session-2.1.90-icons.patch
 Patch2: gnome-session-2.0.1-gtk1theme.patch
 Patch3: gnome-session-2.0.5-login.patch
-Patch4: gnome-session-2.0.5-splash-fixes.patch
 Patch5: gnome-session-2.0.5-dithering.patch
-# Up purge delay to 5 minutes 
-# http://www.openoffice.org/issues/show_bug.cgi?id=4494
-Patch6: gnome-session-2.0.5-purgedelay.patch
+Patch6: gnome-session-2.1.90-noseparator.patch
+## http://bugzilla.gnome.org/show_bug.cgi?id=106037
+Patch7: gnome-session-2.2.0.2-themed-icons.patch
+## http://bugzilla.gnome.org/show_bug.cgi?id=106450
+Patch8: gnome-session-2.2.0.2-splash-repaint.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -49,7 +50,6 @@ BuildRequires: libbonobo-devel >= %{libbonobo_version}
 BuildRequires: libbonoboui-devel >= %{libbonoboui_version}
 BuildRequires: gnome-vfs2-devel >= %{gnome_vfs2_version}
 BuildRequires: bonobo-activation-devel >= %{bonobo_activation_version}
-BuildRequires: Xft
 BuildRequires: fontconfig
 
 # this is so the configure checks find /usr/bin/halt etc.
@@ -63,12 +63,13 @@ GNOME components and handles logout and saving the session.
 %prep
 %setup -q
 
-%patch1 -p1 -b .metacity-default
+%patch1 -p1 -b .icons
 %patch2 -p1 -b .gtk1theme
 %patch3 -p1 -b .login
-%patch4 -p1 -b .splash-fixes
 %patch5 -p1 -b .dithering
-%patch6 -p1 -b .purgedelay
+%patch6 -p1 -b .noseparator
+%patch7 -p0 -b .themed-icons
+%patch8 -p1 -b .splash-repaint
 
 %build
 
@@ -120,6 +121,38 @@ done
 %{_sysconfdir}/X11/gdm
 
 %changelog
+* Tue Feb 18 2003 Havoc Pennington <hp@redhat.com> 2.2.0.2-4
+- repaint proper area of text in splash screen, #84527
+
+* Tue Feb 18 2003 Havoc Pennington <hp@redhat.com> 2.2.0.2-3
+- change icon for magicdev to one that exists in Bluecurve theme
+  (part of #84491)
+
+* Thu Feb 13 2003 Havoc Pennington <hp@redhat.com> 2.2.0.2-2
+- load icons from icon theme
+
+* Wed Feb  5 2003 Havoc Pennington <hp@redhat.com> 2.2.0.2-1
+- 2.2.0.2
+
+* Tue Feb  4 2003 Jonathan Blandford <jrb@redhat.com>
+- remove extraneous separator.  Still ugly.
+
+* Wed Jan 29 2003 Havoc Pennington <hp@redhat.com>
+- add icons for the stuff in the default session #81489
+
+* Wed Jan 22 2003 Tim Powers <timp@redhat.com>
+- rebuilt
+
+* Sat Jan 11 2003 Havoc Pennington <hp@redhat.com>
+- 2.1.90
+- drop purgedelay patch, as it was increased upstream (though only to 2 minutes instead of 5)
+
+* Fri Dec  6 2002 Tim Waugh <twaugh@redhat.com> 2.1.2-2
+- Add eggcups to default session.
+
+* Wed Nov 13 2002 Havoc Pennington <hp@redhat.com>
+- 2.1.2
+
 * Tue Sep  3 2002 Owen Taylor <otaylor@redhat.com>
 - Up purge delay for session manager to 5 minutes to avoid problem 
   with openoffice.org timing out

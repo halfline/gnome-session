@@ -8,7 +8,7 @@
 # The clients must be numbered from 0 to the value of num_clients - 1.
 
 [Default]
-num_clients=6
+num_clients=7
 0,id=default0
 0,Priority=60
 0,RestartCommand=pam-panel-icon --sm-client-id default0
@@ -27,3 +27,6 @@ num_clients=6
 5,id=default5
 5,Priority=60
 5,RestartCommand=rhn-applet-gui --sm-client-id default5
+6,id=default6
+6,Priority=50
+6,RestartCommand=eggcups --sm-client-id default6
