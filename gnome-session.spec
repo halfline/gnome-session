@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.6.0
-Release: 4
+Release: 5
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -135,6 +135,9 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Mon Jun 14 2004 Ray Strode <rstrode@redhat.com> 2.6.0-5
+- Prevent having duplicate packages in different collections
+
 * Mon Jun 14 2004 Ray Strode <rstrode@redhat.com> 2.6.0-4
 - Use desktop-file-install instead of patching 
   session-properties.desktop.  Add X-Red-Hat-Base category.
