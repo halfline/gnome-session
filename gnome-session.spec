@@ -12,7 +12,7 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.5.91
+Version: 2.6.0
 Release: 1
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
@@ -129,6 +129,9 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Wed Mar 31 2004 Mark McLoughlin <markmc@redhat.com> 2.6.0-1
+- Update to 2.6.0
+
 * Wed Mar 10 2004 Mark McLoughlin <markmc@redhat.com>
 - Update to 2.5.91
 
