@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.8.0
-Release: 2
+Release: 3
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/gnome-session/2.7/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -42,6 +42,7 @@ Patch3: gnome-session-2.0.5-dithering.patch
 ## http://bugzilla.gnome.org/show_bug.cgi?id=106450
 Patch4: gnome-session-2.2.0.2-splash-repaint.patch
 Patch5: gnome-session-2.7.4-read-desktop-entries.patch
+Patch6: gnome-session-2.8.0-null-program-name.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -70,6 +71,7 @@ GNOME components and handles logout and saving the session.
 %patch3 -p1 -b .dithering
 %patch4 -p1 -b .splash-repaint
 %patch5 -p1 -b .read-desktop-entries
+%patch6 -p1 -b .null-program-name
 
 %build
 
@@ -138,6 +140,10 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Thu Oct 07 2004 Ray Strode <rstrode@redhat.com> 2.8.0-3
+- Check for NULL program name when looking for client
+  match in session.
+
 * Fri Sep 24 2004 Ray Strode <rstrode@redhat.com> 2.8.0-2
 - Add "Session" item to More Preferences menu
 
