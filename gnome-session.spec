@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.6.0
-Release: 1
+Release: 3
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -54,6 +54,8 @@ BuildRequires: gnome-vfs2-devel >= %{gnome_vfs2_version}
 
 # this is so the configure checks find /usr/bin/halt etc.
 BuildRequires: usermode
+
+BuildRequires: automake14 autoconf gettext
 
 %description
 
@@ -129,6 +131,13 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Fri Jun 10 2004 Ray Strode <rstrode@redhat.com> 2.6.0-3
+- Add terminating list delimiter to OnlyShowIn entry of 
+  session-properties.desktop
+
+* Fri Apr 16 2004 Warren Togami <wtogami@redhat.com> 2.6.0-2
+- #110725 BR automake14 autoconf gettext
+
 * Wed Mar 31 2004 Mark McLoughlin <markmc@redhat.com> 2.6.0-1
 - Update to 2.6.0
 
