@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.8.0
-Release: 6
+Release: 7
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/gnome-session/2.7/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -32,6 +32,7 @@ Requires: /usr/share/pixmaps/splash/gnome-splash.png
 Requires: GConf2 >= %{gconf2_version}
 # Needed for gnome-settings-daemon
 Requires: control-center
+Requires: howl-libs >= 0.9.8
 
 %ifnarch s390 s390x
 Requires: gnome-volume-manager
@@ -57,6 +58,7 @@ BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: libbonobo-devel >= %{libbonobo_version}
 BuildRequires: libbonoboui-devel >= %{libbonoboui_version}
 BuildRequires: gnome-vfs2-devel >= %{gnome_vfs2_version}
+BuildRequires: howl-devel >= 0.9.8
 
 # this is so the configure checks find /usr/bin/halt etc.
 BuildRequires: usermode
@@ -152,6 +154,9 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Mon Dec 20 2004 Daniel Reed <djr@redhat.com> 2.8.0-7
+- rebuild for new libhowl.so.0 library (for GnomeMeeting 1.2)
+
 * Tue Nov 02 2004 Ray Strode <rstrode@redhat.com> 2.8.0-6
 - Rebuild for devel branch
 
