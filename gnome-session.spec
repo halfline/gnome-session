@@ -12,8 +12,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.4.0
-Release: 3
+Version: 2.5.3
+Release: 1
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -22,6 +22,9 @@ Source3: gnome.desktop
 License: GPL 
 Group: User Interface/Desktops
 BuildRoot: %{_tmppath}/%{name}-root
+
+# For intltool:
+BuildRequires: perl-XML-Parser >= 2.31-16
 
 Requires: redhat-artwork >= 0.20
 Requires: /usr/share/pixmaps/splash/gnome-splash.png
@@ -39,7 +42,6 @@ Patch3: gnome-session-2.0.5-dithering.patch
 ## http://bugzilla.gnome.org/show_bug.cgi?id=106450
 Patch4: gnome-session-2.2.0.2-splash-repaint.patch
 Patch5: gnome-session-2.4.0.rh.patch
-Patch6: gnome-session-2.4.0-work-with-2-6-glib.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -67,9 +69,12 @@ GNOME components and handles logout and saving the session.
 %patch3 -p1 -b .dithering
 %patch4 -p1 -b .splash-repaint
 %patch5 -p1 -b .rh
-%patch6 -p1 -b .work-with-2-6-glib
 
 %build
+
+#workaround broken perl-XML-Parser on 64bit arches
+export PERL5LIB=/usr/lib64/perl5/vendor_perl/5.8.2 perl
+
 automake-1.4
 autoheader
 autoconf
@@ -125,8 +130,8 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
-* Wed Mar 31 2004 Mark McLoughlin <markmc@redhat.com> 2.4.0-3
-- Fix X lock up on logout with glib-2.4 installed (bug #119253)
+* Mon Jan 26 2004 Alexander Larsson <alexl@redhat.com> 2.5.3-1
+- Update to 2.5.3
 
 * Wed Nov 05 2003 Than Ngo <than@redhat.com> 2.4.0-2
 - don't show gnome-session-properties in KDE (bug #102533)
