@@ -1,0 +1,11 @@
+--- gnome-session-2.0.5/gnome-session/gsm-sound.c.login	2002-07-12 10:02:06.000000000 +0100
++++ gnome-session-2.0.5/gnome-session/gsm-sound.c	2002-08-23 14:53:08.000000000 +0100
+@@ -66,7 +66,7 @@
+   if (!(sample_file && *sample_file))
+     {
+       g_free (sample_file);
+-      return FALSE;
++      return TRUE; /* Don't fall back to system sound. */
+     }
+ 
+   sample_id = esd_sample_getid (gnome_sound_connection_get (), "gnome-2/login");
