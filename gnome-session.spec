@@ -12,7 +12,7 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.5.3
+Version: 2.5.91
 Release: 1
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
@@ -51,7 +51,6 @@ BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: libbonobo-devel >= %{libbonobo_version}
 BuildRequires: libbonoboui-devel >= %{libbonoboui_version}
 BuildRequires: gnome-vfs2-devel >= %{gnome_vfs2_version}
-BuildRequires: fontconfig
 
 # this is so the configure checks find /usr/bin/halt etc.
 BuildRequires: usermode
@@ -130,6 +129,17 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Wed Mar 10 2004 Mark McLoughlin <markmc@redhat.com>
+- Update to 2.5.91
+
+* Tue Feb 24 2004 Mark McLoughlin <markmc@redhat.com> 2.5.90-1
+- Update to 2.5.90
+- Remove extraneous fontconfig BuildRequires
+- Resolve conflicts with the icons and splash-repaint patches
+
+* Fri Feb 13 2004 Elliot Lee <sopwith@redhat.com>
+- rebuilt
+
 * Mon Jan 26 2004 Alexander Larsson <alexl@redhat.com> 2.5.3-1
 - Update to 2.5.3
 
