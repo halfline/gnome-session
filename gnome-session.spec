@@ -46,6 +46,7 @@ Patch3: gnome-session-2.0.5-dithering.patch
 ## http://bugzilla.gnome.org/show_bug.cgi?id=106450
 Patch4: gnome-session-2.2.0.2-splash-repaint.patch
 Patch5: gnome-session-2.7.4-read-desktop-entries.patch
+Patch6: gnome-session-2.9.4-gnome-common.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -74,13 +75,15 @@ GNOME components and handles logout and saving the session.
 %patch3 -p1 -b .dithering
 %patch4 -p1 -b .splash-repaint
 %patch5 -p1 -b .read-desktop-entries
+%patch6 -p1 -b .gnome-common
 
 %build
 
 #workaround broken perl-XML-Parser on 64bit arches
 export PERL5LIB=/usr/lib64/perl5/vendor_perl/5.8.2 perl
 
-automake-1.4
+aclocal
+automake
 autoheader
 autoconf
 
@@ -95,11 +98,11 @@ export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
 
 desktop-file-install --vendor gnome --delete-original                   \
-  --dir $RPM_BUILD_ROOT%{_datadir}/control-center-2.0/capplets          \
+  --dir $RPM_BUILD_ROOT%{_datadir}/applications			        \
   --add-only-show-in GNOME                                              \
   --add-category Settings                                               \
   --add-category AdvancedSettings                                       \
-  $RPM_BUILD_ROOT%{_datadir}/control-center-2.0/capplets/*
+  $RPM_BUILD_ROOT%{_datadir}/applications/*
 
 ./mkinstalldirs $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/
 install -m 755 %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/GNOME
@@ -140,7 +143,7 @@ done
 %doc AUTHORS COPYING ChangeLog NEWS README
 
 %{_datadir}/gnome
-%{_datadir}/control-center-2.0
+%{_datadir}/applications
 %{_datadir}/man/man*/*
 %{_bindir}/*
 %{_sysconfdir}/gconf/schemas/*.schemas
