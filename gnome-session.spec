@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.4.0
-Release: 1
+Release: 3
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -38,6 +38,8 @@ Patch2: gnome-session-2.0.5-login.patch
 Patch3: gnome-session-2.0.5-dithering.patch
 ## http://bugzilla.gnome.org/show_bug.cgi?id=106450
 Patch4: gnome-session-2.2.0.2-splash-repaint.patch
+Patch5: gnome-session-2.4.0.rh.patch
+Patch6: gnome-session-2.4.0-work-with-2-6-glib.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -64,6 +66,8 @@ GNOME components and handles logout and saving the session.
 %patch2 -p1 -b .login
 %patch3 -p1 -b .dithering
 %patch4 -p1 -b .splash-repaint
+%patch5 -p1 -b .rh
+%patch6 -p1 -b .work-with-2-6-glib
 
 %build
 automake-1.4
@@ -121,6 +125,12 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Wed Mar 31 2004 Mark McLoughlin <markmc@redhat.com> 2.4.0-3
+- Fix X lock up on logout with glib-2.4 installed (bug #119253)
+
+* Wed Nov 05 2003 Than Ngo <than@redhat.com> 2.4.0-2
+- don't show gnome-session-properties in KDE (bug #102533)
+
 * Fri Aug 29 2003 Alexander Larsson <alexl@redhat.com> 2.3.7-3
 - fix up gnome.desktop location
 
