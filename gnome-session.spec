@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.0.5
-Release: 6
+Release: 7
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -36,6 +36,9 @@ Patch2: gnome-session-2.0.1-gtk1theme.patch
 Patch3: gnome-session-2.0.5-login.patch
 Patch4: gnome-session-2.0.5-splash-fixes.patch
 Patch5: gnome-session-2.0.5-dithering.patch
+# Up purge delay to 5 minutes 
+# http://www.openoffice.org/issues/show_bug.cgi?id=4494
+Patch6: gnome-session-2.0.5-purgedelay.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -65,6 +68,7 @@ GNOME components and handles logout and saving the session.
 %patch3 -p1 -b .login
 %patch4 -p1 -b .splash-fixes
 %patch5 -p1 -b .dithering
+%patch6 -p1 -b .purgedelay
 
 %build
 
@@ -116,6 +120,10 @@ done
 %{_sysconfdir}/X11/gdm
 
 %changelog
+* Tue Sep  3 2002 Owen Taylor <otaylor@redhat.com>
+- Up purge delay for session manager to 5 minutes to avoid problem 
+  with openoffice.org timing out
+
 * Wed Aug 28 2002 Havoc Pennington <hp@redhat.com>
 - put gdm session in here, conflict with old gdm
 - use DITHER_MAX for dithering to make splash screen look good in 16
