@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.6.0
-Release: 3
+Release: 4
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -41,7 +41,6 @@ Patch2: gnome-session-2.0.5-login.patch
 Patch3: gnome-session-2.0.5-dithering.patch
 ## http://bugzilla.gnome.org/show_bug.cgi?id=106450
 Patch4: gnome-session-2.2.0.2-splash-repaint.patch
-Patch5: gnome-session-2.4.0.rh.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -69,7 +68,6 @@ GNOME components and handles logout and saving the session.
 %patch2 -p1 -b .login
 %patch3 -p1 -b .dithering
 %patch4 -p1 -b .splash-repaint
-%patch5 -p1 -b .rh
 
 %build
 
@@ -89,6 +87,12 @@ rm -rf $RPM_BUILD_ROOT
 export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 %makeinstall
 unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
+
+desktop-file-install --vendor  gnome --delete-original                  \
+  --dir $RPM_BUILD_ROOT%{_datadir}/control-center-2.0/capplets          \
+  --add-only-show-in GNOME                                              \
+  --add-category X-Red-Hat-Base                                         \
+  $RPM_BUILD_ROOT%{_datadir}/control-center-2.0/capplets/*
 
 ./mkinstalldirs $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/
 install -m 755 %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/GNOME
@@ -131,7 +135,11 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
-* Fri Jun 10 2004 Ray Strode <rstrode@redhat.com> 2.6.0-3
+* Mon Jun 14 2004 Ray Strode <rstrode@redhat.com> 2.6.0-4
+- Use desktop-file-install instead of patching 
+  session-properties.desktop.  Add X-Red-Hat-Base category.
+
+* Thu Jun 10 2004 Ray Strode <rstrode@redhat.com> 2.6.0-3
 - Add terminating list delimiter to OnlyShowIn entry of 
   session-properties.desktop
 
