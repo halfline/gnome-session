@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.7.4
-Release: 2
+Release: 3
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/pre-gnome2/sources/gnome-session/%{name}-%{version}.tar.bz2
 Source1: Gnome.session
@@ -139,7 +139,12 @@ done
 %{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
-* Mon Aug 30 2004 Ray Strode <rstrode@redhat.com> 2.7.4-2
+* Wed Aug 18 2004 Ray Strode <rstrode@redhat.com> 2.7.4-3
+- Change folder name from "autostart" to more aptly named
+  "session-upgrades" from suggestion by Colin Walters.
+- put non-upstream gconf key in rh_extensions
+
+* Wed Aug 18 2004 Ray Strode <rstrode@redhat.com> 2.7.4-2
 - Provide drop-a-desktop-file method of adding programs
   to the user's session.
 
