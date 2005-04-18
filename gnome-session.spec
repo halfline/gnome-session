@@ -13,12 +13,11 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.10.0
-Release: 1
+Release: 2
 URL: http://www.gnome.org
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/gnome-session/2.7/%{name}-%{version}.tar.bz2
-Source1: Gnome.session
-Source2: redhat-default-session
-Source3: gnome.desktop
+Source1: redhat-default-session
+Source2: gnome.desktop
 License: GPL 
 Group: User Interface/Desktops
 BuildRoot: %{_tmppath}/%{name}-root
@@ -37,8 +36,8 @@ Requires: control-center
 Requires: gnome-volume-manager
 %endif
 
-## we conflict with gdm that contains the GNOME gdm session
-Conflicts: gdm < 1:2.4.0.7-7
+## we conflict with gdm that contains the GNOME gdm xsession
+Conflicts: gdm < 1:2.6.0.8-4
 
 Patch1: gnome-session-2.2.2-icons.patch
 Patch2: gnome-session-2.0.5-login.patch
@@ -104,20 +103,17 @@ desktop-file-install --vendor gnome --delete-original                   \
   --add-category AdvancedSettings                                       \
   $RPM_BUILD_ROOT%{_datadir}/applications/*
 
-./mkinstalldirs $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/
-install -m 755 %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/gdm/Sessions/GNOME
+./mkinstalldirs ${RPM_BUILD_ROOT}%{_datadir}/xsessions/
+install -m 755 %{SOURCE2} ${RPM_BUILD_ROOT}%{_datadir}/xsessions/
 
-./mkinstalldirs $RPM_BUILD_ROOT/etc/X11/dm/Sessions/
-install -m 755 %{SOURCE3} $RPM_BUILD_ROOT/etc/X11/dm/Sessions/
-
-/bin/rm $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
+/bin/rm -f $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
 
 # Bad evilness to remove gnome-volume-manager dependency on s390
 %ifarch s390 s390x
-sed -i -e 's/num_clients=7/num_clients=6/' -e '/^6,.*$/d' %{SOURCE2}
+sed -i -e 's/num_clients=7/num_clients=6/' -e '/^6,.*$/d' %{SOURCE1}
 %endif
 
-install -m 644 %{SOURCE2} $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
+install -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
 
 #/bin/rm -r $RPM_BUILD_ROOT/var/scrollkeeper
 
@@ -144,13 +140,15 @@ done
 
 %{_datadir}/gnome
 %{_datadir}/applications
+%{_datadir}/xsessions
 %{_datadir}/man/man*/*
 %{_bindir}/*
 %{_sysconfdir}/gconf/schemas/*.schemas
-%{_sysconfdir}/X11/gdm
-%{_sysconfdir}/X11/dm/Sessions/*
 
 %changelog
+* Thu Apr 18 2005 Ray Strode <rstrode@redhat.com> - 2.10.0-2
+- Install gnome.desktop to /usr/share/xsessions (bug 145791)
+
 * Thu Mar 17 2005 Ray Strode <rstrode@redhat.com> - 2.10.0-1
 - Update to upstream version 2.10.0
 
