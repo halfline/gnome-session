@@ -37,7 +37,7 @@ Requires: gnome-volume-manager
 %endif
 
 ## we conflict with gdm that contains the GNOME gdm xsession
-Conflicts: gdm < 1:2.6.0.8-4
+Conflicts: gdm < 1:2.6.0.8-5
 
 Patch1: gnome-session-2.2.2-icons.patch
 Patch2: gnome-session-2.0.5-login.patch
