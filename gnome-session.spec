@@ -12,10 +12,10 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.10.0
-Release: 2
+Version: 2.11.91
+Release: 1
 URL: http://www.gnome.org
-Source0: ftp://ftp.gnome.org/pub/GNOME/sources/gnome-session/2.7/%{name}-%{version}.tar.bz2
+Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
 Source2: gnome.desktop
 License: GPL 
@@ -43,8 +43,6 @@ Patch1: gnome-session-2.2.2-icons.patch
 Patch2: gnome-session-2.0.5-login.patch
 Patch3: gnome-session-2.0.5-dithering.patch
 ## http://bugzilla.gnome.org/show_bug.cgi?id=106450
-Patch4: gnome-session-2.2.0.2-splash-repaint.patch
-Patch5: gnome-session-2.7.4-read-desktop-entries.patch
 Patch6: gnome-session-2.9.4-gnome-common.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
@@ -72,8 +70,6 @@ GNOME components and handles logout and saving the session.
 %patch1 -p1 -b .icons
 %patch2 -p1 -b .login
 %patch3 -p1 -b .dithering
-%patch4 -p1 -b .splash-repaint
-%patch5 -p1 -b .read-desktop-entries
 %patch6 -p1 -b .gnome-common
 
 %build
@@ -146,6 +142,10 @@ done
 %{_sysconfdir}/gconf/schemas/*.schemas
 
 %changelog
+* Tue Aug  9 2005 Ray Strode <rstrode@redhat.com> - 2.11.91-1
+- Update to upstream version 2.11.91 (fixes bug 165357).
+- drop some patches
+
 * Thu Apr 18 2005 Ray Strode <rstrode@redhat.com> - 2.10.0-2
 - Install gnome.desktop to /usr/share/xsessions (bug 145791)
 
