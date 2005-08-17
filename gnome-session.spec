@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.11.91
-Release: 1
+Release: 2
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -142,6 +142,9 @@ done
 %{_sysconfdir}/gconf/schemas/*.schemas
 
 %changelog
+* Tue Aug 16 2005 Warren Togami <wtogami@redhat.com> - 2.11.91-2
+- rebuild for new cairo
+
 * Tue Aug  9 2005 Ray Strode <rstrode@redhat.com> - 2.11.91-1
 - Update to upstream version 2.11.91 (fixes bug 165357).
 - drop some patches
