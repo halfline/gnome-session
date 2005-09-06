@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.11.91
-Release: 2
+Release: 3
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -136,12 +136,15 @@ done
 
 %{_datadir}/gnome
 %{_datadir}/applications
-%{_datadir}/xsessions
+%{_datadir}/xsessions/*
 %{_datadir}/man/man*/*
 %{_bindir}/*
 %{_sysconfdir}/gconf/schemas/*.schemas
 
 %changelog
+* Tue Sep  6 2005 Ray Strode <rstrode@redhat.com> - 2.11.91-3
+- Don't take ownership of /usr/share/xsessions (bug 145791).
+
 * Tue Aug 16 2005 Warren Togami <wtogami@redhat.com> - 2.11.91-2
 - rebuild for new cairo
 
