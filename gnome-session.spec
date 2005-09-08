@@ -12,8 +12,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.11.91
-Release: 3
+Version: 2.12.0
+Release: 1
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -142,6 +142,9 @@ done
 %{_sysconfdir}/gconf/schemas/*.schemas
 
 %changelog
+* Thu Sep  8 2005 Matthias Clasen <mclasen@redhat.com> - 2.12.0-1
+- Update to 2.12.0
+
 * Tue Sep  6 2005 Ray Strode <rstrode@redhat.com> - 2.11.91-3
 - Don't take ownership of /usr/share/xsessions (bug 145791).
 
