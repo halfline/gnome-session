@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.12.0
-Release: 1
+Release: 2
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -142,6 +142,10 @@ done
 %{_sysconfdir}/gconf/schemas/*.schemas
 
 %changelog
+* Mon Oct 31 2005 Ray Strode <rstrode@redhat.com> - 2.12.0-2
+- remove rhn applet from default session
+- s/magicdev/gnome-volume-manager/
+
 * Thu Sep  8 2005 Matthias Clasen <mclasen@redhat.com> - 2.12.0-1
 - Update to 2.12.0
 
