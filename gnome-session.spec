@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.12.0
-Release: 3
+Release: 4
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -44,6 +44,8 @@ Patch2: gnome-session-2.0.5-login.patch
 Patch3: gnome-session-2.0.5-dithering.patch
 ## http://bugzilla.gnome.org/show_bug.cgi?id=106450
 Patch6: gnome-session-2.9.4-gnome-common.patch
+# Launch gnome-user-share on login if enabled
+Patch7: gnome-session-user-share.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -71,6 +73,7 @@ GNOME components and handles logout and saving the session.
 %patch2 -p1 -b .login
 %patch3 -p1 -b .dithering
 %patch6 -p1 -b .gnome-common
+%patch7 -p0 -b .user-share
 
 %build
 
@@ -142,6 +145,9 @@ done
 %{_sysconfdir}/gconf/schemas/*.schemas
 
 %changelog
+* Wed Nov  9 2005 Alexander Larsson <alexl@redhat.com> - 2.12.0-4
+- Add gnome-user-share patch
+
 * Tue Nov 8 2005 Ray Strode <rstrode@redhat.com> - 2.12.0-3
 - fix up the dummy client ids to match the id passed initially
   passed to the programs in the default session 
