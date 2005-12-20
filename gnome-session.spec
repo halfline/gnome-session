@@ -26,7 +26,7 @@ BuildRoot: %{_tmppath}/%{name}-root
 BuildRequires: perl-XML-Parser >= 2.31-16
 
 Requires: redhat-artwork >= 0.20
-Requires: /usr/share/pixmaps/splash/gnome-splash.png
+Requires: fedora-logos >= 1.1.37 
 # required to get gconf-sanity-check-2 in the right place
 Requires: GConf2 >= %{gconf2_version}
 # Needed for gnome-settings-daemon
