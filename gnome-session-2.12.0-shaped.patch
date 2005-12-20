@@ -1,0 +1,48 @@
+--- gnome-session-2.12.0/gnome-session/splash-widget.c.shaped	2005-12-20 14:00:44.000000000 -0500
++++ gnome-session-2.12.0/gnome-session/splash-widget.c	2005-12-20 14:02:16.000000000 -0500
+@@ -228,7 +228,9 @@
+ 
+ 	if (sw->background && widget->window) {
+ 		int width, height;
+-
++		GdkPixmap *mask;
++		mask = NULL;
++	
+ 		width = gdk_pixbuf_get_width  (sw->background);
+ 		height = gdk_pixbuf_get_height (sw->background);
+ 
+@@ -237,6 +239,11 @@
+ 			width, height,
+ 			gdk_drawable_get_visual (widget->window)->depth);
+ 
++		mask = gdk_pixmap_new (
++			widget->window,
++			width, height,
++			1);
++
+ 		if (pm) {
+ 			gdk_pixbuf_render_to_drawable (
+ 				sw->background, GDK_DRAWABLE (pm),
+@@ -247,6 +254,22 @@
+ 			
+ 			gdk_window_set_back_pixmap (
+ 				widget->window, pm, FALSE);
++
++			if (mask) {
++				gdk_pixbuf_render_threshold_alpha (
++					sw->background, (GdkBitmap *) mask,
++					0, 0, 0, 0, width, height,
++					125);
++
++				gdk_window_shape_combine_mask (
++							widget->window,
++							(GdkBitmap *) mask,
++							0,
++							0);
++
++				gdk_pixmap_unref (mask);
++			} 
++			
+ 			sw->bg_pixmap = pm;
+ 		}
+ 	}
