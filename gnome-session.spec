@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.12.0
-Release: 4.1
+Release: 5 
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -46,6 +46,8 @@ Patch3: gnome-session-2.0.5-dithering.patch
 Patch6: gnome-session-2.9.4-gnome-common.patch
 # Launch gnome-user-share on login if enabled
 Patch7: gnome-session-user-share.patch
+# do shaped window for splash screen
+Patch8: gnome-session-2.12.0-shaped.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -74,6 +76,7 @@ GNOME components and handles logout and saving the session.
 %patch3 -p1 -b .dithering
 %patch6 -p1 -b .gnome-common
 %patch7 -p0 -b .user-share
+%patch8 -p1 -b .shaped
 
 %build
 
@@ -145,6 +148,9 @@ done
 %{_sysconfdir}/gconf/schemas/*.schemas
 
 %changelog
+* Tue Dec 20 2005 John (J5) Palmieri <johnp@redhat.com> - 2.12.0-5
+- Handle shaped window for splash screen
+
 * Fri Dec 09 2005 Jesse Keating <jkeating@redhat.com>
 - rebuilt
 
