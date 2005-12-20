@@ -1,6 +1,31 @@
---- gnome-session-2.12.0/gnome-session/splash-widget.c.shaped	2005-12-20 14:00:44.000000000 -0500
-+++ gnome-session-2.12.0/gnome-session/splash-widget.c	2005-12-20 14:02:16.000000000 -0500
-@@ -228,7 +228,9 @@
+--- gnome-session-2.12.0/gnome-session/splash-widget.c.shaped	2005-12-20 15:45:53.000000000 -0500
++++ gnome-session-2.12.0/gnome-session/splash-widget.c	2005-12-20 16:23:55.000000000 -0500
+@@ -138,7 +138,7 @@
+ 		return FALSE;
+ 
+ 	if (gdk_rectangle_intersect (
+-		&event->area, &sw->image_bounds, &exposed))
++		&event->area, &sw->image_bounds, &exposed)) {
+ 		gdk_draw_drawable  (
+ 			GDK_DRAWABLE (widget->window),
+ 			widget->style->black_gc,
+@@ -147,6 +147,15 @@
+ 			exposed.x, exposed.y,
+ 			exposed.width, exposed.height);
+ 
++		if (sw->bg_mask)
++			gdk_window_shape_combine_mask (
++						widget->window,
++						sw->bg_mask,
++						0,
++						0);
++			
++        }
++
+ 	for (l = sw->icons; l; l = l->next) {
+ 		SplashIcon *si = l->data;
+ 
+@@ -228,7 +237,9 @@
  
  	if (sw->background && widget->window) {
  		int width, height;
@@ -11,7 +36,7 @@
  		width = gdk_pixbuf_get_width  (sw->background);
  		height = gdk_pixbuf_get_height (sw->background);
  
-@@ -237,6 +239,11 @@
+@@ -237,6 +248,11 @@
  			width, height,
  			gdk_drawable_get_visual (widget->window)->depth);
  
@@ -23,7 +48,7 @@
  		if (pm) {
  			gdk_pixbuf_render_to_drawable (
  				sw->background, GDK_DRAWABLE (pm),
-@@ -247,6 +254,22 @@
+@@ -247,6 +263,22 @@
  			
  			gdk_window_set_back_pixmap (
  				widget->window, pm, FALSE);
@@ -40,9 +65,49 @@
 +							0,
 +							0);
 +
-+				gdk_pixmap_unref (mask);
 +			} 
 +			
++			sw->bg_mask = (GdkBitmap *) mask;
  			sw->bg_pixmap = pm;
  		}
  	}
+@@ -262,6 +294,12 @@
+ 		sw->bg_pixmap = NULL;
+ 	}
+ 
++        if (sw->bg_mask) {
++		g_object_unref (sw->bg_mask);
++		sw->bg_mask = NULL;
++	}
++
++
+ 	GNOME_CALL_PARENT (GTK_WIDGET_CLASS, unrealize, (widget));
+ }
+ 
+--- gnome-session-2.12.0/gnome-session/splash-widget.h.shaped	2005-12-20 16:10:05.000000000 -0500
++++ gnome-session-2.12.0/gnome-session/splash-widget.h	2005-12-20 16:18:02.000000000 -0500
+@@ -37,6 +37,7 @@
+   
+ 	GdkPixbuf   *background;
+ 	GdkPixmap   *bg_pixmap;
++	GdkBitmap   *bg_mask;
+ 	GList       *icons;
+ 	PangoLayout *layout;
+ 	PangoAttribute   *font_size_attr;
+@@ -66,13 +67,13 @@
+ #define SPLASH_BASE_HEIGHT 220
+ 
+ /* offset from bottom of label & font */
+-#define SPLASH_LABEL_V_OFFSET 3
++#define SPLASH_LABEL_V_OFFSET 79
+ #define SPLASH_LABEL_FONT_SIZE 8
+ 
+ /* icon border, spacing, offset from bottom and initial size */
+-#define SPLASH_ICON_BORDER  8
++#define SPLASH_ICON_BORDER  78 
+ #define SPLASH_ICON_SPACING 4
+-#define SPLASH_ICON_V_OFFSET 14
++#define SPLASH_ICON_V_OFFSET 90
+ #define SPLASH_BASE_ICON_SIZE 36
+ #define SPLASH_BASE_ICON_ROWS 1
+ 
