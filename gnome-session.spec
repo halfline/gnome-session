@@ -148,7 +148,7 @@ done
 %{_sysconfdir}/gconf/schemas/*.schemas
 
 %changelog
-* Thu Jan 12 2005 Ray Strode <rstrode@redhat.com> - 2.12.0-6
+* Thu Jan 12 2006 Ray Strode <rstrode@redhat.com> - 2.12.0-6
 - Fix screen corruption around splash screen shape (bug 177502)
 
 * Tue Dec 20 2005 John (J5) Palmieri <johnp@redhat.com> - 2.12.0-5
