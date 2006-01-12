@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.12.0
-Release: 5 
+Release: 6
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -148,6 +148,9 @@ done
 %{_sysconfdir}/gconf/schemas/*.schemas
 
 %changelog
+* Thu Jan 12 2005 Ray Strode <rstrode@redhat.com> - 2.12.0-6
+- Fix screen corruption around splash screen shape (bug 177502)
+
 * Tue Dec 20 2005 John (J5) Palmieri <johnp@redhat.com> - 2.12.0-5
 - Handle shaped window for splash screen
 
