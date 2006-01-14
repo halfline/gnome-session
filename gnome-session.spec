@@ -85,6 +85,7 @@ export PERL5LIB=/usr/lib64/perl5/vendor_perl/5.8.2 perl
 
 aclocal
 automake
+intltoolize --force
 autoheader
 autoconf
 
