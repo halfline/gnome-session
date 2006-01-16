@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.13.4
-Release: 1
+Release: 2
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -48,6 +48,8 @@ Patch6: gnome-session-2.9.4-gnome-common.patch
 Patch7: gnome-session-user-share.patch
 # do shaped window for splash screen
 Patch8: gnome-session-2.12.0-shaped.patch
+# too much crashing
+Patch9: gnome-session-2.13.4-no-crashes.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -149,6 +151,9 @@ done
 %{_sysconfdir}/gconf/schemas/*.schemas
 
 %changelog
+* Mon Jan 16 2006 Matthias Clasen <mclasen@redhat.com> - 2.13.4-2
+- Disable the fatal-criticals, since it crashes too much 
+
 * Fri Jan 13 2006 Matthias Clasen <mclasen@redhat.com> - 2.13.4-1
 - Update to 2.13.4
 
