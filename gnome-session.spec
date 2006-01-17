@@ -12,8 +12,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.13.4
-Release: 2
+Version: 2.13.5
+Release: 1
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -79,6 +79,7 @@ GNOME components and handles logout and saving the session.
 %patch6 -p1 -b .gnome-common
 %patch7 -p0 -b .user-share
 %patch8 -p1 -b .shaped
+%patch9 -p1 -b .no-crashes
 
 %build
 
@@ -151,6 +152,9 @@ done
 %{_sysconfdir}/gconf/schemas/*.schemas
 
 %changelog
+* Tue Jan 17 2006 Matthias Clasen <mclasen@redhat.com> - 2.13.5-1
+- Update to 2.13.5
+
 * Mon Jan 16 2006 Matthias Clasen <mclasen@redhat.com> - 2.13.4-2
 - Disable the fatal-criticals, since it crashes too much 
 
