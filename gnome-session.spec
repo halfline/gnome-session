@@ -12,7 +12,7 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.13.5
+Version: 2.13.90
 Release: 1
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
@@ -152,6 +152,9 @@ done
 %{_sysconfdir}/gconf/schemas/*.schemas
 
 %changelog
+* Sat Jan 28 2006 Matthias Clasen <mclasen@redhat.com> - 2.13.90-1
+- Update to 2.13.90
+
 * Tue Jan 17 2006 Matthias Clasen <mclasen@redhat.com> - 2.13.5-1
 - Update to 2.13.5
 
