@@ -12,8 +12,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.13.90
-Release: 1.2
+Version: 2.13.91
+Release: 1
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -152,6 +152,9 @@ done
 %{_sysconfdir}/gconf/schemas/*.schemas
 
 %changelog
+* Mon Feb 13 2006 Matthias Clasen <mclasen@redhat.com> - 2.13.91-1
+- Update to 2.13.91
+
 * Fri Feb 10 2006 Jesse Keating <jkeating@redhat.com> - 2.13.90-1.2
 - bump again for double-long bug on ppc(64)
 
