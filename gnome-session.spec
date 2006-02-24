@@ -13,7 +13,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.13.91
-Release: 1
+Release: 2
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -121,6 +121,8 @@ sed -i -e 's/num_clients=7/num_clients=6/' -e '/^6,.*$/d' %{SOURCE1}
 
 install -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
 
+mkdir $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart
+
 #/bin/rm -r $RPM_BUILD_ROOT/var/scrollkeeper
 
 ## remove splash screen
@@ -150,8 +152,12 @@ done
 %{_datadir}/man/man*/*
 %{_bindir}/*
 %{_sysconfdir}/gconf/schemas/*.schemas
+%{_sysconfdir}/xdg/autostart
 
 %changelog
+* Thu Feb 23 2006 Ray Strode <rstrode@redhat.com> - 2.13.91-2
+- take ownership of autostart dir (bug 182335)
+
 * Mon Feb 13 2006 Matthias Clasen <mclasen@redhat.com> - 2.13.91-1
 - Update to 2.13.91
 
