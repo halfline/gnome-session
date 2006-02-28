@@ -78,7 +78,7 @@ GNOME components and handles logout and saving the session.
 %patch2 -p1 -b .login
 %patch3 -p1 -b .dithering
 %patch6 -p1 -b .gnome-common
-%patch7 -p0 -b .user-share
+%patch7 -p1 -b .user-share
 %patch8 -p1 -b .shaped
 %patch9 -p1 -b .no-crashes
 %patch10 -p1 -b .preserve-backward-compat
