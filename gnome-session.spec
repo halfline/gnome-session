@@ -122,7 +122,8 @@ sed -i -e 's/num_clients=7/num_clients=6/' -e '/^6,.*$/d' %{SOURCE1}
 
 install -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
 
-mkdir $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart
+mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
 
 #/bin/rm -r $RPM_BUILD_ROOT/var/scrollkeeper
 
@@ -154,6 +155,7 @@ done
 %{_bindir}/*
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_sysconfdir}/xdg/autostart
+%{_datadir}/gnome/autostart
 
 %changelog
 * Tue Feb 28 2006 Ray Strode <rstrode@redhat.com> - 2.13.92-1
