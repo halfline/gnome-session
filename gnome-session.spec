@@ -12,8 +12,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.13.91
-Release: 2
+Version: 2.13.92
+Release: 1
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -45,11 +45,12 @@ Patch3: gnome-session-2.0.5-dithering.patch
 ## http://bugzilla.gnome.org/show_bug.cgi?id=106450
 Patch6: gnome-session-2.9.4-gnome-common.patch
 # Launch gnome-user-share on login if enabled
-Patch7: gnome-session-user-share.patch
+Patch7: gnome-session-2.13.92-user-share.patch
 # do shaped window for splash screen
 Patch8: gnome-session-2.12.0-shaped.patch
 # too much crashing
 Patch9: gnome-session-2.13.4-no-crashes.patch
+Patch10: gnome-session-2.13.92-preserve-backward-compat.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -80,7 +81,7 @@ GNOME components and handles logout and saving the session.
 %patch7 -p0 -b .user-share
 %patch8 -p1 -b .shaped
 %patch9 -p1 -b .no-crashes
-
+%patch10 -p1 -b .preserve-backward-compat
 %build
 
 #workaround broken perl-XML-Parser on 64bit arches
@@ -155,6 +156,11 @@ done
 %{_sysconfdir}/xdg/autostart
 
 %changelog
+* Tue Feb 28 2006 Ray Strode <rstrode@redhat.com> - 2.13.92-1
+- Update to 2.13.92
+- Add patch from CVS HEAD to maintain compatibility with
+  version 2.13.91
+
 * Thu Feb 23 2006 Ray Strode <rstrode@redhat.com> - 2.13.91-2
 - take ownership of autostart dir (bug 182335)
 

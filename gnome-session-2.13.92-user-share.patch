@@ -1,0 +1,88 @@
+--- gnome-session-2.13.92/gnome-session/main.c.user-share	2006-02-22 11:31:10.000000000 -0500
++++ gnome-session-2.13.92/gnome-session/main.c	2006-02-28 13:42:42.000000000 -0500
+@@ -46,6 +46,7 @@
+ #include "gsm-sound.h"
+ #include "gsm-gsd.h"
+ #include "gsm-keyring.h"
++#include "gsm-user-share.h"
+ #include "gsm-xrandr.h"
+ #include "gsm-at-startup.h"
+ #include "gsm-remote-desktop.h"
+@@ -485,6 +486,8 @@
+ 
+   gsm_sound_login ();
+ 
++  gdm_user_share_start ();
++
+   gsm_remote_desktop_start ();
+ 
+   if (splashing)
+--- /dev/null	2006-02-28 12:23:07.427962250 -0500
++++ gnome-session-2.13.92/gnome-session/gsm-user-share.c	2006-02-28 13:40:38.000000000 -0500
+@@ -0,0 +1,38 @@
++#include <config.h>
++
++#include <glib.h>
++#include <gconf/gconf-client.h>
++
++#include "gsm-user-share.h"
++
++#define FILE_SHARING_ENABLED "/desktop/gnome/file_sharing/enabled"
++
++void
++gsm_user_share_start (void)
++{
++    GConfClient *client;
++    gboolean enabled;
++    char *argv[2];
++    int i;
++
++    client = gconf_client_get_default ();
++    enabled = gconf_client_get_bool (client,
++				     FILE_SHARING_ENABLED,
++				     NULL);
++    g_object_unref (client);
++    
++    if (enabled) {
++        i = 0;
++	argv[i++] = LIBEXECDIR"/gnome-user-share";
++	argv[i++] = NULL;
++	
++	g_spawn_async (NULL,
++		       argv,
++		       NULL,
++		       G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_STDERR_TO_DEV_NULL,
++		       NULL,
++		       NULL,
++		       NULL,
++		       NULL);
++    }
++}
+--- /dev/null	2006-02-28 12:23:07.427962250 -0500
++++ gnome-session-2.13.92/gnome-session/gsm-user-share.h	2006-02-28 13:40:38.000000000 -0500
+@@ -0,0 +1,6 @@
++#ifndef GSM_USER_SHARE_H
++#define GSM_USER_SHARE_H
++
++void gsm_user_share_start (void);
++
++#endif /* GSM_USER_SHARE_H */
+--- gnome-session-2.13.92/gnome-session/Makefile.am.user-share	2005-01-10 11:36:40.000000000 -0500
++++ gnome-session-2.13.92/gnome-session/Makefile.am	2006-02-28 13:40:38.000000000 -0500
+@@ -23,6 +23,7 @@
+ 	-DPREFIX=\""$(prefix)"\"                                \
+ 	-DSYSCONFDIR=\""$(sysconfdir)"\"                        \
+ 	-DLIBDIR=\""$(libdir)"\"                                \
++	-DLIBEXECDIR=\""$(libexecdir)"\"                        \
+ 	-DDATADIR=\""$(datadir)"\"                              \
+ 	$(NULL)
+ 
+@@ -93,6 +94,8 @@
+ 	gsm-xrandr.h		\
+ 	gsm-keyring.c		\
+ 	gsm-keyring.h		\
++	gsm-user-share.c	\
++	gsm-user-share.h	\
+ 	gsm-gsd.c		\
+ 	gsm-gsd.h		\
+ 	gsm-protocol.c		\
