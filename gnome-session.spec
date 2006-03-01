@@ -7,13 +7,14 @@
 %define libbonoboui_version 2.3.0
 %define gnome_vfs2_version 2.3.0
 %define gconf2_version 2.2.0
+%define gnome_desktop_version 2.2.0
 
 %define po_package gnome-session-2.0
 
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.13.92
-Release: 1
+Release: 2
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -60,11 +61,13 @@ BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: libbonobo-devel >= %{libbonobo_version}
 BuildRequires: libbonoboui-devel >= %{libbonoboui_version}
 BuildRequires: gnome-vfs2-devel >= %{gnome_vfs2_version}
+BuildRequires: gnome-desktop-devel >= %{gnome_desktop_version}
 
 # this is so the configure checks find /usr/bin/halt etc.
 BuildRequires: usermode
 
 BuildRequires: automake14 autoconf gettext
+BuildRequires: libX11-devel libXt-devel
 
 %description
 
@@ -158,6 +161,9 @@ done
 %{_datadir}/gnome/autostart
 
 %changelog
+* Wed Mar 01 2006 Karsten Hopp <karsten@redhat.de> 2.13.92-2
+- BuildRequires: gnome-desktop-devel, libX11-devel, libXt-devel
+
 * Tue Feb 28 2006 Ray Strode <rstrode@redhat.com> - 2.13.92-1
 - Update to 2.13.92
 - Add patch from CVS HEAD to maintain compatibility with
