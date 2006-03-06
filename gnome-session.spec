@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.13.92
-Release: 2
+Release: 3
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -52,6 +52,8 @@ Patch8: gnome-session-2.12.0-shaped.patch
 # too much crashing
 Patch9: gnome-session-2.13.4-no-crashes.patch
 Patch10: gnome-session-2.13.92-preserve-backward-compat.patch
+Patch11: gnome-session-2.13.92-fix-session-editing.patch
+Patch12: gnome-session-2.13.92-desensitize-invalid-buttons.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -85,6 +87,9 @@ GNOME components and handles logout and saving the session.
 %patch8 -p1 -b .shaped
 %patch9 -p1 -b .no-crashes
 %patch10 -p1 -b .preserve-backward-compat
+%patch11 -p1 -b .fix-session-editing
+%patch12 -p1 -b .desensitize-invalid-buttons
+
 %build
 
 #workaround broken perl-XML-Parser on 64bit arches
@@ -161,6 +166,11 @@ done
 %{_datadir}/gnome/autostart
 
 %changelog
+* Mon Mar 06 2006 Ray Strode <rstrode@redhat.com> - 2.13.92-3
+- Patch from Vincent Untz to fix session editing (upstream bug 333641)
+- Desensitize buttons for operations that the user isn't allowed
+  to do (bug 179479).
+
 * Wed Mar 01 2006 Karsten Hopp <karsten@redhat.de> 2.13.92-2
 - BuildRequires: gnome-desktop-devel, libX11-devel, libXt-devel
 
