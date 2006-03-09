@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.13.92
-Release: 3
+Release: 4
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -54,6 +54,7 @@ Patch9: gnome-session-2.13.4-no-crashes.patch
 Patch10: gnome-session-2.13.92-preserve-backward-compat.patch
 Patch11: gnome-session-2.13.92-fix-session-editing.patch
 Patch12: gnome-session-2.13.92-desensitize-invalid-buttons.patch
+Patch13: gnome-session-2.13.92-make-config-dir.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -89,6 +90,7 @@ GNOME components and handles logout and saving the session.
 %patch10 -p1 -b .preserve-backward-compat
 %patch11 -p1 -b .fix-session-editing
 %patch12 -p1 -b .desensitize-invalid-buttons
+%patch13 -p1 -b .make-config-dir
 
 %build
 
@@ -108,7 +110,7 @@ make
 rm -rf $RPM_BUILD_ROOT
 
 export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
-%makeinstall
+make install DESTDIR=$RPM_BUILD_ROOT
 unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
 
 desktop-file-install --vendor gnome --delete-original                   \
@@ -166,6 +168,10 @@ done
 %{_datadir}/gnome/autostart
 
 %changelog
+* Thu Mar 09 2006 Ray Strode <rstrode@redhat.com> - 2.13.92-4
+- create ~/.config/autostart before trying to migrate
+  session-manual to it (bug 179602).
+
 * Mon Mar 06 2006 Ray Strode <rstrode@redhat.com> - 2.13.92-3
 - Patch from Vincent Untz to fix session editing (upstream bug 333641)
 - Desensitize buttons for operations that the user isn't allowed
