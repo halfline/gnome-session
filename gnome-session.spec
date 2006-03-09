@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.13.92
-Release: 4
+Release: 5
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -168,6 +168,9 @@ done
 %{_datadir}/gnome/autostart
 
 %changelog
+* Thu Mar 09 2006 Ray Strode <rstrode@redhat.com> - 2.13.92-5
+- fix up path creation functions 
+
 * Thu Mar 09 2006 Ray Strode <rstrode@redhat.com> - 2.13.92-4
 - create ~/.config/autostart before trying to migrate
   session-manual to it (bug 179602).
