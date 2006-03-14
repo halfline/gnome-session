@@ -51,8 +51,6 @@ Patch7: gnome-session-2.13.92-user-share.patch
 Patch8: gnome-session-2.12.0-shaped.patch
 # too much crashing
 Patch9: gnome-session-2.13.4-no-crashes.patch
-Patch10: gnome-session-2.13.92-preserve-backward-compat.patch
-Patch11: gnome-session-2.13.92-fix-session-editing.patch
 Patch12: gnome-session-2.13.92-desensitize-invalid-buttons.patch
 Patch13: gnome-session-2.13.92-make-config-dir.patch
 
@@ -87,8 +85,6 @@ GNOME components and handles logout and saving the session.
 %patch7 -p1 -b .user-share
 %patch8 -p1 -b .shaped
 %patch9 -p1 -b .no-crashes
-%patch10 -p1 -b .preserve-backward-compat
-%patch11 -p1 -b .fix-session-editing
 %patch12 -p1 -b .desensitize-invalid-buttons
 %patch13 -p1 -b .make-config-dir
 
