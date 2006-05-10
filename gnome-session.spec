@@ -13,8 +13,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.14.1
-Release: 2
+Version: 2.15.1
+Release: 1
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -164,6 +164,9 @@ done
 %{_datadir}/gnome/autostart
 
 %changelog
+* Wed May 10 2006 Matthias Clasen <mclasen@redhat.com> - 2.15.1-1
+- Update to 2.15.1
+
 * Mon Apr 10 2006 Matthias Clasen <mclasen@redhat.com> - 2.14.1-2
 - Update to 2.14.1
 
