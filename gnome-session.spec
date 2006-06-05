@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.15.1
-Release: 1
+Release: 2
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -27,7 +27,7 @@ BuildRoot: %{_tmppath}/%{name}-root
 BuildRequires: perl-XML-Parser >= 2.31-16
 
 Requires: redhat-artwork >= 0.20
-Requires: fedora-logos >= 1.1.37 
+Requires: system-logos
 # required to get gconf-sanity-check-2 in the right place
 Requires: GConf2 >= %{gconf2_version}
 # Needed for gnome-settings-daemon
@@ -164,6 +164,9 @@ done
 %{_datadir}/gnome/autostart
 
 %changelog
+* Mon Jun  5 2006 Matthias Clasen <mclasen@redhat.com> - 2.15.1-2
+- Require system-logos, not fedora-logos
+
 * Wed May 10 2006 Matthias Clasen <mclasen@redhat.com> - 2.15.1-1
 - Update to 2.15.1
 
