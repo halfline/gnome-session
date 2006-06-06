@@ -23,8 +23,7 @@ License: GPL
 Group: User Interface/Desktops
 BuildRoot: %{_tmppath}/%{name}-root
 
-# For intltool:
-BuildRequires: perl-XML-Parser >= 2.31-16
+BuildRequires: intltool, autoconf, automake
 
 Requires: redhat-artwork >= 0.20
 Requires: system-logos
@@ -164,6 +163,9 @@ done
 %{_datadir}/gnome/autostart
 
 %changelog
+* Tue Jun  6 2006 Matthias Clasen  <mclasen@redhat.com> 2.15.1-3
+- Add BuildRequires: intltool, autoconf, automake 
+
 * Mon Jun  5 2006 Matthias Clasen <mclasen@redhat.com> - 2.15.1-2
 - Require system-logos, not fedora-logos
 
