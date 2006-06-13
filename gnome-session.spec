@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.15.1
-Release: 4
+Release: 5
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -22,9 +22,6 @@ Source2: gnome.desktop
 License: GPL 
 Group: User Interface/Desktops
 BuildRoot: %{_tmppath}/%{name}-root
-
-BuildRequires: intltool, autoconf, automake
-BuildRequires: libtool
 
 Requires: redhat-artwork >= 0.20
 Requires: system-logos
@@ -67,7 +64,9 @@ BuildRequires: gnome-desktop-devel >= %{gnome_desktop_version}
 # this is so the configure checks find /usr/bin/halt etc.
 BuildRequires: usermode
 
-BuildRequires: automake14 autoconf gettext
+BuildRequires: intltool, autoconf, automake
+BuildRequires: libtool
+BuildRequires: gettext
 BuildRequires: libX11-devel libXt-devel
 
 %description
@@ -164,6 +163,9 @@ done
 %{_datadir}/gnome/autostart
 
 %changelog
+* Mon Jun 12 2006 Bill Nottingham  <notting@redhat.com> 2.15.1-5
+- remove obsolete automake14 buildreq
+
 * Fri Jun  9 2006 Matthias Clasen  <mclasen@redhat.com> 2.15.1-4
 - Add more missing BuildRequires
 
