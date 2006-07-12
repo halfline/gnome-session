@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.15.1
-Release: 5
+Release: 5.1
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -163,6 +163,9 @@ done
 %{_datadir}/gnome/autostart
 
 %changelog
+* Wed Jul 12 2006 Jesse Keating <jkeating@redhat.com> - 2.15.1-5.1
+- rebuild
+
 * Mon Jun 12 2006 Bill Nottingham  <notting@redhat.com> 2.15.1-5
 - remove obsolete automake14 buildreq
 
