@@ -3,8 +3,6 @@
 %define gtk2_version 2.2.0
 %define libgnome_version 2.3.0
 %define libgnomeui_version 2.3.0
-%define libbonobo_version 2.3.0
-%define libbonoboui_version 2.3.0
 %define gnome_vfs2_version 2.3.0
 %define gconf2_version 2.2.0
 %define gnome_desktop_version 2.2.0
@@ -13,8 +11,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.15.1
-Release: 5.1
+Version: 2.15.4
+Release: 1
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -49,17 +47,16 @@ Patch8: gnome-session-2.12.0-shaped.patch
 # too much crashing
 Patch9: gnome-session-2.13.4-no-crashes.patch
 Patch12: gnome-session-2.13.92-desensitize-invalid-buttons.patch
-Patch13: gnome-session-2.13.92-make-config-dir.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
 BuildRequires: gtk2-devel >= %{gtk2_version}
 BuildRequires: libgnome-devel >= %{libgnome_version}
 BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
-BuildRequires: libbonobo-devel >= %{libbonobo_version}
-BuildRequires: libbonoboui-devel >= %{libbonoboui_version}
 BuildRequires: gnome-vfs2-devel >= %{gnome_vfs2_version}
 BuildRequires: gnome-desktop-devel >= %{gnome_desktop_version}
+BuildRequires: dbus-devel
+BuildRequires: libnotify-devel
 
 # this is so the configure checks find /usr/bin/halt etc.
 BuildRequires: usermode
@@ -68,6 +65,7 @@ BuildRequires: intltool, autoconf, automake
 BuildRequires: libtool
 BuildRequires: gettext
 BuildRequires: libX11-devel libXt-devel
+BuildRequires: libXrandr-devel
 
 %description
 
@@ -85,7 +83,6 @@ GNOME components and handles logout and saving the session.
 %patch8 -p1 -b .shaped
 %patch9 -p1 -b .no-crashes
 %patch12 -p1 -b .desensitize-invalid-buttons
-%patch13 -p1 -b .make-config-dir
 
 %build
 
@@ -163,6 +160,9 @@ done
 %{_datadir}/gnome/autostart
 
 %changelog
+* Wed Jul 12 2006 Matthias Clasen <mclasen@redhat.com> - 2.15.4-1
+- Update to 2.15.4
+
 * Wed Jul 12 2006 Jesse Keating <jkeating@redhat.com> - 2.15.1-5.1
 - rebuild
 
