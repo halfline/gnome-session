@@ -57,6 +57,7 @@ BuildRequires: gnome-vfs2-devel >= %{gnome_vfs2_version}
 BuildRequires: gnome-desktop-devel >= %{gnome_desktop_version}
 BuildRequires: dbus-devel
 BuildRequires: libnotify-devel
+BuildRequires: control-center-devel
 
 # this is so the configure checks find /usr/bin/halt etc.
 BuildRequires: usermode
@@ -160,7 +161,7 @@ done
 %{_datadir}/gnome/autostart
 
 %changelog
-* Wed Jul 12 2006 Matthias Clasen <mclasen@redhat.com> - 2.15.4-1
+* Thu Jul 13 2006 Ray Strode <rstrode@redhat.com> - 2.15.4-1
 - Update to 2.15.4
 
 * Wed Jul 12 2006 Jesse Keating <jkeating@redhat.com> - 2.15.1-5.1
