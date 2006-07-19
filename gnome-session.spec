@@ -6,13 +6,15 @@
 %define gnome_vfs2_version 2.3.0
 %define gconf2_version 2.2.0
 %define gnome_desktop_version 2.2.0
+%define dbus_glib_version 0.70
+%define dbus_version 0.90
 
 %define po_package gnome-session-2.0
 
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.15.4
-Release: 1
+Release: 2 
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -55,7 +57,8 @@ BuildRequires: libgnome-devel >= %{libgnome_version}
 BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: gnome-vfs2-devel >= %{gnome_vfs2_version}
 BuildRequires: gnome-desktop-devel >= %{gnome_desktop_version}
-BuildRequires: dbus-devel
+BuildRequires: dbus-devel >= %{dbus_version}
+BuildRequires: dbus-glib-devel >= %{dbus_glib_version}
 BuildRequires: libnotify-devel
 BuildRequires: control-center-devel
 
@@ -161,6 +164,9 @@ done
 %{_datadir}/gnome/autostart
 
 %changelog
+* Wed Jul 19 2006 John (J5) Palmieri <johnp@redhat.com> - 2.15.4-2
+- Add BR for dbus-glib-devel
+
 * Thu Jul 13 2006 Ray Strode <rstrode@redhat.com> - 2.15.4-1
 - Update to 2.15.4
 
