@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.15.4
-Release: 2 
+Release: 3
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -49,6 +49,7 @@ Patch8: gnome-session-2.12.0-shaped.patch
 # too much crashing
 Patch9: gnome-session-2.13.4-no-crashes.patch
 Patch12: gnome-session-2.13.92-desensitize-invalid-buttons.patch
+Patch13: gnome-session-2.15.4-window-manager.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -87,6 +88,7 @@ GNOME components and handles logout and saving the session.
 %patch8 -p1 -b .shaped
 %patch9 -p1 -b .no-crashes
 %patch12 -p1 -b .desensitize-invalid-buttons
+%patch13 -p0 -b .window-manager
 
 %build
 
@@ -164,6 +166,10 @@ done
 %{_datadir}/gnome/autostart
 
 %changelog
+* Thu Aug 3 2006 Soren Sandmann <sandmann@redhat.com> - 2.15.4-3
+- Add patch to (a) add configuration option for window manager, (b) start the window
+  manager, and (c) disable splash screen by default.
+
 * Wed Jul 19 2006 John (J5) Palmieri <johnp@redhat.com> - 2.15.4-2
 - Add BR for dbus-glib-devel
 
