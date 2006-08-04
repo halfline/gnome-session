@@ -13,8 +13,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.15.4
-Release: 3
+Version: 2.15.90
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -62,6 +62,7 @@ BuildRequires: dbus-devel >= %{dbus_version}
 BuildRequires: dbus-glib-devel >= %{dbus_glib_version}
 BuildRequires: libnotify-devel
 BuildRequires: control-center-devel
+BuildRequires: desktop-file-utils
 
 # this is so the configure checks find /usr/bin/halt etc.
 BuildRequires: usermode
@@ -166,6 +167,9 @@ done
 %{_datadir}/gnome/autostart
 
 %changelog
+* Thu Aug 4 2006 Matthias Clasen <mclasen@redhat.com> - 2.15.90-1.fc6
+- Update to 2.15.90
+
 * Thu Aug 3 2006 Soren Sandmann <sandmann@redhat.com> - 2.15.4-3
 - Add patch to (a) add configuration option for window manager, (b) start the window
   manager, and (c) disable splash screen by default.
