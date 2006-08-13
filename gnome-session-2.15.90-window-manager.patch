@@ -48,7 +48,7 @@
  OLDIFS=$IFS
  IFS=":"
  if [ -z "$WINDOW_MANAGER" ] ; then
-@@ -67,11 +73,17 @@ fi
+@@ -67,11 +73,18 @@ fi
  # Now create options OPT1 and OPT2 based on the windowmanager used
  OPT1=
  OPT2=
@@ -63,6 +63,7 @@
 +      OPT1=--sm-client-id
 +      OPT2=$SMID
 +      OPT3=gconf
++      ;;
      openbox)
        OPT1=--sm-client-id
        OPT2=$SMID

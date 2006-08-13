@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.15.90
-Release: 3%{?dist}
+Release: 4%{?dist}
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -167,6 +167,10 @@ done
 %{_datadir}/gnome/autostart
 
 %changelog
+* Sun Aug 13 2006 Ray Strode <rstrode@redhat.com> - 2.15.90-4.fc6
+- fix window manager launching script. Patch from 
+  Tim Vismor <tvismor@acm.org> (bug 202312)
+
 * Fri Aug 11 2006 Ray Strode <rstrode@redhat.com> - 2.15.90-3.fc6
 - start gnome-window-decorator and pass "gconf" when invoking
   compiz
