@@ -13,8 +13,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.15.90
-Release: 4%{?dist}
+Version: 2.15.91
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -40,16 +40,24 @@ Conflicts: gdm < 1:2.6.0.8-5
 Patch1: gnome-session-2.2.2-icons.patch
 Patch2: gnome-session-2.0.5-login.patch
 Patch3: gnome-session-2.0.5-dithering.patch
+
 ## http://bugzilla.gnome.org/show_bug.cgi?id=106450
 Patch6: gnome-session-2.9.4-gnome-common.patch
+
 # Launch gnome-user-share on login if enabled
 Patch7: gnome-session-2.13.92-user-share.patch
+
 # do shaped window for splash screen
 Patch8: gnome-session-2.12.0-shaped.patch
+
 # too much crashing
 Patch9: gnome-session-2.13.4-no-crashes.patch
-Patch12: gnome-session-2.13.92-desensitize-invalid-buttons.patch
-Patch13: gnome-session-2.15.90-window-manager.patch
+
+# http://bugzilla.gnome.org/show_bug.cgi?id=333670
+Patch12: gnome-session-2.15.91-desensitize-invalid-buttons.patch
+
+# http://bugzilla.gnome.org/show_bug.cgi?id=350848
+Patch13: gnome-session-2.15.91-window-manager.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -167,6 +175,9 @@ done
 %{_datadir}/gnome/autostart
 
 %changelog
+* Mon Aug 14 2006 Ray Strode <rstrode@redhat.com> - 2.15.91-1.fc6
+- Update to 2.15.91
+
 * Sun Aug 13 2006 Ray Strode <rstrode@redhat.com> - 2.15.90-4.fc6
 - fix window manager launching script. Patch from 
   Tim Vismor <tvismor@acm.org> (bug 202312)
