@@ -13,7 +13,7 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.15.92
+Version: 2.16.0
 Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
@@ -181,6 +181,9 @@ fi
 %{_datadir}/gnome/autostart
 
 %changelog
+* Mon Sep  4 2006 Matthias Clasen <mclasen@redhat.com> - 2.16.0-1.fc6
+- Update to 2.16.0
+
 * Mon Aug 21 2006 Matthias Clasen <mclasen@redhat.com> - 2.15.92-1.fc6
 - Update to 2.15.92
 - Add %%preun and %%postun scripts
