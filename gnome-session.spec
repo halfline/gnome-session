@@ -59,6 +59,9 @@ Patch12: gnome-session-2.15.91-desensitize-invalid-buttons.patch
 # http://bugzilla.gnome.org/show_bug.cgi?id=350848
 Patch13: gnome-session-2.15.91-window-manager.patch
 
+# http://bugzilla.gnome.org/show_bug.cgi?id=84315
+Patch14: gnome-session-2.15.91-http-proxy.patch
+
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
 BuildRequires: gtk2-devel >= %{gtk2_version}
@@ -98,6 +101,7 @@ GNOME components and handles logout and saving the session.
 %patch9 -p1 -b .no-crashes
 %patch12 -p1 -b .desensitize-invalid-buttons
 %patch13 -p1 -b .window-manager
+%patch14 -p1 -b .http-proxy
 
 %build
 
@@ -181,6 +185,10 @@ fi
 %{_datadir}/gnome/autostart
 
 %changelog
+* Wed Sep  6 2006 Ray Strode <rstrode@redhat.com> - 2.16.0-2.fc6
+- set http_proxy environment variable from GNOME settings 
+  (bug 190041)
+
 * Mon Sep  4 2006 Matthias Clasen <mclasen@redhat.com> - 2.16.0-1.fc6
 - Update to 2.16.0
 
