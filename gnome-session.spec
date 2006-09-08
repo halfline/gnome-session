@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.16.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -48,7 +48,7 @@ Patch6: gnome-session-2.9.4-gnome-common.patch
 Patch7: gnome-session-2.13.92-user-share.patch
 
 # do shaped window for splash screen
-Patch8: gnome-session-2.12.0-shaped.patch
+Patch8: gnome-session-2.16.0-shaped.patch
 
 # too much crashing
 Patch9: gnome-session-2.13.4-no-crashes.patch
@@ -185,6 +185,9 @@ fi
 %{_datadir}/gnome/autostart
 
 %changelog
+* Thu Sep  7 2006 Matthias Clasen <mclasen@redhat.com> - 2.16.0-3.fc6
+- Fix position of icons in the splash screen  (#205508)
+
 * Wed Sep  6 2006 Ray Strode <rstrode@redhat.com> - 2.16.0-2.fc6
 - set http_proxy environment variable from GNOME settings 
   (bug 190041)
