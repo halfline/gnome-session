@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.16.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -83,6 +83,10 @@ BuildRequires: libtool
 BuildRequires: gettext
 BuildRequires: libX11-devel libXt-devel
 BuildRequires: libXrandr-devel
+
+Requires(pre): GConf2 >= 2.14
+Requires(post): GConf2 >= 2.14
+Requires(preun): GConf2 >= 2.14
 
 %description
 
@@ -158,13 +162,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas > /dev/null
+gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas > /dev/null || :
 /sbin/ldconfig
+
+%pre
+if [ "$1" -gt 1 ]; then
+  export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
+  gconftool-2 --makefile-uninstall-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas > /dev/null || :
+fi
 
 %preun
 if [ "$1" -eq 0 ]; then
   export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-  gconftool-2 --makefile-uninstall-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas > /dev/null
+  gconftool-2 --makefile-uninstall-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas > /dev/null || :
 fi
 
 %postun
@@ -185,6 +195,9 @@ fi
 %{_datadir}/gnome/autostart
 
 %changelog
+* Wed Oct 18 2006 Matthias Clasen <mclasen@redhat.com> - 2.16.0-4
+- Fix scripts according to the packaging guidelines
+
 * Thu Sep  7 2006 Matthias Clasen <mclasen@redhat.com> - 2.16.0-3.fc6
 - Fix position of icons in the splash screen  (#205508)
 
