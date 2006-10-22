@@ -13,8 +13,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.16.0
-Release: 4%{?dist}
+Version: 2.16.1
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -195,6 +195,9 @@ fi
 %{_datadir}/gnome/autostart
 
 %changelog
+* Sat Oct 21 2006 Matthias Clasen <mclasen@redhat.com> - 2.16.1-1
+- Update to 2.16.1
+
 * Wed Oct 18 2006 Matthias Clasen <mclasen@redhat.com> - 2.16.0-4
 - Fix scripts according to the packaging guidelines
 
