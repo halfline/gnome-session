@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.16.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -195,6 +195,11 @@ fi
 %{_datadir}/gnome/autostart
 
 %changelog
+* Thu Oct 26 2006 Ray Strode <rstrode@redhat.com> - 2.16.1-2.fc6
+- don't hose users with a stale http_proxy variable if they
+  use autoconfiguration and uses to use manual configuration.
+  Patch by Mark McLoughlin (bug 212319)
+
 * Sat Oct 21 2006 Matthias Clasen <mclasen@redhat.com> - 2.16.1-1
 - Update to 2.16.1
 
