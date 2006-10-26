@@ -195,7 +195,7 @@ fi
 %{_datadir}/gnome/autostart
 
 %changelog
-* Thu Oct 26 2006 Ray Strode <rstrode@redhat.com> - 2.16.1-2.fc6
+* Thu Oct 26 2006 Ray Strode <rstrode@redhat.com> - 2.16.1-2.fc7
 - don't hose users with a stale http_proxy variable if they
   use autoconfiguration and uses to use manual configuration.
   Patch by Mark McLoughlin (bug 212319)
