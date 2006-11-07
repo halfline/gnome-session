@@ -13,8 +13,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.16.1
-Release: 2%{?dist}
+Version: 2.17.2
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -162,19 +162,19 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas > /dev/null || :
+gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas >& /dev/null || :
 /sbin/ldconfig
 
 %pre
 if [ "$1" -gt 1 ]; then
   export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-  gconftool-2 --makefile-uninstall-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas > /dev/null || :
+  gconftool-2 --makefile-uninstall-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas >& /dev/null || :
 fi
 
 %preun
 if [ "$1" -eq 0 ]; then
   export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-  gconftool-2 --makefile-uninstall-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas > /dev/null || :
+  gconftool-2 --makefile-uninstall-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas >& /dev/null || :
 fi
 
 %postun
@@ -195,6 +195,9 @@ fi
 %{_datadir}/gnome/autostart
 
 %changelog
+* Tue Nov  7 2006 Matthias Clasen  <mclasen@redhat.com> - 2.17.2-1
+- Update to 2.17.2
+
 * Thu Oct 26 2006 Ray Strode <rstrode@redhat.com> - 2.16.1-2.fc7
 - don't hose users with a stale http_proxy variable if they
   use autoconfiguration and uses to use manual configuration.
