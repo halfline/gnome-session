@@ -59,9 +59,6 @@ Patch12: gnome-session-2.15.91-desensitize-invalid-buttons.patch
 # http://bugzilla.gnome.org/show_bug.cgi?id=350848
 Patch13: gnome-session-2.15.91-window-manager.patch
 
-# http://bugzilla.gnome.org/show_bug.cgi?id=84315
-Patch14: gnome-session-2.15.91-http-proxy.patch
-
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
 BuildRequires: gtk2-devel >= %{gtk2_version}
@@ -105,7 +102,6 @@ GNOME components and handles logout and saving the session.
 %patch9 -p1 -b .no-crashes
 %patch12 -p1 -b .desensitize-invalid-buttons
 %patch13 -p1 -b .window-manager
-%patch14 -p1 -b .http-proxy
 
 %build
 
