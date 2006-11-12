@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.17.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -191,6 +191,9 @@ fi
 %{_datadir}/gnome/autostart
 
 %changelog
+* Sat Nov 11 2006 Matthias Clasen  <mclasen@redhat.com> - 2.17.2-2
+- Fix gnome-wm for compiz
+
 * Tue Nov  7 2006 Matthias Clasen  <mclasen@redhat.com> - 2.17.2-1
 - Update to 2.17.2
 
