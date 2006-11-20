@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.17.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -132,7 +132,7 @@ desktop-file-install --vendor gnome --delete-original                   \
   $RPM_BUILD_ROOT%{_datadir}/applications/*
 
 ./mkinstalldirs ${RPM_BUILD_ROOT}%{_datadir}/xsessions/
-install -m 755 %{SOURCE2} ${RPM_BUILD_ROOT}%{_datadir}/xsessions/
+install -m 644 %{SOURCE2} ${RPM_BUILD_ROOT}%{_datadir}/xsessions/
 
 /bin/rm -f $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
 
@@ -191,6 +191,9 @@ fi
 %{_datadir}/gnome/autostart
 
 %changelog
+* Mon Nov 20 2006 Ray Strode <rstrode@redhat.com> - 2.17.2-3
+- don't make gnome.desktop executable (bug 196105)
+
 * Sat Nov 11 2006 Matthias Clasen  <mclasen@redhat.com> - 2.17.2-2
 - Fix gnome-wm for compiz
 
