@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.17.2
-Release: 3%{?dist}
+Release: 4%{?dist}
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -145,6 +145,7 @@ install -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
 
 mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
+mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties
 
 #/bin/rm -r $RPM_BUILD_ROOT/var/scrollkeeper
 
@@ -189,8 +190,12 @@ fi
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_sysconfdir}/xdg/autostart
 %{_datadir}/gnome/autostart
+%{_datadir}/gnome/wm-properties
 
 %changelog
+* Wed Nov 22 2006 Matthias Clasen <mclasen@redhat.com> - 2.17.2-4
+- Own the /usr/share/gnome/wm-properties directory (#216514)
+
 * Mon Nov 20 2006 Ray Strode <rstrode@redhat.com> - 2.17.2-3
 - don't make gnome.desktop executable (bug 196105)
 
