@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.17.2
-Release: 5%{?dist}
+Release: 6%{?dist}
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -59,6 +59,9 @@ Patch12: gnome-session-2.15.91-desensitize-invalid-buttons.patch
 # http://bugzilla.gnome.org/show_bug.cgi?id=350848
 Patch13: gnome-session-2.15.91-window-manager.patch
 
+# http://bugzilla.gnome.org/show_bug.cgi?id=84315
+Patch14: gnome-session-2.17.2-http-proxy.patch
+
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
 BuildRequires: gtk2-devel >= %{gtk2_version}
@@ -102,6 +105,7 @@ GNOME components and handles logout and saving the session.
 %patch9 -p1 -b .no-crashes
 %patch12 -p1 -b .desensitize-invalid-buttons
 %patch13 -p1 -b .window-manager
+%patch14 -p1 -b .http-proxy
 
 %build
 
@@ -193,7 +197,7 @@ fi
 %{_datadir}/gnome/wm-properties
 
 %changelog
-* Mon Nov 27 2006 Ray Strode <rstrode@redhat.com> - 2.17.2-5
+* Mon Nov 27 2006 Ray Strode <rstrode@redhat.com> - 2.17.2-6
 - don't set http_proxy variable if proxy requires password (bug
   217332)
 
