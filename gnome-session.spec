@@ -14,7 +14,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.17.2
-Release: 4%{?dist}
+Release: 5%{?dist}
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -193,6 +193,10 @@ fi
 %{_datadir}/gnome/wm-properties
 
 %changelog
+* Mon Nov 27 2006 Ray Strode <rstrode@redhat.com> - 2.17.2-5
+- don't set http_proxy variable if proxy requires password (bug
+  217332)
+
 * Wed Nov 22 2006 Matthias Clasen <mclasen@redhat.com> - 2.17.2-4
 - Own the /usr/share/gnome/wm-properties directory (#216514)
 
