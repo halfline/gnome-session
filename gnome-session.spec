@@ -51,10 +51,10 @@ Patch8: gnome-session-2.16.0-shaped.patch
 Patch9: gnome-session-2.13.4-no-crashes.patch
 
 # http://bugzilla.gnome.org/show_bug.cgi?id=350848
-Patch13: gnome-session-2.15.91-window-manager.patch
+# The gconf bits weren't accepted upstream, so we'll
+# need to figure something out here
+Patch13: gnome-session-2.17.5-window-manager.patch
 
-# http://bugzilla.gnome.org/show_bug.cgi?id=84315
-Patch14: gnome-session-2.17.2-http-proxy.patch
 
 BuildRequires: glib2-devel >= %{glib2_version}
 BuildRequires: pango-devel >= %{pango_version}
@@ -97,7 +97,6 @@ GNOME components and handles logout and saving the session.
 %patch8 -p1 -b .shaped
 %patch9 -p1 -b .no-crashes
 %patch13 -p1 -b .window-manager
-%patch14 -p1 -b .http-proxy
 
 %build
 
