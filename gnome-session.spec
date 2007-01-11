@@ -13,15 +13,15 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.17.2
-Release: 6%{?dist}
+Version: 2.17.5
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: %{name}-%{version}.tar.bz2
 Source1: redhat-default-session
 Source2: gnome.desktop
 License: GPL 
 Group: User Interface/Desktops
-BuildRoot: %{_tmppath}/%{name}-root
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n) 
 
 Requires: redhat-artwork >= 0.20
 Requires: system-logos
@@ -197,6 +197,9 @@ fi
 %{_datadir}/gnome/wm-properties
 
 %changelog
+* Wed Jan 10 2007 Matthias Clasen <mclasen@redhat.com> - 2.17.5-1
+- Update to 2.17.5
+
 * Mon Nov 27 2006 Ray Strode <rstrode@redhat.com> - 2.17.2-6
 - don't set http_proxy variable if proxy requires password (bug
   217332)
