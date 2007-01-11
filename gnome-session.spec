@@ -103,6 +103,8 @@ GNOME components and handles logout and saving the session.
 #workaround broken perl-XML-Parser on 64bit arches
 export PERL5LIB=/usr/lib64/perl5/vendor_perl/5.8.2 perl
 
+sed -i -e 's/GNOME_COMPILE_WARNINGS.*//' configure.in
+
 aclocal
 automake
 intltoolize --force
