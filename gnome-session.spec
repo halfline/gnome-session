@@ -41,9 +41,6 @@ Patch1: gnome-session-2.2.2-icons.patch
 Patch2: gnome-session-2.0.5-login.patch
 Patch3: gnome-session-2.0.5-dithering.patch
 
-## http://bugzilla.gnome.org/show_bug.cgi?id=106450
-Patch6: gnome-session-2.9.4-gnome-common.patch
-
 # Launch gnome-user-share on login if enabled
 Patch7: gnome-session-2.13.92-user-share.patch
 
@@ -52,9 +49,6 @@ Patch8: gnome-session-2.16.0-shaped.patch
 
 # too much crashing
 Patch9: gnome-session-2.13.4-no-crashes.patch
-
-# http://bugzilla.gnome.org/show_bug.cgi?id=333670
-Patch12: gnome-session-2.15.91-desensitize-invalid-buttons.patch
 
 # http://bugzilla.gnome.org/show_bug.cgi?id=350848
 Patch13: gnome-session-2.15.91-window-manager.patch
@@ -99,11 +93,9 @@ GNOME components and handles logout and saving the session.
 %patch1 -p1 -b .icons
 %patch2 -p1 -b .login
 %patch3 -p1 -b .dithering
-%patch6 -p1 -b .gnome-common
 %patch7 -p1 -b .user-share
 %patch8 -p1 -b .shaped
 %patch9 -p1 -b .no-crashes
-%patch12 -p1 -b .desensitize-invalid-buttons
 %patch13 -p1 -b .window-manager
 %patch14 -p1 -b .http-proxy
 
