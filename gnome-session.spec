@@ -64,7 +64,7 @@ BuildRequires: dbus-glib-devel >= %{dbus_glib_version}
 BuildRequires: gnome-keyring >= %{gnome_keyring_version}
 BuildRequires: libnotify-devel >= %{libnotify_version}
 BuildRequires: GConf2-devel >= %{gconf2_version}
-BuildRequires: gnome-desktop
+BuildRequires: gnome-desktop-devel
 BuildRequires: pango-devel
 BuildRequires: control-center-devel
 BuildRequires: desktop-file-utils
