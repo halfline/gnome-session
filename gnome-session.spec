@@ -1,22 +1,20 @@
-%define glib2_version 2.2.0
-%define pango_version 1.2.0
-%define gtk2_version 2.2.0
-%define libgnome_version 2.3.0
+%define esound_version 0.2.26
 %define libgnomeui_version 2.3.0
-%define gnome_vfs2_version 2.3.0
-%define gconf2_version 2.2.0
-%define gnome_desktop_version 2.2.0
+%define gtk2_version 2.3.1
 %define dbus_glib_version 0.70
 %define dbus_version 0.90
+%define gnome_keyring_version 0.5.1
+%define gconf2_version 2.14.0
+%define libnotify_version 0.2.1
 
 %define po_package gnome-session-2.0
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.17.5
+Version: 2.17.90
 Release: 1%{?dist}
 URL: http://www.gnome.org
-Source0: %{name}-%{version}.tar.bz2
+Source0: http://ftp.gnome.org/pub/gnome/sources/gnome-session/2.17/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
 Source2: gnome.desktop
 License: GPL 
@@ -39,12 +37,14 @@ Conflicts: gdm < 1:2.6.0.8-5
 
 Patch1: gnome-session-2.2.2-icons.patch
 Patch2: gnome-session-2.0.5-login.patch
+# http://bugzilla.gnome.org/show_bug.cgi?id=399259
 Patch3: gnome-session-2.0.5-dithering.patch
 
 # Launch gnome-user-share on login if enabled
 Patch7: gnome-session-2.13.92-user-share.patch
 
 # do shaped window for splash screen
+# http://bugzilla.gnome.org/show_bug.cgi?id=399262
 Patch8: gnome-session-2.16.0-shaped.patch
 
 # too much crashing
@@ -55,19 +55,21 @@ Patch9: gnome-session-2.13.4-no-crashes.patch
 # need to figure something out here
 Patch13: gnome-session-2.17.5-window-manager.patch
 
-
-BuildRequires: glib2-devel >= %{glib2_version}
-BuildRequires: pango-devel >= %{pango_version}
-BuildRequires: gtk2-devel >= %{gtk2_version}
-BuildRequires: libgnome-devel >= %{libgnome_version}
+BuildRequires: esound-devel >= %{esound_version}
+BuildRequires: /usr/bin/esd
 BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
-BuildRequires: gnome-vfs2-devel >= %{gnome_vfs2_version}
-BuildRequires: gnome-desktop-devel >= %{gnome_desktop_version}
+BuildRequires: gtk2-devel >= %{gtk2_version}
 BuildRequires: dbus-devel >= %{dbus_version}
 BuildRequires: dbus-glib-devel >= %{dbus_glib_version}
-BuildRequires: libnotify-devel
+BuildRequires: gnome-keyring >= %{gnome_keyring_version}
+BuildRequires: libnotify-devel >= %{libnotify_version}
+BuildRequires: GConf2-devel >= %{gconf2_version}
+BuildRequires: gnome-desktop
+BuildRequires: pango-devel
 BuildRequires: control-center-devel
 BuildRequires: desktop-file-utils
+BuildRequires: libXau-devel
+BuildRequires: libXrandr-devel
 
 # this is so the configure checks find /usr/bin/halt etc.
 BuildRequires: usermode
@@ -78,9 +80,9 @@ BuildRequires: gettext
 BuildRequires: libX11-devel libXt-devel
 BuildRequires: libXrandr-devel
 
-Requires(pre): GConf2 >= 2.14
-Requires(post): GConf2 >= 2.14
-Requires(preun): GConf2 >= 2.14
+Requires(pre): GConf2 >= %{gconf2_version}
+Requires(post): GConf2 >= %{gconf2_version}
+Requires(preun): GConf2 >= %{gconf2_version}
 
 %description
 
@@ -111,7 +113,7 @@ intltoolize --force
 autoheader
 autoconf
 
-%configure --with-halt-command=/usr/bin/poweroff --with-reboot-command=/usr/bin/reboot
+%configure --enable-esd --with-halt-command=/usr/bin/poweroff --with-reboot-command=/usr/bin/reboot
 make
 
 %install
@@ -155,9 +157,9 @@ rm -r $RPM_BUILD_ROOT%{_datadir}/pixmaps/splash
 rm -rf $RPM_BUILD_ROOT
 
 %post
+/sbin/ldconfig
 export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
 gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas >& /dev/null || :
-/sbin/ldconfig
 
 %pre
 if [ "$1" -gt 1 ]; then
@@ -190,6 +192,10 @@ fi
 %{_datadir}/gnome/wm-properties
 
 %changelog
+* Sun Jan 21 2007 Matthias Clasen <mclasen@redhat.com> - 2.17.90-1
+- Update to 2.17.90
+- Clean up BuildRequires
+
 * Wed Jan 10 2007 Matthias Clasen <mclasen@redhat.com> - 2.17.5-1
 - Update to 2.17.5
 

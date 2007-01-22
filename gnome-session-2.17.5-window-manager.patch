@@ -1,5 +1,5 @@
---- gnome-session-2.17.5/gnome-session/gnome-session.schemas.in.window-manager	2007-01-08 17:32:28.000000000 -0500
-+++ gnome-session-2.17.5/gnome-session/gnome-session.schemas.in	2007-01-11 14:05:30.000000000 -0500
+--- gnome-session-2.17.5/data/gnome-session.schemas.in.window-manager	2007-01-08 17:32:28.000000000 -0500
++++ gnome-session-2.17.5/data/gnome-session.schemas.in	2007-01-11 14:05:30.000000000 -0500
 @@ -2,11 +2,22 @@
  <gconfschemafile>
     <schemalist>
