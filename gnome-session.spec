@@ -188,8 +188,8 @@ fi
 %{_bindir}/*
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_sysconfdir}/xdg/autostart
-%{_datadir}/gnome/autostart
-%{_datadir}/gnome/wm-properties
+%{_datadir}/icons/hicolor/*/apps/session-properties.png
+%{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 
 %changelog
 * Sun Jan 21 2007 Matthias Clasen <mclasen@redhat.com> - 2.17.90-1
