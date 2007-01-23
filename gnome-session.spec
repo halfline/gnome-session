@@ -11,7 +11,7 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.17.90
+Version: 2.17.90.1
 Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://ftp.gnome.org/pub/gnome/sources/gnome-session/2.17/%{name}-%{version}.tar.bz2
@@ -192,6 +192,9 @@ fi
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 
 %changelog
+* Tue Jan 23 2007 Matthias Clasen <mclasen@redhat.com> - 2.17.90.1-1
+- Update to 2.17.90.1
+
 * Sun Jan 21 2007 Matthias Clasen <mclasen@redhat.com> - 2.17.90-1
 - Update to 2.17.90
 - Clean up BuildRequires
