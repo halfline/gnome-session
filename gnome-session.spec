@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.17.90.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://ftp.gnome.org/pub/gnome/sources/gnome-session/2.17/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -24,7 +24,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires: redhat-artwork >= 0.20
 Requires: system-logos
 # required to get gconf-sanity-check-2 in the right place
-Requires: GConf2 >= %{gconf2_version}
+Requires: GConf2-gtk >= %{gconf2_version}
 # Needed for gnome-settings-daemon
 Requires: control-center
 
@@ -192,6 +192,9 @@ fi
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 
 %changelog
+* Mon Feb  5 2007 Matthias Clasen <mclasen@redhat.com> - 2.17.90.1-2
+- Require GConf2-gtk for gconf-sanity-check 
+
 * Tue Jan 23 2007 Matthias Clasen <mclasen@redhat.com> - 2.17.90.1-1
 - Update to 2.17.90.1
 
