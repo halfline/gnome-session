@@ -194,8 +194,11 @@ fi
 
 %changelog
 * Tue Feb  6 2007 Kristian Høgsberg <krh@localhost.localdomain> - 2.17.90.1-3
-- Update gnome-session-2.17.5-window-manager.patch to start
+- Update gnome-session-2.15.90-window-manager.patch to start
   gtk-window-decorator instead of gnome-window-decorator for compiz.
+
+  [ Update: the patch is not applied and upstream gnome-session does
+    the right thing. ]
 
 * Mon Feb  5 2007 Matthias Clasen <mclasen@redhat.com> - 2.17.90.1-2
 - Require GConf2-gtk for gconf-sanity-check 
