@@ -59,7 +59,7 @@
        OPT1=--sm-client-id=$SMID
        ;;
 +    compiz)
-+      gnome-window-decorator &
++      gtk-window-decorator &
 +      OPT1=--sm-client-id
 +      OPT2=$SMID
 +      OPT3=gconf

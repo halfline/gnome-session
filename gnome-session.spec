@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.17.90.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 Source0: http://ftp.gnome.org/pub/gnome/sources/gnome-session/2.17/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -193,6 +193,10 @@ fi
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 
 %changelog
+* Tue Feb  6 2007 Kristian Høgsberg <krh@localhost.localdomain> - 2.17.90.1-3
+- Update gnome-session-2.17.5-window-manager.patch to start
+  gtk-window-decorator instead of gnome-window-decorator for compiz.
+
 * Mon Feb  5 2007 Matthias Clasen <mclasen@redhat.com> - 2.17.90.1-2
 - Require GConf2-gtk for gconf-sanity-check 
 
