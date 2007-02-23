@@ -1,0 +1,16 @@
+--- gnome-session-2.17.91/gnome-session/gsm-at-startup.c.timeout	2007-02-23 14:08:58.000000000 -0500
++++ gnome-session-2.17.91/gnome-session/gsm-at-startup.c	2007-02-23 14:09:12.000000000 -0500
+@@ -88,11 +88,11 @@
+      gdk_window_set_events (w, GDK_PROPERTY_CHANGE_MASK);
+      gsm_assistive_tech_exec (command);
+      gdk_window_add_filter (w, gsm_assistive_filter_watch, &tid);
+-     tid = g_timeout_add (5e3, gsm_assistive_filter_timeout, NULL);    
++//     tid = g_timeout_add (5e3, gsm_assistive_filter_timeout, NULL);    
+ 
+      gtk_main ();
+ 
+-     gdk_window_remove_filter (w, gsm_assistive_filter_watch, &tid);
++//     gdk_window_remove_filter (w, gsm_assistive_filter_watch, &tid);
+ 
+      g_free (command);
+ }

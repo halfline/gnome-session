@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.17.91
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://ftp.gnome.org/pub/gnome/sources/gnome-session/2.17/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -54,6 +54,9 @@ Patch9: gnome-session-2.13.4-no-crashes.patch
 # The gconf bits weren't accepted upstream, so we'll
 # need to figure something out here
 Patch13: gnome-session-2.17.5-window-manager.patch
+
+# don't pop up the dialog as it can take longer than 5 seconds
+Patch20: gnome-session-2.17.91-atspi-timeout.patch
 
 BuildRequires: esound-devel >= %{esound_version}
 BuildRequires: /usr/bin/esd
@@ -100,6 +103,7 @@ GNOME components and handles logout and saving the session.
 %patch8 -p1 -b .shaped
 %patch9 -p1 -b .no-crashes
 %patch13 -p1 -b .window-manager
+%patch20 -p1 -b .timeout
 
 %build
 
@@ -193,6 +197,10 @@ fi
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 
 %changelog
+* Fri Feb 23 2007 Jeremy Katz <katzj@redhat.com> - 2.17.91-2
+- disable a11y registry timeout so that we don't get the popup with 
+  the livecd (#227214)
+
 * Tue Feb 13 2007 Matthisa Clasen <mclasen@redhat.com> - 2.17.91-1
 - Update to 2.17.91
 
