@@ -11,8 +11,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.17.91
-Release: 2%{?dist}
+Version: 2.17.92
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://ftp.gnome.org/pub/gnome/sources/gnome-session/2.17/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -197,6 +197,9 @@ fi
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 
 %changelog
+* Wed Feb 28 2007 Matthias Clasen <mclasen@redhat.com> - 2.17.92-1
+- Update to 2.17.92
+
 * Fri Feb 23 2007 Jeremy Katz <katzj@redhat.com> - 2.17.91-2
 - disable a11y registry timeout so that we don't get the popup with 
   the livecd (#227214)
