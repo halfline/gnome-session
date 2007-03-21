@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.18.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://ftp.gnome.org/pub/gnome/sources/gnome-session/2.18/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -197,6 +197,9 @@ fi
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 
 %changelog
+* Wed Mar 21 2007 Ray Strode <rstrode@redhat.com> - 2.18.0-2
+- remove eggcups from default session (bug 233261)
+
 * Tue Mar 13 2007 Matthias Clasen <mclasen@redhat.com> - 2.18.0-1
 - Update to 2.18.0
 
