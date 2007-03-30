@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.18.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 Source0: http://ftp.gnome.org/pub/gnome/sources/gnome-session/2.18/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -147,7 +147,6 @@ sed -i -e 's/num_clients=7/num_clients=6/' -e '/^6,.*$/d' %{SOURCE1}
 
 install -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
 
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/xdg/autostart
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties
 
@@ -192,11 +191,13 @@ fi
 %{_datadir}/man/man*/*
 %{_bindir}/*
 %{_sysconfdir}/gconf/schemas/*.schemas
-%{_sysconfdir}/xdg/autostart
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 
 %changelog
+* Fri Mar 30 2007 Ray Strode <rstrode@redhat.com> - 2.18.0-3
+- remove xdg autostart dir since it's part of filesystem now
+
 * Wed Mar 21 2007 Ray Strode <rstrode@redhat.com> - 2.18.0-2
 - remove eggcups from default session (bug 233261)
 
