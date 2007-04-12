@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.18.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 URL: http://www.gnome.org
 Source0: http://ftp.gnome.org/pub/gnome/sources/gnome-session/2.18/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -57,6 +57,9 @@ Patch13: gnome-session-2.17.5-window-manager.patch
 
 # don't pop up the dialog as it can take longer than 5 seconds
 Patch20: gnome-session-2.17.91-atspi-timeout.patch
+
+# http://bugzilla.gnome.org/show_bug.cgi?id=411506
+Patch21: gnome-session-2.17.91-use-gdm-at-hints-3.patch
 
 BuildRequires: esound-devel >= %{esound_version}
 BuildRequires: /usr/bin/esd
@@ -104,6 +107,7 @@ GNOME components and handles logout and saving the session.
 %patch9 -p1 -b .no-crashes
 %patch13 -p1 -b .window-manager
 %patch20 -p1 -b .timeout
+%patch21 -p0 -b .use-gdm-hints
 
 %build
 
@@ -195,6 +199,9 @@ fi
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 
 %changelog
+* Thu Apr 12 2007 David Zeuthen <davidz@redhat.com> - 2.18.0-4
+- start same kind of AT's in session as started in gdm (#229912)
+
 * Fri Mar 30 2007 Ray Strode <rstrode@redhat.com> - 2.18.0-3
 - remove xdg autostart dir since it's part of filesystem now
 

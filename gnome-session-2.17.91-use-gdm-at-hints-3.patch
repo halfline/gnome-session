@@ -1,0 +1,121 @@
+--- gnome-session/main.c.gdm-hints	2007-04-12 14:31:38.000000000 -0400
++++ gnome-session/main.c	2007-04-12 14:38:56.000000000 -0400
+@@ -388,6 +388,12 @@
+   gconf_client = gsm_get_conf_client ();
+   gconf_client_add_dir (gconf_client, GSM_GCONF_CONFIG_PREFIX, GCONF_CLIENT_PRELOAD_ONELEVEL, NULL); 
+   a_t_support = gconf_client_get_bool (gconf_client, ACCESSIBILITY_KEY, NULL);
++  if (g_getenv ("GDM_ATS") != NULL && !a_t_support)
++    {
++      a_t_support = TRUE;
++      gconf_client_set_bool (gconf_client, ACCESSIBILITY_KEY, TRUE, NULL);
++    }
++
+ 
+   if (a_t_support)
+     {
+@@ -436,6 +442,11 @@
+   autosave       = gconf_client_get_bool (gconf_client, AUTOSAVE_MODE_KEY, NULL);
+   logout_prompt  = gconf_client_get_bool (gconf_client, LOGOUT_PROMPT_KEY, NULL);
+   a_t_support    = gconf_client_get_bool (gconf_client, ACCESSIBILITY_KEY, NULL);
++  if (g_getenv ("GDM_ATS") != NULL)
++    {
++      a_t_support = TRUE;
++    }
++
+ 
+   gconf_client_notify_add (gconf_client,
+ 			   AUTOSAVE_MODE_KEY,
+--- gnome-session/gsm-at-startup.c.gdm-hints	2007-04-12 14:31:38.000000000 -0400
++++ gnome-session/gsm-at-startup.c	2007-04-12 14:31:38.000000000 -0400
+@@ -17,16 +17,24 @@
+ static void
+ gsm_assistive_tech_exec (gchar *exec_string)
+ {
+-  gchar    *s;
+   gboolean  success;
+-  
++  char     **v;
++
+   success = FALSE;
+-  s = g_find_program_in_path (exec_string);
+ 
+-  if (s) {
+-    success = gsm_exec_command_line_async (exec_string, NULL);
+-    g_free (s);
++  v = g_strsplit (exec_string, " ", 0);
++  if (v[0] != NULL) {
++	  gchar    *s;
++	  fprintf (stderr, "v[0]='%s'\n", v[0]);
++	  s = g_find_program_in_path (v[0]);
++	  fprintf (stderr, "s='%s'\n", s);
++	  if (s) {
++		  success = gsm_exec_command_line_async (exec_string, NULL);
++		  fprintf (stderr, "bar %d '%s'\n", success, exec_string);
++		  g_free (s);
++	  }
+   }
++  g_strfreev (v);
+   
+   if (!success && !strcmp (exec_string, "gnopernicus")) {
+     /* backwards compatibility for 2.14 */
+@@ -34,6 +42,33 @@
+   }
+ }
+ 
++static void
++gsm_assistive_tech_exec_type (gchar *at_type)
++{
++	gchar *at;
++
++	at = NULL;
++
++	fprintf (stderr, "at_type='%s'\n", at_type);
++
++	/* TODO: should 
++	 *
++	 * 1. read from preferred applications in gconf 
++	 * 2. make sure that AT's execed don't overlap with users choice
++	 */
++	if (strcmp (at_type, "screenreader") == 0) {
++		at = "orca";
++	} else if (strcmp (at_type, "magnifier") == 0) {
++		at = "orca -n -d main-window -d speech -e magnifier";
++	} else if (strcmp (at_type, "onscreenkeyboard") == 0) {
++		at = "gok";
++	}
++
++	if (at != NULL) {
++		gsm_assistive_tech_exec (at);
++	}
++}
++
+ static GdkFilterReturn 
+ gsm_assistive_filter_watch (GdkXEvent *xevent, GdkEvent *event, gpointer data){
+      XEvent *xev = (XEvent *)xevent;
+@@ -103,6 +138,7 @@
+   GError *error = NULL;
+   GConfClient *client;
+   GSList *list;
++  const char *at_suggested_by_gdm;
+ 
+   client  = gsm_get_conf_client ();
+   list = gconf_client_get_list (client, AT_STARTUP_KEY, GCONF_VALUE_STRING, &error);
+@@ -122,6 +158,18 @@
+ 	}
+       g_slist_free (list);
+     }
++
++  /* start AT's if user have started them from gdm */
++  if ((at_suggested_by_gdm = g_getenv ("GDM_ATS")) != NULL) {
++	  int i;
++	  char **at_list;
++	  at_list = g_strsplit (at_suggested_by_gdm, " ", 0);
++	  for (i = 0; at_list[i] != NULL; i++) {
++		  gsm_assistive_tech_exec_type (at_list[i]);
++	  }
++	  g_strfreev (at_list);
++  }  
++
+ }
+ 
+ void
