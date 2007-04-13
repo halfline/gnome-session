@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.18.0
-Release: 4%{?dist}
+Release: 5%{?dist}
 URL: http://www.gnome.org
 Source0: http://ftp.gnome.org/pub/gnome/sources/gnome-session/2.18/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -31,6 +31,9 @@ Requires: control-center
 %ifnarch s390 s390x
 Requires: gnome-volume-manager
 %endif
+
+# pull in dbus-x11, see bug 209924
+Requires: dbus-x11
 
 ## we conflict with gdm that contains the GNOME gdm xsession
 Conflicts: gdm < 1:2.6.0.8-5
@@ -199,6 +202,9 @@ fi
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 
 %changelog
+* Sat Apr 14 2007 Matthias Clasen <mclasen@redhat.com> - 2.18.0-5
+- Add a dependency on dbus-x11
+
 * Thu Apr 12 2007 David Zeuthen <davidz@redhat.com> - 2.18.0-4
 - start same kind of AT's in session as started in gdm (#229912)
 
