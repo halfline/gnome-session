@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.18.0
-Release: 5%{?dist}
+Release: 6%{?dist}
 URL: http://www.gnome.org
 Source0: http://ftp.gnome.org/pub/gnome/sources/gnome-session/2.18/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -193,7 +193,7 @@ fi
 %doc AUTHORS COPYING ChangeLog NEWS README
 
 %{_datadir}/gnome
-%{_datadir}/applications
+%{_datadir}/applications/gnome-session-properties.desktop
 %{_datadir}/xsessions/*
 %{_datadir}/man/man*/*
 %{_bindir}/*
@@ -202,6 +202,9 @@ fi
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 
 %changelog
+* Sun May  6 2007 Matthias Clasen <mclasen@redhat.com> - 2.18.0-6
+- Don't own /usr/share/applications
+
 * Sat Apr 14 2007 Matthias Clasen <mclasen@redhat.com> - 2.18.0-5
 - Add a dependency on dbus-x11
 
