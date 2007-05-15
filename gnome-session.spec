@@ -64,6 +64,7 @@ Patch20: gnome-session-2.17.91-atspi-timeout.patch
 # http://bugzilla.gnome.org/show_bug.cgi?id=411506
 Patch21: gnome-session-2.17.91-use-gdm-at-hints-3.patch
 
+# http://bugzilla.gnome.org/show_bug.cgi?id=438615
 Patch22: gnome-session-2.18.0-dont-use-iris-with-cm.patch
 
 BuildRequires: esound-devel >= %{esound_version}
