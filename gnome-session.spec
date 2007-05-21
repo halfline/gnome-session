@@ -11,10 +11,10 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.18.0
-Release: 7%{?dist}
+Version: 2.19.2
+Release: 1%{?dist}
 URL: http://www.gnome.org
-Source0: http://ftp.gnome.org/pub/gnome/sources/gnome-session/2.18/%{name}-%{version}.tar.bz2
+Source0: http://download.gnome.org/sources/gnome-session/2.19/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
 Source2: gnome.desktop
 License: GPL 
@@ -39,16 +39,9 @@ Requires: dbus-x11
 Conflicts: gdm < 1:2.6.0.8-5
 
 Patch1: gnome-session-2.2.2-icons.patch
-Patch2: gnome-session-2.0.5-login.patch
-# http://bugzilla.gnome.org/show_bug.cgi?id=399259
-Patch3: gnome-session-2.0.5-dithering.patch
 
 # Launch gnome-user-share on login if enabled
 Patch7: gnome-session-2.13.92-user-share.patch
-
-# do shaped window for splash screen
-# http://bugzilla.gnome.org/show_bug.cgi?id=399262
-Patch8: gnome-session-2.16.0-shaped.patch
 
 # too much crashing
 Patch9: gnome-session-2.13.4-no-crashes.patch
@@ -62,7 +55,7 @@ Patch13: gnome-session-2.17.5-window-manager.patch
 Patch20: gnome-session-2.17.91-atspi-timeout.patch
 
 # http://bugzilla.gnome.org/show_bug.cgi?id=411506
-Patch21: gnome-session-2.17.91-use-gdm-at-hints-3.patch
+#Patch21: gnome-session-2.17.91-use-gdm-at-hints-3.patch
 
 # http://bugzilla.gnome.org/show_bug.cgi?id=438615
 Patch22: gnome-session-2.18.0-dont-use-iris-with-cm.patch
@@ -106,14 +99,11 @@ GNOME components and handles logout and saving the session.
 %setup -q
 
 %patch1 -p1 -b .icons
-%patch2 -p1 -b .login
-%patch3 -p1 -b .dithering
 %patch7 -p1 -b .user-share
-%patch8 -p1 -b .shaped
 %patch9 -p1 -b .no-crashes
 %patch13 -p1 -b .window-manager
 %patch20 -p1 -b .timeout
-%patch21 -p0 -b .use-gdm-hints
+#%patch21 -p0 -b .use-gdm-hints
 %patch22 -p1 -b .dont-use-iris-with-cm
 
 %build
@@ -161,8 +151,6 @@ install -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties
 
-#/bin/rm -r $RPM_BUILD_ROOT/var/scrollkeeper
-
 ## remove splash screen
 rm -r $RPM_BUILD_ROOT%{_datadir}/pixmaps/splash
 
@@ -206,6 +194,9 @@ fi
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 
 %changelog
+* Sun May 20 2007 Matthias Clasen <mclasen@redhat.com> - 2.19.2-1
+- Update to 2.19.2
+
 * Tue May 15 2007 Ray Strode <rstrode@redhat.com> - 2.18.0-7
 - Don't show iris animation when using compiz (bug 237842)
 
