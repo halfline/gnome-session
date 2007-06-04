@@ -11,8 +11,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.19.2
-Release: 2%{?dist}
+Version: 2.19.3
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.19/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -56,9 +56,6 @@ Patch20: gnome-session-2.17.91-atspi-timeout.patch
 
 # http://bugzilla.gnome.org/show_bug.cgi?id=411506
 #Patch21: gnome-session-2.17.91-use-gdm-at-hints-3.patch
-
-# http://bugzilla.gnome.org/show_bug.cgi?id=438615
-Patch22: gnome-session-2.18.0-dont-use-iris-with-cm.patch
 
 BuildRequires: esound-devel >= %{esound_version}
 BuildRequires: /usr/bin/esd
@@ -104,7 +101,6 @@ GNOME components and handles logout and saving the session.
 %patch13 -p1 -b .window-manager
 %patch20 -p1 -b .timeout
 #%patch21 -p0 -b .use-gdm-hints
-%patch22 -p1 -b .dont-use-iris-with-cm
 
 %build
 
@@ -194,6 +190,10 @@ fi
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 
 %changelog
+* Mon Jun  4 2007 Matthias Clasen <mclasen@redhat.com> - 2.19.3-1
+- Update to 2.19.3
+- Drop upstreamed patch
+
 * Tue May 22 2007 - Bastien Nocera <bnocera@redhat.com> - 2.19.2-2
 - Fix up logic in iris patch
 
