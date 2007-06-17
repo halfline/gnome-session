@@ -128,8 +128,6 @@ unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
 desktop-file-install --vendor gnome --delete-original                   \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications			        \
   --add-only-show-in GNOME                                              \
-  --add-category Settings                                               \
-  --add-category AdvancedSettings                                       \
   $RPM_BUILD_ROOT%{_datadir}/applications/*
 
 ./mkinstalldirs ${RPM_BUILD_ROOT}%{_datadir}/xsessions/
