@@ -1,6 +1,6 @@
 %define esound_version 0.2.26
 %define libgnomeui_version 2.3.0
-%define gtk2_version 2.3.1
+%define gtk2_version 2.11.3
 %define dbus_glib_version 0.70
 %define dbus_version 0.90
 %define gnome_keyring_version 0.5.1
@@ -11,7 +11,7 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.19.3
+Version: 2.19.4
 Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.19/%{name}-%{version}.tar.bz2
@@ -52,7 +52,7 @@ Patch9: gnome-session-2.13.4-no-crashes.patch
 Patch13: gnome-session-2.17.5-window-manager.patch
 
 # don't pop up the dialog as it can take longer than 5 seconds
-Patch20: gnome-session-2.17.91-atspi-timeout.patch
+Patch20: gnome-session-2.19.4-atspi-timeout.patch
 
 # http://bugzilla.gnome.org/show_bug.cgi?id=411506
 #Patch21: gnome-session-2.17.91-use-gdm-at-hints-3.patch
@@ -190,6 +190,9 @@ fi
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 
 %changelog
+* Sun Jun 17 2007 Matthias Clasen <mclasen@redhat.com> - 2.19.4-1
+- Update to 2.19.4
+
 * Mon Jun  4 2007 Matthias Clasen <mclasen@redhat.com> - 2.19.3-1
 - Update to 2.19.3
 - Drop upstreamed patch
