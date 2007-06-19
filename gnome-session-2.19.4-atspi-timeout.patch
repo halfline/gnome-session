@@ -1,20 +1,70 @@
 --- gnome-session-2.19.4/gnome-session/gsm-at-startup.c.timeout	2007-06-17 18:21:51.000000000 -0400
-+++ gnome-session-2.19.4/gnome-session/gsm-at-startup.c	2007-06-17 19:00:54.000000000 -0400
-@@ -65,13 +65,15 @@ gsm_assistive_registry_start (void)
++++ gnome-session-2.19.4/gnome-session/gsm-at-startup.c	2007-06-19 14:21:30.000000000 -0400
+@@ -10,67 +10,14 @@
+ #include <gdk/gdkx.h>
+ #include <gconf/gconf-client.h>
  
-      gdk_window_set_events (w, GDK_PROPERTY_CHANGE_MASK);
+-static Atom AT_SPI_IOR;
+-
+-static GdkFilterReturn 
+-gsm_assistive_filter_watch (GdkXEvent *xevent, GdkEvent *event, gpointer data){
+-     XEvent *xev = (XEvent *)xevent;
+-     gint tid = *(gint *)data;
+-
+-     if (xev->xany.type == PropertyNotify &&
+-	 xev->xproperty.atom == AT_SPI_IOR)
+-       {
+-          g_source_remove (tid);
+-          gtk_main_quit ();
+-	  
+-          return GDK_FILTER_REMOVE;
+-       }
+-
+-     return GDK_FILTER_CONTINUE;
+-}
+-
+-static void
+-gsm_assistive_error_dialog (void)
+-{
+-     GtkWidget *dialog = gtk_message_dialog_new (NULL,
+-						 GTK_DIALOG_MODAL,
+-						 GTK_MESSAGE_ERROR,
+-						 GTK_BUTTONS_OK,
+-						 _("Assistive technology support has been requested for this session, but the accessibility registry was not found. Please ensure that the AT-SPI package is installed. Your session has been started without assistive technology support."));
+-     gtk_dialog_run (GTK_DIALOG (dialog));
+-     gtk_widget_destroy (dialog);     
+-}
+-
+-static gboolean
+-gsm_assistive_filter_timeout (gpointer data)
+-{
+-  gsm_assistive_error_dialog ();
+-
+-  gtk_main_quit ();
+-
+-  return FALSE;
+-}
+-
+ void
+ gsm_assistive_registry_start (void)
+ {
+-     GdkWindow *w = gdk_get_default_root_window (); 
+      gchar *command;
+-     guint tid;
+  
+-     if (!AT_SPI_IOR)
+-       AT_SPI_IOR = XInternAtom (GDK_DISPLAY (), "AT_SPI_IOR", False); 
+-
+      command = g_strdup (AT_SPI_REGISTRYD_DIR "/at-spi-registryd");
+ 
+-     gdk_window_set_events (w, GDK_PROPERTY_CHANGE_MASK);
       gsm_exec_command_line_async (command, NULL);
-+#if 0
-      gdk_window_add_filter (w, gsm_assistive_filter_watch, &tid);
-      tid = g_timeout_add_seconds (5, gsm_assistive_filter_timeout, NULL);    
+-     gdk_window_add_filter (w, gsm_assistive_filter_watch, &tid);
+-     tid = g_timeout_add_seconds (5, gsm_assistive_filter_timeout, NULL);    
 -
-+#endif    
-      gtk_main ();
+-     gtk_main ();
+-
+-     gdk_window_remove_filter (w, gsm_assistive_filter_watch, &tid);
  
-+#if 0
-      gdk_window_remove_filter (w, gsm_assistive_filter_watch, &tid);
--
-+#endif
       g_free (command);
  }
- 
