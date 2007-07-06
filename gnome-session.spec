@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.19.4
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.19/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -143,7 +143,6 @@ sed -i -e 's/num_clients=7/num_clients=6/' -e '/^6,.*$/d' %{SOURCE1}
 install -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/wm-properties
 
 ## remove splash screen
 rm -r $RPM_BUILD_ROOT%{_datadir}/pixmaps/splash
@@ -188,6 +187,9 @@ fi
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 
 %changelog
+* Fri Jul  6 2007 Matthias Clasen <mclasen@redhat.com> - 2.19.4-3
+- Move /usr/share/gnome/wm-properties to control-center-filesystem
+
 * Tue Jun 19 2007 Matthias Clasen <mclasen@redhat.com> - 2.19.4-2
 - Fix a hang on login with a11y
 
