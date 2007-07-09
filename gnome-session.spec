@@ -11,8 +11,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.19.4
-Release: 3%{?dist}
+Version: 2.19.5
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.19/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -187,6 +187,9 @@ fi
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 
 %changelog
+* Sun Jul  8 2007 Matthias Clasen <mclasen@redhat.com> - 2.19.5-1
+- Update to 2.19.5
+
 * Fri Jul  6 2007 Matthias Clasen <mclasen@redhat.com> - 2.19.4-3
 - Move /usr/share/gnome/wm-properties to control-center-filesystem
 
