@@ -12,12 +12,12 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.19.6
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.19/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
 Source2: gnome.desktop
-License: GPL 
+License: GPLv2+
 Group: User Interface/Desktops
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n) 
 
@@ -169,24 +169,25 @@ if [ "$1" -eq 0 ]; then
   gconftool-2 --makefile-uninstall-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas >& /dev/null || :
 fi
 
-%postun
+%postun 
 /sbin/ldconfig
 
 %files -f %{po_package}.lang
 %defattr(-,root,root)
-
-%doc AUTHORS COPYING ChangeLog NEWS README
-
+%doc AUTHORS COPYING NEWS README
 %{_datadir}/gnome
 %{_datadir}/applications/gnome-session-properties.desktop
 %{_datadir}/xsessions/*
-%{_datadir}/man/man*/*
 %{_bindir}/*
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
+%doc %{_datadir}/man/man*/*
 
 %changelog
+* Fri Aug  3 2007 Matthias Clasen <mclasen@redhat.com> - 2.19.6-2
+- Update license field
+
 * Mon Jul 30 2007 Matthias Clasen <mclasen@redhat.com> - 2.19.6-1
 - Update to 2.19.6
 
