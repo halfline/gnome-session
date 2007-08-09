@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.19.6
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.19/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -185,6 +185,9 @@ fi
 %doc %{_datadir}/man/man*/*
 
 %changelog
+* Thu Aug  9 2007 Kristian Høgsberg <krh@redhat.com> - 2.19.6-3
+- Export LIBGL_ALWAYS_INDIRECT before starting compiz.
+
 * Fri Aug  3 2007 Matthias Clasen <mclasen@redhat.com> - 2.19.6-2
 - Update license field
 
