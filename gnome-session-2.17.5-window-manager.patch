@@ -1,6 +1,6 @@
 diff -up gnome-session-2.19.6/data/gnome-session.schemas.in.window-manager gnome-session-2.19.6/data/gnome-session.schemas.in
 --- gnome-session-2.19.6/data/gnome-session.schemas.in.window-manager	2007-07-30 16:07:16.000000000 -0400
-+++ gnome-session-2.19.6/data/gnome-session.schemas.in	2007-08-09 17:40:50.000000000 -0400
++++ gnome-session-2.19.6/data/gnome-session.schemas.in	2007-08-09 17:47:42.000000000 -0400
 @@ -2,11 +2,22 @@
  <gconfschemafile>
     <schemalist>
@@ -27,7 +27,7 @@ diff -up gnome-session-2.19.6/data/gnome-session.schemas.in.window-manager gnome
              <long>Show the splash screen when the session starts up</long>
 diff -up gnome-session-2.19.6/gnome-session/gnome-wm.window-manager gnome-session-2.19.6/gnome-session/gnome-wm
 --- gnome-session-2.19.6/gnome-session/gnome-wm.window-manager	2007-07-30 16:07:15.000000000 -0400
-+++ gnome-session-2.19.6/gnome-session/gnome-wm	2007-08-09 17:44:21.000000000 -0400
++++ gnome-session-2.19.6/gnome-session/gnome-wm	2007-08-10 15:01:04.000000000 -0400
 @@ -3,7 +3,9 @@
  # The user can specify his prefered WM by setting the WINDOW_MANAGER
  # environment variable.
@@ -49,11 +49,30 @@ diff -up gnome-session-2.19.6/gnome-session/gnome-wm.window-manager gnome-sessio
  
  if [ -z "$WINDOW_MANAGER" ] ; then
    # Create a list of window manager we can handle, trying to only use the
-@@ -117,6 +122,7 @@ fi
+@@ -82,6 +87,7 @@ fi
+ OPT1=
+ OPT2=
+ OPT3=
++OPT4=
+ if [ ! -z "$SMID" ] ; then
+   case `basename $WINDOW_MANAGER` in
+     sawfish|sawmill|metacity)
+@@ -117,14 +123,16 @@ fi
  
  case `basename $WINDOW_MANAGER` in
    compiz)
 +    export LIBGL_ALWAYS_INDIRECT=1
      gtk-window-decorator &
-     OPT3=gconf
+-    OPT3=gconf
++    OPT3=glib
++    OPT4=gconf
      ;;
+   beryl)
+     emerald &
+     ;;
+ esac
+ 
+-exec $WINDOW_MANAGER $OPT1 $OPT2 $OPT3
++exec $WINDOW_MANAGER $OPT1 $OPT2 $OPT3 $OPT4
+ 
+ echo "ERROR: No window manager could run!"
