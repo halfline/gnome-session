@@ -11,8 +11,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.19.6
-Release: 5%{?dist}
+Version: 2.19.90
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.19/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -185,6 +185,9 @@ fi
 %doc %{_datadir}/man/man*/*
 
 %changelog
+* Mon Aug 13 2007 Matthias Clasen <mclasen@redhat.com> - 2.19.90-1
+- Update to 2.19.90
+
 * Fri Aug 10 2007 Kristian Høgsberg <krh@redhat.com> - 2.19.6-5
 - Edit window manager patch again to add 'glib' to compiz launch.
 
