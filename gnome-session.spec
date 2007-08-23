@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.19.90
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.19/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -185,6 +185,9 @@ fi
 %doc %{_datadir}/man/man*/*
 
 %changelog
+* Thu Aug 23 2007 Adam Jackson <ajax@redhat.com> - 2.19.90-2
+- Rebuild for build ID
+
 * Mon Aug 13 2007 Matthias Clasen <mclasen@redhat.com> - 2.19.90-1
 - Update to 2.19.90
 
