@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.19.92
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.19/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -185,6 +185,10 @@ fi
 %doc %{_datadir}/man/man*/*
 
 %changelog
+* Wed Sep  5 2007 Kristian Høgsberg <krh@redhat.com> - 2.19.92-2
+- Update gnome-session-2.17.5-window-manager.patch to apply (remove
+  chunks that are now upstream).
+
 * Tue Sep  4 2007 Matthias Clasen <mclasen@redhat.com> - 2.19.92-1
 - Update to 2.19.92
 
