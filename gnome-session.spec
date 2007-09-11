@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.19.92
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.19/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -56,6 +56,9 @@ Patch20: gnome-session-2.19.4-atspi-timeout.patch
 
 # http://bugzilla.gnome.org/show_bug.cgi?id=411506
 #Patch21: gnome-session-2.17.91-use-gdm-at-hints-3.patch
+
+# http://bugzilla.gnome.org/show_bug.cgi?id=475468
+Patch22: ice-leaks.patch
 
 BuildRequires: esound-devel >= %{esound_version}
 BuildRequires: /usr/bin/esd
@@ -101,6 +104,7 @@ GNOME components and handles logout and saving the session.
 %patch13 -p1 -b .window-manager
 %patch20 -p1 -b .timeout
 #%patch21 -p0 -b .use-gdm-hints
+%patch22 -p1 -b .ice-leaks
 
 %build
 
@@ -185,6 +189,9 @@ fi
 %doc %{_datadir}/man/man*/*
 
 %changelog
+* Tue Sep 11 2007 Matthias Clasen <mclasen@redhat.com> - 2.19.92-3
+- Plug memory leaks in the ICE code
+
 * Wed Sep  5 2007 Kristian Høgsberg <krh@redhat.com> - 2.19.92-2
 - Update gnome-session-2.17.5-window-manager.patch to apply (remove
   chunks that are now upstream).
