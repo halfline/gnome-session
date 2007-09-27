@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.20.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.20/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -21,7 +21,6 @@ License: GPLv2+
 Group: User Interface/Desktops
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n) 
 
-Requires: redhat-artwork >= 0.20
 Requires: system-logos
 # required to get gconf-sanity-check-2 in the right place
 Requires: GConf2-gtk >= %{gconf2_version}
@@ -189,6 +188,9 @@ fi
 %doc %{_datadir}/man/man*/*
 
 %changelog
+* Thu Sep 27 2007 Ray Strode <rstrode@redhat.com> - 2.20.0-2
+- drop redhat-artwork dep.  We don't need it.
+
 * Mon Sep 17 2007 Matthias Clasen <mclasen@redhat.com> - 2.20.0-1
 - Update to 2.20.0
 
