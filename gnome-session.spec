@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.20.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.20/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -38,6 +38,9 @@ Requires: dbus-x11
 Conflicts: gdm < 1:2.6.0.8-5
 
 Patch1: gnome-session-2.2.2-icons.patch
+
+# Launch "esd" (really pulseaudio) all the time
+Patch2: gnome-session-enable-sound-by-default.patch
 
 # Launch gnome-user-share on login if enabled
 Patch7: gnome-session-2.13.92-user-share.patch
@@ -98,6 +101,7 @@ GNOME components and handles logout and saving the session.
 %setup -q
 
 %patch1 -p1 -b .icons
+%patch2 -p0 -b .sound
 %patch7 -p1 -b .user-share
 %patch9 -p1 -b .no-crashes
 %patch13 -p1 -b .window-manager
@@ -188,6 +192,9 @@ fi
 %doc %{_datadir}/man/man*/*
 
 %changelog
+* Tue Oct 30 2007 - Bastien Nocera <bnocera@redhat.com> - 2.20.1-2
+- Enable sound by default, without looking at the prefs
+
 * Mon Oct 15 2007 Matthias Clasen <mclasen@redhat.com> - 2.20.1-1
 - Update to 2.20.1 (translation updates)
 
