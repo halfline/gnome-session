@@ -11,8 +11,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.20.1
-Release: 2%{?dist}
+Version: 2.20.2
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.20/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -192,6 +192,9 @@ fi
 %doc %{_datadir}/man/man*/*
 
 %changelog
+* Tue Nov 27 2007  Matthias Clasen <mclasen@redhat.com> - 2.20.2-1
+- Update to 2.20.2 (translation updates)
+
 * Tue Oct 30 2007 - Bastien Nocera <bnocera@redhat.com> - 2.20.1-2
 - Enable sound by default, without looking at the prefs
 
