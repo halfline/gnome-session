@@ -1,0 +1,92 @@
+diff -up /dev/null gnome-session-2.21.5/gnome-session/gsm-user-share.h
+--- /dev/null	2008-01-15 08:30:50.560008905 -0500
++++ gnome-session-2.21.5/gnome-session/gsm-user-share.h	2008-01-15 09:14:18.000000000 -0500
+@@ -0,0 +1,6 @@
++#ifndef GSM_USER_SHARE_H
++#define GSM_USER_SHARE_H
++
++void gsm_user_share_start (void);
++
++#endif /* GSM_USER_SHARE_H */
+diff -up gnome-session-2.21.5/gnome-session/Makefile.am.user-share gnome-session-2.21.5/gnome-session/Makefile.am
+--- gnome-session-2.21.5/gnome-session/Makefile.am.user-share	2008-01-14 17:42:46.000000000 -0500
++++ gnome-session-2.21.5/gnome-session/Makefile.am	2008-01-15 09:14:18.000000000 -0500
+@@ -23,6 +23,7 @@ STANDARD_PROPERTIES_CFLAGS =            
+ 	-DPREFIX=\""$(prefix)"\"                                \
+ 	-DSYSCONFDIR=\""$(sysconfdir)"\"                        \
+ 	-DLIBDIR=\""$(libdir)"\"                                \
++	-DLIBEXECDIR=\""$(libexecdir)"\"                        \
+ 	-DDATADIR=\""$(datadir)"\"                              \
+ 	$(NULL)
+ 
+@@ -82,6 +83,8 @@ gnome_session_SOURCES =		\
+ 	gsm-dbus.h		\
+ 	gsm-keyring.c		\
+ 	gsm-keyring.h		\
++	gsm-user-share.c	\
++	gsm-user-share.h	\
+ 	gsm-gsd.c		\
+ 	gsm-gsd.h		\
+ 	gsm-protocol.c		\
+diff -up /dev/null gnome-session-2.21.5/gnome-session/gsm-user-share.c
+--- /dev/null	2008-01-15 08:30:50.560008905 -0500
++++ gnome-session-2.21.5/gnome-session/gsm-user-share.c	2008-01-15 09:14:18.000000000 -0500
+@@ -0,0 +1,38 @@
++#include <config.h>
++
++#include <glib.h>
++#include <gconf/gconf-client.h>
++
++#include "gsm-user-share.h"
++
++#define FILE_SHARING_ENABLED "/desktop/gnome/file_sharing/enabled"
++
++void
++gsm_user_share_start (void)
++{
++    GConfClient *client;
++    gboolean enabled;
++    char *argv[2];
++    int i;
++
++    client = gconf_client_get_default ();
++    enabled = gconf_client_get_bool (client,
++				     FILE_SHARING_ENABLED,
++				     NULL);
++    g_object_unref (client);
++    
++    if (enabled) {
++        i = 0;
++	argv[i++] = LIBEXECDIR"/gnome-user-share";
++	argv[i++] = NULL;
++	
++	g_spawn_async (NULL,
++		       argv,
++		       NULL,
++		       G_SPAWN_STDOUT_TO_DEV_NULL | G_SPAWN_STDERR_TO_DEV_NULL,
++		       NULL,
++		       NULL,
++		       NULL,
++		       NULL);
++    }
++}
+diff -up gnome-session-2.21.5/gnome-session/main.c.user-share gnome-session-2.21.5/gnome-session/main.c
+--- gnome-session-2.21.5/gnome-session/main.c.user-share	2008-01-14 18:21:52.000000000 -0500
++++ gnome-session-2.21.5/gnome-session/main.c	2008-01-15 09:24:53.000000000 -0500
+@@ -51,6 +51,7 @@
+ #include "gsm-sound.h"
+ #include "gsm-gsd.h"
+ #include "gsm-keyring.h"
++#include "gsm-user-share.h"
+ #include "gsm-at-startup.h"
+ #include "gsm-remote-desktop.h"
+ 
+@@ -778,6 +779,8 @@ main (int argc, char *argv[])
+ 
+   gsm_sound_login ();
+ 
++  gsm_user_share_start ();
++
+   gsm_remote_desktop_start ();
+ 
+   if (splashing)

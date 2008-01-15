@@ -11,10 +11,10 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.20.2
+Version: 2.21.5
 Release: 1%{?dist}
 URL: http://www.gnome.org
-Source0: http://download.gnome.org/sources/gnome-session/2.20/%{name}-%{version}.tar.bz2
+Source0: http://download.gnome.org/sources/gnome-session/2.21/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
 Source2: gnome.desktop
 License: GPLv2+
@@ -43,7 +43,7 @@ Patch1: gnome-session-2.2.2-icons.patch
 Patch2: gnome-session-enable-sound-by-default.patch
 
 # Launch gnome-user-share on login if enabled
-Patch7: gnome-session-2.13.92-user-share.patch
+Patch7: gnome-session-2.21.5-user-share.patch
 
 # too much crashing
 Patch9: gnome-session-2.13.4-no-crashes.patch
@@ -192,6 +192,9 @@ fi
 %doc %{_datadir}/man/man*/*
 
 %changelog
+* Tue Jan 15 2008  Matthias Clasen <mclasen@redhat.com> - 2.21.5-1
+- Update to 2.21.5
+
 * Tue Nov 27 2007  Matthias Clasen <mclasen@redhat.com> - 2.20.2-1
 - Update to 2.20.2 (translation updates)
 
