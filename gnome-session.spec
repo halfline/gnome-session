@@ -74,7 +74,7 @@ BuildRequires: GConf2-devel >= %{gconf2_version}
 BuildRequires: GConf2-gtk >= %{gconf2_version}
 BuildRequires: gnome-desktop-devel
 BuildRequires: pango-devel
-BuildRequires: control-center-devel
+BuildRequires: gnome-settings-daemon-devel
 BuildRequires: desktop-file-utils
 BuildRequires: libXau-devel
 BuildRequires: libXrandr-devel
