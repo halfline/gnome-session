@@ -11,7 +11,7 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.21.5
+Version: 2.21.90
 Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.21/%{name}-%{version}.tar.bz2
@@ -189,9 +189,12 @@ fi
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
-%doc %{_datadir}/man/man*/*
+%doc %{_mandir}/man*/*
 
 %changelog
+* Tue Jan 29 2008  Matthias Clasen <mclasen@redhat.com> - 2.21.90-1
+- Update to 2.21.90
+
 * Tue Jan 15 2008  Matthias Clasen <mclasen@redhat.com> - 2.21.5-1
 - Update to 2.21.5
 
