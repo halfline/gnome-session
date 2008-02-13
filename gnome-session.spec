@@ -11,8 +11,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.21.90
-Release: 2%{?dist}
+Version: 2.21.91
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.21/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -41,8 +41,6 @@ Patch1: gnome-session-2.2.2-icons.patch
 
 # Launch "esd" (really pulseaudio) all the time
 Patch2: gnome-session-enable-sound-by-default.patch
-# http://bugzilla.gnome.org/show_bug.cgi?id=466458
-Patch3: gnome-session-play-login-sound-2.patch
 
 # too much crashing
 Patch9: gnome-session-2.13.4-no-crashes.patch
@@ -101,9 +99,6 @@ GNOME components and handles logout and saving the session.
 
 %patch1 -p1 -b .icons
 %patch2 -p0 -b .sound
-pushd gnome-session
-%patch3 -p0 -b .login-sound
-popd
 %patch9 -p1 -b .no-crashes
 %patch13 -p1 -b .window-manager
 %patch20 -p1 -b .timeout
@@ -193,6 +188,9 @@ fi
 %doc %{_mandir}/man*/*
 
 %changelog
+* Tue Feb 12 2008  Matthias Clasen <mclasen@redhat.com> - 2.21.91-1
+- Update to 2.21.91
+
 * Mon Feb 11 2008 - Bastien Nocera <bnocera@redhat.com> - 2.21.90-2
 - Add patch to make login sounds work
 - Remove unneeded patch to launch gnome-user-share, it launches
