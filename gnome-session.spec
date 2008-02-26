@@ -3,7 +3,7 @@
 %define gtk2_version 2.11.3
 %define dbus_glib_version 0.70
 %define dbus_version 0.90
-%define gnome_keyring_version 0.5.1
+%define gnome_keyring_version 2.21.92
 %define gconf2_version 2.14.0
 %define libnotify_version 0.2.1
 
@@ -188,6 +188,9 @@ fi
 %doc %{_mandir}/man*/*
 
 %changelog
+* Tue Feb 26 2008 Matthias Clasen <mclasen@redhat.com> - 2.21.92-1
+- Update to 2.21.92
+
 * Tue Feb 12 2008  Matthias Clasen <mclasen@redhat.com> - 2.21.91-1
 - Update to 2.21.91
 
