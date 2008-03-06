@@ -93,7 +93,6 @@ GNOME components and handles logout and saving the session.
 %setup -q
 
 %patch1 -p1 -b .icons
-%patch2 -p0 -b .sound
 %patch9 -p1 -b .no-crashes
 %patch13 -p1 -b .window-manager
 %patch20 -p1 -b .timeout
