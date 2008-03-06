@@ -11,7 +11,7 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.21.92
+Version: 2.21.93
 Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.21/%{name}-%{version}.tar.bz2
@@ -39,9 +39,6 @@ Conflicts: gdm < 1:2.6.0.8-5
 
 Patch1: gnome-session-2.2.2-icons.patch
 
-# Launch "esd" (really pulseaudio) all the time
-Patch2: gnome-session-enable-sound-by-default.patch
-
 # too much crashing
 Patch9: gnome-session-2.13.4-no-crashes.patch
 
@@ -59,8 +56,6 @@ Patch20: gnome-session-2.19.4-atspi-timeout.patch
 # http://bugzilla.gnome.org/show_bug.cgi?id=475468
 Patch22: ice-leaks.patch
 
-BuildRequires: esound-devel >= %{esound_version}
-BuildRequires: /usr/bin/esd
 BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: gtk2-devel >= %{gtk2_version}
 BuildRequires: dbus-devel >= %{dbus_version}
@@ -118,7 +113,7 @@ intltoolize --force
 autoheader
 autoconf
 
-%configure --enable-esd --with-halt-command=/usr/bin/poweroff --with-reboot-command=/usr/bin/reboot
+%configure --with-halt-command=/usr/bin/poweroff --with-reboot-command=/usr/bin/reboot
 make %{?_smp_mflags}
 
 %install
@@ -188,6 +183,9 @@ fi
 %doc %{_mandir}/man*/*
 
 %changelog
+* Thu Mar 06 2008 - Bastien Nocera <bnocera@redhat.com> - 2.21.93-1
+- Update to 2.21.93, drop esound dependencies and patches
+
 * Tue Feb 26 2008 Matthias Clasen <mclasen@redhat.com> - 2.21.92-1
 - Update to 2.21.92
 
