@@ -25,9 +25,9 @@ diff -up gnome-session-2.19.6/data/gnome-session.schemas.in.window-manager gnome
           <locale name="C">
              <short>Show the splash screen</short>
              <long>Show the splash screen when the session starts up</long>
-diff -up gnome-session-2.19.6/gnome-session/gnome-wm.window-manager gnome-session-2.19.6/gnome-session/gnome-wm
---- gnome-session-2.19.6/gnome-session/gnome-wm.window-manager	2007-07-30 16:07:15.000000000 -0400
-+++ gnome-session-2.19.6/gnome-session/gnome-wm	2007-08-10 15:01:04.000000000 -0400
+diff -up gnome-session-2.19.6/data/gnome-wm.window-manager gnome-session-2.19.6/data/gnome-wm
+--- gnome-session-2.19.6/data/gnome-wm.window-manager	2007-07-30 16:07:15.000000000 -0400
++++ gnome-session-2.19.6/data/gnome-wm	2007-08-10 15:01:04.000000000 -0400
 @@ -3,7 +3,9 @@
  # The user can specify his prefered WM by setting the WINDOW_MANAGER
  # environment variable.

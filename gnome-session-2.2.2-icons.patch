@@ -1,5 +1,5 @@
---- gnome-session-2.5.90/gnome-session/splash-widget.c.icons	2004-02-24 14:13:22.000000000 +0000
-+++ gnome-session-2.5.90/gnome-session/splash-widget.c	2004-02-24 14:14:24.000000000 +0000
+--- gnome-session-2.5.90/splash/splash-widget.c.icons	2004-02-24 14:13:22.000000000 +0000
++++ gnome-session-2.5.90/splash/splash-widget.c	2004-02-24 14:14:24.000000000 +0000
 @@ -46,7 +46,11 @@
  	{ N_("The Panel"),               "gnome-panel",           "gnome-panel" },
  	{ N_("Session Manager Proxy"),   "gnome-smproxy",         "gnome-session" },
