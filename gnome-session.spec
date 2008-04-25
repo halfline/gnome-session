@@ -11,10 +11,10 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.22.1.1
+Version: 2.23.1
 Release: 1%{?dist}
 URL: http://www.gnome.org
-Source0: http://download.gnome.org/sources/gnome-session/2.22/%{name}-%{version}.tar.bz2
+Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
 Source2: gnome.desktop
 License: GPLv2+
@@ -173,6 +173,9 @@ fi
 %doc %{_mandir}/man*/*
 
 %changelog
+* Fri Apr 25 2008 Matthias Clasen <mclasen@redhat.com> - 2.23.1-1
+- Update to 2.23.1
+
 * Thu Apr 10 2008 Matthias Clasen <mclasen@redhat.com> - 2.22.1.1-1
 - Update to 2.22.1.1 (fixes a crash in the trash migration code)
 
