@@ -172,6 +172,10 @@ fi
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 %doc %{_mandir}/man*/*
+%dir %{_libdir}/gnome-session
+%dir %{_libdir}/gnome-session/helpers
+%{_libdir}/gnome-session/helpers/*
+
 
 %changelog
 * Fri Apr 25 2008 Matthias Clasen <mclasen@redhat.com> - 2.23.1-1
