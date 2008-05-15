@@ -167,6 +167,8 @@ fi
 %{_datadir}/gnome
 %{_datadir}/applications/gnome-session-properties.desktop
 %{_datadir}/xsessions/*
+%dir %{_datadir}/gnome-session
+%{_datadir}/gnome-session/session-properties.glade
 %{_bindir}/*
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
