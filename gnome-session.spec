@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.23.2.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -52,6 +52,9 @@ Patch13: gnome-session-2.17.5-window-manager.patch
 
 # http://bugzilla.gnome.org/show_bug.cgi?id=475468
 Patch22: ice-leaks.patch
+
+# http://bugzilla.gnome.org/show_bug.cgi?id=533351
+Patch33: legacy-crash.patch
 
 BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: gtk2-devel >= %{gtk2_version}
@@ -95,6 +98,7 @@ GNOME components and handles logout and saving the session.
 #%patch20 -p1 -b .timeout
 #%patch21 -p0 -b .use-gdm-hints
 #%patch22 -p1 -b .ice-leaks
+%patch33 -p1 -b .legacy-crash
 
 %build
 
@@ -180,6 +184,9 @@ fi
 
 
 %changelog
+* Thu May 15 2008 Matthias Clasen <mclasen@redhat.com> - 2.23.2.2-2
+- Don't crash while handling legacy sessions
+
 * Wed May 14 2008 Matthias Clasen <mclasen@redhat.com> - 2.23.2.2-1
 - Update to 2.23.2.2
 
