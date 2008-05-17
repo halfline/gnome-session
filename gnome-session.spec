@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.23.2.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -55,6 +55,9 @@ Patch22: ice-leaks.patch
 
 # http://bugzilla.gnome.org/show_bug.cgi?id=533351
 Patch33: legacy-crash.patch
+
+# Work around the assumption that the nautilus desktop file is nautilus.desktop
+Patch34: gnome-session-nautilus.patch
 
 BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: gtk2-devel >= %{gtk2_version}
@@ -99,6 +102,7 @@ GNOME components and handles logout and saving the session.
 #%patch21 -p0 -b .use-gdm-hints
 #%patch22 -p1 -b .ice-leaks
 %patch33 -p1 -b .legacy-crash
+%patch34 -p1 -b .nautilus
 
 %build
 
@@ -184,6 +188,9 @@ fi
 
 
 %changelog
+* Fri May 16 2008 Matthias Clasen <mclasen@redhat.com> - 2.23.2.2-3
+- Make nautilus start again
+
 * Thu May 15 2008 Matthias Clasen <mclasen@redhat.com> - 2.23.2.2-2
 - Don't crash while handling legacy sessions
 
