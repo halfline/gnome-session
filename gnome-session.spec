@@ -53,9 +53,6 @@ Patch13: gnome-session-2.17.5-window-manager.patch
 # http://bugzilla.gnome.org/show_bug.cgi?id=475468
 Patch22: ice-leaks.patch
 
-# http://bugzilla.gnome.org/show_bug.cgi?id=533351
-Patch33: legacy-crash.patch
-
 # Work around the assumption that the nautilus desktop file is nautilus.desktop
 Patch34: gnome-session-nautilus.patch
 
@@ -101,7 +98,6 @@ GNOME components and handles logout and saving the session.
 #%patch20 -p1 -b .timeout
 #%patch21 -p0 -b .use-gdm-hints
 #%patch22 -p1 -b .ice-leaks
-%patch33 -p1 -b .legacy-crash
 %patch34 -p1 -b .nautilus
 
 %build
