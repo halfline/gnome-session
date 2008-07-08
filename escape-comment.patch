@@ -1,0 +1,12 @@
+diff -up gnome-session-2.23.4.1/capplet/commands.c.escape gnome-session-2.23.4.1/capplet/commands.c
+--- gnome-session-2.23.4.1/capplet/commands.c.escape	2008-07-08 13:40:02.000000000 -0400
++++ gnome-session-2.23.4.1/capplet/commands.c	2008-07-08 13:40:15.000000000 -0400
+@@ -788,7 +788,7 @@ char *
+ spc_command_get_app_description (const char *name, 
+                                                 const char *comment)
+ {
+-  return g_strdup_printf ("<b>%s</b>\n%s", name,
++  return g_markup_printf_escaped ("<b>%s</b>\n%s", name,
+                           (!gsm_util_text_is_blank (comment) ? 
+                            comment : _("No description")));
+ }

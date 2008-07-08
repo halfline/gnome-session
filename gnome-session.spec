@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.23.4.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -55,6 +55,9 @@ Patch22: ice-leaks.patch
 
 # Work around the assumption that the nautilus desktop file is nautilus.desktop
 Patch34: gnome-session-nautilus.patch
+
+# http://bugzilla.gnome.org/show_bug.cgi?id=542086
+Patch47: escape-comment.patch
 
 BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: gtk2-devel >= %{gtk2_version}
@@ -99,6 +102,7 @@ GNOME components and handles logout and saving the session.
 #%patch21 -p0 -b .use-gdm-hints
 #%patch22 -p1 -b .ice-leaks
 %patch34 -p1 -b .nautilus
+%patch47 -p1 -b .escape-comment
 
 %build
 
@@ -184,6 +188,9 @@ fi
 
 
 %changelog
+* Tue Jul  8 2008 Matthias Clasen <mclasen@redhat.com> - 2.23.4.1-2
+- Escape comments for markup
+
 * Wed Jun 18 2008 Matthias Clasen <mclasen@redhat.com> - 2.23.4.1-1
 - Update to 2.23.4.1
 
