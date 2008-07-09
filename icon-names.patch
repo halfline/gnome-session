@@ -1,0 +1,14 @@
+diff -up gnome-session-2.23.4.1/gnome-session/logout-dialog.c.icon-names gnome-session-2.23.4.1/gnome-session/logout-dialog.c
+--- gnome-session-2.23.4.1/gnome-session/logout-dialog.c.icon-names	2008-07-09 16:12:41.000000000 -0400
++++ gnome-session-2.23.4.1/gnome-session/logout-dialog.c	2008-07-09 16:13:10.000000000 -0400
+@@ -41,8 +41,8 @@
+ 
+ #define AUTOMATIC_ACTION_TIMEOUT 60
+ 
+-#define GSM_ICON_LOGOUT   "gnome-logout"
+-#define GSM_ICON_SHUTDOWN "gnome-shutdown"
++#define GSM_ICON_LOGOUT   "system-logout"
++#define GSM_ICON_SHUTDOWN "system-shutdown"
+ 
+ struct _GsmLogoutDialogPrivate 
+ {
