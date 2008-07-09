@@ -59,6 +59,7 @@ Patch34: gnome-session-nautilus.patch
 # http://bugzilla.gnome.org/show_bug.cgi?id=542086
 Patch47: escape-comment.patch
 
+# http://bugzilla.gnome.org/show_bug.cgi?id=542256
 Patch49: icon-names.patch
 
 BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
