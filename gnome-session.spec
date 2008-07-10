@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.23.4.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -192,6 +192,9 @@ fi
 
 
 %changelog
+* Wed Jul  9 2008 Matthias Clasen <mclasen@redhat.com> - 2.23.4.1-4
+- Fix a typo in the previous patch
+
 * Wed Jul  9 2008 Matthias Clasen <mclasen@redhat.com> - 2.23.4.1-3
 - Use more standard icon names
 

@@ -7,7 +7,7 @@ diff -up gnome-session-2.23.4.1/gnome-session/logout-dialog.c.icon-names gnome-s
  
 -#define GSM_ICON_LOGOUT   "gnome-logout"
 -#define GSM_ICON_SHUTDOWN "gnome-shutdown"
-+#define GSM_ICON_LOGOUT   "system-logout"
++#define GSM_ICON_LOGOUT   "system-log-out"
 +#define GSM_ICON_SHUTDOWN "system-shutdown"
  
  struct _GsmLogoutDialogPrivate 
