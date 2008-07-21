@@ -1,15 +1,15 @@
-diff -up gnome-session-2.23.2.2/gnome-session/session.c.nautilus gnome-session-2.23.2.2/gnome-session/session.c
---- gnome-session-2.23.2.2/gnome-session/session.c.nautilus	2008-05-16 20:22:01.000000000 -0400
-+++ gnome-session-2.23.2.2/gnome-session/session.c	2008-05-16 20:22:51.000000000 -0400
-@@ -199,7 +199,10 @@ append_default_apps (GsmSession *session
-       if (!a->data)
-         continue;
+--- gnome-session-2.23.5/gnome-session/gsm-manager.c.orig	2008-07-21 15:50:16.000000000 -0400
++++ gnome-session-2.23.5/gnome-session/gsm-manager.c	2008-07-21 15:51:18.000000000 -0400
+@@ -1612,7 +1612,11 @@
+                         continue;
+                 }
  
--      desktop_file = g_strdup_printf ("%s.desktop", (char *) a->data); 
-+      if (strcmp (a->data, "nautilus") == 0)
-+        desktop_file = g_strdup ("gnome-nautilus.desktop");
-+      else
-+        desktop_file = g_strdup_printf ("%s.desktop", (char *) a->data); 
+-                desktop_file = g_strdup_printf ("%s.desktop", (char *) a->data);
++                if (strcmp (a->data, "nautilus") == 0) {
++                        desktop_file = g_strdup ("gnome-nautilus.desktop");
++                } else {
++                        desktop_file = g_strdup_printf ("%s.desktop", (char *) a->data);
++                }
  
-       g_debug ("Look for: %s", desktop_file);
+                 g_debug ("GsmManager: Looking for: %s", desktop_file);
  

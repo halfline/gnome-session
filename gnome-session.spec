@@ -11,8 +11,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.23.4.1
-Release: 4%{?dist}
+Version: 2.23.5
+Release: 0.2008.07.21.1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -33,12 +33,6 @@ Requires: dbus-x11
 ## we conflict with gdm that contains the GNOME gdm xsession
 Conflicts: gdm < 1:2.6.0.8-5
 
-# FIXME does this still apply ?
-#Patch1: gnome-session-2.2.2-icons.patch
-
-# FIXME does this still apply ?
-#Patch9: gnome-session-2.13.4-no-crashes.patch
-
 # http://bugzilla.gnome.org/show_bug.cgi?id=350848
 # The gconf bits weren't accepted upstream, so we'll
 # need to figure something out here
@@ -47,20 +41,8 @@ Patch13: gnome-session-2.17.5-window-manager.patch
 # FIXME does this still apply ?
 #Patch20: gnome-session-2.19.4-atspi-timeout.patch
 
-# http://bugzilla.gnome.org/show_bug.cgi?id=411506
-#Patch21: gnome-session-2.17.91-use-gdm-at-hints-3.patch
-
-# http://bugzilla.gnome.org/show_bug.cgi?id=475468
-Patch22: ice-leaks.patch
-
 # Work around the assumption that the nautilus desktop file is nautilus.desktop
 Patch34: gnome-session-nautilus.patch
-
-# http://bugzilla.gnome.org/show_bug.cgi?id=542086
-Patch47: escape-comment.patch
-
-# http://bugzilla.gnome.org/show_bug.cgi?id=542256
-Patch49: icon-names.patch
 
 BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: gtk2-devel >= %{gtk2_version}
@@ -98,15 +80,9 @@ GNOME components and handles logout and saving the session.
 %prep
 %setup -q
 
-#%patch1 -p1 -b .icons
-#%patch9 -p1 -b .no-crashes
 %patch13 -p1 -b .window-manager
 #%patch20 -p1 -b .timeout
-#%patch21 -p0 -b .use-gdm-hints
-#%patch22 -p1 -b .ice-leaks
 %patch34 -p1 -b .nautilus
-%patch47 -p1 -b .escape-comment
-%patch49 -p1 -b .icon-names
 
 %build
 
@@ -121,7 +97,7 @@ intltoolize --force
 autoheader
 autoconf
 
-%configure --with-halt-command=/usr/bin/poweroff --with-reboot-command=/usr/bin/reboot
+%configure
 make %{?_smp_mflags}
 
 %install
@@ -170,7 +146,7 @@ if [ "$1" -eq 0 ]; then
   gconftool-2 --makefile-uninstall-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas >& /dev/null || :
 fi
 
-%postun 
+%postun
 /sbin/ldconfig
 
 %files -f %{po_package}.lang
@@ -181,6 +157,7 @@ fi
 %{_datadir}/xsessions/*
 %dir %{_datadir}/gnome-session
 %{_datadir}/gnome-session/session-properties.glade
+%{_datadir}/gnome-session/gsm-inhibit-dialog.glade
 %{_bindir}/*
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
@@ -192,6 +169,9 @@ fi
 
 
 %changelog
+* Mon Jul 21 2008 Jon McCann  <jmccann@redhat.com> - 2.23.5.0.2008.07.21.1
+- Snapshot from DBus branch
+
 * Wed Jul  9 2008 Matthias Clasen <mclasen@redhat.com> - 2.23.4.1-4
 - Fix a typo in the previous patch
 
