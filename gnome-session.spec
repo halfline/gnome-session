@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.23.5
-Release: 0.2008.07.21.2%{?dist}
+Release: 0.2008.07.21.3%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -67,6 +67,7 @@ BuildRequires: libtool
 BuildRequires: gettext
 BuildRequires: libX11-devel libXt-devel
 BuildRequires: libXrandr-devel
+BuildRequires: PolicyKit-gnome-devel
 
 Requires(pre): GConf2 >= %{gconf2_version}
 Requires(post): GConf2 >= %{gconf2_version}
@@ -74,7 +75,7 @@ Requires(preun): GConf2 >= %{gconf2_version}
 
 %description
 
-gnome-session manages a GNOME desktop session. It starts up the other core 
+gnome-session manages a GNOME desktop session. It starts up the other core
 GNOME components and handles logout and saving the session.
 
 %prep
@@ -169,6 +170,9 @@ fi
 
 
 %changelog
+* Mon Jul 22 2008 Jon McCann  <jmccann@redhat.com> - 2.23.5.0.2008.07.21.3
+- Add BuildRequires PolicyKit-gnome-devel
+
 * Mon Jul 21 2008 Jon McCann  <jmccann@redhat.com> - 2.23.5.0.2008.07.21.2
 - New snapshot to fix build
 
