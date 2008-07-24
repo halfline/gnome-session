@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.23.5
-Release: 0.2008.07.21.3%{?dist}
+Release: 0.2008.07.21.4%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -44,6 +44,8 @@ Patch13: gnome-session-2.17.5-window-manager.patch
 # Work around the assumption that the nautilus desktop file is nautilus.desktop
 Patch34: gnome-session-nautilus.patch
 
+Patch57: gerror-crash.patch
+ 
 BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: gtk2-devel >= %{gtk2_version}
 BuildRequires: dbus-devel >= %{dbus_version}
@@ -84,6 +86,7 @@ GNOME components and handles logout and saving the session.
 %patch13 -p1 -b .window-manager
 #%patch20 -p1 -b .timeout
 %patch34 -p1 -b .nautilus
+%patch57 -p1 -b .gerror-crash
 
 %build
 
@@ -170,6 +173,9 @@ fi
 
 
 %changelog
+* Thu Jul 24 2008 Matthias Clasen  <mclasen@redhat.com> - 2.23.5.0.2008.07.21.4
+- Fix a crash
+
 * Mon Jul 22 2008 Jon McCann  <jmccann@redhat.com> - 2.23.5.0.2008.07.21.3
 - Add BuildRequires PolicyKit-gnome-devel
 

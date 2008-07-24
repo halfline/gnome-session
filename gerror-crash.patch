@@ -1,0 +1,12 @@
+diff -up gnome-session-2.23.5/gnome-session/gsm-autostart-app.c.gerror-crash gnome-session-2.23.5/gnome-session/gsm-autostart-app.c
+--- gnome-session-2.23.5/gnome-session/gsm-autostart-app.c.gerror-crash	2008-07-24 19:31:29.000000000 -0400
++++ gnome-session-2.23.5/gnome-session/gsm-autostart-app.c	2008-07-24 19:33:00.000000000 -0400
+@@ -156,6 +156,8 @@ gsm_autostart_app_set_desktop_filename (
+ 
+         g_debug ("GsmAutostartApp: setting desktop filename to %s", desktop_filename);
+ 
++	error = NULL;
++
+         if (app->priv->desktop_file != NULL) {
+                 egg_desktop_file_free (app->priv->desktop_file);
+                 app->priv->desktop_file = NULL;
