@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.23.5
-Release: 0.2008.07.21.4%{?dist}
+Release: 0.2008.07.28.1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -36,16 +36,11 @@ Conflicts: gdm < 1:2.6.0.8-5
 # http://bugzilla.gnome.org/show_bug.cgi?id=350848
 # The gconf bits weren't accepted upstream, so we'll
 # need to figure something out here
-Patch13: gnome-session-2.17.5-window-manager.patch
+Patch13: gnome-session-2.23.5-window-manager.patch
 
 # FIXME does this still apply ?
 #Patch20: gnome-session-2.19.4-atspi-timeout.patch
 
-# Work around the assumption that the nautilus desktop file is nautilus.desktop
-Patch34: gnome-session-nautilus.patch
-
-Patch57: gerror-crash.patch
- 
 BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: gtk2-devel >= %{gtk2_version}
 BuildRequires: dbus-devel >= %{dbus_version}
@@ -70,6 +65,7 @@ BuildRequires: gettext
 BuildRequires: libX11-devel libXt-devel
 BuildRequires: libXrandr-devel
 BuildRequires: PolicyKit-gnome-devel
+BuildRequires: xmlto
 
 Requires(pre): GConf2 >= %{gconf2_version}
 Requires(post): GConf2 >= %{gconf2_version}
@@ -101,7 +97,7 @@ intltoolize --force
 autoheader
 autoconf
 
-%configure
+%configure --enable-docbook-docs --docdir=%{_datadir}/doc/%{name}-%{version}
 make %{?_smp_mflags}
 
 %install
@@ -127,6 +123,8 @@ mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
 
 ## remove splash screen
 rm -r $RPM_BUILD_ROOT%{_datadir}/pixmaps/splash
+
+cp AUTHORS COPYING NEWS README $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}
 
 %find_lang %{po_package}
 
@@ -155,7 +153,14 @@ fi
 
 %files -f %{po_package}.lang
 %defattr(-,root,root)
-%doc AUTHORS COPYING NEWS README
+%doc %dir %{_datadir}/doc/%{name}-%{version}
+%doc %{_datadir}/doc/%{name}-%{version}/AUTHORS
+%doc %{_datadir}/doc/%{name}-%{version}/COPYING
+%doc %{_datadir}/doc/%{name}-%{version}/NEWS
+%doc %{_datadir}/doc/%{name}-%{version}/README
+%doc %dir %{_datadir}/doc/%{name}-%{version}/dbus
+%doc %{_datadir}/doc/%{name}-%{version}/dbus/*
+%doc %{_mandir}/man*/*
 %{_datadir}/gnome
 %{_datadir}/applications/gnome-session-properties.desktop
 %{_datadir}/xsessions/*
@@ -166,13 +171,15 @@ fi
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
-%doc %{_mandir}/man*/*
 %dir %{_libdir}/gnome-session
 %dir %{_libdir}/gnome-session/helpers
 %{_libdir}/gnome-session/helpers/*
 
 
 %changelog
+* Mon Jul 28 2008 Jon McCann  <jmccann@redhat.com> - 2.23.5.0.2008.07.28.1
+- New snapshot from DBus branch
+
 * Thu Jul 24 2008 Matthias Clasen  <mclasen@redhat.com> - 2.23.5.0.2008.07.21.4
 - Fix a crash
 
