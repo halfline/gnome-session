@@ -1,0 +1,43 @@
+--- gnome-session-2.23.5/data/gnome-session.schemas.in.window-manager	2008-07-27 11:33:01.000000000 -0400
++++ gnome-session-2.23.5/data/gnome-session.schemas.in	2008-07-28 16:06:46.000000000 -0400
+@@ -2,6 +2,17 @@
+ <gconfschemafile>
+    <schemalist>
+       <schema>
++         <key>/schemas/apps/gnome-session/rh/window_manager</key>
++         <applyto>/apps/gnome-session/rh/window_manager</applyto>
++         <owner>gnome</owner>
++         <type>string</type>
++         <default>metacity</default>
++         <locale name="C">
++          <short>Window Manager to start</short>
++          <long>The Window manager that gnome-session will start. Valid values are "metacity" and "compiz".</long>
++         </locale>
++      </schema>
++      <schema>
+          <key>/schemas/apps/gnome-session/options/show_splash_screen</key>
+          <applyto>/apps/gnome-session/options/show_splash_screen</applyto>
+          <owner>gnome</owner>
+--- gnome-session-2.23.5/data/gnome-wm.window-manager	2008-06-13 16:00:53.000000000 -0400
++++ gnome-session-2.23.5/data/gnome-wm	2008-07-28 16:03:10.000000000 -0400
+@@ -3,7 +3,9 @@
+ # The user can specify his prefered WM by setting the WINDOW_MANAGER
+ # environment variable.
+ #
+-# If this is not set, we search a list of known windowmanagers and use
++# If this is not set, we check the /apps/gnome-session/rh/window_manager key
++# and go off that.  finally, if all else fails we search a list of known 
++# windowmanagers and use
+ # the first one that is found in the users's PATH
+ #
+ 
+@@ -38,6 +40,9 @@
+ done
+ 
+ # WINDOW_MANAGER overrides all
++if [ -z "$WINDOW_MANAGER" ] ; then
++	WINDOW_MANAGER=$(gconftool-2 --get /apps/gnome-session/rh/window_manager)
++fi
+ 
+ if [ -z "$WINDOW_MANAGER" ] ; then
+   # Create a list of window manager we can handle, trying to only use the
