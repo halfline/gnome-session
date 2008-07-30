@@ -11,8 +11,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.23.5
-Release: 0.2008.07.28.1%{?dist}
+Version: 2.23.6
+Release: 0.2008.07.29.1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -81,8 +81,6 @@ GNOME components and handles logout and saving the session.
 
 %patch13 -p1 -b .window-manager
 #%patch20 -p1 -b .timeout
-%patch34 -p1 -b .nautilus
-%patch57 -p1 -b .gerror-crash
 
 %build
 
@@ -177,6 +175,9 @@ fi
 
 
 %changelog
+* Mon Jul 29 2008 Jon McCann  <jmccann@redhat.com> - 2.23.6.0.2008.07.29.1
+- New snapshot from DBus branch
+
 * Mon Jul 28 2008 Jon McCann  <jmccann@redhat.com> - 2.23.5.0.2008.07.28.1
 - New snapshot from DBus branch
 
