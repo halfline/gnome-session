@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.23.6
-Release: 0.2008.07.30.1%{?dist}
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -32,14 +32,6 @@ Requires: dbus-x11
 
 ## we conflict with gdm that contains the GNOME gdm xsession
 Conflicts: gdm < 1:2.6.0.8-5
-
-# http://bugzilla.gnome.org/show_bug.cgi?id=350848
-# The gconf bits weren't accepted upstream, so we'll
-# need to figure something out here
-Patch13: gnome-session-2.23.5-window-manager.patch
-
-# FIXME does this still apply ?
-#Patch20: gnome-session-2.19.4-atspi-timeout.patch
 
 BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: gtk2-devel >= %{gtk2_version}
@@ -78,9 +70,6 @@ GNOME components and handles logout and saving the session.
 
 %prep
 %setup -q
-
-%patch13 -p1 -b .window-manager
-#%patch20 -p1 -b .timeout
 
 %build
 
@@ -175,6 +164,9 @@ fi
 
 
 %changelog
+* Tue Aug  5 2008 Matthias Clasen  <mclasen@redhat.com> - 2.23.6-1
+- Update to 2.23.6
+ 
 * Wed Jul 30 2008 Jon McCann  <jmccann@redhat.com> - 2.23.6.0.2008.07.30.1
 - New snapshot from DBus branch
 
