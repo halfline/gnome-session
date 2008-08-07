@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.23.6
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -63,6 +63,8 @@ Requires(pre): GConf2 >= %{gconf2_version}
 Requires(post): GConf2 >= %{gconf2_version}
 Requires(preun): GConf2 >= %{gconf2_version}
 
+Patch0: icon-names.patch
+
 %description
 
 gnome-session manages a GNOME desktop session. It starts up the other core
@@ -70,6 +72,7 @@ GNOME components and handles logout and saving the session.
 
 %prep
 %setup -q
+%patch0 -p1 -b .icon-names
 
 %build
 
@@ -164,6 +167,9 @@ fi
 
 
 %changelog
+* Thu Aug  7 2008 Matthias Clasen  <mclasen@redhat.com> - 2.23.6-2
+- Fix another icon name
+
 * Tue Aug  5 2008 Matthias Clasen  <mclasen@redhat.com> - 2.23.6-1
 - Update to 2.23.6
  
