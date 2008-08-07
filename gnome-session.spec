@@ -63,7 +63,7 @@ Requires(pre): GConf2 >= %{gconf2_version}
 Requires(post): GConf2 >= %{gconf2_version}
 Requires(preun): GConf2 >= %{gconf2_version}
 
-Patch0: icon-names.patch
+Patch0: icon-name.patch
 
 %description
 
@@ -72,7 +72,7 @@ GNOME components and handles logout and saving the session.
 
 %prep
 %setup -q
-%patch0 -p1 -b .icon-names
+%patch0 -p1 -b .icon-name
 
 %build
 
