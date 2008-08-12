@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.23.6
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -63,7 +63,10 @@ Requires(pre): GConf2 >= %{gconf2_version}
 Requires(post): GConf2 >= %{gconf2_version}
 Requires(preun): GConf2 >= %{gconf2_version}
 
+# fixed upstream
 Patch0: icon-name.patch
+# fixed upstream
+Patch1: compat-crash.patch
 
 %description
 
@@ -73,6 +76,7 @@ GNOME components and handles logout and saving the session.
 %prep
 %setup -q
 %patch0 -p1 -b .icon-name
+%patch1 -p1 -b .compat-crash
 
 %build
 
@@ -167,6 +171,9 @@ fi
 
 
 %changelog
+* Tue Aug 12 2008 Matthias Clasen  <mclasen@redhat.com> - 2.23.6-3
+- Fix a crash in the at-spi-registryd-wrapper
+
 * Thu Aug  7 2008 Matthias Clasen  <mclasen@redhat.com> - 2.23.6-2
 - Fix another icon name
 
