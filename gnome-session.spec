@@ -11,8 +11,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.23.6
-Release: 4%{?dist}
+Version: 2.23.90
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -63,11 +63,6 @@ Requires(pre): GConf2 >= %{gconf2_version}
 Requires(post): GConf2 >= %{gconf2_version}
 Requires(preun): GConf2 >= %{gconf2_version}
 
-# fixed upstream
-Patch0: icon-name.patch
-# fixed upstream
-Patch1: compat-crash.patch
-
 %description
 
 gnome-session manages a GNOME desktop session. It starts up the other core
@@ -75,8 +70,6 @@ GNOME components and handles logout and saving the session.
 
 %prep
 %setup -q
-%patch0 -p1 -b .icon-name
-%patch1 -p1 -b .compat-crash
 
 %build
 
@@ -175,6 +168,9 @@ fi
 
 
 %changelog
+* Fri Aug 22 2008 Matthias Clasen  <mclasen@redhat.com> - 2.23.90-1
+- Update to 2.23.90
+
 * Thu Aug 14 2008 Lennart Poettering  <lpoetter@redhat.com> - 2.23.6-4
 - Drop login/logout sound scripts since we do this now in libcanberra
 
