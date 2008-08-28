@@ -11,8 +11,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.23.90
-Release: 1%{?dist}
+Version: 2.23.91
+Release: 0.20080828.1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -168,6 +168,9 @@ fi
 
 
 %changelog
+* Thu Aug 28 2008 Jon McCann  <jmccann@redhat.com> - 2.23.91.0.2008.08.28.1
+- Update to snapshot
+
 * Fri Aug 22 2008 Matthias Clasen  <mclasen@redhat.com> - 2.23.90-1
 - Update to 2.23.90
 
@@ -182,7 +185,7 @@ fi
 
 * Tue Aug  5 2008 Matthias Clasen  <mclasen@redhat.com> - 2.23.6-1
 - Update to 2.23.6
- 
+
 * Wed Jul 30 2008 Jon McCann  <jmccann@redhat.com> - 2.23.6.0.2008.07.30.1
 - New snapshot from DBus branch
 
