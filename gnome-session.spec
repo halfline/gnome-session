@@ -63,8 +63,6 @@ Requires(pre): GConf2 >= %{gconf2_version}
 Requires(post): GConf2 >= %{gconf2_version}
 Requires(preun): GConf2 >= %{gconf2_version}
 
-Patch0: valgrind-leaks.patch
-
 %description
 
 gnome-session manages a GNOME desktop session. It starts up the other core
@@ -72,7 +70,6 @@ GNOME components and handles logout and saving the session.
 
 %prep
 %setup -q
-%patch0 -p0 -b .leaks
 
 %build
 
