@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.23.92
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -63,6 +63,13 @@ Requires(pre): GConf2 >= %{gconf2_version}
 Requires(post): GConf2 >= %{gconf2_version}
 Requires(preun): GConf2 >= %{gconf2_version}
 
+# http://bugzilla.gnome.org/show_bug.cgi?id=552292
+Patch0: ListenObjs-leak.patch
+# http://bugzilla.gnome.org/show_bug.cgi?id=552293
+Patch1: previous_id-leak.patch
+# http://bugzilla.gnome.org/show_bug.cgi?id=552294
+Patch2: inhibitor-leak.patch
+
 %description
 
 gnome-session manages a GNOME desktop session. It starts up the other core
@@ -70,6 +77,9 @@ GNOME components and handles logout and saving the session.
 
 %prep
 %setup -q
+%patch0 -p1 -b .ListenObjs-leak
+%patch1 -p1 -b .previous_id-leak
+%patch2 -p1 -b .inhibitor-leak
 
 %build
 
@@ -168,6 +178,9 @@ fi
 
 
 %changelog
+* Sun Sep 14 2008 Matthias Clasen  <mclasen@redhat.com> - 2.23.92-2
+- Plug memory leaks
+
 * Mon Sep  8 2008 Jon McCann  <jmccann@redhat.com> - 2.23.92-1
 - Update to 2.23.92
 
