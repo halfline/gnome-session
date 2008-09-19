@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.23.92
-Release: 5%{?dist}
+Release: 6%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -75,6 +75,8 @@ Patch3: empty-string-leak.patch
 Patch4: ice-leak.patch
 # http://bugzilla.gnome.org/show_bug.cgi?id=552780
 Patch5: xml-leak.patch
+# http://bugzilla.gnome.org/show_bug.cgi?id=552815
+Patch6: startup_id-leak.patch
 
 %description
 
@@ -89,6 +91,7 @@ GNOME components and handles logout and saving the session.
 %patch3 -p1 -b .empty-string-leak
 %patch4 -p0 -b .ice-leak
 %patch5 -p1 -b .xml-leak
+%patch6 -p1 -b .startup_id-leak.patch
 
 %build
 
@@ -187,6 +190,9 @@ fi
 
 
 %changelog
+* Thu Sep 18 2008 Matthias Clasen  <mclasen@redhat.com> - 2.23.92-6
+- Plug memory leaks
+
 * Thu Sep 18 2008 Matthias Clasen  <mclasen@redhat.com> - 2.23.92-5
 - Plug memory leaks
 
