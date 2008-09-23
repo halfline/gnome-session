@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.24.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.24/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -63,16 +63,6 @@ Requires(pre): GConf2 >= %{gconf2_version}
 Requires(post): GConf2 >= %{gconf2_version}
 Requires(preun): GConf2 >= %{gconf2_version}
 
-# http://bugzilla.gnome.org/show_bug.cgi?id=552292
-Patch0: ListenObjs-leak.patch
-# http://bugzilla.gnome.org/show_bug.cgi?id=552293
-Patch1: previous_id-leak.patch
-# http://bugzilla.gnome.org/show_bug.cgi?id=552294
-Patch2: inhibitor-leak.patch
-# http://bugzilla.gnome.org/show_bug.cgi?id=552302
-Patch3: empty-string-leak.patch
-# http://bugzilla.gnome.org/show_bug.cgi?id=552255
-Patch4: ice-leak.patch
 # http://bugzilla.gnome.org/show_bug.cgi?id=552780
 Patch5: xml-leak.patch
 # http://bugzilla.gnome.org/show_bug.cgi?id=552815
@@ -85,11 +75,6 @@ GNOME components and handles logout and saving the session.
 
 %prep
 %setup -q
-%patch0 -p1 -b .ListenObjs-leak
-%patch1 -p1 -b .previous_id-leak
-%patch2 -p1 -b .inhibitor-leak
-%patch3 -p1 -b .empty-string-leak
-%patch4 -p0 -b .ice-leak
 %patch5 -p1 -b .xml-leak
 %patch6 -p1 -b .startup_id-leak.patch
 
@@ -190,8 +175,9 @@ fi
 
 
 %changelog
-* Mon Sep 22 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.0-1
+* Mon Sep 22 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.0-2
 - Update to 2.24.0
+- Drop upstreamed patches
 
 * Thu Sep 18 2008 Matthias Clasen  <mclasen@redhat.com> - 2.23.92-6
 - Plug memory leaks
