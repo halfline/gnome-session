@@ -11,10 +11,10 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.23.92
-Release: 6%{?dist}
+Version: 2.24.0
+Release: 1%{?dist}
 URL: http://www.gnome.org
-Source0: http://download.gnome.org/sources/gnome-session/2.23/%{name}-%{version}.tar.bz2
+Source0: http://download.gnome.org/sources/gnome-session/2.24/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
 Source2: gnome.desktop
 License: GPLv2+
@@ -190,6 +190,9 @@ fi
 
 
 %changelog
+* Mon Sep 22 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.0-1
+- Update to 2.24.0
+
 * Thu Sep 18 2008 Matthias Clasen  <mclasen@redhat.com> - 2.23.92-6
 - Plug memory leaks
 
