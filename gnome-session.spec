@@ -72,12 +72,12 @@ Patch6: startup_id-leak.patch
 gnome-session manages a GNOME desktop or GDM login session. It starts up the other core
 GNOME components and handles logout and saving the session.
 
-%package file
+%package xsession
 Summary: gnome-session desktop file
 Group: User Interface/Desktop
 Requires: gnome-session
 
-%description file
+%description xsession
 Desktop file to add GNOME to display manager session menu.
 
 %prep
