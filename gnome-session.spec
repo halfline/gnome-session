@@ -156,7 +156,7 @@ fi
 %postun
 /sbin/ldconfig
 
-%files file
+%files xsession
 %defattr(-,root,root)
 %{_datadir}/xsessions/*
 
