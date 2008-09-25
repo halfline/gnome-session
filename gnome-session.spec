@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.24.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.24/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -69,9 +69,16 @@ Patch5: xml-leak.patch
 Patch6: startup_id-leak.patch
 
 %description
-
-gnome-session manages a GNOME desktop session. It starts up the other core
+gnome-session manages a GNOME desktop or GDM login session. It starts up the other core
 GNOME components and handles logout and saving the session.
+
+%package file
+Summary: gnome-session desktop file
+Group: User Interface/Desktop
+Requires: gnome-session
+
+%description file
+Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
@@ -149,6 +156,10 @@ fi
 %postun
 /sbin/ldconfig
 
+%files file
+%defattr(-,root,root)
+%{_datadir}/xsessions/*
+
 %files -f %{po_package}.lang
 %defattr(-,root,root)
 %doc %dir %{_datadir}/doc/%{name}-%{version}
@@ -161,7 +172,6 @@ fi
 %doc %{_mandir}/man*/*
 %{_datadir}/gnome
 %{_datadir}/applications/gnome-session-properties.desktop
-%{_datadir}/xsessions/*
 %dir %{_datadir}/gnome-session
 %{_datadir}/gnome-session/session-properties.glade
 %{_datadir}/gnome-session/gsm-inhibit-dialog.glade
@@ -175,6 +185,9 @@ fi
 
 
 %changelog
+* Thu Sep 25 2008 Ray Strode  <rstrode@redhat.com> - 2.24.0-3
+- Split gnome-session.desktop off into subpackage
+
 * Mon Sep 22 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.0-2
 - Update to 2.24.0
 - Drop upstreamed patches
