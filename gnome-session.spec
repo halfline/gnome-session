@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.24.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.24/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -75,7 +75,7 @@ GNOME components and handles logout and saving the session.
 %package xsession
 Summary: gnome-session desktop file
 Group: User Interface/Desktop
-Requires: gnome-session
+Requires: gnome-session = %{version}-%{release}
 
 %description xsession
 Desktop file to add GNOME to display manager session menu.
@@ -185,6 +185,10 @@ fi
 
 
 %changelog
+* Fri Sep 26 2008 Ray Strode  <rstrode@redhat.com> - 2.24.0-4
+- Make the new xsession subpackage require the version of
+  gnome-session it's built against
+
 * Thu Sep 25 2008 Ray Strode  <rstrode@redhat.com> - 2.24.0-3
 - Split gnome-session.desktop off into subpackage
 
