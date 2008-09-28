@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.24.0
-Release: 4%{?dist}
+Release: 5%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.24/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -47,6 +47,7 @@ BuildRequires: gnome-settings-daemon-devel
 BuildRequires: desktop-file-utils
 BuildRequires: libXau-devel
 BuildRequires: libXrandr-devel
+BuildRequires: xorg-x11-xtrans-devel
 
 # this is so the configure checks find /usr/bin/halt etc.
 BuildRequires: usermode
@@ -185,6 +186,9 @@ fi
 
 
 %changelog
+* Sun Sep 28 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.0-5
+- BR xorg-x11-xtrans-devel (#464316)
+
 * Fri Sep 26 2008 Ray Strode  <rstrode@redhat.com> - 2.24.0-4
 - Make the new xsession subpackage require the version of
   gnome-session it's built against
