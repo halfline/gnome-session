@@ -70,6 +70,8 @@ Patch5: xml-leak.patch
 Patch6: startup_id-leak.patch
 # http://bugzilla.gnome.org/show_bug.cgi?id=554775 
 Patch7: missing-translations.patch
+# fixed upstream
+Patch8: hig-problems.patch
 
 %description
 gnome-session manages a GNOME desktop or GDM login session. It starts up the other core
@@ -88,6 +90,7 @@ Desktop file to add GNOME to display manager session menu.
 %patch5 -p1 -b .xml-leak
 %patch6 -p1 -b .startup_id-leak.patch
 %patch7 -p1 -b .missing-translations
+%patch8 -p1 -b .hig-problems
 
 %build
 
@@ -191,6 +194,7 @@ fi
 %changelog
 * Fri Oct  3 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.0-6
 - Fix missing translations in the capplet
+- Fix small UI issues in the capplet
 
 * Sun Sep 28 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.0-5
 - BR xorg-x11-xtrans-devel (#464316)
