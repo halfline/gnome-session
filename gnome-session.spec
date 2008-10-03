@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.24.0
-Release: 5%{?dist}
+Release: 6%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.24/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -68,6 +68,8 @@ Requires(preun): GConf2 >= %{gconf2_version}
 Patch5: xml-leak.patch
 # http://bugzilla.gnome.org/show_bug.cgi?id=552815
 Patch6: startup_id-leak.patch
+# http://bugzilla.gnome.org/show_bug.cgi?id=554775 
+Patch7: missing-translations.patch
 
 %description
 gnome-session manages a GNOME desktop or GDM login session. It starts up the other core
@@ -85,6 +87,7 @@ Desktop file to add GNOME to display manager session menu.
 %setup -q
 %patch5 -p1 -b .xml-leak
 %patch6 -p1 -b .startup_id-leak.patch
+%patch7 -p1 -b .missing-translations
 
 %build
 
@@ -186,6 +189,9 @@ fi
 
 
 %changelog
+* Fri Oct  3 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.0-6
+- Fix missing translations in the capplet
+
 * Sun Sep 28 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.0-5
 - BR xorg-x11-xtrans-devel (#464316)
 
