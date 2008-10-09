@@ -73,7 +73,7 @@ Patch7: missing-translations.patch
 # fixed upstream
 Patch8: hig-problems.patch
 
-# TODO add bug reference
+# http://bugzilla.gnome.org/show_bug.cgi?id=536915
 Patch9: gnome-session-2.24.0-add-can-shutdown-api.patch
 
 %description
