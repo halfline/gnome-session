@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.24.0
-Release: 6%{?dist}
+Release: 7%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.24/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -73,6 +73,9 @@ Patch7: missing-translations.patch
 # fixed upstream
 Patch8: hig-problems.patch
 
+# TODO add bug reference
+Patch9: gnome-session-2.24.0-add-can-shutdown-api.patch
+
 %description
 gnome-session manages a GNOME desktop or GDM login session. It starts up the other core
 GNOME components and handles logout and saving the session.
@@ -91,6 +94,7 @@ Desktop file to add GNOME to display manager session menu.
 %patch6 -p1 -b .startup_id-leak.patch
 %patch7 -p1 -b .missing-translations
 %patch8 -p1 -b .hig-problems
+%patch9 -p1 -b .add-can-shutdown-api
 
 %build
 
@@ -192,6 +196,10 @@ fi
 
 
 %changelog
+* Thu Oct  9 2008 Ray Strode <rstrode@redhat.com> - 2.24.0-7
+- Add new api for panel to figure out whether or not to show
+  Shutdown menu item.
+
 * Fri Oct  3 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.0-6
 - Fix missing translations in the capplet
 - Fix small UI issues in the capplet

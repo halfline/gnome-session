@@ -1,0 +1,233 @@
+diff -ru gnome-session-2.24.0/gnome-session/gsm-consolekit.c new/gnome-session/gsm-consolekit.c
+--- gnome-session-2.24.0/gnome-session/gsm-consolekit.c	2008-09-22 17:21:08.000000000 -0400
++++ new/gnome-session/gsm-consolekit.c	2008-10-09 11:32:26.000000000 -0400
+@@ -54,6 +54,7 @@
+         DBusGConnection *dbus_connection;
+         DBusGProxy      *bus_proxy;
+         DBusGProxy      *ck_proxy;
++        PolKitTracker   *pk_tracker;
+         guint32          is_connected : 1;
+ };
+ 
+@@ -136,15 +137,29 @@
+         g_type_class_add_private (manager_class, sizeof (GsmConsolekitPrivate));
+ }
+ 
++static DBusHandlerResult
++filter_function (DBusConnection *connection,
++                 DBusMessage    *message,
++                 GsmConsolekit  *manager)
++{
++        if (manager->priv->pk_tracker != NULL) {
++                polkit_tracker_dbus_func (manager->priv->pk_tracker, message);
++        }
++
++        return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
++}
++
+ static gboolean
+ gsm_consolekit_ensure_ck_connection (GsmConsolekit  *manager,
+                                      GError        **error)
+ {
++        DBusConnection *connection;
+         GError  *connection_error;
+         gboolean is_connected;
+ 
+         connection_error = NULL;
+ 
++        connection = NULL;
+         if (manager->priv->dbus_connection == NULL) {
+                 manager->priv->dbus_connection = dbus_g_bus_get (DBUS_BUS_SYSTEM,
+                                                                  &connection_error);
+@@ -154,6 +169,13 @@
+                         is_connected = FALSE;
+                         goto out;
+                 }
++
++                connection = dbus_g_connection_get_connection (manager->priv->dbus_connection);
++
++                dbus_connection_add_filter (connection,
++                                            (DBusHandleMessageFunction)
++                                            filter_function,
++                                            manager, NULL);
+         }
+ 
+         if (manager->priv->bus_proxy == NULL) {
+@@ -198,6 +220,24 @@
+                 }
+         }
+ 
++        if (manager->priv->pk_tracker == NULL && connection != NULL) {
++                PolKitCaller *caller;
++
++                manager->priv->pk_tracker = polkit_tracker_new ();
++                polkit_tracker_init (manager->priv->pk_tracker);
++                polkit_tracker_set_system_bus_connection (manager->priv->pk_tracker,
++                                                          connection);
++
++                /* Prime the tracker's cache
++                 */
++                caller = polkit_tracker_get_caller_from_dbus_name (manager->priv->pk_tracker,
++                                                                   CK_NAME, NULL);
++
++                if (caller != NULL) {
++                        g_object_unref (caller);
++                }
++        }
++
+         is_connected = TRUE;
+ 
+  out:
+@@ -825,20 +865,61 @@
+         return ret;
+ }
+ 
++static gboolean
++gsm_consolekit_can_do_action (GsmConsolekit *manager,
++                              const char    *action_name)
++{
++        PolKitGnomeContext *gnome_context;
++        PolKitPolicyCache *policy_cache;
++        PolKitPolicyFileEntry *file_entry;
++        PolKitPolicyDefault *policy;
++        PolKitAction *action;
++        PolKitCaller *caller;
++        PolKitResult result;
++
++        gnome_context = polkit_gnome_context_get (NULL);
++
++        if (gnome_context == NULL) {
++                return FALSE;
++        }
++
++        policy_cache = polkit_context_get_policy_cache (gnome_context->pk_context);
++        file_entry = polkit_policy_cache_get_entry_by_id (policy_cache, "org.freedesktop.consolekit");
++        policy = polkit_policy_file_entry_get_default (file_entry);
++        action = polkit_action_new ();
++        if (polkit_action_set_action_id (action, action_name)) {
++                polkit_action_unref (action);
++                return FALSE;
++        }
++
++        caller =
++            polkit_tracker_get_caller_from_dbus_name (manager->priv->pk_tracker,
++                                                      CK_NAME, NULL);
++        result = polkit_policy_default_can_caller_do_action (policy, action,
++                                                             caller);
++        polkit_caller_unref (caller);
++
++        return result != POLKIT_RESULT_NO && result != POLKIT_RESULT_UNKNOWN;
++}
++
+ gboolean
+ gsm_consolekit_can_restart (GsmConsolekit *manager)
+ {
+ #ifdef HAVE_POLKIT_GNOME
+         gboolean res;
+         GError  *error;
++
+         error = NULL;
+         res = gsm_consolekit_ensure_ck_connection (manager, &error);
+         if (!res) {
+                 g_warning ("Could not connect to ConsoleKit: %s",
+                            error->message);
+                 g_error_free (error);
++                return FALSE;
+         }
+-        return res;
++
++        return gsm_consolekit_can_do_action (manager, "org.freedesktop.consolekit.system.restart") ||
++               gsm_consolekit_can_do_action (manager, "org.freedesktop.consolekit.system.restart-multiple-users");
+ #else
+         g_debug ("GsmConsolekit: built without PolicyKit-gnome support - cannot restart system");
+         return FALSE;
+@@ -857,8 +938,11 @@
+                 g_warning ("Could not connect to ConsoleKit: %s",
+                            error->message);
+                 g_error_free (error);
++                return FALSE;
+         }
+-        return res;
++
++        return gsm_consolekit_can_do_action (manager, "org.freedesktop.consolekit.system.stop") ||
++               gsm_consolekit_can_do_action (manager, "org.freedesktop.consolekit.system.stop-multiple-users");
+ #else
+         g_debug ("GsmConsolekit: built without PolicyKit-gnome support - cannot stop system");
+         return FALSE;
+diff -ru gnome-session-2.24.0/gnome-session/gsm-manager.c new/gnome-session/gsm-manager.c
+--- gnome-session-2.24.0/gnome-session/gsm-manager.c	2008-09-22 17:21:08.000000000 -0400
++++ new/gnome-session/gsm-manager.c	2008-10-09 12:41:47.000000000 -0400
+@@ -2313,6 +2313,35 @@
+ }
+ 
+ gboolean
++gsm_manager_can_shutdown (GsmManager *manager,
++                          gboolean   *shutdown_available,
++                          GError    **error)
++{
++        GsmConsolekit *consolekit;
++        GsmPowerManager *power_manager;
++
++        g_debug ("GsmManager: CanShutdown called");
++
++        g_return_val_if_fail (GSM_IS_MANAGER (manager), FALSE);
++
++        if (manager->priv->phase != GSM_MANAGER_PHASE_RUNNING) {
++                *shutdown_available = FALSE;
++                return TRUE;
++        }
++
++        consolekit = gsm_get_consolekit ();
++        power_manager = gsm_get_power_manager ();
++        *shutdown_available = gsm_consolekit_can_stop (consolekit)
++                              || gsm_consolekit_can_restart (consolekit)
++                              || gsm_power_manager_can_suspend (power_manager)
++                              || gsm_power_manager_can_hibernate (power_manager);
++        g_object_unref (consolekit);
++        g_object_unref (power_manager);
++
++        return TRUE;
++}
++
++gboolean
+ gsm_manager_logout (GsmManager *manager,
+                     guint       logout_mode,
+                     GError    **error)
+diff -ru gnome-session-2.24.0/gnome-session/gsm-manager.h new/gnome-session/gsm-manager.h
+--- gnome-session-2.24.0/gnome-session/gsm-manager.h	2008-09-22 17:21:08.000000000 -0400
++++ new/gnome-session/gsm-manager.h	2008-10-09 12:42:20.000000000 -0400
+@@ -151,6 +151,10 @@
+ 
+ gboolean            gsm_manager_shutdown                       (GsmManager     *manager,
+                                                                 GError        **error);
++
++gboolean            gsm_manager_can_shutdown                   (GsmManager     *manager,
++                                                                gboolean       *shutdown_available,
++                                                                GError        **error);
+ gboolean            gsm_manager_logout                         (GsmManager     *manager,
+                                                                 guint           logout_mode,
+                                                                 GError        **error);
+diff -ru gnome-session-2.24.0/gnome-session/org.gnome.SessionManager.xml new/gnome-session/org.gnome.SessionManager.xml
+--- gnome-session-2.24.0/gnome-session/org.gnome.SessionManager.xml	2008-09-22 17:21:08.000000000 -0400
++++ new/gnome-session/org.gnome.SessionManager.xml	2008-10-09 12:35:17.000000000 -0400
+@@ -252,6 +252,20 @@
+       </doc:doc>
+     </method>
+ 
++    <method name="CanShutdown">
++      <arg name="is_available" direction="out" type="b">
++        <doc:doc>
++          <doc:summary>True if shutdown is available to the user, false otherwise</doc:summary>
++        </doc:doc>
++      </arg>
++      <doc:doc>
++        <doc:description>
++          <doc:para>Allows the caller to determine whether or not it's okay to show
++          a shutdown option in the UI</doc:para>
++        </doc:description>
++      </doc:doc>
++    </method>
++
+     <method name="Logout">
+       <arg name="mode" type="u" direction="in">
+         <doc:doc>
