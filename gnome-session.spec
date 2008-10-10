@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.24.0
-Release: 7%{?dist}
+Release: 8%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.24/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -196,6 +196,9 @@ fi
 
 
 %changelog
+* Thu Oct  9 2008 Ray Strode <rstrode@redhat.com> - 2.24.0-8
+- Fix assertion failure in last patch
+
 * Thu Oct  9 2008 Ray Strode <rstrode@redhat.com> - 2.24.0-7
 - Add new api for panel to figure out whether or not to show
   Shutdown menu item.
