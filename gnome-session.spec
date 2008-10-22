@@ -11,8 +11,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.24.0
-Release: 11%{?dist}
+Version: 2.24.1
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.24/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -64,15 +64,6 @@ Requires(pre): GConf2 >= %{gconf2_version}
 Requires(post): GConf2 >= %{gconf2_version}
 Requires(preun): GConf2 >= %{gconf2_version}
 
-# http://bugzilla.gnome.org/show_bug.cgi?id=552780
-Patch5: xml-leak.patch
-# http://bugzilla.gnome.org/show_bug.cgi?id=552815
-Patch6: startup_id-leak.patch
-# http://bugzilla.gnome.org/show_bug.cgi?id=554775 
-Patch7: missing-translations.patch
-# fixed upstream
-Patch8: hig-problems.patch
-
 # http://bugzilla.gnome.org/show_bug.cgi?id=536915
 Patch9: gnome-session-2.24.0-add-can-shutdown-api.patch
 
@@ -90,10 +81,6 @@ Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
-%patch5 -p1 -b .xml-leak
-%patch6 -p1 -b .startup_id-leak.patch
-%patch7 -p1 -b .missing-translations
-%patch8 -p1 -b .hig-problems
 %patch9 -p1 -b .add-can-shutdown-api
 
 %build
@@ -196,6 +183,10 @@ fi
 
 
 %changelog
+* Wed Oct 22 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.1-1
+- Update to 2.24.1
+- Drop upstreamed patches
+
 * Wed Oct 15 2008 Ray Strode <rstrode@redhat.com> - 2.24.0-11
 - Remove some dubious code to fix panel race at startup that
   would make shutdown menu item disappear for some users.
