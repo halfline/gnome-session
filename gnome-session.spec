@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.24.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.24/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -67,6 +67,9 @@ Requires(preun): GConf2 >= %{gconf2_version}
 # http://bugzilla.gnome.org/show_bug.cgi?id=536915
 Patch9: gnome-session-2.24.0-add-can-shutdown-api.patch
 
+# fixed upstream
+Patch10: resizable.patch
+
 %description
 gnome-session manages a GNOME desktop or GDM login session. It starts up the other core
 GNOME components and handles logout and saving the session.
@@ -82,6 +85,7 @@ Desktop file to add GNOME to display manager session menu.
 %prep
 %setup -q
 %patch9 -p1 -b .add-can-shutdown-api
+%patch10 -p1 -b .resizable
 
 %build
 
@@ -183,6 +187,9 @@ fi
 
 
 %changelog
+* Sun Oct 26 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.1-2
+- Make the capplet resizable (#468577)
+
 * Wed Oct 22 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.1-1
 - Update to 2.24.1
 - Drop upstreamed patches
