@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.24.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.24/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -187,7 +187,7 @@ fi
 
 
 %changelog
-* Sun Oct 26 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.1-2
+* Sun Oct 26 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.1-3
 - Make the capplet resizable (#468577)
 
 * Wed Oct 22 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.1-1
