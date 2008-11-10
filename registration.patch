@@ -1,0 +1,20 @@
+diff -up gnome-session-2.24.1/gnome-session/gsm-manager.c.registration gnome-session-2.24.1/gnome-session/gsm-manager.c
+--- gnome-session-2.24.1/gnome-session/gsm-manager.c.registration	2008-11-10 13:54:08.000000000 -0500
++++ gnome-session-2.24.1/gnome-session/gsm-manager.c	2008-11-10 14:01:41.000000000 -0500
+@@ -2436,13 +2436,10 @@ gsm_manager_register_client (GsmManager 
+ 
+         g_debug ("GsmManager: Adding new client %s to session", new_startup_id);
+ 
+-        if (IS_STRING_EMPTY (startup_id) && IS_STRING_EMPTY (app_id)) {
+-                /* just accept the client - we can't associate with an
+-                   existing App */
+-                app = NULL;
+-        } else if (IS_STRING_EMPTY (startup_id)) {
++        if (app == NULL && !IS_STRING_EMPTY (startup_id)) {
+                 app = find_app_for_startup_id (manager, startup_id);
+-        } else if (IS_STRING_EMPTY (startup_id)) {
++        } 
++        if (app == NULL && !IS_STRING_EMPTY (app_id)) {
+                 /* try to associate this app id with a known app */
+                 app = find_app_for_app_id (manager, app_id);
+         }
