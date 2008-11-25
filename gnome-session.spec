@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.24.1
-Release: 4%{?dist}
+Release: 5%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.24/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -74,8 +74,8 @@ Patch10: resizable.patch
 Patch11: registration.patch
 
 %description
-gnome-session manages a GNOME desktop or GDM login session. It starts up the other core
-GNOME components and handles logout and saving the session.
+gnome-session manages a GNOME desktop or GDM login session. It starts up 
+the other core GNOME components and handles logout and saving the session.
 
 %package xsession
 Summary: gnome-session desktop file
@@ -159,8 +159,7 @@ if [ "$1" -eq 0 ]; then
   gconftool-2 --makefile-uninstall-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas >& /dev/null || :
 fi
 
-%postun
-/sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files xsession
 %defattr(-,root,root)
@@ -191,6 +190,9 @@ fi
 
 
 %changelog
+* Tue Nov 25 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.1-5
+- Spec file cleanups
+
 * Mon Nov 10 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.1-4
 - Fix client registration in some cases 
 
