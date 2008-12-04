@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.25.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.25/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -79,18 +79,14 @@ Desktop file to add GNOME to display manager session menu.
 %prep
 %setup -q
 
-%build
-
 #workaround broken perl-XML-Parser on 64bit arches
 export PERL5LIB=/usr/lib64/perl5/vendor_perl/5.8.2 perl
 
 sed -i -e 's/GNOME_COMPILE_WARNINGS.*//' configure.in
 
-aclocal
-automake
-intltoolize --force
-autoheader
-autoconf
+autoreconf -i -f
+
+%build
 
 %configure --enable-docbook-docs --docdir=%{_datadir}/doc/%{name}-%{version}
 make %{?_smp_mflags}
@@ -178,7 +174,7 @@ fi
 
 
 %changelog
-* Thu Dec  4 2008 Matthias Clasen  <mclasen@redhat.com> - 2.25.2-1
+* Thu Dec  4 2008 Matthias Clasen  <mclasen@redhat.com> - 2.25.2-2
 - Update to 2.25.2
 
 * Tue Nov 25 2008 Matthias Clasen  <mclasen@redhat.com> - 2.24.1-5
