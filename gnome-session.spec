@@ -12,7 +12,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.25.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.25/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -57,6 +57,7 @@ BuildRequires: libtool
 BuildRequires: gettext
 BuildRequires: libX11-devel libXt-devel
 BuildRequires: libXrandr-devel
+BuildRequires: libXtest-devel
 BuildRequires: PolicyKit-gnome-devel
 BuildRequires: xmlto
 
@@ -174,8 +175,9 @@ fi
 
 
 %changelog
-* Tue Jan 20 2009 Matthias Clasen  <mclasen@redhat.com> - 2.25.5-1
+* Tue Jan 20 2009 Matthias Clasen  <mclasen@redhat.com> - 2.25.5-2
 - Update to 2.25.5
+- Fix BuildRequires
 
 * Wed Dec 17 2008 Matthias Clasen  <mclasen@redhat.com> - 2.25.3-1
 - Update to 2.25.3
