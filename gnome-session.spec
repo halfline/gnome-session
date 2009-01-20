@@ -56,8 +56,7 @@ BuildRequires: intltool, autoconf, automake
 BuildRequires: libtool
 BuildRequires: gettext
 BuildRequires: libX11-devel libXt-devel
-BuildRequires: libXrandr-devel
-BuildRequires: libXtest-devel
+BuildRequires: libXtst-devel
 BuildRequires: PolicyKit-gnome-devel
 BuildRequires: xmlto
 
