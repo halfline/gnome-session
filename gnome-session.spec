@@ -1,5 +1,3 @@
-%define esound_version 0.2.26
-%define libgnomeui_version 2.3.0
 %define gtk2_version 2.11.3
 %define dbus_glib_version 0.70
 %define dbus_version 0.90
@@ -11,8 +9,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.25.5
-Release: 2%{?dist}
+Version: 2.25.90
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.25/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -33,11 +31,10 @@ Requires: dbus-x11
 ## we conflict with gdm that contains the GNOME gdm xsession
 Conflicts: gdm < 1:2.6.0.8-5
 
-BuildRequires: libgnomeui-devel >= %{libgnomeui_version}
 BuildRequires: gtk2-devel >= %{gtk2_version}
 BuildRequires: dbus-devel >= %{dbus_version}
 BuildRequires: dbus-glib-devel >= %{dbus_glib_version}
-BuildRequires: gnome-keyring >= %{gnome_keyring_version}
+BuildRequires: gnome-keyring-devel >= %{gnome_keyring_version}
 BuildRequires: libnotify-devel >= %{libnotify_version}
 BuildRequires: GConf2-devel >= %{gconf2_version}
 BuildRequires: GConf2-gtk >= %{gconf2_version}
@@ -174,6 +171,9 @@ fi
 
 
 %changelog
+* Tue Feb  3 2009 Matthias Clasen  <mclasen@redhat.com> - 2.25.90-1
+- Update to 2.25.90
+
 * Tue Jan 20 2009 Matthias Clasen  <mclasen@redhat.com> - 2.25.5-2
 - Update to 2.25.5
 - Fix BuildRequires
