@@ -9,7 +9,7 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.25.90
+Version: 2.25.91
 Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.25/%{name}-%{version}.tar.bz2
@@ -173,6 +173,9 @@ fi
 
 
 %changelog
+* Wed Feb 18 2009 Matthias Clasen  <mclasen@redhat.com> - 2.25.91-1
+- Update to 2.25.91
+
 * Tue Feb  3 2009 Matthias Clasen  <mclasen@redhat.com> - 2.25.90-1
 - Update to 2.25.90
 
