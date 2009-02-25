@@ -10,7 +10,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.25.91
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.25/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -69,6 +69,7 @@ the other core GNOME components and handles logout and saving the session.
 Summary: gnome-session desktop file
 Group: User Interface/Desktop
 Requires: gnome-session = %{version}-%{release}
+BuildArch: noarch
 
 %description xsession
 Desktop file to add GNOME to display manager session menu.
@@ -173,6 +174,9 @@ fi
 
 
 %changelog
+* Tue Feb 24 20009 Matthias Clasen  <mclasen@redhat.com> - 2.25.91-3
+- Make -xsession noarch
+
 * Tue Feb 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.25.91-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
 
