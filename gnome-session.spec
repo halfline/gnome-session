@@ -174,7 +174,7 @@ fi
 
 
 %changelog
-* Tue Feb 24 20009 Matthias Clasen  <mclasen@redhat.com> - 2.25.91-3
+* Tue Feb 24 2009 Matthias Clasen  <mclasen@redhat.com> - 2.25.91-3
 - Make -xsession noarch
 
 * Tue Feb 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.25.91-2
