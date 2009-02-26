@@ -10,7 +10,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.25.91
-Release: 3%{?dist}
+Release: 4%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.25/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -61,6 +61,8 @@ Requires(pre): GConf2 >= %{gconf2_version}
 Requires(post): GConf2 >= %{gconf2_version}
 Requires(preun): GConf2 >= %{gconf2_version}
 
+Patch0: xsync-is-great.patch
+
 %description
 gnome-session manages a GNOME desktop or GDM login session. It starts up 
 the other core GNOME components and handles logout and saving the session.
@@ -69,13 +71,13 @@ the other core GNOME components and handles logout and saving the session.
 Summary: gnome-session desktop file
 Group: User Interface/Desktop
 Requires: gnome-session = %{version}-%{release}
-BuildArch: noarch
 
 %description xsession
 Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
+%patch0 -p1 -b .xsync-is-great
 
 #workaround broken perl-XML-Parser on 64bit arches
 export PERL5LIB=/usr/lib64/perl5/vendor_perl/5.8.2 perl
@@ -174,6 +176,10 @@ fi
 
 
 %changelog
+* Thu Feb 26 2009 Matthias Clasen  <mclasen@redhat.com> - 2.25.91-4
+- Make -xsession arch again
+- Fix xsync usage
+
 * Tue Feb 24 2009 Matthias Clasen  <mclasen@redhat.com> - 2.25.91-3
 - Make -xsession noarch
 
