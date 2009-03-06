@@ -10,11 +10,15 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.25.92
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.25/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
 Source2: gnome.desktop
+
+# http://bugzilla.gnome.org/show_bug.cgi?id=574399
+Patch0: gnome-session-debug-spew.patch
+
 License: GPLv2+
 Group: User Interface/Desktops
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -75,6 +79,7 @@ Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
+%patch0 -p1 -b .debug-spew
 
 #workaround broken perl-XML-Parser on 64bit arches
 export PERL5LIB=/usr/lib64/perl5/vendor_perl/5.8.2 perl
@@ -173,6 +178,9 @@ fi
 
 
 %changelog
+* Fri Mar  6 2009 Matthias Clasen  <mclasen@redhat.com> - 2.25.92-2
+- Turn off excessive debug spew
+
 * Tue Mar  3 2009 Matthias Clasen  <mclasen@redhat.com> - 2.25.92-1
 - Update to 2.25.92
 
