@@ -1,0 +1,14 @@
+diff -up gnome-session-2.26.0/gnome-session/gs-idle-monitor.c.alarm-warning gnome-session-2.26.0/gnome-session/gs-idle-monitor.c
+--- gnome-session-2.26.0/gnome-session/gs-idle-monitor.c.alarm-warning	2009-04-05 01:31:17.238537050 -0400
++++ gnome-session-2.26.0/gnome-session/gs-idle-monitor.c	2009-04-05 01:32:57.511751140 -0400
+@@ -181,6 +181,10 @@ handle_alarm_notify_event (GSIdleMonitor
+         gboolean            res;
+         gboolean            condition;
+ 
++        if (alarm_event->state == XSyncAlarmDestroyed) {
++                return;
++        }
++
+         watch = find_watch_for_alarm (monitor, alarm_event->alarm);
+ 
+         if (watch == NULL) {
