@@ -9,8 +9,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.26.0
-Release: 2%{?dist}
+Version: 2.26.0.90
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.26/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -62,7 +62,6 @@ Requires(pre): GConf2 >= %{gconf2_version}
 Requires(post): GConf2 >= %{gconf2_version}
 Requires(preun): GConf2 >= %{gconf2_version}
 
-Patch0: gnome-session-alarm-warning.patch
 
 %description
 gnome-session manages a GNOME desktop or GDM login session. It starts up
@@ -78,7 +77,6 @@ Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
-%patch0 -p1 -b .alarm-warning
 
 #workaround broken perl-XML-Parser on 64bit arches
 export PERL5LIB=/usr/lib64/perl5/vendor_perl/5.8.2 perl
@@ -177,6 +175,9 @@ fi
 
 
 %changelog
+* Wed Apr  8 2009 Matthias Clasen  <mclasen@redhat.com> - 2.26.0.90-1
+- Update to 2.26.0.90
+
 * Sun Apr  5 2009 Matthias Clasen  <mclasen@redhat.com> - 2.26.0-2
 - Avoid some warnings (#493688)
 
