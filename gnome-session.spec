@@ -10,11 +10,14 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.26.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.26/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
 Source2: gnome.desktop
+
+# https://bugzilla.redhat.com/show_bug.cgi?id=497619
+Patch0: polkit1.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -77,11 +80,10 @@ Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
+%patch0 -p1 -b .polkit1
 
 #workaround broken perl-XML-Parser on 64bit arches
 export PERL5LIB=/usr/lib64/perl5/vendor_perl/5.8.2 perl
-
-sed -i -e 's/GNOME_COMPILE_WARNINGS.*//' configure.in
 
 autoreconf -i -f
 
@@ -175,6 +177,9 @@ fi
 
 
 %changelog
+* Tue May 12 2009 Matthias Clasen  <mclasen@redhat.com> - 2.26.1-2
+- Port to PolicyKit 1
+
 * Tue Apr 14 2009 Matthias Clasen  <mclasen@redhat.com> - 2.26.1-1
 - Update to 2.26.1
 - See http://download.gnome.org/sources/gnome-session/2.26/gnome-session-2.26.1.news
