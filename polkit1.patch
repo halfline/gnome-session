@@ -1,6 +1,6 @@
 diff -up gnome-session-2.26.1/configure.in.polkit1 gnome-session-2.26.1/configure.in
 --- gnome-session-2.26.1/configure.in.polkit1	2009-04-14 11:31:47.000000000 -0400
-+++ gnome-session-2.26.1/configure.in	2009-05-14 10:34:17.929350281 -0400
++++ gnome-session-2.26.1/configure.in	2009-06-12 19:51:49.223577026 -0400
 @@ -31,7 +31,7 @@ AC_ARG_WITH(at-spi-registryd-directory,
  AT_SPI_REGISTRYD_DIR=$with_at_spi_registryd_directory
  AC_SUBST(AT_SPI_REGISTRYD_DIR)
@@ -42,7 +42,7 @@ diff -up gnome-session-2.26.1/configure.in.polkit1 gnome-session-2.26.1/configur
  dnl GConf Checks
 diff -up gnome-session-2.26.1/gnome-session/gsm-consolekit.c.polkit1 gnome-session-2.26.1/gnome-session/gsm-consolekit.c
 --- gnome-session-2.26.1/gnome-session/gsm-consolekit.c.polkit1	2009-04-14 11:31:45.000000000 -0400
-+++ gnome-session-2.26.1/gnome-session/gsm-consolekit.c	2009-05-13 23:47:00.667014605 -0400
++++ gnome-session-2.26.1/gnome-session/gsm-consolekit.c	2009-06-12 19:57:53.643580353 -0400
 @@ -31,10 +31,6 @@
  #include <dbus/dbus-glib.h>
  #include <dbus/dbus-glib-lowlevel.h>
@@ -494,7 +494,7 @@ diff -up gnome-session-2.26.1/gnome-session/gsm-consolekit.c.polkit1 gnome-sessi
                                                G_TYPE_INVALID,
 -                                              /* return values: */
 -                                              G_TYPE_STRING, &type,
-+                                              &can_restart,
++                                              G_TYPE_BOOLEAN, &can_restart,
                                                G_TYPE_INVALID);
  
 -        /* error is bad: we consider there's another user */
@@ -723,7 +723,7 @@ diff -up gnome-session-2.26.1/gnome-session/gsm-consolekit.c.polkit1 gnome-sessi
 +                                              INT_MAX,
 +                                              error,
 +                                              G_TYPE_INVALID,
-+                                              &can_stop,
++                                              G_TYPE_BOOLEAN, &can_stop,
 +                                              G_TYPE_INVALID);
  
 -gboolean
@@ -742,7 +742,7 @@ diff -up gnome-session-2.26.1/gnome-session/gsm-consolekit.c.polkit1 gnome-sessi
  gchar *
 diff -up gnome-session-2.26.1/gnome-session/Makefile.am.polkit1 gnome-session-2.26.1/gnome-session/Makefile.am
 --- gnome-session-2.26.1/gnome-session/Makefile.am.polkit1	2009-04-14 11:31:45.000000000 -0400
-+++ gnome-session-2.26.1/gnome-session/Makefile.am	2009-05-14 10:34:41.744457421 -0400
++++ gnome-session-2.26.1/gnome-session/Makefile.am	2009-06-12 19:51:49.228578549 -0400
 @@ -16,7 +16,6 @@ INCLUDES =					\
  	$(ICE_CFLAGS)				\
  	$(GNOME_SESSION_CFLAGS)			\

@@ -10,7 +10,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.26.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.26/%{name}-%{version}.tar.bz2
 Source1: redhat-default-session
@@ -177,6 +177,9 @@ fi
 
 
 %changelog
+* Fri Jun 12 2009 Matthias Clasen  <mclasen@redhat.com> - 2.26.1-3
+- Fix some oversights in the PolicyKit port
+
 * Tue May 12 2009 Matthias Clasen  <mclasen@redhat.com> - 2.26.1-2
 - Port to PolicyKit 1
 
