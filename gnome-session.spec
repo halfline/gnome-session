@@ -16,7 +16,8 @@ Source0: http://download.gnome.org/sources/gnome-session/2.26/%{name}-%{version}
 Source1: redhat-default-session
 Source2: gnome.desktop
 
-# https://bugzilla.redhat.com/show_bug.cgi?id=497619
+# http://bugzilla.redhat.com/show_bug.cgi?id=497619
+# http://bugzilla.gnome.org/show_bug.cgi?id=585614
 Patch0: polkit1.patch
 
 License: GPLv2+
