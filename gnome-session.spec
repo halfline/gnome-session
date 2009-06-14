@@ -160,6 +160,7 @@ fi
 %dir %{_datadir}/gnome-session
 %{_datadir}/gnome-session/session-properties.glade
 %{_datadir}/gnome-session/gsm-inhibit-dialog.glade
+%{_datadir}/gnome/autostart
 %{_bindir}/*
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
