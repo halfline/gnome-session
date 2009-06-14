@@ -10,10 +10,9 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.26.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.26/%{name}-%{version}.tar.bz2
-Source1: redhat-default-session
 Source2: gnome.desktop
 
 # http://bugzilla.redhat.com/show_bug.cgi?id=497619
@@ -108,13 +107,9 @@ desktop-file-install --vendor gnome --delete-original                   \
 ./mkinstalldirs ${RPM_BUILD_ROOT}%{_datadir}/xsessions/
 install -m 644 %{SOURCE2} ${RPM_BUILD_ROOT}%{_datadir}/xsessions/
 
-/bin/rm -f $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
-
 /bin/rm -f $RPM_BUILD_ROOT%{_datadir}/gnome/autostart/gnome-login-sound.desktop
 /bin/rm -f $RPM_BUILD_ROOT%{_datadir}/gnome/shutdown/gnome-logout-sound.sh
 /bin/rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-session/helpers/gnome-login-sound
-
-install -m 644 %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/gnome/default.session
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
 
@@ -161,7 +156,6 @@ fi
 %doc %dir %{_datadir}/doc/%{name}-%{version}/dbus
 %doc %{_datadir}/doc/%{name}-%{version}/dbus/*
 %doc %{_mandir}/man*/*
-%{_datadir}/gnome
 %{_datadir}/applications/gnome-session-properties.desktop
 %dir %{_datadir}/gnome-session
 %{_datadir}/gnome-session/session-properties.glade
@@ -178,6 +172,9 @@ fi
 
 
 %changelog
+* Sun Jun 14 2009 Matthias Clasen  <mclasen@redhat.com> - 2.26.1-4
+- Drop unused files
+
 * Fri Jun 12 2009 Matthias Clasen  <mclasen@redhat.com> - 2.26.1-3
 - Fix some oversights in the PolicyKit port
 
