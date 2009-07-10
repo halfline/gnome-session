@@ -10,7 +10,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.26.1
-Release: 4%{?dist}
+Release: 5%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.26/%{name}-%{version}.tar.bz2
 Source2: gnome.desktop
@@ -18,6 +18,9 @@ Source2: gnome.desktop
 # http://bugzilla.redhat.com/show_bug.cgi?id=497619
 # http://bugzilla.gnome.org/show_bug.cgi?id=585614
 Patch0: polkit1.patch
+
+# http://bugzilla.gnome.org/show_bug.cgi?id=588247
+Patch1: watch-spew.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -81,6 +84,7 @@ Desktop file to add GNOME to display manager session menu.
 %prep
 %setup -q
 %patch0 -p1 -b .polkit1
+%patch1 -p1 -b .watch-spew
 
 #workaround broken perl-XML-Parser on 64bit arches
 export PERL5LIB=/usr/lib64/perl5/vendor_perl/5.8.2 perl
@@ -173,6 +177,9 @@ fi
 
 
 %changelog
+* Fri Jul 10 2009 Matthias Clasen  <mclasen@redhat.com> - 2.26.1-5
+- Avoid pointless warnings
+
 * Sun Jun 14 2009 Matthias Clasen  <mclasen@redhat.com> - 2.26.1-4
 - Drop unused files
 
