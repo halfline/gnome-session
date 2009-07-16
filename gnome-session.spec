@@ -81,8 +81,7 @@ Desktop file to add GNOME to display manager session menu.
 %setup -q
 %patch0 -p1 -b .polkit1
 
-#workaround broken perl-XML-Parser on 64bit arches
-export PERL5LIB=/usr/lib64/perl5/vendor_perl/5.8.2 perl
+echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
 autoreconf -i -f
 
@@ -157,11 +156,11 @@ fi
 %doc %{_mandir}/man*/*
 %{_datadir}/applications/gnome-session-properties.desktop
 %dir %{_datadir}/gnome-session
-%{_datadir}/gnome-session/session-properties.glade
-%{_datadir}/gnome-session/gsm-inhibit-dialog.glade
 %{_datadir}/gnome/autostart
 %{_bindir}/*
 %{_sysconfdir}/gconf/schemas/*.schemas
+%{_datadir}/gnome-session/gsm-inhibit-dialog.ui
+%{_datadir}/gnome-session/session-properties.ui
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 %dir %{_libdir}/gnome-session
