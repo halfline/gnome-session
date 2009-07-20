@@ -10,7 +10,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.27.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.27/%{name}-%{version}.tar.bz2
 Source2: gnome.desktop
@@ -31,6 +31,9 @@ Requires: control-center
 
 # pull in dbus-x11, see bug 209924
 Requires: dbus-x11
+
+# we need an authentication agent in the session
+Requires: polkit-gnome
 
 ## we conflict with gdm that contains the GNOME gdm xsession
 Conflicts: gdm < 1:2.6.0.8-5
@@ -171,6 +174,9 @@ fi
 
 
 %changelog
+* Mon Jul 20 2009 Matthias Clasen  <mclasen@redhat.com> - 2.27.4-2
+- Require polkit-gnome, we need an authentication agent in the session
+
 * Wed Jul 15 2009 Matthias Clasen  <mclasen@redhat.com> - 2.27.4-1
 - Update to 2.27.4
 
