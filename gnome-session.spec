@@ -10,7 +10,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.27.4
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.27/%{name}-%{version}.tar.bz2
 Source2: gnome.desktop
@@ -174,6 +174,9 @@ fi
 
 
 %changelog
+* Fri Jul 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.27.4-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
+
 * Mon Jul 20 2009 Matthias Clasen  <mclasen@redhat.com> - 2.27.4-2
 - Require polkit-gnome, we need an authentication agent in the session
 
