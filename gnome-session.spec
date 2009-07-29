@@ -9,8 +9,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.27.4
-Release: 3%{?dist}
+Version: 2.27.5
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.27/%{name}-%{version}.tar.bz2
 Source2: gnome.desktop
@@ -174,6 +174,10 @@ fi
 
 
 %changelog
+* Tue Jul 28 2009 Matthias Clasen  <mclasen@redhat.com> - 2.27.5-1
+- Update to 2.27.5
+
+:a
 * Fri Jul 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.27.4-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 
