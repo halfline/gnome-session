@@ -62,6 +62,7 @@ BuildRequires: gettext
 BuildRequires: libX11-devel libXt-devel
 BuildRequires: libXtst-devel
 BuildRequires: xmlto
+BuildRequires: DeviceKit-power-devel
 
 Requires(pre): GConf2 >= %{gconf2_version}
 Requires(post): GConf2 >= %{gconf2_version}
