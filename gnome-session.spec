@@ -10,7 +10,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.27.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.27/%{name}-%{version}.tar.bz2
 Source2: gnome.desktop
@@ -34,6 +34,8 @@ Requires: dbus-x11
 
 # we need an authentication agent in the session
 Requires: polkit-gnome
+# and we want good defaults
+Requires: polkit-desktop-policy
 
 ## we conflict with gdm that contains the GNOME gdm xsession
 Conflicts: gdm < 1:2.6.0.8-5
@@ -175,10 +177,12 @@ fi
 
 
 %changelog
+* Thu Aug 13 2009 Matthias Clasen  <mclasen@redhat.com> - 2.27.5-2
+- Require polkit-desktop-policy
+
 * Tue Jul 28 2009 Matthias Clasen  <mclasen@redhat.com> - 2.27.5-1
 - Update to 2.27.5
 
-:a
 * Fri Jul 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.27.4-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 
