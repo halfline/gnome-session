@@ -15,10 +15,6 @@ URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.27/%{name}-%{version}.tar.bz2
 Source2: gnome.desktop
 
-# http://bugzilla.redhat.com/show_bug.cgi?id=497619
-# http://bugzilla.gnome.org/show_bug.cgi?id=585614
-Patch0: polkit1.patch
-
 License: GPLv2+
 Group: User Interface/Desktops
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -85,7 +81,6 @@ Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
-%patch0 -p1 -b .polkit1
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
