@@ -113,9 +113,6 @@ install -m 644 %{SOURCE2} ${RPM_BUILD_ROOT}%{_datadir}/xsessions/
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
 
-## remove splash screen
-rm -r $RPM_BUILD_ROOT%{_datadir}/pixmaps/splash
-
 cp AUTHORS COPYING NEWS README $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}
 
 %find_lang %{po_package}
