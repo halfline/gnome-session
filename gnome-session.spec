@@ -9,8 +9,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.27.5
-Release: 2%{?dist}
+Version: 2.27.92
+Release: 1%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.27/%{name}-%{version}.tar.bz2
 Source2: gnome.desktop
@@ -177,6 +177,9 @@ fi
 
 
 %changelog
+* Wed Sep  9 2009 Matthias Clasen  <mclasen@redhat.com> - 2.27.92-1
+- Update to 2.27.92
+
 * Thu Aug 13 2009 Matthias Clasen  <mclasen@redhat.com> - 2.27.5-2
 - Require polkit-desktop-policy
 
