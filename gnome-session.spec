@@ -165,7 +165,6 @@ fi
 %dir %{_libdir}/gnome-session
 %dir %{_libdir}/gnome-session/helpers
 %{_libdir}/gnome-session/helpers/*
-%{_sysconfdir}/xdg/autostart/at-spi-registryd-wrapper.desktop
 %{_sysconfdir}/xdg/autostart/gnome-settings-daemon-helper.desktop
 
 
