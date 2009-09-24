@@ -9,10 +9,10 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.27.92
+Version: 2.28.0
 Release: 1%{?dist}
 URL: http://www.gnome.org
-Source0: http://download.gnome.org/sources/gnome-session/2.27/%{name}-%{version}.tar.bz2
+Source0: http://download.gnome.org/sources/gnome-session/2.28/%{name}-%{version}.tar.bz2
 Source2: gnome.desktop
 
 License: GPLv2+
@@ -169,6 +169,9 @@ fi
 
 
 %changelog
+* Wed Sep 23 2009 Matthias Clasen  <mclasen@redhat.com> - 2.28.0-1
+- Update to 2.28.0
+
 * Wed Sep  9 2009 Matthias Clasen  <mclasen@redhat.com> - 2.27.92-1
 - Update to 2.27.92
 
