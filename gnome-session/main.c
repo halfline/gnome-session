@@ -36,6 +36,7 @@
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus-glib-bindings.h>
 #include <dbus/dbus-glib-lowlevel.h>
+#include <libnotify/notify.h>
 
 #include "gdm-signal-handler.h"
 #include "gdm-log.h"
@@ -466,6 +467,8 @@ main (int argc, char **argv)
                 g_print ("%s %s\n", argv [0], VERSION);
                 exit (1);
         }
+
+        notify_init ("GNOME session manager");
 
         gdm_log_init ();
         gdm_log_set_debug (debug);

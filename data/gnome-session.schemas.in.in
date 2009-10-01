@@ -61,6 +61,36 @@
         </locale>
       </schema>
       <schema>
+          <key>/schemas/desktop/gnome/session/max_idle_action</key>
+          <applyto>/desktop/gnome/session/max_idle_action</applyto>
+          <owner>gnome</owner>
+          <type>string</type>
+          <default></default>
+          <locale name="C">
+             <short>The action to take after the maximum idle time</short>
+             <long>
+               The name of the action to take when the maximum allowed
+               idle time has been reached.  The Delay is specified in
+               the "max_idle_time" key.  Allowed values are: logout,
+               forced-logout.  An empty string disables the action.
+             </long>
+          </locale>
+      </schema>
+      <schema>
+        <key>/schemas/desktop/gnome/session/max_idle_time</key>
+        <applyto>/desktop/gnome/session/max_idle_time</applyto>
+        <owner>gnome</owner>
+        <type>int</type>
+        <default>120</default>
+        <locale name="C">
+          <short>Amount of time a user can remain idle</short>
+          <long>
+            The number of minutes a user can remain idle before the
+            max_idle_action is automatically taken.
+          </long>
+        </locale>
+      </schema>
+      <schema>
          <key>/schemas/desktop/gnome/session/default_session</key>
          <applyto>/desktop/gnome/session/default_session</applyto>
          <owner>gnome</owner>

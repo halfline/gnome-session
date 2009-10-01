@@ -66,6 +66,7 @@ enum {
         PROP_STATUS_TEXT,
         PROP_IDLE_ENABLED,
         PROP_IDLE_TIMEOUT,
+        PROP_SCREENSAVER_ACTIVE,
 };
 
 
@@ -187,6 +188,7 @@ on_screensaver_active_changed (DBusGProxy  *proxy,
                 presence->priv->screensaver_active = is_active;
                 reset_idle_watch (presence);
                 set_session_idle (presence, is_active);
+                g_object_notify (G_OBJECT (presence), "screensaver-active");
         }
 }
 
@@ -439,6 +441,9 @@ gsm_presence_get_property (GObject    *object,
         case PROP_IDLE_TIMEOUT:
                 g_value_set_uint (value, self->priv->idle_timeout);
                 break;
+        case PROP_SCREENSAVER_ACTIVE:
+                g_value_set_boolean (value, self->priv->screensaver_active);
+                break;
         default:
                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
                 break;
@@ -532,6 +537,13 @@ gsm_presence_class_init (GsmPresenceClass *klass)
                                                             G_MAXINT,
                                                             300000,
                                                             G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
+        g_object_class_install_property (object_class,
+                                         PROP_SCREENSAVER_ACTIVE,
+                                         g_param_spec_boolean ("screensaver-active",
+                                                               NULL,
+                                                               NULL,
+                                                               FALSE,
+                                                               G_PARAM_READABLE));
 
         dbus_g_object_type_install_info (GSM_TYPE_PRESENCE, &dbus_glib_gsm_presence_object_info);
         dbus_g_error_domain_register (GSM_PRESENCE_ERROR, NULL, GSM_PRESENCE_TYPE_ERROR);
