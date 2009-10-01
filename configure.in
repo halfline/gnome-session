@@ -42,6 +42,7 @@ LIBGNOMEUI_REQUIRED=2.2.0
 GTK_REQUIRED=2.14.0
 DBUS_GLIB_REQUIRED=0.76
 DEVKIT_POWER_REQUIRED=008
+LIBNOTIFY_REQUIRED=0.4.3
 
 dnl ====================================================================
 dnl Dependency Checks
@@ -54,6 +55,7 @@ PKG_CHECK_MODULES(GNOME_SESSION,
         gtk+-2.0 >= $GTK_REQUIRED
         dbus-glib-1 >= $DBUS_GLIB_REQUIRED
         devkit-power-gobject >= $DEVKIT_POWER_REQUIRED
+        libnotify >= $LIBNOTIFY_REQUIRED
 )
 
 PKG_CHECK_MODULES(SESSION_PROPERTIES,
