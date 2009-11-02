@@ -10,7 +10,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.28.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.28/%{name}-%{version}.tar.bz2
 Source2: gnome.desktop
@@ -67,6 +67,12 @@ Requires(pre): GConf2 >= %{gconf2_version}
 Requires(post): GConf2 >= %{gconf2_version}
 Requires(preun): GConf2 >= %{gconf2_version}
 
+# https://bugzilla.gnome.org/show_bug.cgi?id=592520
+#Patch0: unresponsive-timeout.patch
+# https://bugzilla.gnome.org/show_bug.cgi?id=592519
+#Patch1: show-lock.patch
+# https://bugzilla.gnome.org/show_bug.cgi?id=598211
+Patch2: xsmp-stop.patch
 
 %description
 gnome-session manages a GNOME desktop or GDM login session. It starts up
@@ -82,6 +88,9 @@ Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
+#%patch0 -p1 -b .unresponsive-timeout
+#%patch1 -p1 -b .show-lock
+%patch2 -p1 -b .xsmp-stop
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
@@ -169,6 +178,9 @@ fi
 
 
 %changelog
+* Fri Oct 23 2009 Matthias Clasen  <mclasen@redhat.com> - 2.28.0-2
+- Avoid a crash on certain xsmp error conditions
+
 * Wed Sep 23 2009 Matthias Clasen  <mclasen@redhat.com> - 2.28.0-1
 - Update to 2.28.0
 

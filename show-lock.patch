@@ -1,0 +1,114 @@
+diff -up gnome-session-2.28.0/gnome-session/gsm-inhibit-dialog.c.show-lock gnome-session-2.28.0/gnome-session/gsm-inhibit-dialog.c
+--- gnome-session-2.28.0/gnome-session/gsm-inhibit-dialog.c.show-lock	2009-08-25 04:03:42.000000000 -0400
++++ gnome-session-2.28.0/gnome-session/gsm-inhibit-dialog.c	2009-10-14 10:50:42.337489281 -0400
+@@ -71,13 +71,16 @@ struct GsmInhibitDialogPrivate
+         gboolean           have_xrender;
+         int                xrender_event_base;
+         int                xrender_error_base;
++        gboolean           show_lock;
++        GtkWidget         *lock_button;
+ };
+ 
+ enum {
+         PROP_0,
+         PROP_ACTION,
+         PROP_INHIBITOR_STORE,
+-        PROP_CLIENT_STORE
++        PROP_CLIENT_STORE,
++        PROP_SHOW_LOCK
+ };
+ 
+ enum {
+@@ -134,6 +137,15 @@ gsm_inhibit_dialog_set_action (GsmInhibi
+         dialog->priv->action = action;
+ }
+ 
++static void
++gsm_inhibit_dialog_set_show_lock (GsmInhibitDialog *dialog,
++                                  gboolean          show_lock)
++{
++        dialog->priv->show_lock = show_lock;
++        gtk_widget_set_no_show_all (dialog->priv->lock_button, TRUE);
++        gtk_widget_set_visible (dialog->priv->lock_button, show_lock);
++}
++
+ static gboolean
+ find_inhibitor (GsmInhibitDialog *dialog,
+                 const char       *id,
+@@ -809,6 +821,9 @@ gsm_inhibit_dialog_set_property (GObject
+         case PROP_CLIENT_STORE:
+                 gsm_inhibit_dialog_set_client_store (dialog, g_value_get_object (value));
+                 break;
++        case PROP_SHOW_LOCK:
++                gsm_inhibit_dialog_set_show_lock (dialog, g_value_get_boolean (value));
++                break;
+         default:
+                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+                 break;
+@@ -833,6 +848,9 @@ gsm_inhibit_dialog_get_property (GObject
+         case PROP_CLIENT_STORE:
+                 g_value_set_object (value, dialog->priv->clients);
+                 break;
++        case PROP_SHOW_LOCK:
++                g_value_set_boolean (value, dialog->priv->show_lock);
++                break;
+         default:
+                 G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+                 break;
+@@ -920,9 +938,10 @@ setup_dialog (GsmInhibitDialog *dialog)
+                 break;
+         }
+ 
+-        gtk_dialog_add_button (GTK_DIALOG (dialog),
+-                               _("Lock Screen"),
+-                               DIALOG_RESPONSE_LOCK_SCREEN);
++        dialog->priv->lock_button =
++                gtk_dialog_add_button (GTK_DIALOG (dialog),
++                                       _("Lock Screen"),
++                                       DIALOG_RESPONSE_LOCK_SCREEN);
+         gtk_dialog_add_button (GTK_DIALOG (dialog),
+                                _("Cancel"),
+                                GTK_RESPONSE_CANCEL);
+@@ -1006,6 +1025,7 @@ gsm_inhibit_dialog_constructor (GType   
+         setup_dialog (dialog);
+ 
+         gtk_widget_show_all (GTK_WIDGET (dialog));
++        gsm_inhibit_dialog_set_show_lock (dialog, TRUE);
+ 
+         return G_OBJECT (dialog);
+ }
+@@ -1082,6 +1102,14 @@ gsm_inhibit_dialog_class_init (GsmInhibi
+                                                               GSM_TYPE_STORE,
+                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
+ 
++        g_object_class_install_property (object_class,
++                                         PROP_SHOW_LOCK,
++                                         g_param_spec_boolean ("show-lock",
++                                                               NULL,
++                                                               NULL,
++                                                               TRUE,
++                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
++
+         g_type_class_add_private (klass, sizeof (GsmInhibitDialogPrivate));
+ }
+ 
+@@ -1094,6 +1122,8 @@ gsm_inhibit_dialog_init (GsmInhibitDialo
+ 
+         dialog->priv = GSM_INHIBIT_DIALOG_GET_PRIVATE (dialog);
+ 
++        dialog->priv->show_lock = TRUE;
++
+         dialog->priv->xml = gtk_builder_new ();
+         gtk_builder_set_translation_domain (dialog->priv->xml, GETTEXT_PACKAGE);
+ 
+diff -up gnome-session-2.28.0/gnome-session/gsm-manager.c.show-lock gnome-session-2.28.0/gnome-session/gsm-manager.c
+--- gnome-session-2.28.0/gnome-session/gsm-manager.c.show-lock	2009-10-14 10:50:42.313467505 -0400
++++ gnome-session-2.28.0/gnome-session/gsm-manager.c	2009-10-14 10:51:32.889465604 -0400
+@@ -1200,6 +1200,7 @@ query_end_session_complete (GsmManager *
+                           G_CALLBACK (inhibit_dialog_response),
+                           manager);
+         if (! gsm_manager_has_responsive_inhibitor (manager)) {
++                g_object_set (manager->priv->inhibit_dialog, "show-lock", FALSE, NULL);
+                 manager->priv->inhibit_timeout_id =
+                         g_timeout_add_seconds (120, on_inhibit_dialog_timeout, manager);
+         }
