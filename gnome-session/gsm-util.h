@@ -41,6 +41,9 @@ gboolean    gsm_util_text_is_blank                  (const char *str);
 
 void        gsm_util_init_error                     (gboolean    fatal,
                                                      const char *format, ...);
+void        gsm_util_nag_message                    (const char *key,
+                                                     gboolean    nag_only_once,
+                                                     const char *format, ...);
 
 char *      gsm_util_generate_startup_id            (void);
 
