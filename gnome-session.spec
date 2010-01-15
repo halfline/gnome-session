@@ -207,7 +207,6 @@ fi
 * Thu Aug 13 2009 Matthias Clasen  <mclasen@redhat.com> - 2.27.5-2
 - Require polkit-desktop-policy
 
->>>>>>> 1.254
 * Tue Jul 28 2009 Matthias Clasen  <mclasen@redhat.com> - 2.27.5-1
 - Update to 2.27.5
 
