@@ -3,6 +3,17 @@
    <schemalist>
 
       <schema>
+         <key>/schemas/apps/gnome-session/options/show_root_warning</key>
+         <applyto>/apps/gnome-session/options/show_root_warning</applyto>
+         <owner>gnome</owner>
+         <type>bool</type>
+         <default>true</default>
+         <locale name="C">
+            <short>Warn user against running gnome-session from root account</short>
+            <long>If a user tries to login as root, show a dialog telling them it's a bad idea</long>
+         </locale>
+      </schema>
+      <schema>
          <key>/schemas/apps/gnome-session/options/show_splash_screen</key>
          <applyto>/apps/gnome-session/options/show_splash_screen</applyto>
          <owner>gnome</owner>

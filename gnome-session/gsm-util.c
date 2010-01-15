@@ -35,6 +35,7 @@
 #include <dbus/dbus-glib.h>
 
 #include "gsm-util.h"
+#include "gsm-gconf.h"
 
 static gchar *_saved_session_dir = NULL;
 
@@ -370,6 +371,69 @@ gsm_util_init_error (gboolean    fatal,
         if (fatal) {
                 gtk_main_quit ();
         }
+}
+
+/**
+ * gsm_util_nag_message:
+ * @key: gconf configuration key to save user's "don't nag me" state
+ * @nag_only_once: Initial state of the "don't nag me" checkbox
+ * @format: printf-style error message format
+ * @...: error message args
+ *
+ * Displays a nag message to the user along with a check button that says something
+ * like "Don't show this again". If @nag_only_once is %TRUE, the check button will
+ * default to checked.  The state of the dialog is stored as a boolean at the
+ * gconf path specified by @key
+ *
+ * This should be called for informative messages that the user may or may
+ * not care about.
+ **/
+void
+gsm_util_nag_message (const char *key,
+                      gboolean    nag_only_once,
+                      const char *format, ...)
+{
+        GtkWidget *dialog;
+        GtkWidget *content_area;
+        GtkWidget *check_button;
+        char      *msg;
+        va_list    args;
+        GConfClient *client;
+        gboolean should_nag;
+
+        client = gconf_client_get_default ();
+        should_nag = gconf_client_get_bool (client, key, NULL);
+
+        if (!should_nag) {
+                goto out;
+        }
+
+        va_start (args, format);
+        msg = g_strdup_vprintf (format, args);
+        va_end (args);
+
+        dialog = gtk_message_dialog_new (NULL, 0, GTK_MESSAGE_ERROR,
+                                         GTK_BUTTONS_CLOSE, "%s", msg);
+
+        g_free (msg);
+
+        content_area = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
+        check_button = gtk_check_button_new_with_label (_("Do not show me this again"));
+
+        gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (check_button), nag_only_once != FALSE);
+        gtk_widget_show (check_button);
+
+        gtk_container_add (GTK_CONTAINER (content_area), check_button);
+
+        gtk_window_set_position (GTK_WINDOW (dialog), GTK_WIN_POS_CENTER);
+        gtk_dialog_run (GTK_DIALOG (dialog));
+
+        should_nag = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (check_button)) == FALSE;
+        gconf_client_set_bool (client, key, should_nag != FALSE, NULL);
+        gtk_widget_destroy (dialog);
+
+out:
+        g_object_unref (client);
 }
 
 /**
