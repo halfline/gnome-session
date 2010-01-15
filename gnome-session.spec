@@ -10,7 +10,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.28.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 URL: http://www.gnome.org
 Source0: http://download.gnome.org/sources/gnome-session/2.28/%{name}-%{version}.tar.bz2
 Source2: gnome.desktop
@@ -80,6 +80,9 @@ Patch2: xsmp-stop.patch
 # https://bugzilla.gnome.org/show_bug.cgi?id=597030
 Patch3: 0001-Add-ability-to-perform-actions-after-a-period-of-idl.patch
 
+# https://bugzilla.gnome.org/show_bug.cgi?id=607094
+Patch4: nag-root-user.patch
+
 %description
 gnome-session manages a GNOME desktop or GDM login session. It starts up
 the other core GNOME components and handles logout and saving the session.
@@ -98,6 +101,7 @@ Desktop file to add GNOME to display manager session menu.
 #%patch1 -p1 -b .show-lock
 %patch2 -p1 -b .xsmp-stop
 %patch3 -p1 -b .max-idle
+%patch4 -p1 -b .nag-root-user
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
@@ -185,6 +189,9 @@ fi
 
 
 %changelog
+* Fri Jan 15 2010 Ray Strode <rstrode@redhat.com> - 2.28.0-4
+- Nag user if they try to log in as root
+
 * Fri Nov  6 2009 Matthias Clasen  <mclasen@redhat.com> - 2.28.0-3
 - Add ability to perform actions after a period of idleness
 
@@ -200,6 +207,7 @@ fi
 * Thu Aug 13 2009 Matthias Clasen  <mclasen@redhat.com> - 2.27.5-2
 - Require polkit-desktop-policy
 
+>>>>>>> 1.254
 * Tue Jul 28 2009 Matthias Clasen  <mclasen@redhat.com> - 2.27.5-1
 - Update to 2.27.5
 
