@@ -92,6 +92,8 @@
 
 #define KEY_SLEEP_LOCK            "/apps/gnome-screensaver/lock_enabled"
 
+#define KEY_SHOW_ROOT_WARNING     "/apps/gnome-session/options/show_root_warning"
+
 #define IS_STRING_EMPTY(x) ((x)==NULL||(x)[0]=='\0')
 
 typedef enum
@@ -490,6 +492,26 @@ end_phase (GsmManager *manager)
         if (manager->priv->phase_timeout_id > 0) {
                 g_source_remove (manager->priv->phase_timeout_id);
                 manager->priv->phase_timeout_id = 0;
+        }
+
+        /* If we just finished the phase before the phase where applications
+         * are started, then nag the user if they're root.  We could do it earlier,
+         * but that would mean showing a bare dialog with nothing around it
+         * (and potentially without decorations, font settings loaded, etc).  We
+         * could do it later, but that would be mean things loading around it and
+         * covering it up, etc.
+         */
+        if (manager->priv->phase + 1 == GSM_MANAGER_PHASE_APPLICATION) {
+                if (getuid () == 0) {
+                        gsm_util_nag_message (KEY_SHOW_ROOT_WARNING, FALSE,
+                                              _("You are currently trying to run as the "
+                                                "root super user.  The super user is a "
+                                                "specialized account that is not designed "
+                                                "to run a normal user session.  Various programs "
+                                                "will not function properly, and actions "
+                                                "performed under this account can cause unrecoverable "
+                                                "damage to the operating system."));
+                }
         }
 
         switch (manager->priv->phase) {
