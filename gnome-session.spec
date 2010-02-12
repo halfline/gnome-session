@@ -70,13 +70,6 @@ Requires(pre): GConf2 >= %{gconf2_version}
 Requires(post): GConf2 >= %{gconf2_version}
 Requires(preun): GConf2 >= %{gconf2_version}
 
-# https://bugzilla.gnome.org/show_bug.cgi?id=592520
-#Patch0: unresponsive-timeout.patch
-# https://bugzilla.gnome.org/show_bug.cgi?id=592519
-#Patch1: show-lock.patch
-# https://bugzilla.gnome.org/show_bug.cgi?id=598211
-Patch2: xsmp-stop.patch
-
 # https://bugzilla.gnome.org/show_bug.cgi?id=597030
 Patch3: 0001-Add-ability-to-perform-actions-after-a-period-of-idl.patch
 
@@ -97,9 +90,6 @@ Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
-#%patch0 -p1 -b .unresponsive-timeout
-#%patch1 -p1 -b .show-lock
-%patch2 -p1 -b .xsmp-stop
 %patch3 -p1 -b .max-idle
 %patch4 -p1 -b .nag-root-user
 
