@@ -103,7 +103,7 @@ autoreconf -i -f
 %build
 
 %configure --enable-docbook-docs --docdir=%{_datadir}/doc/%{name}-%{version}
-make -j1 V=1
+make %{?_smp_mflags}
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -175,9 +175,6 @@ fi
 %{_datadir}/gnome-session/session-properties.ui
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
-%dir %{_libdir}/gnome-session
-%dir %{_libdir}/gnome-session/helpers
-%{_libdir}/gnome-session/helpers/*
 %{_sysconfdir}/xdg/autostart/gnome-settings-daemon-helper.desktop
 
 
