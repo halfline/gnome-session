@@ -176,6 +176,9 @@ fi
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 %{_sysconfdir}/xdg/autostart/gnome-settings-daemon-helper.desktop
+%dir %{_libexecdir}/gnome-session
+%dir %{_libexecdir}/gnome-session/helpers
+%{_libexecdir}/gnome-session/helpers/gnome-settings-daemon-helper
 
 
 %changelog
