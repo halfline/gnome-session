@@ -103,7 +103,7 @@ autoreconf -i -f
 %build
 
 %configure --enable-docbook-docs --docdir=%{_datadir}/doc/%{name}-%{version}
-make %{?_smp_mflags}
+make %{?_smp_mflags} V=1
 
 %install
 rm -rf $RPM_BUILD_ROOT
