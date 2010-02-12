@@ -76,6 +76,8 @@ Patch3: 0001-Add-ability-to-perform-actions-after-a-period-of-idl.patch
 # https://bugzilla.gnome.org/show_bug.cgi?id=607094
 Patch4: nag-root-user.patch
 
+Patch5: gnome-session-libs.patch
+
 %description
 gnome-session manages a GNOME desktop or GDM login session. It starts up
 the other core GNOME components and handles logout and saving the session.
@@ -92,6 +94,7 @@ Desktop file to add GNOME to display manager session menu.
 %setup -q
 %patch3 -p1 -b .max-idle
 %patch4 -p1 -b .nag-root-user
+%patch5 -p1 -b .libs
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 

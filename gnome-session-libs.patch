@@ -1,0 +1,12 @@
+diff -up gnome-session-2.29.6/configure.in.libs gnome-session-2.29.6/configure.in
+--- gnome-session-2.29.6/configure.in.libs	2010-02-11 19:18:01.736273150 -0500
++++ gnome-session-2.29.6/configure.in	2010-02-11 19:19:29.621272995 -0500
+@@ -165,6 +165,8 @@ AC_CHECK_LIB(Xau, XauFileName, [X_LIBS="
+ *** Can't find the Xauth library. It is needed to compile gnome-session.])],
+ 	     $X_LIBS)
+ 
++X_LIBS="$X_LIBS -lXext"
++
+ AC_SUBST(X_LIBS)
+ 
+ dnl ====================================================================
