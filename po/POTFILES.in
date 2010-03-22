@@ -6,9 +6,11 @@ capplet/gsp-app.c
 capplet/main.c
 compat/gnome-settings-daemon-helper.c
 compat/gnome-settings-daemon-helper.desktop.in.in.in
+data/gnome-custom-session.desktop.in
 data/gnome.desktop.in
 data/gnome-session.schemas.in.in
 data/gnome-wm.desktop.in.in
+[type: gettext/glade]data/session-selector.ui
 [type: gettext/glade]data/gsm-inhibit-dialog.ui
 data/session-properties.desktop.in.in
 [type: gettext/glade]data/session-properties.ui
@@ -24,4 +26,5 @@ gnome-session/gsm-util.c
 gnome-session/main.c
 splash/gnome-session-splash.c
 splash/gnome-session-splash.desktop.in.in.in
+tools/gnome-session-selector.c
 tools/gnome-session-save.c
