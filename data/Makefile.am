@@ -6,12 +6,20 @@ uidir = $(pkgdatadir)
 ui_DATA = \
 	session-properties.ui	\
 	gsm-inhibit-dialog.ui	\
+	session-selector.ui	\
 	$(NULL)
 
 @INTLTOOL_DESKTOP_RULE@
 
 xsessiondir = $(datadir)/xsessions
-xsession_in_files = gnome.desktop.in
+xsession_in_files = \
+	gnome.desktop.in		\
+	$(NULL)
+
+if BUILD_SESSION_SELECTOR
+xsession_in_files += gnome-custom-session.desktop.in
+endif
+
 xsession_DATA = $(xsession_in_files:.desktop.in=.desktop)
 
 @INTLTOOL_SCHEMAS_RULE@
