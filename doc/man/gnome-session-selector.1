@@ -1,0 +1,31 @@
+.\"
+.\" gnome-session-selector manual page.
+.\" (C) 2010 Red Hat, Inc.
+.\"
+.TH GNOME-SESSION-SELECTOR 1 "GNOME"
+.SH NAME
+gnome-session-selector \- Selects a session to use with gnome-session
+.SH SYNOPSIS
+.B gnome-session-selector ([session]|--action [(save|print|load))])
+.SH DESCRIPTION
+\fIgnome-session-selector \fP can be used from a xsession desktop file to select
+a session before gnome-session is run. \fIgnome-session\fP reads and stores
+its session in the "${XDG_DATA_HOME}/gnome-session/saved-session" directory.
+\fIgnome-session-selector\fP works by replacing the saved-session directory by a
+symlink to another directory. Since the session name is used as the directory
+name, it may not contain '/' characters or begin with a '.'.
+
+.PP
+When a session name is specified, \fIgnome-session-selector\fP will create a symlink
+to select this session.
+
+When started without arguments or with --action load,
+\fIgnome-session-selector\fP will present a dialog that allows to choose one of the
+existing sessions or create a new one.
+
+When started with --action save, \fIgnome-session-selector\fP will present a dialog
+that allows to choose a session, or create a new one, then performs a session
+save operation.
+
+.SH SEE ALSO
+.BR gnome-session(1)
