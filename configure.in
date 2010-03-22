@@ -75,6 +75,21 @@ PKG_CHECK_MODULES(COMPAT,
         gtk+-2.0 >= $GTK_REQUIRED
         dbus-glib-1 >= $DBUS_GLIB_REQUIRED)
 
+AC_ARG_ENABLE(session-selector, AS_HELP_STRING([--enable-session-selector],
+                                               [enable building a custom session selector dialog]),
+                                                enable_session_selector=$enableval,enable_session_selector=no)
+
+AM_CONDITIONAL(BUILD_SESSION_SELECTOR,
+               [test "$enable_session_selector" = yes])
+
+if test "$enable_session_selector" = yes; then
+        PKG_CHECK_MODULES(SESSION_SELECTOR,
+                          dbus-glib-1 >= $DBUS_GLIB_REQUIRED
+                          gtk+-2.0 >= 2.18
+                          gmodule-export-2.0
+                          gconf-2.0)
+fi
+
 PKG_CHECK_MODULES(SM, sm)
 PKG_CHECK_MODULES(ICE, ice)
 
