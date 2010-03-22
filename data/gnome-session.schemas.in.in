@@ -36,6 +36,17 @@
          </locale>
       </schema>
       <schema>
+         <key>/schemas/apps/gnome-session/options/auto_save_session_one_shot</key>
+         <applyto>/apps/gnome-session/options/auto_save_session_one_shot</applyto>
+         <owner>gnome</owner>
+         <type>bool</type>
+         <default>false</default>
+         <locale name="C">
+            <short>Save sessions</short>
+            <long>When enabled, gnome-session will automatically save the next session at log out even if auto saving is disabled.</long>
+         </locale>
+      </schema>
+      <schema>
          <key>/schemas/apps/gnome-session/options/logout_prompt</key>
          <applyto>/apps/gnome-session/options/logout_prompt</applyto>
          <owner>gnome</owner>
