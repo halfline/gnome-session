@@ -89,6 +89,7 @@
 #define KEY_MAX_IDLE_ACTION       KEY_DESKTOP_DIR "/max_idle_action"
 
 #define KEY_GNOME_SESSION_DIR     "/apps/gnome-session/options"
+#define KEY_AUTOSAVE_ONE_SHOT     KEY_GNOME_SESSION_DIR "/auto_save_session_one_shot"
 #define KEY_AUTOSAVE              KEY_GNOME_SESSION_DIR "/auto_save_session"
 
 #define KEY_SLEEP_LOCK            "/apps/gnome-screensaver/lock_enabled"
@@ -430,10 +431,24 @@ quit_request_completed (GsmConsolekit *consolekit,
 static void
 gsm_manager_quit (GsmManager *manager)
 {
+        GError *error;
         GsmConsolekit *consolekit;
 
         /* See the comment in request_reboot() for some more details about how
          * this works. */
+
+        /* Clear one shot key autosave in the event its set (so that it's actually
+         * one shot only)
+         */
+        error = NULL;
+        if (!gconf_client_set_bool (manager->priv->gconf_client,
+                                    KEY_AUTOSAVE_ONE_SHOT,
+                                    FALSE,
+                                    &error)) {
+                g_warning ("Error clearing configuration key '%s': %s",
+                           KEY_AUTOSAVE_ONE_SHOT,
+                           error->message);
+        }
 
         switch (manager->priv->logout_type) {
         case GSM_MANAGER_LOGOUT_LOGOUT:
@@ -1925,17 +1940,32 @@ auto_save_is_enabled (GsmManager *manager)
 
         error = NULL;
         auto_save = gconf_client_get_bool (manager->priv->gconf_client,
-                                           KEY_AUTOSAVE,
+                                           KEY_AUTOSAVE_ONE_SHOT,
                                            &error);
 
         if (error) {
                 g_warning ("Error retrieving configuration key '%s': %s",
-                           KEY_AUTOSAVE,
+                           KEY_AUTOSAVE_ONE_SHOT,
                            error->message);
                 g_error_free (error);
 
-                /* If we fail to query gconf key, disable auto save */
                 auto_save = FALSE;
+        }
+
+        if (!auto_save) {
+                auto_save = gconf_client_get_bool (manager->priv->gconf_client,
+                                                   KEY_AUTOSAVE,
+                                                   &error);
+
+                if (error) {
+                        g_warning ("Error retrieving configuration key '%s': %s",
+                                   KEY_AUTOSAVE,
+                                   error->message);
+                        g_error_free (error);
+
+                        /* If we fail to query gconf key, disable auto save */
+                        auto_save = FALSE;
+                }
         }
 
         return auto_save;
