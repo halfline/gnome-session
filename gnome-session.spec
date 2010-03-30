@@ -9,15 +9,15 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.29.92
+Version: 2.30.0
 Release: 1%{?dist}
 URL: http://www.gnome.org
-Source0: http://download.gnome.org/sources/gnome-session/2.29/%{name}-%{version}.tar.bz2
+#VCS: git:git://git.gnome.org/gnome-session
+Source0: http://download.gnome.org/sources/gnome-session/2.30/%{name}-%{version}.tar.bz2
 Source2: gnome.desktop
 
 License: GPLv2+
 Group: User Interface/Desktops
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Requires: system-logos
 # required to get gconf-sanity-check-2 in the right place
@@ -182,6 +182,9 @@ fi
 
 
 %changelog
+* Mon Mar 29 2010 Matthias Clasen <mclasen@redhat.com> - 2.30.0-1
+- Update to 2.30.0
+
 * Tue Mar 09 2010 Bastien Nocera <bnocera@redhat.com> 2.29.92-1
 - Update to 2.29.92
 
