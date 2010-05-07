@@ -10,7 +10,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.30.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.30/%{name}-%{version}.tar.bz2
@@ -76,7 +76,8 @@ Patch3: 0001-Add-ability-to-perform-actions-after-a-period-of-idl.patch
 # https://bugzilla.gnome.org/show_bug.cgi?id=607094
 Patch4: nag-root-user.patch
 
-Patch5: gnome-session-libs.patch
+# upstream
+Patch6: Explicitly-add-lXext-lXau-to-linker-line.patch
 
 %description
 gnome-session manages a GNOME desktop or GDM login session. It starts up
@@ -94,7 +95,7 @@ Desktop file to add GNOME to display manager session menu.
 %setup -q
 %patch3 -p1 -b .max-idle
 %patch4 -p1 -b .nag-root-user
-%patch5 -p1 -b .libs
+%patch6 -p1
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
@@ -182,6 +183,9 @@ fi
 
 
 %changelog
+* Fri May 07 2010 Colin Walters <walters@verbum.org> - 2.30.0-2
+- Use upstream commit for library linking
+
 * Mon Mar 29 2010 Matthias Clasen <mclasen@redhat.com> - 2.30.0-1
 - Update to 2.30.0
 
