@@ -431,24 +431,10 @@ quit_request_completed (GsmConsolekit *consolekit,
 static void
 gsm_manager_quit (GsmManager *manager)
 {
-        GError *error;
         GsmConsolekit *consolekit;
 
         /* See the comment in request_reboot() for some more details about how
          * this works. */
-
-        /* Clear one shot key autosave in the event its set (so that it's actually
-         * one shot only)
-         */
-        error = NULL;
-        if (!gconf_client_set_bool (manager->priv->gconf_client,
-                                    KEY_AUTOSAVE_ONE_SHOT,
-                                    FALSE,
-                                    &error)) {
-                g_warning ("Error clearing configuration key '%s': %s",
-                           KEY_AUTOSAVE_ONE_SHOT,
-                           error->message);
-        }
 
         switch (manager->priv->logout_type) {
         case GSM_MANAGER_LOGOUT_LOGOUT:
