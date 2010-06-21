@@ -7,7 +7,8 @@ deps = session_deps + [
   gtk_dep,
   x11_dep,
   sm_dep,
-  ice_dep
+  ice_dep,
+  dbus_glib_dep
 ]
 
 cflags = [

@@ -99,6 +99,7 @@ xtrans_dep = dependency('xtrans')
 ice_dep = dependency('ice')
 sm_dep = dependency('sm')
 x11_dep = dependency('x11')
+dbus_glib_dep = dependency('dbus-glib-1')
 
 session_deps = [
   gio_dep,
