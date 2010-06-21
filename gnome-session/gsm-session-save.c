@@ -26,8 +26,12 @@
 #include "gsm-util.h"
 #include "gsm-autostart-app.h"
 #include "gsm-client.h"
+#include <gconf/gconf-client.h>
 
 #include "gsm-session-save.h"
+
+#define KEY_GNOME_SESSION_DIR     "/apps/gnome-session/options"
+#define KEY_AUTOSAVE_ONE_SHOT     KEY_GNOME_SESSION_DIR "/auto_save_session_one_shot"
 
 static gboolean gsm_session_clear_saved_session (const char *directory,
                                                  GHashTable *discard_hash);
@@ -117,11 +121,34 @@ void
 gsm_session_save (GsmStore  *client_store,
                   GError   **error)
 {
+        GConfClient     *gconf_client;
         const char      *save_dir;
         char            *tmp_dir;
         SessionSaveData  data;
 
         g_debug ("GsmSessionSave: Saving session");
+
+        gconf_client = gconf_client_get_default ();
+
+        if (gconf_client != NULL) {
+                GError *gconf_error;
+
+                /* Clear one shot key autosave in the event its set (so that it's actually
+                 * one shot only)
+                 */
+                gconf_error = NULL;
+                if (!gconf_client_set_bool (gconf_client,
+                                            KEY_AUTOSAVE_ONE_SHOT,
+                                            FALSE,
+                                            &gconf_error)) {
+                        g_warning ("Error clearing configuration key '%s': %s",
+                                   KEY_AUTOSAVE_ONE_SHOT,
+                                   gconf_error->message);
+                        g_error_free (gconf_error);
+                }
+
+                g_object_unref (gconf_client);
+        }
 
         save_dir = gsm_util_get_saved_session_dir ();
         if (save_dir == NULL) {
