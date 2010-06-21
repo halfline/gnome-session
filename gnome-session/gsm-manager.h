@@ -164,6 +164,9 @@ gboolean            gsm_manager_shutdown                       (GsmManager     *
 gboolean            gsm_manager_reboot                         (GsmManager     *manager,
                                                                 DBusGMethodInvocation *context);
 
+gboolean            gsm_manager_save_session                   (GsmManager     *manager,
+                                                                GError        **error);
+
 gboolean            gsm_manager_can_shutdown                   (GsmManager     *manager,
                                                                 gboolean       *shutdown_available,
                                                                 GError        **error);
