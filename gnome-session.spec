@@ -10,7 +10,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.31.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.31/%{name}-%{version}.tar.bz2
@@ -75,6 +75,9 @@ Patch3: 0001-Add-ability-to-perform-actions-after-a-period-of-idl.patch
 
 # https://bugzilla.gnome.org/show_bug.cgi?id=607094
 Patch4: nag-root-user.patch
+
+# an artificial requires to make sure we get dconf, for now
+Requires: dconf
 
 %description
 gnome-session manages a GNOME desktop or GDM login session. It starts up
@@ -179,6 +182,9 @@ fi
 
 
 %changelog
+* Thu Jul  8 2010 Matthias Clasen <mclasen@redhat.com> - 2.31.2-2
+- Require dconf
+
 * Thu May 27 2010 Matthias Clasen <mclasen@redhat.com> - 2.31.2-1
 - Update to 2.31.2
 
