@@ -9,8 +9,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.31.2
-Release: 2%{?dist}
+Version: 2.31.6
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.31/%{name}-%{version}.tar.bz2
@@ -182,6 +182,9 @@ fi
 
 
 %changelog
+* Fri Aug  6 2010 Matthias Clasen <mclasen@redhat.com> - 2.31.6-1
+- Update to 2.31.6
+
 * Thu Jul  8 2010 Matthias Clasen <mclasen@redhat.com> - 2.31.2-2
 - Require dconf
 
