@@ -1,0 +1,241 @@
+diff -up gnome-session-2.31.6/gnome-session/gs-idle-monitor.c.gdk-display-fix gnome-session-2.31.6/gnome-session/gs-idle-monitor.c
+--- gnome-session-2.31.6/gnome-session/gs-idle-monitor.c.gdk-display-fix	2010-09-21 12:42:28.181187473 -0400
++++ gnome-session-2.31.6/gnome-session/gs-idle-monitor.c	2010-09-21 12:46:35.594095313 -0400
+@@ -141,16 +141,16 @@ send_fake_event (GSIdleMonitor *monitor)
+ 
+         g_debug ("GSIdleMonitor: sending fake key");
+ 
+-        XLockDisplay (GDK_DISPLAY());
+-        XTestFakeKeyEvent (GDK_DISPLAY(),
++        XLockDisplay (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()));
++        XTestFakeKeyEvent (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
+                            *monitor->priv->keycode,
+                            True,
+                            CurrentTime);
+-        XTestFakeKeyEvent (GDK_DISPLAY(),
++        XTestFakeKeyEvent (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
+                            *monitor->priv->keycode,
+                            False,
+                            CurrentTime);
+-        XUnlockDisplay (GDK_DISPLAY());
++        XUnlockDisplay (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()));
+ 
+         /* Swap the keycode */
+         if (monitor->priv->keycode == &monitor->priv->keycode1) {
+@@ -249,7 +249,7 @@ init_xsync (GSIdleMonitor *monitor)
+         int                 ncounters;
+         XSyncSystemCounter *counters;
+ 
+-        res = XSyncQueryExtension (GDK_DISPLAY (),
++        res = XSyncQueryExtension (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()),
+                                    &monitor->priv->sync_event_base,
+                                    &sync_error_base);
+         if (! res) {
+@@ -257,13 +257,13 @@ init_xsync (GSIdleMonitor *monitor)
+                 return FALSE;
+         }
+ 
+-        res = XSyncInitialize (GDK_DISPLAY (), &major, &minor);
++        res = XSyncInitialize (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &major, &minor);
+         if (! res) {
+                 g_warning ("GSIdleMonitor: Unable to initialize Sync extension");
+                 return FALSE;
+         }
+ 
+-        counters = XSyncListSystemCounters (GDK_DISPLAY (), &ncounters);
++        counters = XSyncListSystemCounters (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &ncounters);
+         for (i = 0; i < ncounters; i++) {
+                 if (counters[i].name != NULL
+                     && strcmp (counters[i].name, "IDLETIME") == 0) {
+@@ -289,23 +289,23 @@ _init_xtest (GSIdleMonitor *monitor)
+ #ifdef HAVE_XTEST
+         int a, b, c, d;
+ 
+-        XLockDisplay (GDK_DISPLAY());
+-        monitor->priv->have_xtest = (XTestQueryExtension (GDK_DISPLAY(), &a, &b, &c, &d) == True);
++        XLockDisplay (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()));
++        monitor->priv->have_xtest = (XTestQueryExtension (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &a, &b, &c, &d) == True);
+         if (monitor->priv->have_xtest) {
+-                monitor->priv->keycode1 = XKeysymToKeycode (GDK_DISPLAY(), XK_Alt_L);
++                monitor->priv->keycode1 = XKeysymToKeycode (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XK_Alt_L);
+                 if (monitor->priv->keycode1 == 0) {
+                         g_warning ("keycode1 not existant");
+                 }
+-                monitor->priv->keycode2 = XKeysymToKeycode (GDK_DISPLAY(), XK_Alt_R);
++                monitor->priv->keycode2 = XKeysymToKeycode (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XK_Alt_R);
+                 if (monitor->priv->keycode2 == 0) {
+-                        monitor->priv->keycode2 = XKeysymToKeycode (GDK_DISPLAY(), XK_Alt_L);
++                        monitor->priv->keycode2 = XKeysymToKeycode (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), XK_Alt_L);
+                         if (monitor->priv->keycode2 == 0) {
+                                 g_warning ("keycode2 not existant");
+                         }
+                 }
+                 monitor->priv->keycode = &monitor->priv->keycode1;
+         }
+-        XUnlockDisplay (GDK_DISPLAY());
++        XUnlockDisplay (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()));
+ #endif /* HAVE_XTEST */
+ }
+ 
+@@ -379,10 +379,10 @@ idle_monitor_watch_free (GSIdleMonitorWa
+                 return;
+         }
+         if (watch->xalarm_positive != None) {
+-                XSyncDestroyAlarm (GDK_DISPLAY (), watch->xalarm_positive);
++                XSyncDestroyAlarm (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), watch->xalarm_positive);
+         }
+         if (watch->xalarm_negative != None) {
+-                XSyncDestroyAlarm (GDK_DISPLAY (), watch->xalarm_negative);
++                XSyncDestroyAlarm (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), watch->xalarm_negative);
+         }
+         g_slice_free (GSIdleMonitorWatch, watch);
+ }
+@@ -452,22 +452,22 @@ _xsync_alarm_set (GSIdleMonitor      *mo
+         if (watch->xalarm_positive != None) {
+                 g_debug ("GSIdleMonitor: updating alarm for positive transition wait=%lld",
+                          _xsyncvalue_to_int64 (attr.trigger.wait_value));
+-                XSyncChangeAlarm (GDK_DISPLAY (), watch->xalarm_positive, flags, &attr);
++                XSyncChangeAlarm (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), watch->xalarm_positive, flags, &attr);
+         } else {
+                 g_debug ("GSIdleMonitor: creating new alarm for positive transition wait=%lld",
+                          _xsyncvalue_to_int64 (attr.trigger.wait_value));
+-                watch->xalarm_positive = XSyncCreateAlarm (GDK_DISPLAY (), flags, &attr);
++                watch->xalarm_positive = XSyncCreateAlarm (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), flags, &attr);
+         }
+ 
+         attr.trigger.test_type = XSyncNegativeTransition;
+         if (watch->xalarm_negative != None) {
+                 g_debug ("GSIdleMonitor: updating alarm for negative transition wait=%lld",
+                          _xsyncvalue_to_int64 (attr.trigger.wait_value));
+-                XSyncChangeAlarm (GDK_DISPLAY (), watch->xalarm_negative, flags, &attr);
++                XSyncChangeAlarm (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), watch->xalarm_negative, flags, &attr);
+         } else {
+                 g_debug ("GSIdleMonitor: creating new alarm for negative transition wait=%lld",
+                          _xsyncvalue_to_int64 (attr.trigger.wait_value));
+-                watch->xalarm_negative = XSyncCreateAlarm (GDK_DISPLAY (), flags, &attr);
++                watch->xalarm_negative = XSyncCreateAlarm (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), flags, &attr);
+         }
+ 
+         return TRUE;
+diff -up gnome-session-2.31.6/gnome-session/gsm-inhibit-dialog.c.gdk-display-fix gnome-session-2.31.6/gnome-session/gsm-inhibit-dialog.c
+--- gnome-session-2.31.6/gnome-session/gsm-inhibit-dialog.c.gdk-display-fix	2010-09-21 12:29:00.821752493 -0400
++++ gnome-session-2.31.6/gnome-session/gsm-inhibit-dialog.c	2010-09-21 12:41:47.118369100 -0400
+@@ -351,7 +351,8 @@ get_cmap (GdkPixmap *pixmap)
+ }
+ 
+ static GdkPixbuf *
+-pixbuf_get_from_pixmap (Pixmap xpixmap)
++pixbuf_get_from_pixmap (GdkScreen *screen,
++                        Pixmap     xpixmap)
+ {
+         GdkDrawable *drawable;
+         GdkPixbuf   *retval;
+@@ -363,7 +364,7 @@ pixbuf_get_from_pixmap (Pixmap xpixmap)
+         cmap = NULL;
+ 
+         g_debug ("GsmInhibitDialog: getting foreign pixmap for %u", (guint)xpixmap);
+-        drawable = gdk_pixmap_foreign_new (xpixmap);
++        drawable = gdk_pixmap_foreign_new_for_display (gdk_screen_get_display (screen), xpixmap);
+         if (GDK_IS_PIXMAP (drawable)) {
+                 cmap = get_cmap (drawable);
+                 gdk_drawable_get_size (drawable,
+@@ -389,7 +390,8 @@ pixbuf_get_from_pixmap (Pixmap xpixmap)
+ }
+ 
+ static Pixmap
+-get_pixmap_for_window (Window window)
++get_pixmap_for_window (GdkScreen *screen,
++                       Window     window)
+ {
+         XWindowAttributes        attr;
+         XRenderPictureAttributes pa;
+@@ -403,9 +405,9 @@ get_pixmap_for_window (Window window)
+         int                      width;
+         int                      height;
+ 
+-        XGetWindowAttributes (GDK_DISPLAY (), window, &attr);
++        XGetWindowAttributes (GDK_SCREEN_XDISPLAY (screen), window, &attr);
+ 
+-        format = XRenderFindVisualFormat (GDK_DISPLAY (), attr.visual);
++        format = XRenderFindVisualFormat (GDK_SCREEN_XDISPLAY (screen), attr.visual);
+         has_alpha = (format->type == PictTypeDirect && format->direct.alphaMask);
+         x = attr.x;
+         y = attr.y;
+@@ -414,15 +416,15 @@ get_pixmap_for_window (Window window)
+ 
+         pa.subwindow_mode = IncludeInferiors; /* Don't clip child widgets */
+ 
+-        src_picture = XRenderCreatePicture (GDK_DISPLAY (), window, format, CPSubwindowMode, &pa);
++        src_picture = XRenderCreatePicture (GDK_SCREEN_XDISPLAY (screen), window, format, CPSubwindowMode, &pa);
+ 
+-        pixmap = XCreatePixmap (GDK_DISPLAY (),
++        pixmap = XCreatePixmap (GDK_SCREEN_XDISPLAY (screen),
+                                 window,
+                                 width, height,
+                                 attr.depth);
+ 
+-        dst_picture = XRenderCreatePicture (GDK_DISPLAY (), pixmap, format, 0, 0);
+-        XRenderComposite (GDK_DISPLAY (),
++        dst_picture = XRenderCreatePicture (GDK_SCREEN_XDISPLAY (screen), pixmap, format, 0, 0);
++        XRenderComposite (GDK_SCREEN_XDISPLAY (screen),
+                           has_alpha ? PictOpOver : PictOpSrc,
+                           src_picture,
+                           None,
+@@ -438,9 +440,10 @@ get_pixmap_for_window (Window window)
+ #endif /* HAVE_COMPOSITE */
+ 
+ static GdkPixbuf *
+-get_pixbuf_for_window (guint xid,
+-                       int   width,
+-                       int   height)
++get_pixbuf_for_window (GdkScreen *screen,
++                       guint      xid,
++                       int        width,
++                       int        height)
+ {
+         GdkPixbuf *pixbuf = NULL;
+ #ifdef HAVE_XRENDER
+@@ -448,7 +451,7 @@ get_pixbuf_for_window (guint xid,
+         Pixmap     xpixmap;
+ 
+         xwindow = (Window) xid;
+-        xpixmap = get_pixmap_for_window (xwindow);
++        xpixmap = get_pixmap_for_window (screen, xwindow);
+         if (xpixmap == None) {
+                 g_debug ("GsmInhibitDialog: Unable to get window snapshot for %u", xid);
+                 return NULL;
+@@ -456,12 +459,12 @@ get_pixbuf_for_window (guint xid,
+                 g_debug ("GsmInhibitDialog: Got xpixmap %u", (guint)xpixmap);
+         }
+ 
+-        pixbuf = pixbuf_get_from_pixmap (xpixmap);
++        pixbuf = pixbuf_get_from_pixmap (screen, xpixmap);
+ 
+         if (xpixmap != None) {
+                 gdk_error_trap_push ();
+-                XFreePixmap (GDK_DISPLAY (), xpixmap);
+-                gdk_display_sync (gdk_display_get_default ());
++                XFreePixmap (GDK_SCREEN_XDISPLAY (screen), xpixmap);
++                gdk_display_sync (gdk_screen_get_display (screen));
+                 gdk_error_trap_pop ();
+         }
+ 
+@@ -513,7 +516,8 @@ add_inhibitor (GsmInhibitDialog *dialog,
+         xid = gsm_inhibitor_peek_toplevel_xid (inhibitor);
+         g_debug ("GsmInhibitDialog: inhibitor has XID %u", xid);
+         if (xid > 0 && dialog->priv->have_xrender) {
+-                pixbuf = get_pixbuf_for_window (xid, DEFAULT_SNAPSHOT_SIZE, DEFAULT_SNAPSHOT_SIZE);
++                pixbuf = get_pixbuf_for_window (gtk_widget_get_screen (GTK_WIDGET (dialog)),
++                                                xid, DEFAULT_SNAPSHOT_SIZE, DEFAULT_SNAPSHOT_SIZE);
+                 if (pixbuf == NULL) {
+                         g_debug ("GsmInhibitDialog: unable to read pixbuf from %u", xid);
+                 }
+@@ -989,7 +993,7 @@ gsm_inhibit_dialog_constructor (GType   
+ 
+ #ifdef HAVE_XRENDER
+         gdk_error_trap_push ();
+-        if (XRenderQueryExtension (GDK_DISPLAY (), &dialog->priv->xrender_event_base, &dialog->priv->xrender_error_base)) {
++        if (XRenderQueryExtension (GDK_DISPLAY_XDISPLAY (gdk_display_get_default ()), &dialog->priv->xrender_event_base, &dialog->priv->xrender_error_base)) {
+                 g_debug ("GsmInhibitDialog: Initialized XRender extension");
+                 dialog->priv->have_xrender = TRUE;
+         } else {

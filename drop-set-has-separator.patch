@@ -1,0 +1,33 @@
+diff -up gnome-session-2.31.6/capplet/gsm-app-dialog.c.drop-set-has-separator gnome-session-2.31.6/capplet/gsm-app-dialog.c
+--- gnome-session-2.31.6/capplet/gsm-app-dialog.c.drop-set-has-separator	2010-09-21 12:50:26.848074283 -0400
++++ gnome-session-2.31.6/capplet/gsm-app-dialog.c	2010-09-21 12:50:40.278014938 -0400
+@@ -177,7 +177,6 @@ setup_dialog (GsmAppDialog *dialog)
+         gtk_container_add (GTK_CONTAINER (content_area), widget);
+ 
+         gtk_container_set_border_width (GTK_CONTAINER (dialog), 6);
+-        gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
+         gtk_window_set_icon_name (GTK_WINDOW (dialog), "session-properties");
+ 
+         g_object_set (dialog,
+diff -up gnome-session-2.31.6/capplet/gsm-properties-dialog.c.drop-set-has-separator gnome-session-2.31.6/capplet/gsm-properties-dialog.c
+--- gnome-session-2.31.6/capplet/gsm-properties-dialog.c.drop-set-has-separator	2010-09-21 12:50:16.859117448 -0400
++++ gnome-session-2.31.6/capplet/gsm-properties-dialog.c	2010-09-21 12:50:34.823038507 -0400
+@@ -787,7 +787,6 @@ gsm_properties_dialog_init (GsmPropertie
+         gtk_window_set_resizable (GTK_WINDOW (dialog), TRUE);
+         gtk_container_set_border_width (GTK_CONTAINER (dialog), 6);
+         gtk_box_set_spacing (GTK_BOX (content_area), 2);
+-        gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
+         gtk_window_set_icon_name (GTK_WINDOW (dialog), "session-properties");
+         gtk_window_set_title (GTK_WINDOW (dialog), _("Startup Applications Preferences"));
+ }
+diff -up gnome-session-2.31.6/gnome-session/gsm-inhibit-dialog.c.drop-set-has-separator gnome-session-2.31.6/gnome-session/gsm-inhibit-dialog.c
+--- gnome-session-2.31.6/gnome-session/gsm-inhibit-dialog.c.drop-set-has-separator	2010-09-21 12:49:30.277323771 -0400
++++ gnome-session-2.31.6/gnome-session/gsm-inhibit-dialog.c	2010-09-21 12:49:30.280323758 -0400
+@@ -1120,7 +1120,6 @@ gsm_inhibit_dialog_init (GsmInhibitDialo
+         gtk_container_add (GTK_CONTAINER (content_area), widget);
+ 
+         gtk_container_set_border_width (GTK_CONTAINER (dialog), 6);
+-        gtk_dialog_set_has_separator (GTK_DIALOG (dialog), FALSE);
+         gtk_window_set_icon_name (GTK_WINDOW (dialog), "system-log-out");
+         gtk_window_set_title (GTK_WINDOW (dialog), "");
+         g_object_set (dialog,
