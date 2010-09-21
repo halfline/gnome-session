@@ -96,6 +96,8 @@ Desktop file to add GNOME to display manager session menu.
 %setup -q
 %patch3 -p1 -b .max-idle
 %patch4 -p1 -b .nag-root-user
+
+# next two are here: https://bugzilla.gnome.org/show_bug.cgi?id=630277
 %patch5 -p1 -b .gdk-display-fix
 %patch6 -p1 -b .drop-set-has-separator
 
