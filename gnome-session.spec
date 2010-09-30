@@ -9,11 +9,11 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.31.6
-Release: 3%{?dist}
+Version: 2.32.0
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
-Source0: http://download.gnome.org/sources/gnome-session/2.31/%{name}-%{version}.tar.bz2
+Source0: http://download.gnome.org/sources/gnome-session/2.32/%{name}-%{version}.tar.bz2
 Source2: gnome.desktop
 
 License: GPLv2+
@@ -184,6 +184,9 @@ fi
 
 
 %changelog
+* Thu Sep 30 2010 Matthias Clasen <mclasen@redhat.com> - 2.32.0-1
+- Update to 2.32.0
+
 * Wed Sep 29 2010 jkeating - 2.31.6-3
 - Rebuilt for gcc bug 634757
 
