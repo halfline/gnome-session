@@ -1,16 +1,11 @@
-%define gtk_version 2.90
-%define dbus_glib_version 0.70
-%define dbus_version 0.90
-%define gnome_keyring_version 2.21.92
-%define gconf2_version 2.14.0
-%define libnotify_version 0.2.1
+%define gtk_version 2.91
 
 %define po_package gnome-session-2.0
 
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.91.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}.tar.bz2
@@ -21,7 +16,7 @@ Group: User Interface/Desktops
 
 Requires: system-logos
 # required to get gconf-sanity-check-2 in the right place
-Requires: GConf2-gtk >= %{gconf2_version}
+Requires: GConf2-gtk 
 # Needed for gnome-settings-daemon
 Requires: control-center
 
@@ -33,16 +28,13 @@ Requires: polkit-gnome
 # and we want good defaults
 Requires: polkit-desktop-policy
 
-## we conflict with gdm that contains the GNOME gdm xsession
-Conflicts: gdm < 1:2.6.0.8-5
-
-BuildRequires: gtk3-devel >= %{gtk_version}
-BuildRequires: dbus-devel >= %{dbus_version}
-BuildRequires: dbus-glib-devel >= %{dbus_glib_version}
-BuildRequires: gnome-keyring-devel >= %{gnome_keyring_version}
-BuildRequires: libnotify-devel >= %{libnotify_version}
-BuildRequires: GConf2-devel >= %{gconf2_version}
-BuildRequires: GConf2-gtk >= %{gconf2_version}
+BuildRequires: gtk3-devel 
+BuildRequires: dbus-devel 
+BuildRequires: dbus-glib-devel 
+BuildRequires: gnome-keyring-devel 
+BuildRequires: libnotify-devel 
+BuildRequires: GConf2-devel 
+BuildRequires: GConf2-gtk 
 BuildRequires: pango-devel
 BuildRequires: gnome-settings-daemon-devel
 BuildRequires: desktop-file-utils
@@ -65,9 +57,9 @@ BuildRequires: gnome-common
 # for patch3
 BuildRequires: libnotify-devel
 
-Requires(pre): GConf2 >= %{gconf2_version}
-Requires(post): GConf2 >= %{gconf2_version}
-Requires(preun): GConf2 >= %{gconf2_version}
+Requires(pre): GConf2 
+Requires(post): GConf2 
+Requires(preun): GConf2 
 
 # https://bugzilla.gnome.org/show_bug.cgi?id=597030
 Patch3: 0001-Add-ability-to-perform-actions-after-a-period-of-idl.patch
@@ -75,6 +67,7 @@ Patch3: 0001-Add-ability-to-perform-actions-after-a-period-of-idl.patch
 # https://bugzilla.gnome.org/show_bug.cgi?id=607094
 Patch4: nag-root-user.patch
 
+# Fedora specific patch
 Patch7: gnome-session-cflags.patch
 
 # an artificial requires to make sure we get dconf, for now
@@ -85,8 +78,8 @@ gnome-session manages a GNOME desktop or GDM login session. It starts up
 the other core GNOME components and handles logout and saving the session.
 
 %package xsession
-Summary: gnome-session desktop file
-Group: User Interface/Desktop
+Summary: Desktop file for gnome-session
+Group: User Interface/Desktops
 Requires: gnome-session = %{version}-%{release}
 
 %description xsession
@@ -111,52 +104,54 @@ make %{?_smp_mflags}
 
 %install
 export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
-make install DESTDIR=$RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
 
 desktop-file-install --vendor gnome --delete-original                   \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications			        \
+  --dir $RPM_BUILD_ROOT%{_datadir}/applications           \
   --add-only-show-in GNOME                                              \
   $RPM_BUILD_ROOT%{_datadir}/applications/*
 
-./mkinstalldirs ${RPM_BUILD_ROOT}%{_datadir}/xsessions/
-install -m 644 %{SOURCE2} ${RPM_BUILD_ROOT}%{_datadir}/xsessions/
+install -Dp -m 644 %{SOURCE2} ${RPM_BUILD_ROOT}%{_datadir}/xsessions/
 
-/bin/rm -f $RPM_BUILD_ROOT%{_datadir}/gnome/autostart/gnome-login-sound.desktop
-/bin/rm -f $RPM_BUILD_ROOT%{_datadir}/gnome/shutdown/gnome-logout-sound.sh
-/bin/rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-session/helpers/gnome-login-sound
+rm -f $RPM_BUILD_ROOT%{_datadir}/gnome/autostart/gnome-login-sound.desktop
+rm -f $RPM_BUILD_ROOT%{_datadir}/gnome/shutdown/gnome-logout-sound.sh
+rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-session/helpers/gnome-login-sound
 
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
 
-cp AUTHORS COPYING NEWS README $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}
+cp -p AUTHORS COPYING NEWS README $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}
 
 %find_lang %{po_package}
 
 %post
 /sbin/ldconfig
-export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas >& /dev/null || :
+%gconf_schema_upgrade gnome-session.schemas
+touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 %pre
-if [ "$1" -gt 1 ]; then
-  export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-  gconftool-2 --makefile-uninstall-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas >& /dev/null || :
-fi
+%gconf_schema_prepare gnome-session.schemas
 
 %preun
-if [ "$1" -eq 0 ]; then
-  export GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source`
-  gconftool-2 --makefile-uninstall-rule %{_sysconfdir}/gconf/schemas/gnome-session.schemas >& /dev/null || :
+%gconf_schema_remove gnome-session.schemas
+
+%postun 
+/sbin/ldconfig
+if [ $1 -eq 0 ] ; then
+    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
+    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 fi
 
-%postun -p /sbin/ldconfig
+%posttrans
+gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+
 
 %files xsession
-%defattr(-,root,root)
+%defattr(-,root,root,-)
 %{_datadir}/xsessions/*
 
 %files -f %{po_package}.lang
-%defattr(-,root,root)
+%defattr(-,root,root,-)
 %doc %dir %{_datadir}/doc/%{name}-%{version}
 %doc %{_datadir}/doc/%{name}-%{version}/AUTHORS
 %doc %{_datadir}/doc/%{name}-%{version}/COPYING
@@ -177,6 +172,9 @@ fi
 
 
 %changelog
+* Fri Oct 15 2010 Parag Nemade <paragn AT fedoraproject.org> - 2.91.0-2
+- Merge-review cleanup (#225835)
+
 * Wed Oct  6 2010 Matthias Clasen <mclasen@redhat.com> - 2.91.0-1
 - Update to 2.91.0
 
