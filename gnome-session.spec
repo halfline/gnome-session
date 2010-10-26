@@ -5,7 +5,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.91.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}.tar.bz2
@@ -126,14 +126,14 @@ cp -p AUTHORS COPYING NEWS README $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{versi
 
 %post
 /sbin/ldconfig
-%gconf_schema_upgrade gnome-session.schemas
+%gconf_schema_upgrade gnome-session
 touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 
 %pre
-%gconf_schema_prepare gnome-session.schemas
+%gconf_schema_prepare gnome-session
 
 %preun
-%gconf_schema_remove gnome-session.schemas
+%gconf_schema_remove gnome-session
 
 %postun 
 /sbin/ldconfig
@@ -172,6 +172,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Oct 26 2010 Parag Nemade <paragn AT fedoraproject.org> - 2.91.0-3
+- Gconf2 scriptlet accepts schema file names without file extension.
+
 * Fri Oct 15 2010 Parag Nemade <paragn AT fedoraproject.org> - 2.91.0-2
 - Merge-review cleanup (#225835)
 
