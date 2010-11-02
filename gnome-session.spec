@@ -5,7 +5,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.91.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}.tar.bz2
@@ -16,7 +16,7 @@ Group: User Interface/Desktops
 
 Requires: system-logos
 # required to get gconf-sanity-check-2 in the right place
-Requires: GConf2-gtk 
+Requires: GConf2-gtk
 # Needed for gnome-settings-daemon
 Requires: control-center
 
@@ -28,13 +28,13 @@ Requires: polkit-gnome
 # and we want good defaults
 Requires: polkit-desktop-policy
 
-BuildRequires: gtk3-devel 
-BuildRequires: dbus-devel 
-BuildRequires: dbus-glib-devel 
-BuildRequires: gnome-keyring-devel 
-BuildRequires: libnotify-devel 
-BuildRequires: GConf2-devel 
-BuildRequires: GConf2-gtk 
+BuildRequires: gtk3-devel
+BuildRequires: dbus-devel
+BuildRequires: dbus-glib-devel
+BuildRequires: gnome-keyring-devel
+BuildRequires: libnotify-devel
+BuildRequires: GConf2-devel
+BuildRequires: GConf2-gtk
 BuildRequires: pango-devel
 BuildRequires: gnome-settings-daemon-devel
 BuildRequires: desktop-file-utils
@@ -57,9 +57,9 @@ BuildRequires: gnome-common
 # for patch3
 BuildRequires: libnotify-devel
 
-Requires(pre): GConf2 
-Requires(post): GConf2 
-Requires(preun): GConf2 
+Requires(pre): GConf2
+Requires(post): GConf2
+Requires(preun): GConf2
 
 # https://bugzilla.gnome.org/show_bug.cgi?id=597030
 Patch3: 0001-Add-ability-to-perform-actions-after-a-period-of-idl.patch
@@ -172,6 +172,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Mon Nov  1 2010 Matthias Clasen <mclasen@redhat.com> - 2.91.0-4
+- Rebuild against newer gtk3
+
 * Tue Oct 26 2010 Parag Nemade <paragn AT fedoraproject.org> - 2.91.0-3
 - Gconf2 scriptlet accepts schema file names without file extension.
 
