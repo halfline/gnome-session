@@ -5,7 +5,7 @@ diff -up gnome-session-2.31.6/configure.ac.max-idle gnome-session-2.31.6/configu
  GLIB_REQUIRED=2.16.0
  DBUS_GLIB_REQUIRED=0.76
  UPOWER_REQUIRED=0.9.0
-+LIBNOTIFY_REQUIRED=0.4.3
++LIBNOTIFY_REQUIRED=0.7.0
  
  case "$with_gtk" in
    2.0) GTK_API_VERSION=2.0
@@ -336,7 +336,7 @@ diff -up gnome-session-2.31.6/gnome-session/gsm-manager.c.max-idle gnome-session
 +                                                    NULL);
 +                } else {
 +                        manager->priv->max_idle_notification
-+                                = notify_notification_new (summary, body, NULL, NULL);
++                                = notify_notification_new (summary, body, NULL);
 +                        notify_notification_set_timeout (manager->priv->max_idle_notification,
 +                                                         NOTIFY_EXPIRES_NEVER);
 +

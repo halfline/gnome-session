@@ -5,7 +5,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.91.0
-Release: 4%{?dist}
+Release: 5%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}.tar.bz2
@@ -55,7 +55,7 @@ BuildRequires: upower-devel
 BuildRequires: gnome-common
 
 # for patch3
-BuildRequires: libnotify-devel
+BuildRequires: libnotify-devel >= 0.7.0
 
 Requires(pre): GConf2
 Requires(post): GConf2
@@ -172,6 +172,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Nov  2 2010 Matthias Clasen <mclasen@redhat.com> - 2.91.0-5
+- Prepare for libnotify 0.7.0
+
 * Mon Nov  1 2010 Matthias Clasen <mclasen@redhat.com> - 2.91.0-4
 - Rebuild against newer gtk3
 
