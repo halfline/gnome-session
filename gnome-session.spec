@@ -32,7 +32,7 @@ BuildRequires: gtk3-devel
 BuildRequires: dbus-devel
 BuildRequires: dbus-glib-devel
 BuildRequires: gnome-keyring-devel
-BuildRequires: libnotify-devel
+BuildRequires: libnotify-devel >= 0.7.0
 BuildRequires: GConf2-devel
 BuildRequires: GConf2-gtk
 BuildRequires: pango-devel
