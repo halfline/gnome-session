@@ -5,7 +5,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.91.0
-Release: 5%{?dist}
+Release: 6%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}.tar.bz2
@@ -67,6 +67,9 @@ Patch3: 0001-Add-ability-to-perform-actions-after-a-period-of-idl.patch
 # https://bugzilla.gnome.org/show_bug.cgi?id=607094
 Patch4: nag-root-user.patch
 
+# https://bugzilla.gnome.org/show_bug.cgi?id=634244
+Patch5: prevent-inhibitor-dialog.patch
+
 # Fedora specific patch
 Patch7: gnome-session-cflags.patch
 
@@ -89,6 +92,7 @@ Desktop file to add GNOME to display manager session menu.
 %setup -q
 %patch3 -p1 -b .max-idle
 %patch4 -p1 -b .nag-root-user
+%patch5 -p1 -b .prevent-inhibitor-dialog
 
 %patch7 -p1 -b .cflags
 
@@ -172,6 +176,10 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sun Nov 07 2010 Ray Strode <rstrode@redhat.com> 2.91.0-6
+- Fix some cases where the inhibitor dialog shows up when it isn't
+  supposed to.
+
 * Tue Nov  2 2010 Matthias Clasen <mclasen@redhat.com> - 2.91.0-5
 - Prepare for libnotify 0.7.0
 
