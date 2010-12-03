@@ -5,7 +5,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.91.0
-Release: 6%{?dist}
+Release: 7%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}.tar.bz2
@@ -176,6 +176,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Fri Dec  3 2010 Matthias Clasen <mclasen@redhat.com> 2.91.0-7
+- Rebuild against new gtk
+
 * Sun Nov 07 2010 Ray Strode <rstrode@redhat.com> 2.91.0-6
 - Fix some cases where the inhibitor dialog shows up when it isn't
   supposed to.
