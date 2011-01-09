@@ -64,13 +64,13 @@ Requires(post):   /usr/bin/gtk-update-icon-cache
 Requires(postun): /usr/bin/gtk-update-icon-cache
 
 # https://bugzilla.gnome.org/show_bug.cgi?id=597030
-Patch3: 0001-Add-ability-to-perform-actions-after-a-period-of-idl.patch
+# Patch3: 0001-Add-ability-to-perform-actions-after-a-period-of-idl.patch
 
 # https://bugzilla.gnome.org/show_bug.cgi?id=607094
-Patch4: nag-root-user.patch
+# Patch4: nag-root-user.patch
 
 # Fedora specific patch
-Patch7: gnome-session-cflags.patch
+# Patch7: gnome-session-cflags.patch
 
 # an artificial requires to make sure we get dconf, for now
 Requires: dconf
@@ -89,10 +89,9 @@ Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
-%patch3 -p1 -b .max-idle
-%patch4 -p1 -b .nag-root-user
-
-%patch7 -p1 -b .cflags
+# %patch3 -p1 -b .max-idle
+# %patch4 -p1 -b .nag-root-user
+# %patch7 -p1 -b .cflags
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
