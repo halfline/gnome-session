@@ -4,8 +4,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.91.0
-Release: 7%{?dist}
+Version: 2.91.4
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}.tar.bz2
@@ -28,7 +28,7 @@ Requires: polkit-gnome
 # and we want good defaults
 Requires: polkit-desktop-policy
 
-BuildRequires: gtk3-devel
+BuildRequires: gtk3-devel >= 2.99.0
 BuildRequires: dbus-devel
 BuildRequires: dbus-glib-devel
 BuildRequires: gnome-keyring-devel
@@ -60,15 +60,14 @@ BuildRequires: libnotify-devel >= 0.7.0
 Requires(pre): GConf2
 Requires(post): GConf2
 Requires(preun): GConf2
+Requires(post):   /usr/bin/gtk-update-icon-cache
+Requires(postun): /usr/bin/gtk-update-icon-cache
 
 # https://bugzilla.gnome.org/show_bug.cgi?id=597030
 Patch3: 0001-Add-ability-to-perform-actions-after-a-period-of-idl.patch
 
 # https://bugzilla.gnome.org/show_bug.cgi?id=607094
 Patch4: nag-root-user.patch
-
-# https://bugzilla.gnome.org/show_bug.cgi?id=634244
-Patch5: prevent-inhibitor-dialog.patch
 
 # Fedora specific patch
 Patch7: gnome-session-cflags.patch
@@ -92,7 +91,6 @@ Desktop file to add GNOME to display manager session menu.
 %setup -q
 %patch3 -p1 -b .max-idle
 %patch4 -p1 -b .nag-root-user
-%patch5 -p1 -b .prevent-inhibitor-dialog
 
 %patch7 -p1 -b .cflags
 
@@ -139,7 +137,7 @@ touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 %preun
 %gconf_schema_remove gnome-session
 
-%postun 
+%postun
 /sbin/ldconfig
 if [ $1 -eq 0 ] ; then
     touch --no-create %{_datadir}/icons/hicolor &>/dev/null
@@ -176,6 +174,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Sun Jan  9 2011 Matthias Clasen <mclasen@redhat.com> 2.91.4-1
+- Update to 2.91.4
+
 * Fri Dec  3 2010 Matthias Clasen <mclasen@redhat.com> 2.91.0-7
 - Rebuild against new gtk
 
