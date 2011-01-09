@@ -164,8 +164,12 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %doc %{_mandir}/man*/*
 %{_datadir}/applications/gnome-session-properties.desktop
 %dir %{_datadir}/gnome-session
+%dir %{_datadir}/gnome-session/sessions
+%{_datadir}/gnome-session/sessions/gnome.session
+%{_datadir}/gnome-session/sessions/classic-gnome.session
 %{_datadir}/gnome/autostart
 %{_bindir}/*
+%{_libexecdir}/gnome-session-is-accelerated
 %{_sysconfdir}/gconf/schemas/*.schemas
 %{_datadir}/gnome-session/gsm-inhibit-dialog.ui
 %{_datadir}/gnome-session/session-properties.ui
