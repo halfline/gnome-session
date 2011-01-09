@@ -41,6 +41,7 @@ BuildRequires: desktop-file-utils
 BuildRequires: libXau-devel
 BuildRequires: libXrandr-devel
 BuildRequires: xorg-x11-xtrans-devel
+BuildRequires: mesa-libGL-devel
 
 # this is so the configure checks find /usr/bin/halt etc.
 BuildRequires: usermode
