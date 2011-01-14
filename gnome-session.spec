@@ -5,11 +5,13 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.91.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}.tar.bz2
 Source2: gnome.desktop
+# upstream fix
+Patch0: 0001-tools-Do-not-consider-Gallium-s-softpipe-and-llvmpip.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -90,6 +92,8 @@ Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
+%patch0 -p1 -b .softpipe
+
 # %patch3 -p1 -b .max-idle
 # %patch4 -p1 -b .nag-root-user
 # %patch7 -p1 -b .cflags
@@ -178,6 +182,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Fri Dec 14 2011 Matthias Clasen <mclasen@redhat.com> 2.91.4-2
+- Don't run the shell on softpipe
+
 * Sun Jan  9 2011 Matthias Clasen <mclasen@redhat.com> 2.91.4-1
 - Update to 2.91.4
 
