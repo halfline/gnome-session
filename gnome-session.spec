@@ -183,7 +183,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 * Tue Jan 25 2011 Matthias Clasen <mclasen@redhat.com> 2.91.4-3
 - Just require control-center-filesystem (#661565)
 
-* Fri Dec 14 2011 Matthias Clasen <mclasen@redhat.com> 2.91.4-2
+* Fri Jan 14 2011 Matthias Clasen <mclasen@redhat.com> 2.91.4-2
 - Don't run the shell on softpipe
 
 * Sun Jan  9 2011 Matthias Clasen <mclasen@redhat.com> 2.91.4-1
