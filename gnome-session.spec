@@ -1,11 +1,9 @@
-%define gtk_version 2.91
-
 %define po_package gnome-session-2.0
 
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.91.4
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}.tar.bz2
@@ -20,7 +18,7 @@ Requires: system-logos
 # required to get gconf-sanity-check-2 in the right place
 Requires: GConf2-gtk
 # Needed for gnome-settings-daemon
-Requires: control-center
+Requires: control-center-filesystem
 
 # pull in dbus-x11, see bug 209924
 Requires: dbus-x11
@@ -182,6 +180,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Tue Jan 25 2011 Matthias Clasen <mclasen@redhat.com> 2.91.4-3
+- Just require control-center-filesystem (#661565)
+
 * Fri Dec 14 2011 Matthias Clasen <mclasen@redhat.com> 2.91.4-2
 - Don't run the shell on softpipe
 
