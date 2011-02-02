@@ -129,25 +129,19 @@ cp -p AUTHORS COPYING NEWS README $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{versi
 
 %post
 /sbin/ldconfig
-%gconf_schema_upgrade gnome-session
 touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-
-%pre
-%gconf_schema_prepare gnome-session
-
-%preun
-%gconf_schema_remove gnome-session
 
 %postun
 /sbin/ldconfig
 if [ $1 -eq 0 ] ; then
-    touch --no-create %{_datadir}/icons/hicolor &>/dev/null
-    gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+  touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
+  gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
+  glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 fi
 
 %posttrans
 gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-
+glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 
 %files xsession
 %defattr(-,root,root,-)
@@ -171,7 +165,6 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %{_datadir}/gnome/autostart
 %{_bindir}/*
 %{_libexecdir}/gnome-session-is-accelerated
-%{_sysconfdir}/gconf/schemas/*.schemas
 %{_datadir}/gnome-session/gsm-inhibit-dialog.ui
 %{_datadir}/gnome-session/session-properties.ui
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
