@@ -169,7 +169,8 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/gnome-session/session-properties.ui
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
-
+%{_datadir}/GConf/gsettings/org.gnome.SessionManager.gschema.migrate
+%{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
 * Wed Feb  2 2011 Matthias Clasen <mclasen@redhat.com> 2.91.6-1
