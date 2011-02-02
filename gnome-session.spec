@@ -2,8 +2,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.91.4
-Release: 3%{?dist}
+Version: 2.91.6
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}.tar.bz2
@@ -19,6 +19,8 @@ Requires: system-logos
 Requires: GConf2-gtk
 # Needed for gnome-settings-daemon
 Requires: control-center-filesystem
+
+Requires: gsettings-desktop-schemas >= 0.1.5
 
 # pull in dbus-x11, see bug 209924
 Requires: dbus-x11
@@ -180,6 +182,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 
 
 %changelog
+* Wed Feb  2 2011 Matthias Clasen <mclasen@redhat.com> 2.91.6-1
+- 2.91.6
+
 * Tue Jan 25 2011 Matthias Clasen <mclasen@redhat.com> 2.91.4-3
 - Just require control-center-filesystem (#661565)
 
