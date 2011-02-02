@@ -8,8 +8,6 @@ URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}.tar.bz2
 Source2: gnome.desktop
-# upstream fix
-Patch0: 0001-tools-Do-not-consider-Gallium-s-softpipe-and-llvmpip.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -92,7 +90,6 @@ Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
-%patch0 -p1 -b .softpipe
 
 # %patch3 -p1 -b .max-idle
 # %patch4 -p1 -b .nag-root-user
