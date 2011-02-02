@@ -167,7 +167,7 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 %dir %{_datadir}/gnome-session
 %dir %{_datadir}/gnome-session/sessions
 %{_datadir}/gnome-session/sessions/gnome.session
-%{_datadir}/gnome-session/sessions/classic-gnome.session
+%{_datadir}/gnome-session/sessions/gnome-fallback.session
 %{_datadir}/gnome/autostart
 %{_bindir}/*
 %{_libexecdir}/gnome-session-is-accelerated
