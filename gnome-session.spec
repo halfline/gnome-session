@@ -1,4 +1,4 @@
-%define po_package gnome-session-2.0
+%define po_package gnome-session-3.0
 
 Summary: GNOME session manager
 Name: gnome-session
