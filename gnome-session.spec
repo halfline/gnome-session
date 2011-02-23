@@ -3,10 +3,11 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.91.90
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}.tar.bz2
+Source1: gnome-authentication-agent.desktop
 Source2: gnome.desktop
 
 License: GPLv2+
@@ -105,13 +106,11 @@ desktop-file-install --vendor gnome --delete-original                   \
   --add-only-show-in GNOME                                              \
   $RPM_BUILD_ROOT%{_datadir}/applications/*
 
-install -Dp -m 644 %{SOURCE2} ${RPM_BUILD_ROOT}%{_datadir}/xsessions/
-
-rm -f $RPM_BUILD_ROOT%{_datadir}/gnome/autostart/gnome-login-sound.desktop
-rm -f $RPM_BUILD_ROOT%{_datadir}/gnome/shutdown/gnome-logout-sound.sh
-rm -f $RPM_BUILD_ROOT%{_libdir}/gnome-session/helpers/gnome-login-sound
-
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
+
+install -Dp -m 644 %{SOURCE1} ${RPM_BUILD_ROOT}%{_datadir}/gnome/autostart
+
+install -Dp -m 644 %{SOURCE2} ${RPM_BUILD_ROOT}%{_datadir}/xsessions/
 
 cp -p AUTHORS COPYING NEWS README $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}
 
@@ -164,6 +163,10 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Feb 22 2011 Matthias Clasen <mclasen@redhat.com> 2.91.90-3
+- Install an autostart file for the authentication agent
+  in the fallback session
+
 * Tue Feb 22 2011 Ray Strode <rstrode@redhat.com> 2.91.90-2
 - Fix crashity crash crash
 
