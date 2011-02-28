@@ -8,5 +8,5 @@ Categories=
 NoDisplay=true
 X-Desktop-File-Install-Version=0.18
 OnlyShowIn=GNOME;
-AutostartCondition=GNOME3 is-session gnome-fallback
+AutostartCondition=GNOME3 if-session gnome-fallback
 

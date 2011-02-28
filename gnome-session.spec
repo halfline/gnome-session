@@ -3,7 +3,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.91.90
-Release: 3%{?dist}
+Release: 4%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}.tar.bz2
@@ -163,6 +163,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Mon Feb 28 2011 Matthias Clasen <mclasen@redhat.com> 2.91.90-4
+- Fix the autostart syntax
+
 * Tue Feb 22 2011 Matthias Clasen <mclasen@redhat.com> 2.91.90-3
 - Install an autostart file for the authentication agent
   in the fallback session
