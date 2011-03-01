@@ -3,7 +3,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 2.91.90
-Release: 4%{?dist}
+Release: 5%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}.tar.bz2
@@ -69,6 +69,7 @@ Requires(postun): /usr/bin/gtk-update-icon-cache
 Requires: dconf
 
 Patch0: fix-crashity-crash-crash.patch
+Patch1: 0001-gsm_manager_get-does-not-return-a-reference.patch
 
 %description
 gnome-session manages a GNOME desktop or GDM login session. It starts up
@@ -85,6 +86,7 @@ Desktop file to add GNOME to display manager session menu.
 %prep
 %setup -q
 %patch0 -p1 -b .fix-crashity-crash-crash
+%patch1 -p1 -b .make-if-session-work
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
@@ -163,6 +165,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Mon Feb 28 2011 Matthias Clasen <mclasen@redhat.com> 2.91.90-5
+- Make the new if-session Autostart condition work
+
 * Mon Feb 28 2011 Matthias Clasen <mclasen@redhat.com> 2.91.90-4
 - Fix the autostart syntax
 
