@@ -1,6 +1,6 @@
 diff -up gnome-session-2.91.91/tools/Makefile.am.libs gnome-session-2.91.91/tools/Makefile.am
 --- gnome-session-2.91.91/tools/Makefile.am.libs	2011-03-07 23:08:58.320593583 -0500
-+++ gnome-session-2.91.91/tools/Makefile.am	2011-03-07 23:25:37.064107570 -0500
++++ gnome-session-2.91.91/tools/Makefile.am	2011-03-07 23:38:02.621786815 -0500
 @@ -31,7 +31,8 @@ gnome_session_check_accelerated_helper_C
  
  gnome_session_check_accelerated_helper_LDADD = 		\
@@ -11,3 +11,12 @@ diff -up gnome-session-2.91.91/tools/Makefile.am.libs gnome-session-2.91.91/tool
  
  gnome_session_check_accelerated_SOURCES =       \
  	gnome-session-check-accelerated.c
+@@ -42,6 +43,7 @@ gnome_session_check_accelerated_CPPFLAGS
+ 	$(GTK3_CFLAGS)
+ 
+ gnome_session_check_accelerated_LDADD =         \
+-	$(GTK3_LIBS)
++	$(GTK3_LIBS)				\
++	-lX11
+ 
+ -include $(top_srcdir)/git.mk
