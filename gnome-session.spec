@@ -94,7 +94,7 @@ autoreconf -i -f
 %configure --enable-docbook-docs                                \
            --docdir=%{_datadir}/doc/%{name}-%{version}          \
            --with-gtk=3.0
-make %{?_smp_mflags}
+make %{?_smp_mflags} V=1
 
 %install
 export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
