@@ -1,0 +1,13 @@
+diff -up gnome-session-2.91.91/tools/Makefile.am.libs gnome-session-2.91.91/tools/Makefile.am
+--- gnome-session-2.91.91/tools/Makefile.am.libs	2011-03-07 23:08:58.320593583 -0500
++++ gnome-session-2.91.91/tools/Makefile.am	2011-03-07 23:09:24.299268803 -0500
+@@ -21,7 +21,8 @@ gnome_session_quit_LDADD =			\
+ 	$(ICE_LIBS)				\
+ 	$(GNOME_SESSION_LIBS)			\
+ 	$(DBUS_GLIB_LIBS)			\
+-	$(GCONF_LIBS)
++	$(GCONF_LIBS)				\
++	-lX11
+ 
+ gnome_session_check_accelerated_helper_SOURCES = 		\
+ 	gnome-session-check-accelerated-helper.c

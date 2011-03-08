@@ -10,6 +10,8 @@ Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}
 Source1: gnome-authentication-agent.desktop
 Source2: gnome.desktop
 
+Patch0: gnome-session-libs.patch
+
 License: GPLv2+
 Group: User Interface/Desktops
 
@@ -82,6 +84,7 @@ Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
+%patch0 -p1 -b .libs
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
