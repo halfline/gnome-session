@@ -154,12 +154,12 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/gnome-session/sad-computer.svgz
 %{_datadir}/gnome/autostart
 %{_bindir}/*
-%{_libexecdir}/gnome-session-is-accelerated
+%{_libexecdir}/gnome-session-check-accelerated
+%{_libexecdir}/gnome-session-check-accelerated-helper
 %{_datadir}/gnome-session/gsm-inhibit-dialog.ui
 %{_datadir}/gnome-session/session-properties.ui
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
-%{_datadir}/GConf/gsettings/org.gnome.SessionManager.gschema.migrate
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
