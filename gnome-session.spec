@@ -2,8 +2,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.91.91
-Release: 2%{?dist}
+Version: 2.91.91.2
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}.tar.bz2
@@ -11,7 +11,6 @@ Source1: gnome-authentication-agent.desktop
 Source2: gnome.desktop
 
 Patch0: gnome-session-libs.patch
-Patch1: 0001-Return-0-on-success.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -86,7 +85,6 @@ Desktop file to add GNOME to display manager session menu.
 %prep
 %setup -q
 %patch0 -p1 -b .libs
-%patch1 -p1 -b .check-accel
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
@@ -166,6 +164,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Wed Mar  9 2011 Matthias Clasen <mclasen@redhat.com> 2.91.91.2-1
+- Update to 2.91.91.2
+
 * Tue Mar  8 2011 Matthias Clasen <mclasen@redhat.com> 2.91.91-2
 - Fix the check-accel utility exit status
 
