@@ -148,7 +148,6 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %dir %{_datadir}/gnome-session/sessions
 %{_datadir}/gnome-session/sessions/gnome.session
 %{_datadir}/gnome-session/sessions/gnome-fallback.session
-%{_datadir}/gnome-session/sad-computer.svgz
 %{_datadir}/gnome/autostart
 %{_bindir}/*
 %{_libexecdir}/gnome-session-check-accelerated
