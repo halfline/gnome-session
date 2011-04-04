@@ -2,11 +2,11 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 2.91.94
+Version: 3.0.0
 Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
-Source0: http://download.gnome.org/sources/gnome-session/2.91/%{name}-%{version}.tar.bz2
+Source0: http://download.gnome.org/sources/gnome-session/3.0/%{name}-%{version}.tar.bz2
 Source1: gnome-authentication-agent.desktop
 Source2: gnome.desktop
 
@@ -62,8 +62,6 @@ BuildRequires: gnome-common
 Requires(pre): GConf2
 Requires(post): GConf2
 Requires(preun): GConf2
-Requires(post):   /usr/bin/gtk-update-icon-cache
-Requires(postun): /usr/bin/gtk-update-icon-cache
 
 # an artificial requires to make sure we get dconf, for now
 Requires: dconf
@@ -160,6 +158,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Mon Apr  4 2011 Matthias Clasen <mclasen@redhat.com> 3.0.0-1
+- Update to 3.0.0
+
 * Mon Mar 28 2011 Matthias Clasen <mclasen@redhat.com> 2.91.94-1
 - Update to 2.91.94
 
