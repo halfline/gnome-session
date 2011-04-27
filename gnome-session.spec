@@ -3,12 +3,15 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.0.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.0/%{name}-%{version}.tar.bz2
 Source1: gnome-authentication-agent.desktop
 Source2: gnome.desktop
+
+# https://bugzilla.gnome.org/show_bug.cgi?id=644325
+Patch0: gnome-session-3.0.1-renderer-blacklist.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -80,6 +83,7 @@ Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
+%patch0 -p1 -b .blacklist
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
@@ -158,6 +162,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Wed Apr 27 2011 Owen Taylor <otaylor@redhat.com> - 3.0.1-2
+- Add a quick-and-dirty blacklist for Radeon R100, R200, Intel 8xx
+
 * Tue Apr 26 2011 Matthias Clasen <mclasen@redhat.com> 3.0.1-1
 - Update to 3.0.1
 
