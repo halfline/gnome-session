@@ -2,11 +2,11 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.0.1
-Release: 2%{?dist}
+Version: 3.1.2
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
-Source0: http://download.gnome.org/sources/gnome-session/3.0/%{name}-%{version}.tar.bz2
+Source0: http://download.gnome.org/sources/gnome-session/3.1/%{name}-%{version}.tar.xz
 Source1: gnome-authentication-agent.desktop
 Source2: gnome.desktop
 
@@ -162,6 +162,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Wed Jun 15 2011 Tomas Bzatek <tbzatek@redhat.com> - 3.1.2-1
+- Update to 3.1.2
+
 * Wed Apr 27 2011 Owen Taylor <otaylor@redhat.com> - 3.0.1-2
 - Add a quick-and-dirty blacklist for Radeon R100, R200, Intel 8xx
 
