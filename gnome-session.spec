@@ -48,6 +48,7 @@ BuildRequires: libXrandr-devel
 BuildRequires: xorg-x11-xtrans-devel
 BuildRequires: mesa-libGL-devel
 BuildRequires: librsvg2-devel
+BuildRequires: json-glib-devel
 
 # this is so the configure checks find /usr/bin/halt etc.
 BuildRequires: usermode
