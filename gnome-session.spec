@@ -2,7 +2,7 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.1.3
+Version: 3.1.91
 Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
@@ -40,7 +40,6 @@ BuildRequires: dbus-glib-devel
 BuildRequires: gnome-keyring-devel
 BuildRequires: libnotify-devel >= 0.7.0
 BuildRequires: GConf2-devel
-BuildRequires: GConf2-gtk
 BuildRequires: pango-devel
 BuildRequires: gnome-settings-daemon-devel
 BuildRequires: desktop-file-utils
@@ -61,10 +60,6 @@ BuildRequires: libXtst-devel
 BuildRequires: xmlto
 BuildRequires: upower-devel
 BuildRequires: gnome-common
-
-Requires(pre): GConf2
-Requires(post): GConf2
-Requires(preun): GConf2
 
 # an artificial requires to make sure we get dconf, for now
 Requires: dconf
@@ -96,9 +91,7 @@ autoreconf -i -f
 make %{?_smp_mflags} V=1
 
 %install
-export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
-unset GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL
 
 desktop-file-install --vendor gnome --delete-original                   \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications           \
@@ -108,7 +101,6 @@ desktop-file-install --vendor gnome --delete-original                   \
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
 
 install -Dp -m 644 %{SOURCE1} ${RPM_BUILD_ROOT}%{_datadir}/gnome/autostart
-
 install -Dp -m 644 %{SOURCE2} ${RPM_BUILD_ROOT}%{_datadir}/xsessions/
 
 cp -p AUTHORS COPYING NEWS README $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}
@@ -132,11 +124,9 @@ gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
 glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 
 %files xsession
-%defattr(-,root,root,-)
 %{_datadir}/xsessions/*
 
 %files -f %{po_package}.lang
-%defattr(-,root,root,-)
 %doc %dir %{_datadir}/doc/%{name}-%{version}
 %doc %{_datadir}/doc/%{name}-%{version}/AUTHORS
 %doc %{_datadir}/doc/%{name}-%{version}/COPYING
@@ -162,6 +152,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Sep  6 2011 Matthias Clasen <mclasen@redhat.com> 3.1.91-1
+- Update to 3.1.91
+
 * Mon Jul 04 2011 Bastien Nocera <bnocera@redhat.com> 3.1.3-1
 - Update to 3.1.3
 
