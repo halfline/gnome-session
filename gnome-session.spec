@@ -10,9 +10,6 @@ Source0: http://download.gnome.org/sources/gnome-session/3.3/%{name}-%{version}.
 Source1: gnome-authentication-agent.desktop
 Source2: gnome.desktop
 
-# https://bugzilla.gnome.org/show_bug.cgi?id=644325
-Patch0: gnome-session-3.0.1-renderer-blacklist.patch
-
 License: GPLv2+
 Group: User Interface/Desktops
 
@@ -77,7 +74,6 @@ Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
-%patch0 -p1 -b .blacklist
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
