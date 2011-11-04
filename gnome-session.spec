@@ -3,12 +3,14 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.3.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.3/%{name}-%{version}.tar.xz
 Source1: gnome-authentication-agent.desktop
 Source2: gnome.desktop
+
+Patch0: gnome-session-3.3.1-llvmpipe.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -74,6 +76,7 @@ Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
+%patch0 -p1 -b .llvmpipe
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
@@ -148,6 +151,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Thu Nov 03 2011 Adam Jackson <ajax@redhat.com> 3.3.1-2
+- gnome-session-3.3.1-llvmpipe.patch: Don't consider llvmpipe unsupported.
+
 * Wed Nov  2 2011 Matthias Clasen <mclasen@redhat.com> - 3.3.1-1
 - Update to 3.3.1
 
