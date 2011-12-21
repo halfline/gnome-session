@@ -2,8 +2,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.3.2
-Release: 2%{?dist}
+Version: 3.3.3
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.3/%{name}-%{version}.tar.xz
@@ -11,7 +11,6 @@ Source1: gnome-authentication-agent.desktop
 Source2: gnome.desktop
 
 Patch0: gnome-session-3.3.1-llvmpipe.patch
-Patch1: gnome-session-3.3.2-radeon.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -78,7 +77,6 @@ Desktop file to add GNOME to display manager session menu.
 %prep
 %setup -q
 %patch0 -p1 -b .llvmpipe
-%patch1 -p1 -b .radeon
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
@@ -153,6 +151,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Wed Dec 21 2011 Matthias Clasen <mclasen@redhat.com> 3.3.3-1
+- Update to 3.3.3
+
 * Tue Dec 13 2011 Adam Jackson <ajax@redhat.com> 3.3.2-2
 - gnome-session-3.3.2-radeon.patch: Blacklist pre-R300 radeons (#758422)
 
