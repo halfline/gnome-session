@@ -2,8 +2,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.3.3
-Release: 2%{?dist}
+Version: 3.3.5
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.3/%{name}-%{version}.tar.xz
@@ -58,6 +58,8 @@ BuildRequires: libXtst-devel
 BuildRequires: xmlto
 BuildRequires: upower-devel
 BuildRequires: gnome-common
+BuildRequires: systemd-devel
+BuildRequires: polkit-devel
 
 # an artificial requires to make sure we get dconf, for now
 Requires: dconf
@@ -85,7 +87,8 @@ autoreconf -i -f
 %build
 %configure --enable-docbook-docs                                \
            --docdir=%{_datadir}/doc/%{name}-%{version}          \
-           --with-gtk=3.0
+           --with-gtk=3.0                                       \
+           --enable-systemd
 make %{?_smp_mflags} V=1
 
 %install
@@ -151,6 +154,10 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Feb  7 2012 Matthias Clasen <mclasen@redhat.com> - 3.3.5-1
+- Update to 3.3.5
+- Use systemd for session tracking
+
 * Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.3.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 
