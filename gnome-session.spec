@@ -3,7 +3,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.3.92
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.3/%{name}-%{version}.tar.xz
@@ -11,6 +11,8 @@ Source1: gnome-authentication-agent.desktop
 Source2: gnome.desktop
 
 Patch0: gnome-session-3.3.1-llvmpipe.patch
+# Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
+Patch1: gnome-session-3.3.92-nv30.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -79,6 +81,7 @@ Desktop file to add GNOME to display manager session menu.
 %prep
 %setup -q
 %patch0 -p1 -b .llvmpipe
+%patch1 -p1 -b .nv30
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
@@ -154,6 +157,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Thu Mar 22 2012 Adam Williamson <awilliam@redhat.com> - 3.3.92-2
+- blacklist NV30 family until RH #745202 is resolved
+
 * Wed Mar 21 2012 Kalev Lember <kalevlember@gmail.com> - 3.3.92-1
 - Update to 3.3.92
 
