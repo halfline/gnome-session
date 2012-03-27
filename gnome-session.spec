@@ -2,8 +2,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.3.92
-Release: 2%{?dist}
+Version: 3.4.0
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.3/%{name}-%{version}.tar.xz
@@ -157,6 +157,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Mar 27 2012 Richard Hughes <hughsient@gmail.com> - 3.4.0-1
+- Update to 3.4.0
+
 * Thu Mar 22 2012 Adam Williamson <awilliam@redhat.com> - 3.3.92-2
 - blacklist NV30 family until RH #745202 is resolved
 
