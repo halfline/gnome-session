@@ -3,7 +3,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.4.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.3/%{name}-%{version}.tar.xz
@@ -13,6 +13,8 @@ Source2: gnome.desktop
 Patch0: gnome-session-3.3.1-llvmpipe.patch
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
+# https://bugzilla.gnome.org/show_bug.cgi?id=673619
+Patch2: 0001-Fix-some-problems-in-the-systemd-code.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -82,6 +84,7 @@ Desktop file to add GNOME to display manager session menu.
 %setup -q
 %patch0 -p1 -b .llvmpipe
 %patch1 -p1 -b .nv30
+%patch2 -p1 -b .systemd
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
@@ -157,6 +160,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Thu Apr  5 2012 Matthias Clasen <mclasen@redhat.com> - 3.4.0-2
+- Fix a looping PolicyKit dialog on shutdown
+
 * Tue Mar 27 2012 Richard Hughes <hughsient@gmail.com> - 3.4.0-1
 - Update to 3.4.0
 
