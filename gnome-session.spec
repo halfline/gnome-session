@@ -3,7 +3,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.4.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.4/%{name}-%{version}.tar.xz
@@ -120,12 +120,12 @@ touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
 if [ $1 -eq 0 ] ; then
   touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
   gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-  glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
+  glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 fi
 
 %posttrans
 gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
+glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 
 %files xsession
 %{_datadir}/xsessions/*
@@ -157,6 +157,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Apr 24 2012 Kalev Lember <kalevlember@gmail.com> - 3.4.1-2
+- Silence rpm scriptlet output
+
 * Tue Apr 17 2012 Kalev Lember <kalevlember@gmail.com> - 3.4.1-1
 - Update to 3.4.1
 - Dropped upstreamed systemd patch
