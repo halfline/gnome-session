@@ -2,8 +2,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.4.1
-Release: 2%{?dist}
+Version: 3.4.2
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.4/%{name}-%{version}.tar.xz
@@ -157,6 +157,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Fri May 18 2012 Richard Hughes <hughsient@gmail.com> - 3.4.2-1
+- Update to 3.4.2
+
 * Tue Apr 24 2012 Kalev Lember <kalevlember@gmail.com> - 3.4.1-2
 - Silence rpm scriptlet output
 
