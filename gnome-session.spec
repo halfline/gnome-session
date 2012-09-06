@@ -2,7 +2,7 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.5.5
+Version: 3.5.91
 Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
@@ -157,6 +157,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Thu Sep 06 2012 Richard Hughes <hughsient@gmail.com> - 3.5.91-1
+- Update to 3.5.91
+
 * Tue Aug 07 2012 Richard Hughes <hughsient@gmail.com> - 3.5.5-1
 - Update to 3.5.5
 
