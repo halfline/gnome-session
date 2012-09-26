@@ -2,11 +2,11 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.5.91
+Version: 3.6.0
 Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
-Source0: http://download.gnome.org/sources/gnome-session/3.4/%{name}-%{version}.tar.xz
+Source0: http://download.gnome.org/sources/gnome-session/3.6/%{name}-%{version}.tar.xz
 Source1: gnome-authentication-agent.desktop
 Source2: gnome.desktop
 
@@ -157,6 +157,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Sep 25 2012 Matthias Clasen <mclasen@redhat.com> - 3.6.0-1
+- Update to 3.6.0
+
 * Thu Sep 06 2012 Richard Hughes <hughsient@gmail.com> - 3.5.91-1
 - Update to 3.5.91
 
