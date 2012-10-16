@@ -2,7 +2,7 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.6.0
+Version: 3.6.1
 Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
@@ -90,7 +90,6 @@ autoreconf -i -f
 %build
 %configure --enable-docbook-docs                                \
            --docdir=%{_datadir}/doc/%{name}-%{version}          \
-           --with-gtk=3.0                                       \
            --enable-systemd
 make %{?_smp_mflags} V=1
 
@@ -157,6 +156,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Oct 16 2012 Kalev Lember <kalevlember@gmail.com> - 3.6.1-1
+- Update to 3.6.1
+
 * Tue Sep 25 2012 Matthias Clasen <mclasen@redhat.com> - 3.6.0-1
 - Update to 3.6.0
 
