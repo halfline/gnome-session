@@ -3,7 +3,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.6.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.6/%{name}-%{version}.tar.xz
@@ -13,6 +13,7 @@ Source2: gnome.desktop
 Patch0: gnome-session-3.3.1-llvmpipe.patch
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
+Patch2: 0001-main-Set-XDG_MENU_PREFIX.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -82,6 +83,7 @@ Desktop file to add GNOME to display manager session menu.
 %setup -q
 %patch0 -p1 -b .llvmpipe
 %patch1 -p1 -b .nv30
+%patch2 -p1 -b .set-xdg-menu-prefix
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
@@ -156,6 +158,10 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Thu Oct 18 2012 Florian Müllner <fmuellner@redhat.com> - 3.6.1-2
+- Set XDG_MENU_PREFIX to pick the correct menu layout in
+  gnome-shell and alacarte
+
 * Tue Oct 16 2012 Kalev Lember <kalevlember@gmail.com> - 3.6.1-1
 - Update to 3.6.1
 
