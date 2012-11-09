@@ -2,11 +2,11 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.6.1
-Release: 2%{?dist}
+Version: 3.7.1
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
-Source0: http://download.gnome.org/sources/gnome-session/3.6/%{name}-%{version}.tar.xz
+Source0: http://download.gnome.org/sources/gnome-session/3.7/%{name}-%{version}.tar.xz
 Source1: gnome-authentication-agent.desktop
 Source2: gnome.desktop
 
@@ -158,6 +158,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Fri Nov 09 2012 Kalev Lember <kalevlember@gmail.com> - 3.7.1-1
+- Update to 3.7.1
+
 * Thu Oct 18 2012 Florian Müllner <fmuellner@redhat.com> - 3.6.1-2
 - Set XDG_MENU_PREFIX to pick the correct menu layout in
   gnome-shell and alacarte
