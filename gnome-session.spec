@@ -1,8 +1,9 @@
 %define po_package gnome-session-3.0
+%define _default_patch_fuzz 2
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.7.1
+Version: 3.7.2
 Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
@@ -158,6 +159,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Nov 20 2012 Richard Hughes <hughsient@gmail.com> - 3.7.2-1
+- Update to 3.7.2
+
 * Fri Nov 09 2012 Kalev Lember <kalevlember@gmail.com> - 3.7.1-1
 - Update to 3.7.1
 
