@@ -3,7 +3,7 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.7.2
+Version: 3.7.3
 Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
@@ -11,7 +11,6 @@ Source0: http://download.gnome.org/sources/gnome-session/3.7/%{name}-%{version}.
 Source1: gnome-authentication-agent.desktop
 Source2: gnome.desktop
 
-Patch0: gnome-session-3.3.1-llvmpipe.patch
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
 Patch2: 0001-main-Set-XDG_MENU_PREFIX.patch
@@ -36,9 +35,8 @@ Requires: notification-daemon
 Requires: polkit-desktop-policy
 
 BuildRequires: gtk3-devel >= 2.99.0
-BuildRequires: dbus-devel
 BuildRequires: dbus-glib-devel
-BuildRequires: gnome-keyring-devel
+BuildRequires: gnome-desktop3-devel
 BuildRequires: libnotify-devel >= 0.7.0
 BuildRequires: GConf2-devel
 BuildRequires: pango-devel
@@ -82,7 +80,6 @@ Desktop file to add GNOME to display manager session menu.
 
 %prep
 %setup -q
-%patch0 -p1 -b .llvmpipe
 %patch1 -p1 -b .nv30
 %patch2 -p1 -b .set-xdg-menu-prefix
 
@@ -150,6 +147,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_bindir}/*
 %{_libexecdir}/gnome-session-check-accelerated
 %{_libexecdir}/gnome-session-check-accelerated-helper
+%{_libexecdir}/gnome-session-failed
 %{_datadir}/gnome-session/gsm-inhibit-dialog.ui
 %{_datadir}/gnome-session/session-properties.ui
 %{_datadir}/gnome-session/hardware-compatibility
@@ -159,6 +157,11 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Thu Dec 20 2012 Kalev Lember <kalevlember@gmail.com> - 3.7.3-1
+- Update to 3.7.3
+- Drop the upstreamed llvmpipe patch
+- Adjust buildrequires
+
 * Tue Nov 20 2012 Richard Hughes <hughsient@gmail.com> - 3.7.2-1
 - Update to 3.7.2
 
