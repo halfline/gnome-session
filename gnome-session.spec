@@ -3,7 +3,7 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.7.3
+Version: 3.7.4
 Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
@@ -142,7 +142,6 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %dir %{_datadir}/gnome-session
 %dir %{_datadir}/gnome-session/sessions
 %{_datadir}/gnome-session/sessions/gnome.session
-%{_datadir}/gnome-session/sessions/gnome-fallback.session
 %{_datadir}/gnome/autostart
 %{_bindir}/*
 %{_libexecdir}/gnome-session-check-accelerated
@@ -150,6 +149,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_libexecdir}/gnome-session-failed
 %{_datadir}/gnome-session/gsm-inhibit-dialog.ui
 %{_datadir}/gnome-session/session-properties.ui
+%{_datadir}/gnome-session/session-selector.ui
 %{_datadir}/gnome-session/hardware-compatibility
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
@@ -157,6 +157,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Wed Feb 06 2013 Kalev Lember <kalevlember@gmail.com> - 3.7.4-1
+- Update to 3.7.4
+
 * Thu Dec 20 2012 Kalev Lember <kalevlember@gmail.com> - 3.7.3-1
 - Update to 3.7.3
 - Drop the upstreamed llvmpipe patch
