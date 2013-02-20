@@ -142,6 +142,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %dir %{_datadir}/gnome-session
 %dir %{_datadir}/gnome-session/sessions
 %{_datadir}/gnome-session/sessions/gnome.session
+%{_datadir}/gnome-session/sessions/gnome-dummy.session
 %{_datadir}/gnome/autostart
 %{_bindir}/*
 %{_libexecdir}/gnome-session-check-accelerated
@@ -149,7 +150,6 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_libexecdir}/gnome-session-failed
 %{_datadir}/gnome-session/gsm-inhibit-dialog.ui
 %{_datadir}/gnome-session/session-properties.ui
-%{_datadir}/gnome-session/session-selector.ui
 %{_datadir}/gnome-session/hardware-compatibility
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
