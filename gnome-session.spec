@@ -4,7 +4,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.7.90
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.7/%{name}-%{version}.tar.xz
@@ -26,13 +26,6 @@ Requires: gsettings-desktop-schemas >= 0.1.7
 
 # pull in dbus-x11, see bug 209924
 Requires: dbus-x11
-
-# we need an authentication agent in the fallback session
-Requires: polkit-gnome
-# and notifications
-Requires: notification-daemon
-# and we want good defaults
-Requires: polkit-desktop-policy
 
 BuildRequires: gtk3-devel >= 2.99.0
 BuildRequires: dbus-glib-devel
@@ -157,6 +150,10 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Sun Feb 24 2013 Matthias Clasen <mclasen@redhat.com> - 3.7.90-2
+- Drop obsolete requires (polkit-gnome, polkit-desktop-policy,
+  notification-daemon)
+
 * Wed Feb 20 2013 Richard Hughes <rhughes@redhat.com> - 3.7.90-1
 - Update to 3.7.90
 
