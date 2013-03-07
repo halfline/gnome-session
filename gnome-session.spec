@@ -3,8 +3,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.7.90
-Release: 2%{?dist}
+Version: 3.7.91
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.7/%{name}-%{version}.tar.xz
@@ -150,6 +150,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Wed Mar  6 2013 Matthias Clasen <mclasen@redhat.com> - 3.7.91-1
+- Update to 3.7.91
+
 * Sun Feb 24 2013 Matthias Clasen <mclasen@redhat.com> - 3.7.90-2
 - Drop obsolete requires (polkit-gnome, polkit-desktop-policy,
   notification-daemon)
