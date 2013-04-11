@@ -4,7 +4,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.8.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.8/%{name}-%{version}.tar.xz
@@ -14,6 +14,7 @@ Source2: gnome.desktop
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
 Patch2: 0001-main-Set-XDG_MENU_PREFIX.patch
+Patch3: gnome-session-3.6.2-swrast.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -75,6 +76,7 @@ Desktop file to add GNOME to display manager session menu.
 %setup -q
 %patch1 -p1 -b .nv30
 %patch2 -p1 -b .set-xdg-menu-prefix
+%patch3 -p1 -b .swrast
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
@@ -150,6 +152,11 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Thu Apr 11 2013 Adam Jackson <ajax@redhat.com> 3.8.0-2
+- gnome-session-3.6.2-swrast.patch: Allow running on the classic software
+  renderer.  No effect on arches where we build llvmpipe, but on ppc/s390
+  classic swrast is marginally less painful than softpipe.
+
 * Tue Mar 26 2013 Kalev Lember <kalevlember@gmail.com> - 3.8.0-1
 - Update to 3.8.0
 
