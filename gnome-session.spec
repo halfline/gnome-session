@@ -3,8 +3,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.8.0
-Release: 2%{?dist}
+Version: 3.8.1
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.8/%{name}-%{version}.tar.xz
@@ -152,6 +152,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Mon Apr 15 2013 Kalev Lember <kalevlember@gmail.com> - 3.8.1-1
+- Update to 3.8.1
+
 * Thu Apr 11 2013 Adam Jackson <ajax@redhat.com> 3.8.0-2
 - gnome-session-3.6.2-swrast.patch: Allow running on the classic software
   renderer.  No effect on arches where we build llvmpipe, but on ppc/s390
