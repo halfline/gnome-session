@@ -8,7 +8,6 @@ Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.8/%{name}-%{version}.tar.xz
-Source1: gnome-authentication-agent.desktop
 
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
@@ -95,10 +94,6 @@ desktop-file-install --vendor gnome --delete-original                   \
   --add-only-show-in GNOME                                              \
   $RPM_BUILD_ROOT%{_datadir}/applications/*
 
-mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
-
-install -Dp -m 644 %{SOURCE1} ${RPM_BUILD_ROOT}%{_datadir}/gnome/autostart
-
 cp -p AUTHORS COPYING NEWS README $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}
 
 %find_lang %{po_package}
@@ -136,7 +131,6 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %dir %{_datadir}/gnome-session/sessions
 %{_datadir}/gnome-session/sessions/gnome.session
 %{_datadir}/gnome-session/sessions/gnome-dummy.session
-%{_datadir}/gnome/autostart
 %{_bindir}/*
 %{_libexecdir}/gnome-session-check-accelerated
 %{_libexecdir}/gnome-session-check-accelerated-helper
@@ -152,6 +146,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %changelog
 * Tue Apr 30 2013 Kalev Lember <kalevlember@gmail.com> - 3.8.1-2
 - Use the upstream xsession desktop file
+- Drop the fallback mode authentication agent autostart file
 
 * Mon Apr 15 2013 Kalev Lember <kalevlember@gmail.com> - 3.8.1-1
 - Update to 3.8.1
