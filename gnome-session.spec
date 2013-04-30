@@ -4,12 +4,11 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.8.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.8/%{name}-%{version}.tar.xz
 Source1: gnome-authentication-agent.desktop
-Source2: gnome.desktop
 
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
@@ -99,7 +98,6 @@ desktop-file-install --vendor gnome --delete-original                   \
 mkdir -p $RPM_BUILD_ROOT%{_datadir}/gnome/autostart
 
 install -Dp -m 644 %{SOURCE1} ${RPM_BUILD_ROOT}%{_datadir}/gnome/autostart
-install -Dp -m 644 %{SOURCE2} ${RPM_BUILD_ROOT}%{_datadir}/xsessions/
 
 cp -p AUTHORS COPYING NEWS README $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}
 
@@ -152,6 +150,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Apr 30 2013 Kalev Lember <kalevlember@gmail.com> - 3.8.1-2
+- Use the upstream xsession desktop file
+
 * Mon Apr 15 2013 Kalev Lember <kalevlember@gmail.com> - 3.8.1-1
 - Update to 3.8.1
 
