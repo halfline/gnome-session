@@ -3,8 +3,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.8.1
-Release: 2%{?dist}
+Version: 3.8.2
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.8/%{name}-%{version}.tar.xz
@@ -144,6 +144,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue May 14 2013 Richard Hughes <rhughes@redhat.com> - 3.8.2-1
+- Update to 3.8.2
+
 * Tue Apr 30 2013 Kalev Lember <kalevlember@gmail.com> - 3.8.1-2
 - Use the upstream xsession desktop file
 - Drop the fallback mode authentication agent autostart file
