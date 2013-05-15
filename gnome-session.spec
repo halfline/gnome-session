@@ -1,9 +1,14 @@
 %define po_package gnome-session-3.0
 %define _default_patch_fuzz 2
 
+%if 0%{?fedora}
+%else
+%global with_session_selector 1
+%endif
+
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.8.2
+Version: 3.8.2.1
 Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
@@ -82,6 +87,9 @@ autoreconf -i -f
 
 %build
 %configure --enable-docbook-docs                                \
+%if 0%{?with_session_selector}
+           --enable-session-selector                            \
+%endif
            --docdir=%{_datadir}/doc/%{name}-%{version}          \
            --enable-systemd
 make %{?_smp_mflags} V=1
@@ -135,15 +143,17 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_libexecdir}/gnome-session-check-accelerated
 %{_libexecdir}/gnome-session-check-accelerated-helper
 %{_libexecdir}/gnome-session-failed
-%{_datadir}/gnome-session/gsm-inhibit-dialog.ui
-%{_datadir}/gnome-session/session-properties.ui
-%{_datadir}/gnome-session/hardware-compatibility
+%{_datadir}/gnome-session/*
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 %{_datadir}/GConf/gsettings/gnome-session.convert
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Wed May 15 2013 Matthias Clasen <mclasne@redhat.com> - 3.8.2.1-1
+- Update to 3.8.2.1
+- Conditionally build session selector
+
 * Tue May 14 2013 Richard Hughes <rhughes@redhat.com> - 3.8.2-1
 - Update to 3.8.2
 
