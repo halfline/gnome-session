@@ -11,7 +11,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.8.2.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.8/%{name}-%{version}.tar.xz
@@ -152,6 +152,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.8.2.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
 * Sat Jun 22 2013 Matthias Clasen <mclasne@redhat.com> - 3.8.2.1-2
 - Trim %%changelog
 
