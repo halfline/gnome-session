@@ -99,7 +99,7 @@ make %{?_smp_mflags} V=1
 %install
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 
-desktop-file-install --vendor gnome --delete-original                   \
+desktop-file-install --delete-original                   \
   --dir $RPM_BUILD_ROOT%{_datadir}/applications           \
   --add-only-show-in GNOME                                              \
   $RPM_BUILD_ROOT%{_datadir}/applications/*
