@@ -11,7 +11,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.9.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.9/%{name}-%{version}.tar.xz
@@ -152,6 +152,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Sat Aug 10 2013 Ray Strode <rstrode@redhat.com> 3.9.5-2
+- Remove vendor from desktop-file-install
+
 * Sat Aug 10 2013 Kalev Lember <kalevlember@gmail.com> - 3.9.5-1
 - Update to 3.9.5
 
