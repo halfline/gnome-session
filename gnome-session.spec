@@ -99,14 +99,16 @@ make %{?_smp_mflags} V=1
 %install
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 
-desktop-file-install --delete-original                   \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications           \
-  --add-only-show-in GNOME                                              \
-  $RPM_BUILD_ROOT%{_datadir}/applications/*
+# Renamed upstream in https://git.gnome.org/browse/gnome-session/commit/?id=ac9fd0dc97a17674cb082f80df0b1fcc45bc92bf
+mv $RPM_BUILD_ROOT%{_datadir}/applications/session-properties.desktop \
+   $RPM_BUILD_ROOT%{_datadir}/applications/gnome-session-properties.desktop
 
 cp -p AUTHORS COPYING NEWS README $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}
 
 %find_lang %{po_package}
+
+%check
+desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/gnome-session-properties.desktop
 
 %post
 /sbin/ldconfig
