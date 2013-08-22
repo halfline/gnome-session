@@ -130,15 +130,11 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %doc AUTHORS COPYING NEWS README
 %doc %{_mandir}/man*/*
 %{_datadir}/applications/gnome-session-properties.desktop
-%dir %{_datadir}/gnome-session
-%dir %{_datadir}/gnome-session/sessions
-%{_datadir}/gnome-session/sessions/gnome.session
-%{_datadir}/gnome-session/sessions/gnome-dummy.session
 %{_bindir}/*
 %{_libexecdir}/gnome-session-check-accelerated
 %{_libexecdir}/gnome-session-check-accelerated-helper
 %{_libexecdir}/gnome-session-failed
-%{_datadir}/gnome-session/*
+%{_datadir}/gnome-session/
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 %{_datadir}/GConf/gsettings/gnome-session.convert
