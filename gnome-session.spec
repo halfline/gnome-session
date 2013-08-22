@@ -92,7 +92,6 @@ autoreconf -i -f
 %if 0%{?with_session_selector}
            --enable-session-selector                            \
 %endif
-           --docdir=%{_datadir}/doc/%{name}-%{version}          \
            --enable-systemd
 make %{?_smp_mflags} V=1
 
@@ -102,8 +101,6 @@ make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 # Renamed upstream in https://git.gnome.org/browse/gnome-session/commit/?id=ac9fd0dc97a17674cb082f80df0b1fcc45bc92bf
 mv $RPM_BUILD_ROOT%{_datadir}/applications/session-properties.desktop \
    $RPM_BUILD_ROOT%{_datadir}/applications/gnome-session-properties.desktop
-
-cp -p AUTHORS COPYING NEWS README $RPM_BUILD_ROOT%{_datadir}/doc/%{name}-%{version}
 
 %find_lang %{po_package}
 
@@ -130,13 +127,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/xsessions/*
 
 %files -f %{po_package}.lang
-%doc %dir %{_datadir}/doc/%{name}-%{version}
-%doc %{_datadir}/doc/%{name}-%{version}/AUTHORS
-%doc %{_datadir}/doc/%{name}-%{version}/COPYING
-%doc %{_datadir}/doc/%{name}-%{version}/NEWS
-%doc %{_datadir}/doc/%{name}-%{version}/README
-%doc %dir %{_datadir}/doc/%{name}-%{version}/dbus
-%doc %{_datadir}/doc/%{name}-%{version}/dbus/*
+%doc AUTHORS COPYING NEWS README
 %doc %{_mandir}/man*/*
 %{_datadir}/applications/gnome-session-properties.desktop
 %dir %{_datadir}/gnome-session
@@ -156,6 +147,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %changelog
 * Thu Aug 22 2013 Kalev Lember <kalevlember@gmail.com> - 3.9.90-1
 - Update to 3.9.90
+- Switch to unversioned docdirs (#993784)
 
 * Sat Aug 10 2013 Ray Strode <rstrode@redhat.com> 3.9.5-2
 - Remove vendor from desktop-file-install
