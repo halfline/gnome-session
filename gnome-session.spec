@@ -10,7 +10,7 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.9.90
+Version: 3.9.91
 Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
@@ -98,10 +98,6 @@ make %{?_smp_mflags} V=1
 %install
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 
-# Renamed upstream in https://git.gnome.org/browse/gnome-session/commit/?id=ac9fd0dc97a17674cb082f80df0b1fcc45bc92bf
-mv $RPM_BUILD_ROOT%{_datadir}/applications/session-properties.desktop \
-   $RPM_BUILD_ROOT%{_datadir}/applications/gnome-session-properties.desktop
-
 %find_lang %{po_package}
 
 %check
@@ -141,6 +137,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Sep 03 2013 Kalev Lember <kalevlember@gmail.com> - 3.9.91-1
+- Update to 3.9.91
+
 * Thu Aug 22 2013 Kalev Lember <kalevlember@gmail.com> - 3.9.90-1
 - Update to 3.9.90
 - Switch to unversioned docdirs (#993784)
