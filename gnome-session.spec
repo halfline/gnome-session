@@ -131,6 +131,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_libexecdir}/gnome-session-check-accelerated-helper
 %{_libexecdir}/gnome-session-failed
 %{_datadir}/gnome-session/
+%{_datadir}/wayland-sessions/gnome-wayland.desktop
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
 %{_datadir}/GConf/gsettings/gnome-session.convert
