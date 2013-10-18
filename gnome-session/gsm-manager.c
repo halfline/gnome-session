@@ -492,6 +492,7 @@ gsm_manager_quit (GsmManager *manager)
 
         switch (manager->priv->logout_type) {
         case GSM_MANAGER_LOGOUT_LOGOUT:
+        case GSM_MANAGER_LOGOUT_NONE:
                 gtk_main_quit ();
                 break;
         case GSM_MANAGER_LOGOUT_REBOOT:
