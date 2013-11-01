@@ -11,7 +11,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.10.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.10/%{name}-%{version}.tar.xz
@@ -20,6 +20,8 @@ Source0: http://download.gnome.org/sources/gnome-session/3.10/%{name}-%{version}
 Patch1: gnome-session-3.3.92-nv30.patch
 Patch2: 0001-main-Set-XDG_MENU_PREFIX.patch
 Patch3: gnome-session-3.6.2-swrast.patch
+
+Patch4: 0001-Only-support-UPower-0.9.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -83,6 +85,8 @@ Desktop file to add GNOME to display manager session menu.
 %patch2 -p1 -b .set-xdg-menu-prefix
 %patch3 -p1 -b .swrast
 
+%patch4 -p1 -b .upower1
+
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
 autoreconf -i -f
@@ -138,6 +142,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Fri Nov 01 2013 Kalev Lember <kalevlember@gmail.com> - 3.10.1-2
+- Backport patch for UPower 1.0 support
+
 * Mon Oct 14 2013 Richard Hughes <rhughes@redhat.com> - 3.10.1-1
 - Update to 3.10.1
 
