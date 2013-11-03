@@ -10,18 +10,16 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.10.1
-Release: 2%{?dist}
+Version: 3.11.1
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
-Source0: http://download.gnome.org/sources/gnome-session/3.10/%{name}-%{version}.tar.xz
+Source0: http://download.gnome.org/sources/gnome-session/3.11/%{name}-%{version}.tar.xz
 
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
 Patch2: 0001-main-Set-XDG_MENU_PREFIX.patch
 Patch3: gnome-session-3.6.2-swrast.patch
-
-Patch4: 0001-Only-support-UPower-0.9.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -85,8 +83,6 @@ Desktop file to add GNOME to display manager session menu.
 %patch2 -p1 -b .set-xdg-menu-prefix
 %patch3 -p1 -b .swrast
 
-%patch4 -p1 -b .upower1
-
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
 autoreconf -i -f
@@ -103,9 +99,6 @@ make %{?_smp_mflags} V=1
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 
 %find_lang %{po_package}
-
-%check
-desktop-file-validate $RPM_BUILD_ROOT%{_datadir}/applications/gnome-session-properties.desktop
 
 %post
 /sbin/ldconfig
@@ -129,7 +122,6 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %files -f %{po_package}.lang
 %doc AUTHORS COPYING NEWS README
 %doc %{_mandir}/man*/*
-%{_datadir}/applications/gnome-session-properties.desktop
 %{_bindir}/*
 %{_libexecdir}/gnome-session-check-accelerated
 %{_libexecdir}/gnome-session-check-accelerated-helper
@@ -142,6 +134,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Sun Nov 03 2013 Kalev Lember <kalevlember@gmail.com> - 3.11.1-1
+- Update to 3.11.1
+
 * Fri Nov 01 2013 Kalev Lember <kalevlember@gmail.com> - 3.10.1-2
 - Backport patch for UPower 1.0 support
 
