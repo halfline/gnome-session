@@ -18,6 +18,8 @@
 
 #include <config.h>
 
+#include <string.h>
+
 #include <glib.h>
 #include <glib/gstdio.h>
 #include <gio/gio.h>
@@ -42,6 +44,36 @@ typedef struct {
         GsmStore    *app_store;
         GError     **error;
 } SessionSaveData;
+
+static void
+clear_session_type (const char *save_dir)
+{
+        char *file;
+
+        file = g_build_filename (save_dir, "type", NULL);
+
+        g_unlink (file);
+
+        g_free (file);
+}
+
+static void
+set_session_type (const char *save_dir,
+                  const char *type)
+{
+        char *file;
+        GError *error;
+
+        file = g_build_filename (save_dir, "type", NULL);
+
+        error = NULL;
+        g_file_set_contents (file, type, strlen (type), &error);
+        if (error != NULL)
+                g_warning ("couldn't save session type to %s: %s",
+                           type, error->message);
+
+        g_free (file);
+}
 
 static gboolean
 _app_has_app_id (const char   *id,
@@ -151,9 +183,10 @@ out:
 }
 
 void
-gsm_session_save (GsmStore  *client_store,
-                  GsmStore  *app_store,
-                  GError   **error)
+gsm_session_save (GsmStore    *client_store,
+                  GsmStore    *app_store,
+                  const char  *type,
+                  GError     **error)
 {
         GSettings       *settings;
         const char      *save_dir;
@@ -202,8 +235,9 @@ gsm_session_save (GsmStore  *client_store,
                         session_dir = g_strdup (save_dir);
 
                 if (session_dir != NULL) {
-
                         char *absolute_session_dir;
+
+                        set_session_type (tmp_dir, type);
 
                         if (g_path_is_absolute (session_dir)) {
                                 absolute_session_dir = g_strdup (session_dir);
@@ -340,4 +374,5 @@ gsm_session_save_clear (void)
         }
 
         gsm_session_clear_saved_session (save_dir, NULL);
+        clear_session_type (save_dir);
 }
