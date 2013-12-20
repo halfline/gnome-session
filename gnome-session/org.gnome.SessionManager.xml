@@ -289,6 +289,7 @@
     </method>
 
     <method name="SaveSession">
+      <annotation name="org.freedesktop.DBus.GLib.Async" value=""/>
       <doc:doc>
 	<doc:description>
 	  <doc:para>Request to save session</doc:para>
