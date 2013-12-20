@@ -279,6 +279,7 @@ main (int argc, char **argv)
         static char     **override_autostart_dirs = NULL;
         static char      *opt_session_name = NULL;
         const char       *session_name;
+        char             *saved_session_name = NULL;
         gboolean          gl_failed = FALSE;
         static GOptionEntry entries[] = {
                 { "autostart", 'a', 0, G_OPTION_ARG_STRING_ARRAY, &override_autostart_dirs, N_("Override standard autostart directories"), N_("AUTOSTART_DIR") },
@@ -409,10 +410,16 @@ main (int argc, char **argv)
         g_unix_signal_add (SIGUSR1, sigusr1_cb, manager);
         g_unix_signal_add (SIGUSR2, sigusr2_cb, manager);
 
-        if (IS_STRING_EMPTY (opt_session_name))
-                session_name = _gsm_manager_get_default_session (manager);
-        else
+        if (IS_STRING_EMPTY (opt_session_name)) {
+                saved_session_name = _gsm_manager_get_saved_session (manager);
+
+                if (IS_STRING_EMPTY (saved_session_name))
+                        session_name = _gsm_manager_get_default_session (manager);
+                else
+                        session_name = saved_session_name;
+        } else {
                 session_name = opt_session_name;
+        }
 
         gsm_util_set_autostart_dirs (override_autostart_dirs);
 
@@ -427,6 +434,7 @@ main (int argc, char **argv)
         g_clear_object (&manager);
         g_clear_object (&client_store);
         g_clear_object (&bus_proxy);
+        g_free (saved_session_name);
 
         gdm_log_shutdown ();
 
