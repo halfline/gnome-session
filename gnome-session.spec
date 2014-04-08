@@ -11,7 +11,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.12.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.12/%{name}-%{version}.tar.xz
@@ -77,6 +77,14 @@ Requires: gnome-session = %{version}-%{release}
 %description xsession
 Desktop file to add GNOME to display manager session menu.
 
+%package wayland-session
+Summary: Desktop file for wayland based gnome session
+Group: User Interface/Desktops
+Requires: gnome-session = %{version}-%{release}
+
+%description wayland-session
+Desktop file to add GNOME on wayland to display manager session menu.
+
 %prep
 %setup -q
 %patch1 -p1 -b .nv30
@@ -119,6 +127,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %files xsession
 %{_datadir}/xsessions/*
 
+%files wayland-session
+%{_datadir}/wayland-sessions/*
+
 %files -f %{po_package}.lang
 %doc AUTHORS COPYING NEWS README
 %doc %{_mandir}/man*/*
@@ -134,6 +145,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Apr 08 2014 Ray Strode <rstrode@redhat.com> - 3.12.0-2
+- Move wayland session to a subpackage
+
 * Tue Mar 25 2014 Richard Hughes <rhughes@redhat.com> - 3.12.0-1
 - Update to 3.12.0
 
