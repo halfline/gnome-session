@@ -10,8 +10,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.12.0
-Release: 3%{?dist}
+Version: 3.12.1
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.12/%{name}-%{version}.tar.xz
@@ -144,6 +144,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Wed Apr 16 2014 Kalev Lember <kalevlember@gmail.com> - 3.12.1-1
+- Update to 3.12.1
+
 * Tue Apr 15 2014 Ray Strode <rstrode@redhat.com> 3.12.0-3
 - Actually move wayland session to subpackage, instead of
   copy it to subpackage
