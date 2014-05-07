@@ -11,7 +11,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.12.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.12/%{name}-%{version}.tar.xz
@@ -81,6 +81,7 @@ Desktop file to add GNOME to display manager session menu.
 Summary: Desktop file for wayland based gnome session
 Group: User Interface/Desktops
 Requires: gnome-session = %{version}-%{release}
+Requires: xorg-x11-server-Xwayland
 
 %description wayland-session
 Desktop file to add GNOME on wayland to display manager session menu.
@@ -144,6 +145,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Wed May 07 2014 Kalev Lember <kalevlember@gmail.com> - 3.12.1-2
+- Pull in xorg-x11-server-Xwayland for the wayland session
+
 * Wed Apr 16 2014 Kalev Lember <kalevlember@gmail.com> - 3.12.1-1
 - Update to 3.12.1
 
