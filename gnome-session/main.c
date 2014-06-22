@@ -439,6 +439,12 @@ main (int argc, char **argv)
                 { NULL, 0, 0, 0, NULL, NULL, NULL }
         };
 
+        /* Make sure we aren't getting run from within a session */
+        if (g_getenv ("SESSION_MANAGER") != NULL) {
+                fprintf (stderr, "gnome-session: you're already running a session manager\n");
+                exit (1);
+        }
+
         /* Make sure that we have a session bus */
         if (!require_dbus_session (argc, argv, &error)) {
                 gsm_util_init_error (TRUE, "%s", error->message);
