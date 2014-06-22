@@ -50,6 +50,7 @@ static GtkWidget *session_list;
 static GtkListStore *store;
 static GtkTreeModelSort *sort_model;
 static char *info_text;
+static gboolean canceled;
 
 static void select_session (const char *name);
 
@@ -373,6 +374,14 @@ static void
 on_continue_clicked (GtkButton *button,
                      gpointer    data)
 {
+        gtk_main_quit ();
+}
+
+static void
+on_close_clicked (GtkButton *button,
+                  gpointer    data)
+{
+        canceled = TRUE;
         gtk_main_quit ();
 }
 
@@ -785,6 +794,12 @@ main (int argc, char *argv[])
         g_signal_connect (widget, "clicked", G_CALLBACK (on_rename_session_clicked), NULL);
         widget = (GtkWidget *) gtk_builder_get_object (builder, "continue-button");
         g_signal_connect (widget, "clicked", G_CALLBACK (on_continue_clicked), NULL);
+        widget = (GtkWidget *) gtk_builder_get_object (builder, "close-button");
+        if (g_strcmp0 (action, "save") == 0) {
+                g_signal_connect (widget, "clicked", G_CALLBACK (on_close_clicked), NULL);
+        } else {
+                gtk_widget_hide (widget);
+        }
 
         g_signal_connect (window, "map", G_CALLBACK (on_map), NULL);
         gtk_widget_show (window);
@@ -815,7 +830,7 @@ main (int argc, char *argv[])
         if (g_strcmp0 (action, "load") == 0) {
                 make_session_current (selected_session);
                 auto_save_next_session_if_needed ();
-        } else if (g_strcmp0 (action, "save") == 0) {
+        } else if (g_strcmp0 (action, "save") == 0 && !canceled) {
                 char *last_session;
 
                 last_session = get_last_session ();
