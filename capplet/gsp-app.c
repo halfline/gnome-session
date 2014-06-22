@@ -272,7 +272,7 @@ _gsp_app_update_description (GspApp *app)
         if (!gsm_util_text_is_blank (app->priv->comment)) {
                 secondary = app->priv->comment;
         } else {
-                secondary = _("No description");
+                secondary = "";
         }
 
         g_free (app->priv->description);
