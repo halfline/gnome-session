@@ -105,5 +105,7 @@ main (int argc, char *argv[])
 
         gtk_main ();
 
+        gtk_widget_destroy (dialog);
+
         return 0;
 }
