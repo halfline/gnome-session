@@ -10,11 +10,11 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.13.3
-Release: 2%{?dist}
+Version: 3.14.0
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
-Source0: http://download.gnome.org/sources/gnome-session/3.12/%{name}-%{version}.tar.xz
+Source0: http://download.gnome.org/sources/gnome-session/3.14/%{name}-%{version}.tar.xz
 
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
@@ -145,6 +145,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Mon Sep 22 2014 Kalev Lember <kalevlember@gmail.com> - 3.14.0-1
+- Update to 3.14.0
+
 * Sat Aug 16 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.13.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
