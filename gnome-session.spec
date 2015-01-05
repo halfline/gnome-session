@@ -11,7 +11,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.15.3
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.15/%{name}-%{version}.tar.xz
@@ -20,6 +20,7 @@ Source0: http://download.gnome.org/sources/gnome-session/3.15/%{name}-%{version}
 Patch1: gnome-session-3.3.92-nv30.patch
 Patch2: 0001-main-Set-XDG_MENU_PREFIX.patch
 Patch3: gnome-session-3.6.2-swrast.patch
+Patch4: add-back-session-name-property.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -91,6 +92,7 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %patch1 -p1 -b .nv30
 %patch2 -p1 -b .set-xdg-menu-prefix
 %patch3 -p1 -b .swrast
+%patch4 -p1 -b .add-back-session-name-property
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
@@ -146,6 +148,10 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Mon Jan 05 2015 Ray Strode <rstrode@redhat.com> 3.15.3-2
+- Fix crasher
+  Resolves: #1176413
+
 * Fri Dec 19 2014 Richard Hughes <rhughes@redhat.com> - 3.15.3-1
 - Update to 3.15.3
 
