@@ -132,7 +132,8 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/wayland-sessions/*
 
 %files -f %{po_package}.lang
-%doc AUTHORS COPYING NEWS README
+%doc AUTHORS NEWS README
+%license COPYING
 %doc %{_mandir}/man*/*
 %{_bindir}/*
 %{_libexecdir}/gnome-session-check-accelerated
@@ -148,6 +149,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %changelog
 * Thu Jan 29 2015 David King <amigadave@amigadave.com> - 3.15.4-1
 - Update to 3.15.4
+- Use license macro for COPYING
 
 * Mon Jan 05 2015 Ray Strode <rstrode@redhat.com> 3.15.3-2
 - Fix crasher
