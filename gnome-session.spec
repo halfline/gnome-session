@@ -20,6 +20,8 @@ Source0: http://download.gnome.org/sources/gnome-session/3.15/%{name}-%{version}
 Patch1: gnome-session-3.3.92-nv30.patch
 Patch2: 0001-main-Set-XDG_MENU_PREFIX.patch
 Patch3: gnome-session-3.6.2-swrast.patch
+# https://bugzilla.gnome.org/show_bug.cgi?id=743718
+Patch4: gnome-session-3.15.4-no-dbus-glib.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -33,20 +35,23 @@ Requires: gsettings-desktop-schemas >= 0.1.7
 # pull in dbus-x11, see bug 209924
 Requires: dbus-x11
 
-BuildRequires: gtk3-devel >= 2.99.0
-BuildRequires: dbus-glib-devel
-BuildRequires: gnome-desktop3-devel
-BuildRequires: libnotify-devel >= 0.7.0
-BuildRequires: GConf2-devel
-BuildRequires: pango-devel
-BuildRequires: gnome-settings-daemon-devel
-BuildRequires: desktop-file-utils
-BuildRequires: libXau-devel
-BuildRequires: libXrandr-devel
-BuildRequires: xorg-x11-xtrans-devel
-BuildRequires: mesa-libGL-devel
-BuildRequires: librsvg2-devel
-BuildRequires: json-glib-devel
+BuildRequires: pkgconfig(gconf-2.0)
+BuildRequires: pkgconfig(gl)
+BuildRequires: pkgconfig(gnome-desktop-3.0)
+BuildRequires: pkgconfig(gtk+-3.0) >= 2.99.0
+BuildRequires: pkgconfig(libsystemd-daemon)
+BuildRequires: pkgconfig(libsystemd-journal)
+BuildRequires: pkgconfig(libsystemd-login)
+BuildRequires: pkgconfig(ice)
+BuildRequires: pkgconfig(json-glib-1.0)
+BuildRequires: pkgconfig(sm)
+BuildRequires: pkgconfig(x11)
+BuildRequires: pkgconfig(xau)
+BuildRequires: pkgconfig(xcomposite)
+BuildRequires: pkgconfig(xext)
+BuildRequires: pkgconfig(xrender)
+BuildRequires: pkgconfig(xtrans)
+BuildRequires: pkgconfig(xtst)
 
 # this is so the configure checks find /usr/bin/halt etc.
 BuildRequires: usermode
@@ -54,13 +59,9 @@ BuildRequires: usermode
 BuildRequires: intltool, autoconf, automake
 BuildRequires: libtool
 BuildRequires: gettext
-BuildRequires: libX11-devel libXt-devel
-BuildRequires: libXtst-devel
 BuildRequires: xmlto
-BuildRequires: upower-devel
 BuildRequires: gnome-common
-BuildRequires: systemd-devel
-BuildRequires: polkit-devel
+BuildRequires: /usr/bin/xsltproc
 
 # an artificial requires to make sure we get dconf, for now
 Requires: dconf
@@ -91,6 +92,7 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %patch1 -p1 -b .nv30
 %patch2 -p1 -b .set-xdg-menu-prefix
 %patch3 -p1 -b .swrast
+%patch4 -p1 -b .no-dbus-glib
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
@@ -150,6 +152,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 * Thu Jan 29 2015 David King <amigadave@amigadave.com> - 3.15.4-1
 - Update to 3.15.4
 - Use license macro for COPYING
+- Use pkgconfig for BuildRequires
 
 * Mon Jan 05 2015 Ray Strode <rstrode@redhat.com> 3.15.3-2
 - Fix crasher

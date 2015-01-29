@@ -1,0 +1,27 @@
+From dd4fb5f5b1f1c447caf807c7c4bf22f0b5ef1f7e Mon Sep 17 00:00:00 2001
+From: David King <amigadave@amigadave.com>
+Date: Thu, 29 Jan 2015 22:01:48 +0000
+Subject: [PATCH] manager: Drop unnecessary dbus-glib include
+
+Fix the build when dbus-glib is not available.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=743718
+---
+ gnome-session/gsm-manager.h | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/gnome-session/gsm-manager.h b/gnome-session/gsm-manager.h
+index 39595a1..821bea6 100644
+--- a/gnome-session/gsm-manager.h
++++ b/gnome-session/gsm-manager.h
+@@ -22,7 +22,6 @@
+ #define __GSM_MANAGER_H
+ 
+ #include <glib-object.h>
+-#include <dbus/dbus-glib.h>
+ 
+ #include "gsm-store.h"
+ #include "gsm-manager-logout-mode.h"
+-- 
+2.2.2
+
