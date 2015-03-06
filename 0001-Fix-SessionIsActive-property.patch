@@ -1,0 +1,36 @@
+From f1424cd84dc3488922c91a918d9a4f5bdbfb2756 Mon Sep 17 00:00:00 2001
+From: Matthias Clasen <mclasen@redhat.com>
+Date: Fri, 6 Mar 2015 18:13:40 -0500
+Subject: [PATCH] Fix SessionIsActive property
+
+GsmSystemd emits its cold-plug notify::active signal out of
+init(), giving GsmManager no chance to connect its signal handler
+in time to catch the initial emission. And even if we did,
+the GsmManager handler can only operate once the skeleton object
+exists.
+Therefore, do our own cold-plug after creating the skeleton.
+
+This is fallout from the GDBus port.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=745762
+---
+ gnome-session/gsm-manager.c | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/gnome-session/gsm-manager.c b/gnome-session/gsm-manager.c
+index 775873f..70ef94f 100644
+--- a/gnome-session/gsm-manager.c
++++ b/gnome-session/gsm-manager.c
+@@ -3210,6 +3210,9 @@ register_manager (GsmManager *manager)
+         manager->priv->connection = connection;
+         manager->priv->skeleton = skeleton;
+ 
++        /* cold-plug SessionIsActive */
++        on_gsm_system_active_changed (manager->priv->system, NULL, manager);
++
+         return TRUE;
+ }
+ 
+-- 
+2.3.1
+

@@ -11,7 +11,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.15.90
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.15/%{name}-%{version}.tar.xz
@@ -20,6 +20,9 @@ Source0: http://download.gnome.org/sources/gnome-session/3.15/%{name}-%{version}
 Patch1: gnome-session-3.3.92-nv30.patch
 Patch2: 0001-main-Set-XDG_MENU_PREFIX.patch
 Patch3: gnome-session-3.6.2-swrast.patch
+
+# https://bugzilla.gnome.org/show_bug.cgi?id=745762
+Patch4: 0001-Fix-SessionIsActive-property.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -33,7 +36,6 @@ Requires: gsettings-desktop-schemas >= 0.1.7
 # pull in dbus-x11, see bug 209924
 Requires: dbus-x11
 
-BuildRequires: pkgconfig(gconf-2.0)
 BuildRequires: pkgconfig(gl)
 BuildRequires: pkgconfig(gnome-desktop-3.0)
 BuildRequires: pkgconfig(gtk+-3.0) >= 2.99.0
@@ -90,6 +92,7 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %patch1 -p1 -b .nv30
 %patch2 -p1 -b .set-xdg-menu-prefix
 %patch3 -p1 -b .swrast
+%patch4 -p1 -b .session-is-active
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
@@ -100,7 +103,8 @@ autoreconf -i -f
 %if 0%{?with_session_selector}
            --enable-session-selector                            \
 %endif
-           --enable-systemd
+           --enable-systemd                                     \
+           --disable-gconf
 make %{?_smp_mflags} V=1
 
 %install
@@ -146,6 +150,10 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Sat Mar 07 2015 Bastien Nocera <bnocera@redhat.com> 3.15.90-2
+- Fix SessionIsActive property thereby fixing screens not going to sleep
+- Disable GConf autostart support
+
 * Thu Feb 19 2015 David King <amigadave@amigadave.com> - 3.15.90-1
 - Update to 3.15.90
 
