@@ -10,8 +10,8 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.15.90
-Release: 2%{?dist}
+Version: 3.15.92
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.15/%{name}-%{version}.tar.xz
@@ -150,6 +150,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Wed Mar 18 2015 Kalev Lember <kalevlember@gmail.com> - 3.15.92-1
+- Update to 3.15.92
+
 * Sat Mar 07 2015 Bastien Nocera <bnocera@redhat.com> 3.15.90-2
 - Fix SessionIsActive property thereby fixing screens not going to sleep
 - Disable GConf autostart support
