@@ -51,11 +51,9 @@ BuildRequires: pkgconfig(xtst)
 # this is so the configure checks find /usr/bin/halt etc.
 BuildRequires: usermode
 
-BuildRequires: intltool, autoconf, automake
-BuildRequires: libtool
 BuildRequires: gettext
+BuildRequires: intltool
 BuildRequires: xmlto
-BuildRequires: gnome-common
 BuildRequires: /usr/bin/xsltproc
 
 # an artificial requires to make sure we get dconf, for now
@@ -86,10 +84,6 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %setup -q
 %patch1 -p1 -b .nv30
 %patch3 -p1 -b .swrast
-
-echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
-
-autoreconf -i -f
 
 %build
 %configure --enable-docbook-docs                                \
