@@ -1,7 +1,6 @@
 %global _changelog_trimtime %(date +%s -d "1 year ago")
 
 %define po_package gnome-session-3.0
-%define _default_patch_fuzz 2
 
 %if 0%{?fedora}
 %else
@@ -18,11 +17,7 @@ Source0: http://download.gnome.org/sources/gnome-session/3.15/%{name}-%{version}
 
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
-Patch2: 0001-main-Set-XDG_MENU_PREFIX.patch
 Patch3: gnome-session-3.6.2-swrast.patch
-
-# https://bugzilla.gnome.org/show_bug.cgi?id=745762
-Patch4: 0001-Fix-SessionIsActive-property.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -90,9 +85,7 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %prep
 %setup -q
 %patch1 -p1 -b .nv30
-%patch2 -p1 -b .set-xdg-menu-prefix
 %patch3 -p1 -b .swrast
-%patch4 -p1 -b .session-is-active
 
 echo "ACLOCAL_AMFLAGS = -I m4" >> Makefile.am
 
@@ -152,6 +145,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %changelog
 * Wed Mar 18 2015 Kalev Lember <kalevlember@gmail.com> - 3.15.92-1
 - Update to 3.15.92
+- Remove patch fuzz 2 and drop two upstreamed patches
 
 * Sat Mar 07 2015 Bastien Nocera <bnocera@redhat.com> 3.15.90-2
 - Fix SessionIsActive property thereby fixing screens not going to sleep

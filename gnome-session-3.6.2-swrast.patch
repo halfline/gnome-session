@@ -8,5 +8,5 @@ diff -up gnome-session-3.6.2/data/hardware-compatibility.jx gnome-session-3.6.2/
 --software rasterizer
 +#software rasterizer
  
- # Gallium has softpipe and llvmpipe
+ # Gallium has softpipe; we explicitly enable llvmpipe
  -softpipe
