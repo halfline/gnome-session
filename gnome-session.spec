@@ -66,7 +66,7 @@ the other core GNOME components and handles logout and saving the session.
 %package xsession
 Summary: Desktop file for gnome-session
 Group: User Interface/Desktops
-Requires: gnome-session = %{version}-%{release}
+Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description xsession
 Desktop file to add GNOME to display manager session menu.
@@ -74,8 +74,8 @@ Desktop file to add GNOME to display manager session menu.
 %package wayland-session
 Summary: Desktop file for wayland based gnome session
 Group: User Interface/Desktops
-Requires: gnome-session = %{version}-%{release}
-Requires: xorg-x11-server-Xwayland
+Requires: %{name}%{?_isa} = %{version}-%{release}
+Requires: xorg-x11-server-Xwayland%{?_isa}
 
 %description wayland-session
 Desktop file to add GNOME on wayland to display manager session menu.
@@ -140,6 +140,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 * Wed Mar 18 2015 Kalev Lember <kalevlember@gmail.com> - 3.15.92-1
 - Update to 3.15.92
 - Remove patch fuzz 2 and drop two upstreamed patches
+- Tighten deps with the _isa macro
 
 * Sat Mar 07 2015 Bastien Nocera <bnocera@redhat.com> 3.15.90-2
 - Fix SessionIsActive property thereby fixing screens not going to sleep
