@@ -179,6 +179,7 @@ po_dir = join_paths(meson.source_root(), 'po')
 top_inc = include_directories('.')
 
 subdir('gnome-session')
+subdir('capplet')
 subdir('tools')
 subdir('data')
 

@@ -99,3 +99,16 @@ install_data(
   data,
   install_dir: session_pkgdatadir
 )
+
+desktop = 'gnome-session-properties.desktop'
+
+i18n.merge_file(
+  desktop,
+  type: 'desktop',
+  input: desktop + '.in',
+  output: desktop,
+  po_dir: po_dir,
+  install: true,
+  install_dir: join_paths(session_datadir, 'applications')
+)
+
