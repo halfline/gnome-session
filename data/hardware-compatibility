@@ -23,7 +23,7 @@
 -Mesa DRI R[12]00$
 
 # Old Mesa software GL renderer
--software rasterizer
+#software rasterizer
 
 # Gallium has softpipe; we explicitly enable llvmpipe
 -softpipe
