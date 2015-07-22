@@ -10,7 +10,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.16.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.16/%{name}-%{version}.tar.xz
@@ -137,6 +137,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Wed Jul 22 2015 David King <amigadave@amigadave.com> - 3.16.0-3
+- Bump for new gnome-desktop3
+
 * Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 3.16.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
 
