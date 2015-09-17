@@ -95,7 +95,7 @@ Desktop file to add GNOME on wayland to display manager session menu.
 make %{?_smp_mflags} V=1
 
 %install
-make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
+%make_install
 
 %find_lang %{po_package}
 
@@ -140,6 +140,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %changelog
 * Thu Sep 17 2015 Kalev Lember <klember@redhat.com> - 3.17.92-1
 - Update to 3.17.92
+- Use make_install macro
 
 * Wed Jul 22 2015 David King <amigadave@amigadave.com> - 3.16.0-3
 - Bump for new gnome-desktop3
