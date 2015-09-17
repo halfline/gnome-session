@@ -9,11 +9,11 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.16.0
-Release: 3%{?dist}
+Version: 3.17.92
+Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
-Source0: http://download.gnome.org/sources/gnome-session/3.16/%{name}-%{version}.tar.xz
+Source0: http://download.gnome.org/sources/gnome-session/3.17/%{name}-%{version}.tar.xz
 
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
@@ -133,10 +133,14 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/doc/gnome-session/dbus/gnome-session.html
 %{_datadir}/icons/hicolor/*/apps/session-properties.png
 %{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
+%{_datadir}/icons/hicolor/symbolic/apps/session-properties-symbolic.svg
 %{_datadir}/GConf/gsettings/gnome-session.convert
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Thu Sep 17 2015 Kalev Lember <klember@redhat.com> - 3.17.92-1
+- Update to 3.17.92
+
 * Wed Jul 22 2015 David King <amigadave@amigadave.com> - 3.16.0-3
 - Bump for new gnome-desktop3
 
