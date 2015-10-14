@@ -9,11 +9,14 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.18.0
+Version: 3.18.1
 Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.18/%{name}-%{version}.tar.xz
+
+# Backported from upstream
+Patch0: gnome-session-fix-env-var-names.patch
 
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
@@ -82,6 +85,7 @@ Desktop file to add GNOME on wayland to display manager session menu.
 
 %prep
 %setup -q
+%patch0 -p1
 %patch1 -p1 -b .nv30
 %patch3 -p1 -b .swrast
 
@@ -126,6 +130,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %license COPYING
 %doc %{_mandir}/man*/*
 %{_bindir}/*
+%{_libexecdir}/gnome-session-binary
 %{_libexecdir}/gnome-session-check-accelerated
 %{_libexecdir}/gnome-session-check-accelerated-helper
 %{_libexecdir}/gnome-session-failed
@@ -138,6 +143,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Wed Oct 14 2015 Kalev Lember <klember@redhat.com> - 3.18.1-1
+- Update to 3.18.1
+
 * Mon Sep 21 2015 Kalev Lember <klember@redhat.com> - 3.18.0-1
 - Update to 3.18.0
 
