@@ -10,7 +10,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.18.1.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.18/%{name}-%{version}.tar.xz
@@ -18,6 +18,7 @@ Source0: http://download.gnome.org/sources/gnome-session/3.18/%{name}-%{version}
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
 Patch3: gnome-session-3.6.2-swrast.patch
+Patch4: 0001-autostart-app-give-ever-app-its-own-journal-id.patch
 
 License: GPLv2+
 Group: User Interface/Desktops
@@ -84,6 +85,7 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %setup -q
 %patch1 -p1 -b .nv30
 %patch3 -p1 -b .swrast
+%patch4 -p1 -b .give-each-app-its-own-journal-id
 
 %build
 %configure --enable-docbook-docs                                \
@@ -139,6 +141,10 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Fri Nov 06 2015 Ray Strode <rstrode@redhat.com> 3.18.1.2-2
+- Add patch to make crash logging more obvious
+  Related: gnome#757571
+
 * Thu Oct 15 2015 Kalev Lember <klember@redhat.com> - 3.18.1.2-1
 - Update to 3.18.1.2
 
