@@ -10,7 +10,7 @@
 Summary: GNOME session manager
 Name: gnome-session
 Version: 3.19.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.19/%{name}-%{version}.tar.xz
@@ -139,6 +139,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Wed Feb 03 2016 Fedora Release Engineering <releng@fedoraproject.org> - 3.19.4-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
 * Thu Jan 21 2016 Kalev Lember <klember@redhat.com> - 3.19.4-1
 - Update to 3.19.4
 
