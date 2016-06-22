@@ -34,9 +34,7 @@ Requires: dbus-x11
 BuildRequires: pkgconfig(gl)
 BuildRequires: pkgconfig(gnome-desktop-3.0)
 BuildRequires: pkgconfig(gtk+-3.0) >= 2.99.0
-BuildRequires: pkgconfig(libsystemd-daemon)
-BuildRequires: pkgconfig(libsystemd-journal)
-BuildRequires: pkgconfig(libsystemd-login)
+BuildRequires: pkgconfig(libsystemd)
 BuildRequires: pkgconfig(ice)
 BuildRequires: pkgconfig(json-glib-1.0)
 BuildRequires: pkgconfig(sm)
