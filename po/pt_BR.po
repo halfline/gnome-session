@@ -14,22 +14,22 @@
 # André Gondim <In Memorian>, 2009.
 # Flamarion Jorge <jorge.flamarion@gmail.com>, 2011.
 # Enrico Nicoletto <liverig@gmail.com>, 2013.
-#
+# msuppesd <msuppesd@redhat.com>, 2016. #zanata
+# pnemade <pnemade@redhat.com>, 2016. #zanata
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-session\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"session&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-18 14:27+0000\n"
-"PO-Revision-Date: 2013-09-18 15:27-0300\n"
-"Last-Translator: Antonio Fernandes C. Neto <fernandesn@gnome.org>\n"
-"Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
-"Language: pt_BR\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-02-26 10:16+0530\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-03-09 08:53+0000\n"
+"Last-Translator: msuppesd <msuppesd@redhat.com>\n"
+"Language-Team: Brazilian Portuguese <gnome-pt_br-list@gnome.org>\n"
+"Language: pt-BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Zanata 3.8.2\n"
 "X-Project-Style: gnome\n"
 
 #: ../capplet/gsm-app-dialog.c:120
@@ -52,31 +52,49 @@ msgstr "O comando inicial não pode ser vazio"
 msgid "The startup command is not valid"
 msgstr "O comando inicial não é válido"
 
-#: ../capplet/gsm-properties-dialog.c:519
+#: ../capplet/gsm-properties-dialog.c:493
+msgid "Your session has been saved."
+msgstr "Sua sessão foi salva."
+
+#: ../capplet/gsm-properties-dialog.c:495
+#: ../capplet/gsm-properties-dialog.c:521
+msgid "Failed to save session"
+msgstr "Falha ao salvar a sessão"
+
+#: ../capplet/gsm-properties-dialog.c:509
+msgid "Could not connect to the session bus"
+msgstr "Não foi possível conectar ao barramento de sessão"
+
+#: ../capplet/gsm-properties-dialog.c:515 ../tools/gnome-session-quit.c:89
+#: ../tools/gnome-session-quit.c:99
+msgid "Could not connect to the session manager"
+msgstr "Não foi possível conectar ao gerenciador de sessões"
+
+#: ../capplet/gsm-properties-dialog.c:606
 msgid "Enabled"
 msgstr "Habilitado"
 
-#: ../capplet/gsm-properties-dialog.c:531
+#: ../capplet/gsm-properties-dialog.c:618
 msgid "Icon"
 msgstr "Ícone"
 
-#: ../capplet/gsm-properties-dialog.c:543
+#: ../capplet/gsm-properties-dialog.c:630
 msgid "Program"
 msgstr "Programa"
 
-#: ../capplet/gsm-properties-dialog.c:747
+#: ../capplet/gsm-properties-dialog.c:834
 msgid "Startup Applications Preferences"
 msgstr "Preferências dos aplicativos iniciais de sessão"
 
-#: ../capplet/gsp-app.c:276
+#: ../capplet/gsp-app.c:277
 msgid "No name"
 msgstr "Sem nome"
 
-#: ../capplet/gsp-app.c:282
+#: ../capplet/gsp-app.c:283
 msgid "No description"
 msgstr "Nenhuma descrição"
 
-#: ../capplet/main.c:35 ../gnome-session/main.c:309
+#: ../capplet/main.c:35 ../gnome-session/main.c:308
 msgid "Version of this application"
 msgstr "Versão deste aplicativo"
 
@@ -106,11 +124,11 @@ msgstr "Essa sessão o leva ao GNOME"
 msgid "GNOME dummy"
 msgstr "GNOME experimental"
 
-#: ../data/gnome-session-properties.desktop.in.in.h:1
+#: ../data/session-properties.desktop.in.in.h:1
 msgid "Startup Applications"
 msgstr "Aplicativos iniciais de sessão"
 
-#: ../data/gnome-session-properties.desktop.in.in.h:2
+#: ../data/session-properties.desktop.in.in.h:2
 msgid "Choose what applications to start when you log in"
 msgstr ""
 "Escolha quais os aplicativos que irão iniciar quando sua sessão iniciar"
@@ -129,9 +147,9 @@ msgstr "Essa sessão o leva ao GNOME, usando Wayland"
 msgid "Custom Session"
 msgstr "Sessão personalizada"
 
-#: ../data/session-selector.ui.h:2 ../tools/gnome-session-selector.c:103
-msgid "Please select a custom session to run"
-msgstr "Por gentileza selecione uma sessão personalizada a ser executada"
+#: ../data/session-selector.ui.h:2
+msgid "Please select a custom session to use"
+msgstr "Por favor, selecione uma sessão personalizada para ser usada"
 
 #: ../data/session-selector.ui.h:3
 msgid "_New Session"
@@ -146,6 +164,10 @@ msgid "Rena_me Session"
 msgstr "Reno_mear sessão"
 
 #: ../data/session-selector.ui.h:6
+msgid "Classic Experience"
+msgstr "Experiência Clássica"
+
+#: ../data/session-selector.ui.h:7
 msgid "_Continue"
 msgstr "_Continuar"
 
@@ -186,81 +208,11 @@ msgstr "Co_mando:"
 msgid "_Name:"
 msgstr "_Nome:"
 
-#: ../egg/eggdesktopfile.c:165
-#, c-format
-msgid "File is not a valid .desktop file"
-msgstr "O arquivo não é um arquivo .desktop válido"
-
-#. translators: 'Version' is from a desktop file, and
-#. * should not be translated. '%s' would probably be a
-#. * version number.
-#: ../egg/eggdesktopfile.c:191
-#, c-format
-msgid "Unrecognized desktop file Version '%s'"
-msgstr "Versão do arquivo da área de trabalho \"%s\" não reconhecida"
-
-#: ../egg/eggdesktopfile.c:974
-#, c-format
-msgid "Starting %s"
-msgstr "Iniciando %s"
-
-#: ../egg/eggdesktopfile.c:1116
-#, c-format
-msgid "Application does not accept documents on command line"
-msgstr "O aplicativo não aceita documentos na linha de comando"
-
-#: ../egg/eggdesktopfile.c:1184
-#, c-format
-msgid "Unrecognized launch option: %d"
-msgstr "Opção de lançamento não reconhecida: %d"
-
-#. translators: The 'Type=Link' string is found in a
-#. * desktop file, and should not be translated.
-#: ../egg/eggdesktopfile.c:1391
-#, c-format
-msgid "Can't pass document URIs to a 'Type=Link' desktop entry"
-msgstr ""
-"Não foi possível passar as URIs dos documentos para uma entrada de área de "
-"trabalho 'Type=Link'"
-
-#: ../egg/eggdesktopfile.c:1412
-#, c-format
-msgid "Not a launchable item"
-msgstr "Não é um item lançável"
-
-#: ../egg/eggsmclient.c:226
-msgid "Disable connection to session manager"
-msgstr "Desabilitar conexão para o gerenciador de sessões"
-
-#: ../egg/eggsmclient.c:229
-msgid "Specify file containing saved configuration"
-msgstr "Especificar o arquivo que contém a configuração salva"
-
-#: ../egg/eggsmclient.c:229
-msgid "FILE"
-msgstr "ARQUIVO"
-
-#: ../egg/eggsmclient.c:232
-msgid "Specify session management ID"
-msgstr "Especificar o ID de gerenciamento de sessão"
-
-#: ../egg/eggsmclient.c:232
-msgid "ID"
-msgstr "ID"
-
-#: ../egg/eggsmclient.c:253
-msgid "Session management options:"
-msgstr "Opções de gerenciamento de sessão:"
-
-#: ../egg/eggsmclient.c:254
-msgid "Show session management options"
-msgstr "Mostra as opções de gerenciamento de sessão"
-
-#: ../gnome-session/gsm-fail-whale-dialog.c:295
+#: ../gnome-session/gsm-fail-whale-dialog.c:321
 msgid "Oh no!  Something has gone wrong."
 msgstr "Oh não! Alguma coisa está errada."
 
-#: ../gnome-session/gsm-fail-whale-dialog.c:302
+#: ../gnome-session/gsm-fail-whale-dialog.c:328
 msgid ""
 "A problem has occurred and the system can't recover. Please contact a system "
 "administrator"
@@ -268,7 +220,7 @@ msgstr ""
 "Ocorreu um problema e o sistema não pôde ser recuperado. Por favor, entre em "
 "contato com um administrador de sistemas"
 
-#: ../gnome-session/gsm-fail-whale-dialog.c:304
+#: ../gnome-session/gsm-fail-whale-dialog.c:330
 msgid ""
 "A problem has occurred and the system can't recover. All extensions have "
 "been disabled as a precaution."
@@ -276,7 +228,7 @@ msgstr ""
 "Ocorreu um problema e o sistema não pôde ser recuperado. Todas as extensões "
 "foram desativadas por precaução."
 
-#: ../gnome-session/gsm-fail-whale-dialog.c:306
+#: ../gnome-session/gsm-fail-whale-dialog.c:332
 msgid ""
 "A problem has occurred and the system can't recover.\n"
 "Please log out and try again."
@@ -284,43 +236,43 @@ msgstr ""
 "Ocorreu um problema e o sistema não pôde ser recuperado.\n"
 "Por favor encerre a sessão e tente novamente."
 
-#: ../gnome-session/gsm-fail-whale-dialog.c:321
+#: ../gnome-session/gsm-fail-whale-dialog.c:347
 msgid "_Log Out"
 msgstr "_Encerrar sessão"
 
-#: ../gnome-session/gsm-fail-whale-dialog.c:343 ../gnome-session/main.c:307
+#: ../gnome-session/gsm-fail-whale-dialog.c:369 ../gnome-session/main.c:306
 msgid "Enable debugging code"
 msgstr "Habilitar código de depuração"
 
-#: ../gnome-session/gsm-fail-whale-dialog.c:344
+#: ../gnome-session/gsm-fail-whale-dialog.c:370
 msgid "Allow logout"
 msgstr "Permitir encerramento de sessão"
 
-#: ../gnome-session/gsm-fail-whale-dialog.c:345
+#: ../gnome-session/gsm-fail-whale-dialog.c:371
 msgid "Show extension warning"
 msgstr "Mostrar alerta de extensão"
 
-#: ../gnome-session/gsm-manager.c:1271 ../gnome-session/gsm-manager.c:2043
+#: ../gnome-session/gsm-manager.c:1370 ../gnome-session/gsm-manager.c:2192
 msgid "Not responding"
 msgstr "Não respondendo"
 
-#: ../gnome-session/gsm-util.c:411
+#: ../gnome-session/gsm-util.c:382
 msgid "_Log out"
 msgstr "_Encerrar sessão"
 
 #. It'd be really surprising to reach this code: if we're here,
 #. * then the XSMP client already has set several XSMP
 #. * properties. But it could still be that SmProgram is not set.
-#.
-#: ../gnome-session/gsm-xsmp-client.c:559
+#. 
+#: ../gnome-session/gsm-xsmp-client.c:582
 msgid "Remembered Application"
 msgstr "Lembrar dos aplicativos"
 
-#: ../gnome-session/gsm-xsmp-client.c:1209
+#: ../gnome-session/gsm-xsmp-client.c:1244
 msgid "This program is blocking logout."
 msgstr "Este programa está bloqueando o encerramento da sessão."
 
-#: ../gnome-session/gsm-xsmp-server.c:341
+#: ../gnome-session/gsm-xsmp-server.c:340
 msgid ""
 "Refusing new client connection because the session is currently being shut "
 "down\n"
@@ -328,42 +280,42 @@ msgstr ""
 "Recusando a nova conexão do cliente porque a sessão está sendo desligada "
 "neste momento\n"
 
-#: ../gnome-session/gsm-xsmp-server.c:610
+#: ../gnome-session/gsm-xsmp-server.c:609
 #, c-format
 msgid "Could not create ICE listening socket: %s"
 msgstr "Não foi possível criar o soquete de escuta ICE: %s"
 
-#: ../gnome-session/main.c:305
+#: ../gnome-session/main.c:304
 msgid "Override standard autostart directories"
 msgstr "Substituir os diretórios padrões de início automático"
 
-#: ../gnome-session/main.c:305
+#: ../gnome-session/main.c:304
 msgid "AUTOSTART_DIR"
 msgstr "AUTOSTART_DIR"
 
-#: ../gnome-session/main.c:306
+#: ../gnome-session/main.c:305
 msgid "Session to use"
 msgstr "Sessões para usar"
 
-#: ../gnome-session/main.c:306
+#: ../gnome-session/main.c:305
 msgid "SESSION_NAME"
 msgstr "SESSION_NAME"
 
-#: ../gnome-session/main.c:308
+#: ../gnome-session/main.c:307
 msgid "Do not load user-specified applications"
 msgstr "Não carregar aplicativos especificados pelo usuário"
 
 # Translators: the 'fail whale' is the black dialog we show when something goes seriously wrong. http://is.gd/Q4XOeq
 #. Translators: the 'fail whale' is the black dialog we show when something goes seriously wrong
-#: ../gnome-session/main.c:311
+#: ../gnome-session/main.c:310
 msgid "Show the fail whale dialog for testing"
 msgstr "Mostrar o diálogo da \"falha da baleia\" para teste"
 
-#: ../gnome-session/main.c:344
+#: ../gnome-session/main.c:343
 msgid " - the GNOME session manager"
 msgstr " - gerenciador de sessões do GNOME"
 
-#: ../tools/gnome-session-inhibit.c:110
+#: ../tools/gnome-session-inhibit.c:108
 #, c-format
 msgid ""
 "%s [OPTION...] COMMAND\n"
@@ -397,195 +349,82 @@ msgstr ""
 "\n"
 "Se nenhuma opção --inhibit for especificada, assume-se como ocioso (idle).\n"
 
-#: ../tools/gnome-session-inhibit.c:148
+#: ../tools/gnome-session-inhibit.c:146
 #, c-format
 msgid "Failed to execute %s\n"
 msgstr "Ocorreu falha ao executar %s\n"
 
-#: ../tools/gnome-session-inhibit.c:208 ../tools/gnome-session-inhibit.c:218
-#: ../tools/gnome-session-inhibit.c:228
+#: ../tools/gnome-session-inhibit.c:206 ../tools/gnome-session-inhibit.c:216
+#: ../tools/gnome-session-inhibit.c:226
 #, c-format
 msgid "%s requires an argument\n"
 msgstr "%s requer um argumento\n"
 
-#: ../tools/gnome-session-selector.c:62
+#: ../tools/gnome-session-selector.c:71
 #, c-format
 msgid "Session %d"
 msgstr "Sessão %d"
 
-#: ../tools/gnome-session-selector.c:108
+#: ../tools/gnome-session-selector.c:115
 msgid ""
 "Session names are not allowed to start with ‘.’ or contain ‘/’ characters"
 msgstr ""
 "Não são permitidos a nomes de sessões iniciarem com \".\" ou conterem "
 "caracteres \"/\""
 
-#: ../tools/gnome-session-selector.c:112
+#: ../tools/gnome-session-selector.c:119
 msgid "Session names are not allowed to start with ‘.’"
 msgstr "Não são permitidos a nomes de sessões iniciarem com \".\""
 
-#: ../tools/gnome-session-selector.c:116
+#: ../tools/gnome-session-selector.c:123
 msgid "Session names are not allowed to contain ‘/’ characters"
 msgstr "Não são permitidos a nomes de sessões conterem caracteres \"/\""
 
-#: ../tools/gnome-session-selector.c:124
+#: ../tools/gnome-session-selector.c:131
 #, c-format
 msgid "A session named ‘%s’ already exists"
 msgstr "Uma sessão com nome \"%s\" já existe"
 
-#: ../tools/gnome-session-quit.c:53
+#: ../tools/gnome-session-selector.c:794
+msgid "What to do with session selection (save|load|print)"
+msgstr "O que fazer com a seleção de seções (salvar|carregar|imprimir)"
+
+#: ../tools/gnome-session-selector.c:795
+msgid "[session-name]"
+msgstr "[session-name]"
+
+#: ../tools/gnome-session-selector.c:889
+msgid "Please select a custom session to run"
+msgstr "Por gentileza selecione uma sessão personalizada a ser executada"
+
+#: ../tools/gnome-session-selector.c:891
+msgid "Please select a session to use"
+msgstr "Por favor, selecione uma sessão para ser usada"
+
+#: ../tools/gnome-session-selector.c:893
+msgid "Please select a session to save to"
+msgstr "Por favor, selecione uma sessão a ser salva "
+
+#: ../tools/gnome-session-quit.c:51
 msgid "Log out"
 msgstr "Encerrar sessão"
 
-#: ../tools/gnome-session-quit.c:54
+#: ../tools/gnome-session-quit.c:52
 msgid "Power off"
 msgstr "Desligar"
 
-#: ../tools/gnome-session-quit.c:55
+#: ../tools/gnome-session-quit.c:53
 msgid "Reboot"
 msgstr "Reiniciar"
 
-#: ../tools/gnome-session-quit.c:56
+#: ../tools/gnome-session-quit.c:54
 msgid "Ignoring any existing inhibitors"
 msgstr "Ignorar qualquer um inibidor existente"
 
-#: ../tools/gnome-session-quit.c:57
+#: ../tools/gnome-session-quit.c:55
 msgid "Don't prompt for user confirmation"
 msgstr "Não pedir configuração do usuário"
 
-#: ../tools/gnome-session-quit.c:91 ../tools/gnome-session-quit.c:101
-msgid "Could not connect to the session manager"
-msgstr "Não foi possível conectar ao gerenciador de sessões"
-
-#: ../tools/gnome-session-quit.c:203
+#: ../tools/gnome-session-quit.c:201
 msgid "Program called with conflicting options"
 msgstr "Programa chamado com opções conflitantes"
-
-#~ msgid "Some programs are still running:"
-#~ msgstr "Alguns programas ainda estão em execução:"
-
-#~ msgid "Unknown"
-#~ msgstr "Desconhecido"
-
-#~ msgid "A program is still running:"
-#~ msgstr "Um programa ainda está em execução:"
-
-#~ msgid ""
-#~ "Waiting for the program to finish. Interrupting the program may cause you "
-#~ "to lose work."
-#~ msgstr ""
-#~ "Aguardando o programa para finalizar. Interromper este programa pode "
-#~ "ocasionar em perda de trabalho."
-
-#~ msgid ""
-#~ "Waiting for programs to finish. Interrupting these programs may cause you "
-#~ "to lose work."
-#~ msgstr ""
-#~ "Aguardando os programas para finalizar. Interromper estes programas pode "
-#~ "ocasionar em perda de trabalho."
-
-#~ msgid "Switch User Anyway"
-#~ msgstr "Trocar usuário mesmo assim"
-
-#~ msgid "Log Out Anyway"
-#~ msgstr "Encerrar mesmo assim"
-
-#~ msgid "Suspend Anyway"
-#~ msgstr "Suspender mesmo assim"
-
-#~ msgid "Hibernate Anyway"
-#~ msgstr "Hibernar mesmo assim"
-
-#~ msgid "Shut Down Anyway"
-#~ msgstr "Desligar mesmo assim"
-
-#~ msgid "Restart Anyway"
-#~ msgstr "Reiniciar mesmo assim"
-
-#~ msgid "Lock Screen"
-#~ msgstr "Bloquear tela"
-
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"
-
-#~ msgid "You will be automatically logged out in %d second."
-#~ msgid_plural "You will be automatically logged out in %d seconds."
-#~ msgstr[0] "Essa sessão será encerrada automaticamente em %d segundo."
-#~ msgstr[1] "Essa sessão será encerrada automaticamente em %d segundos."
-
-#~ msgid "This system will be automatically shut down in %d second."
-#~ msgid_plural "This system will be automatically shut down in %d seconds."
-#~ msgstr[0] "Este sistema será automaticamente desligado em %d segundo."
-#~ msgstr[1] "Este sistema será automaticamente desligado em %d segundos."
-
-#~ msgid "This system will be automatically restarted in %d second."
-#~ msgid_plural "This system will be automatically restarted in %d seconds."
-#~ msgstr[0] "Este sistema será automaticamente reiniciado em %d segundo."
-#~ msgstr[1] "Este sistema será automaticamente reiniciado em %d segundos."
-
-#~ msgid "You are currently logged in as \"%s\"."
-#~ msgstr "Você está logado atualmente como \"%s\"."
-
-#~ msgid "Log out of this system now?"
-#~ msgstr "Encerrar a sessão deste sistema agora?"
-
-#~ msgid "_Switch User"
-#~ msgstr "_Trocar usuário"
-
-#~ msgid "Shut down this system now?"
-#~ msgstr "Desligar este sistema agora?"
-
-#~ msgid "S_uspend"
-#~ msgstr "S_uspender"
-
-#~ msgid "_Hibernate"
-#~ msgstr "_Hibernar"
-
-#~ msgid "_Restart"
-#~ msgstr "_Reiniciar"
-
-#~ msgid "_Shut Down"
-#~ msgstr "_Desligar"
-
-#~ msgid "Restart this system now?"
-#~ msgstr "Reiniciar este sistema agora?"
-
-#~ msgid "Icon '%s' not found"
-#~ msgstr "Ícone \"%s\" não localizado"
-
-#~ msgid "GNOME 3 Failed to Load"
-#~ msgstr "Falha ao carregar o GNOME 3"
-
-#~ msgid ""
-#~ "Unfortunately GNOME 3 failed to start properly and started in the "
-#~ "<i>fallback mode</i>.\n"
-#~ "\n"
-#~ "This most likely means your system (graphics hardware or driver) is not "
-#~ "capable of delivering the full GNOME 3 experience."
-#~ msgstr ""
-#~ "Infelizmente o GNOME 3 falhou ao inicializar corretamente e inicializou "
-#~ "em <i>modo reserva</i>.\n"
-#~ "\n"
-#~ "Isto provavelmente significa que o seu sistema (hardware de gráficos ou "
-#~ "driver) não é capaz de obter a experiência completa do GNOME 3."
-
-#~ msgid "Learn more about GNOME 3"
-#~ msgstr "Aprender mais sobre o GNOME 3"
-
-#~ msgid ""
-#~ "Unable to start login session (and unable to connect to the X server)"
-#~ msgstr ""
-#~ "Não foi possível iniciar a sessão de login (e não foi possível conectar "
-#~ "ao servidor X)"
-
-#~ msgid "Exited with code %d"
-#~ msgstr "Saiu com o código %d"
-
-#~ msgid "Killed by signal %d"
-#~ msgstr "Morto pelo sinal %d"
-
-#~ msgid "Stopped by signal %d"
-#~ msgstr "Parado pelo sinal %d"
-
-#~ msgid "<b>Some programs are still running:</b>"
-#~ msgstr "<b>Alguns programas ainda estão em execução:</b>"

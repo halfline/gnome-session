@@ -14,20 +14,22 @@
 # Jiro Matsuzawa <jmatsuzawa@gnome.org>, 2011, 2012, 2013.
 # Hideki Yamane <henrich@debian.org>, 2011, 2012.
 # Noriko Mizumoto <noriko@fedoraproject.org>, 2012.
-#
+# kmoriguc <kmoriguc@redhat.com>, 2016. #zanata
+# pnemade <pnemade@redhat.com>, 2016. #zanata
 msgid ""
 msgstr ""
 "Project-Id-Version: gnome-session master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-session&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2013-09-09 23:10+0000\n"
-"PO-Revision-Date: 2013-09-15 21:58+0900\n"
-"Last-Translator: Jiro Matsuzawa <jmatsuzawa@gnome.org>\n"
-"Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
-"Language: ja\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-02-26 10:16+0530\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-03-14 01:18+0000\n"
+"Last-Translator: kmoriguc <kmoriguc@redhat.com>\n"
+"Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
+"Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Zanata 3.8.2\n"
 
 #: ../capplet/gsm-app-dialog.c:120
 msgid "Select Command"
@@ -49,31 +51,49 @@ msgstr "自動起動するプログラムのコマンド名を入力してくだ
 msgid "The startup command is not valid"
 msgstr "コマンド名が間違っています"
 
-#: ../capplet/gsm-properties-dialog.c:519
+#: ../capplet/gsm-properties-dialog.c:493
+msgid "Your session has been saved."
+msgstr "セッションが保存されました。"
+
+#: ../capplet/gsm-properties-dialog.c:495
+#: ../capplet/gsm-properties-dialog.c:521
+msgid "Failed to save session"
+msgstr "セッションの保存に失敗しました"
+
+#: ../capplet/gsm-properties-dialog.c:509
+msgid "Could not connect to the session bus"
+msgstr "セッションバスに接続できませんでした"
+
+#: ../capplet/gsm-properties-dialog.c:515 ../tools/gnome-session-quit.c:89
+#: ../tools/gnome-session-quit.c:99
+msgid "Could not connect to the session manager"
+msgstr "セッションマネージャーに接続できませんでした"
+
+#: ../capplet/gsm-properties-dialog.c:606
 msgid "Enabled"
 msgstr "有効"
 
-#: ../capplet/gsm-properties-dialog.c:531
+#: ../capplet/gsm-properties-dialog.c:618
 msgid "Icon"
 msgstr "アイコン"
 
-#: ../capplet/gsm-properties-dialog.c:543
+#: ../capplet/gsm-properties-dialog.c:630
 msgid "Program"
 msgstr "プログラム"
 
-#: ../capplet/gsm-properties-dialog.c:747
+#: ../capplet/gsm-properties-dialog.c:834
 msgid "Startup Applications Preferences"
 msgstr "自動起動するアプリケーションの設定"
 
-#: ../capplet/gsp-app.c:276
+#: ../capplet/gsp-app.c:277
 msgid "No name"
 msgstr "名前なし"
 
-#: ../capplet/gsp-app.c:282
+#: ../capplet/gsp-app.c:283
 msgid "No description"
 msgstr "(説明なし)"
 
-#: ../capplet/main.c:35 ../gnome-session/main.c:309
+#: ../capplet/main.c:35 ../gnome-session/main.c:308
 msgid "Version of this application"
 msgstr "このアプリケーションのバージョンを表示する"
 
@@ -101,11 +121,11 @@ msgstr "このセッションで GNOME にログインします"
 msgid "GNOME dummy"
 msgstr "GNOME ダミー"
 
-#: ../data/gnome-session-properties.desktop.in.in.h:1
+#: ../data/session-properties.desktop.in.in.h:1
 msgid "Startup Applications"
 msgstr "自動起動するアプリケーション"
 
-#: ../data/gnome-session-properties.desktop.in.in.h:2
+#: ../data/session-properties.desktop.in.in.h:2
 msgid "Choose what applications to start when you log in"
 msgstr "ログインした後に起動するアプリケーションを選択します"
 
@@ -122,9 +142,9 @@ msgstr "このセッションは Wayland を使って GNOME にログインし�
 msgid "Custom Session"
 msgstr "カスタムセッション"
 
-#: ../data/session-selector.ui.h:2 ../tools/gnome-session-selector.c:103
-msgid "Please select a custom session to run"
-msgstr "起動するカスタムセッションを選択してください"
+#: ../data/session-selector.ui.h:2
+msgid "Please select a custom session to use"
+msgstr "使用するカスタムセッションを選択してください"
 
 #: ../data/session-selector.ui.h:3
 msgid "_New Session"
@@ -139,6 +159,10 @@ msgid "Rena_me Session"
 msgstr "セッション名を変更(_M)"
 
 #: ../data/session-selector.ui.h:6
+msgid "Classic Experience"
+msgstr "クラッシックエクスペリエンス"
+
+#: ../data/session-selector.ui.h:7
 msgid "_Continue"
 msgstr "続行(_C)"
 
@@ -178,169 +202,106 @@ msgstr "コマンド(_M):"
 msgid "_Name:"
 msgstr "名前(_N):"
 
-#: ../egg/eggdesktopfile.c:165
-#, c-format
-msgid "File is not a valid .desktop file"
-msgstr "有効な .desktop ファイルではありません"
-
-#. translators: 'Version' is from a desktop file, and
-#. * should not be translated. '%s' would probably be a
-#. * version number.
-#: ../egg/eggdesktopfile.c:191
-#, c-format
-msgid "Unrecognized desktop file Version '%s'"
-msgstr "バージョン '%s' の .desktop ファイルはサポートしていません"
-
-#: ../egg/eggdesktopfile.c:974
-#, c-format
-msgid "Starting %s"
-msgstr "%sの起動中です"
-
-#: ../egg/eggdesktopfile.c:1116
-#, c-format
-msgid "Application does not accept documents on command line"
-msgstr "コマンドラインからドキュメントにはアクセスできません"
-
-#: ../egg/eggdesktopfile.c:1184
-#, c-format
-msgid "Unrecognized launch option: %d"
-msgstr "不明な起動オプションです: %d"
-
-#. translators: The 'Type=Link' string is found in a
-#. * desktop file, and should not be translated.
-#: ../egg/eggdesktopfile.c:1391
-#, c-format
-msgid "Can't pass document URIs to a 'Type=Link' desktop entry"
-msgstr "ドキュメントの URI を 'Type=Link' な .desktop エントリには渡せません"
-
-#: ../egg/eggdesktopfile.c:1412
-#, c-format
-msgid "Not a launchable item"
-msgstr "起動可能なアイテムではありません"
-
-#: ../egg/eggsmclient.c:226
-msgid "Disable connection to session manager"
-msgstr "セッションマネージャーに接続しない"
-
-#: ../egg/eggsmclient.c:229
-msgid "Specify file containing saved configuration"
-msgstr "設定を保存したファイルを指定する"
-
-#: ../egg/eggsmclient.c:229
-msgid "FILE"
-msgstr "FILE"
-
-#: ../egg/eggsmclient.c:232
-msgid "Specify session management ID"
-msgstr "セッション管理の ID を指定する"
-
-#: ../egg/eggsmclient.c:232
-msgid "ID"
-msgstr "ID"
-
-#: ../egg/eggsmclient.c:253
-msgid "Session management options:"
-msgstr "セッション管理のオプション:"
-
-#: ../egg/eggsmclient.c:254
-msgid "Show session management options"
-msgstr "セッション管理のオプションを表示する"
-
-#: ../gnome-session/gsm-fail-whale-dialog.c:295
+#: ../gnome-session/gsm-fail-whale-dialog.c:321
 msgid "Oh no!  Something has gone wrong."
 msgstr "あれっ! 何かおかしいです。"
 
-#: ../gnome-session/gsm-fail-whale-dialog.c:302
-msgid "A problem has occurred and the system can't recover. Please contact a system administrator"
+#: ../gnome-session/gsm-fail-whale-dialog.c:328
+msgid ""
+"A problem has occurred and the system can't recover. Please contact a system "
+"administrator"
 msgstr "問題が発生して、システムの復帰ができません。システム管理者に連絡してください"
 
-#: ../gnome-session/gsm-fail-whale-dialog.c:304
-msgid "A problem has occurred and the system can't recover. All extensions have been disabled as a precaution."
+#: ../gnome-session/gsm-fail-whale-dialog.c:330
+msgid ""
+"A problem has occurred and the system can't recover. All extensions have "
+"been disabled as a precaution."
 msgstr "問題が発生して、システムの復帰ができません。念のため、すべての拡張を無効にしました。"
 
-#: ../gnome-session/gsm-fail-whale-dialog.c:306
+#: ../gnome-session/gsm-fail-whale-dialog.c:332
 msgid ""
 "A problem has occurred and the system can't recover.\n"
 "Please log out and try again."
-msgstr ""
-"問題が発生して、システムの復帰ができません。\n"
+msgstr "問題が発生して、システムの復帰ができません。\n"
 "ログアウトして再度試してください。"
 
-#: ../gnome-session/gsm-fail-whale-dialog.c:321
+#: ../gnome-session/gsm-fail-whale-dialog.c:347
 msgid "_Log Out"
 msgstr "ログアウト(_L)"
 
-#: ../gnome-session/gsm-fail-whale-dialog.c:343 ../gnome-session/main.c:307
+#: ../gnome-session/gsm-fail-whale-dialog.c:369 ../gnome-session/main.c:306
 msgid "Enable debugging code"
 msgstr "デバッグモードにする"
 
-#: ../gnome-session/gsm-fail-whale-dialog.c:344
+#: ../gnome-session/gsm-fail-whale-dialog.c:370
 msgid "Allow logout"
 msgstr "ログアウトを許可する"
 
-#: ../gnome-session/gsm-fail-whale-dialog.c:345
+#: ../gnome-session/gsm-fail-whale-dialog.c:371
 msgid "Show extension warning"
 msgstr "拡張機能に関する警告を表示する"
 
-#: ../gnome-session/gsm-manager.c:1271 ../gnome-session/gsm-manager.c:2043
+#: ../gnome-session/gsm-manager.c:1370 ../gnome-session/gsm-manager.c:2192
 msgid "Not responding"
 msgstr "応答なし"
 
-#: ../gnome-session/gsm-util.c:411
+#: ../gnome-session/gsm-util.c:382
 msgid "_Log out"
 msgstr "ログアウト(_L)"
 
 #. It'd be really surprising to reach this code: if we're here,
 #. * then the XSMP client already has set several XSMP
 #. * properties. But it could still be that SmProgram is not set.
-#.
-#: ../gnome-session/gsm-xsmp-client.c:559
+#. 
+#: ../gnome-session/gsm-xsmp-client.c:582
 msgid "Remembered Application"
 msgstr "実行していたアプリケーション"
 
-#: ../gnome-session/gsm-xsmp-client.c:1209
+#: ../gnome-session/gsm-xsmp-client.c:1244
 msgid "This program is blocking logout."
 msgstr "このプログラムがログアウトできないようにしています。"
 
-#: ../gnome-session/gsm-xsmp-server.c:341
-msgid "Refusing new client connection because the session is currently being shut down\n"
+#: ../gnome-session/gsm-xsmp-server.c:340
+msgid ""
+"Refusing new client connection because the session is currently being shut "
+"down\n"
 msgstr "セッションがシャットダウンを実行しているため、新しいクライアントとの接続を拒否しました。\n"
 
-#: ../gnome-session/gsm-xsmp-server.c:610
+#: ../gnome-session/gsm-xsmp-server.c:609
 #, c-format
 msgid "Could not create ICE listening socket: %s"
 msgstr "ICE の監視ソケットを生成できませんでした: %s"
 
-#: ../gnome-session/main.c:305
+#: ../gnome-session/main.c:304
 msgid "Override standard autostart directories"
 msgstr "標準の自動起動フォルダーをオーバーライドする"
 
-#: ../gnome-session/main.c:305
+#: ../gnome-session/main.c:304
 msgid "AUTOSTART_DIR"
 msgstr "AUTOSTART_DIR"
 
-#: ../gnome-session/main.c:306
+#: ../gnome-session/main.c:305
 msgid "Session to use"
 msgstr "使用するセッション"
 
-#: ../gnome-session/main.c:306
+#: ../gnome-session/main.c:305
 msgid "SESSION_NAME"
 msgstr "SESSION_NAME"
 
-#: ../gnome-session/main.c:308
+#: ../gnome-session/main.c:307
 msgid "Do not load user-specified applications"
 msgstr "ユーザーが指定したアプリケーションを起動しない"
 
 #. Translators: the 'fail whale' is the black dialog we show when something goes seriously wrong
-#: ../gnome-session/main.c:311
+#: ../gnome-session/main.c:310
 msgid "Show the fail whale dialog for testing"
 msgstr "テスト用にエラー画面を表示する"
 
-#: ../gnome-session/main.c:344
+#: ../gnome-session/main.c:343
 msgid " - the GNOME session manager"
 msgstr "- GNOME セッションマネージャー"
 
-#: ../tools/gnome-session-inhibit.c:110
+#: ../tools/gnome-session-inhibit.c:108
 #, c-format
 msgid ""
 "%s [OPTION...] COMMAND\n"
@@ -372,181 +333,80 @@ msgstr ""
 "\n"
 "--inhibit オプションが無指定の場合 idle を指定したものと扱います。\n"
 
-#: ../tools/gnome-session-inhibit.c:148
+#: ../tools/gnome-session-inhibit.c:146
 #, c-format
 msgid "Failed to execute %s\n"
 msgstr "%s を起動できませんでした。\n"
 
-#: ../tools/gnome-session-inhibit.c:208 ../tools/gnome-session-inhibit.c:218
-#: ../tools/gnome-session-inhibit.c:228
+#: ../tools/gnome-session-inhibit.c:206 ../tools/gnome-session-inhibit.c:216
+#: ../tools/gnome-session-inhibit.c:226
 #, c-format
 msgid "%s requires an argument\n"
 msgstr "%s には引数が1つ必要です。\n"
 
-#: ../tools/gnome-session-selector.c:62
+#: ../tools/gnome-session-selector.c:71
 #, c-format
 msgid "Session %d"
 msgstr "セッション %d"
 
-#: ../tools/gnome-session-selector.c:108
-msgid "Session names are not allowed to start with ‘.’ or contain ‘/’ characters"
+#: ../tools/gnome-session-selector.c:115
+msgid ""
+"Session names are not allowed to start with ‘.’ or contain ‘/’ characters"
 msgstr "セッション名は‘.’から始めたり、‘/’を含めることはできません。"
 
-#: ../tools/gnome-session-selector.c:112
+#: ../tools/gnome-session-selector.c:119
 msgid "Session names are not allowed to start with ‘.’"
 msgstr "‘.’はセッション名の先頭には使用できません。"
 
-#: ../tools/gnome-session-selector.c:116
+#: ../tools/gnome-session-selector.c:123
 msgid "Session names are not allowed to contain ‘/’ characters"
 msgstr "‘/’はセッション名に含めることができません。"
 
-#: ../tools/gnome-session-selector.c:124
+#: ../tools/gnome-session-selector.c:131
 #, c-format
 msgid "A session named ‘%s’ already exists"
 msgstr "セッション‘%s’は既に存在します。"
 
-#: ../tools/gnome-session-quit.c:53
+#: ../tools/gnome-session-selector.c:794
+msgid "What to do with session selection (save|load|print)"
+msgstr "セッション選択での実行内容 (save|load|print)"
+
+#: ../tools/gnome-session-selector.c:795
+msgid "[session-name]"
+msgstr "[session-name]"
+
+#: ../tools/gnome-session-selector.c:889
+msgid "Please select a custom session to run"
+msgstr "起動するカスタムセッションを選択してください"
+
+#: ../tools/gnome-session-selector.c:891
+msgid "Please select a session to use"
+msgstr "使用するセッションを選択してください"
+
+#: ../tools/gnome-session-selector.c:893
+msgid "Please select a session to save to"
+msgstr "保存するセッションを選択してください"
+
+#: ../tools/gnome-session-quit.c:51
 msgid "Log out"
 msgstr "ログアウトする"
 
-#: ../tools/gnome-session-quit.c:54
+#: ../tools/gnome-session-quit.c:52
 msgid "Power off"
 msgstr "電源オフ"
 
-#: ../tools/gnome-session-quit.c:55
+#: ../tools/gnome-session-quit.c:53
 msgid "Reboot"
 msgstr "再起動"
 
-#: ../tools/gnome-session-quit.c:56
+#: ../tools/gnome-session-quit.c:54
 msgid "Ignoring any existing inhibitors"
 msgstr "阻害するプロセスを無視する"
 
-#: ../tools/gnome-session-quit.c:57
+#: ../tools/gnome-session-quit.c:55
 msgid "Don't prompt for user confirmation"
 msgstr "ユーザーに確認をしない"
 
-#: ../tools/gnome-session-quit.c:91 ../tools/gnome-session-quit.c:101
-msgid "Could not connect to the session manager"
-msgstr "セッションマネージャーに接続できませんでした"
-
-#: ../tools/gnome-session-quit.c:203
+#: ../tools/gnome-session-quit.c:201
 msgid "Program called with conflicting options"
 msgstr "同時には適用できないオプションを指定しました"
-
-#~ msgid "Some programs are still running:"
-#~ msgstr "いくつかのプログラムが未だ実行中です:"
-
-#~ msgid "Unknown"
-#~ msgstr "不明"
-
-#~ msgid "A program is still running:"
-#~ msgstr "プログラムが未だ実行中です:"
-
-#~ msgid "Waiting for the program to finish. Interrupting the program may cause you to lose work."
-#~ msgstr "プログラムが終了するのを待っています。プログラムの実行を強制的に中断すると、作業内容を失うことになるかもしれません。"
-
-#~ msgid "Waiting for programs to finish. Interrupting these programs may cause you to lose work."
-#~ msgstr "プログラムが終了するのを待っています。実行中のプログラムを途中で強制終了させてしまうと、これまでの処理結果を失ってしまう可能性があります。"
-
-#~ msgid "Switch User Anyway"
-#~ msgstr "とにかくユーザーを切り替える"
-
-#~ msgid "Log Out Anyway"
-#~ msgstr "とにかくログアウトする"
-
-#~ msgid "Suspend Anyway"
-#~ msgstr "とにかくサスペンドにする"
-
-#~ msgid "Hibernate Anyway"
-#~ msgstr "とにかく休止状態にする"
-
-#~ msgid "Shut Down Anyway"
-#~ msgstr "とにかくシャットダウンする"
-
-#~ msgid "Restart Anyway"
-#~ msgstr "とにかく再起動する"
-
-#~ msgid "Lock Screen"
-#~ msgstr "画面をロックする"
-
-#~ msgid "Cancel"
-#~ msgstr "キャンセル"
-
-#~ msgid "You will be automatically logged out in %d second."
-#~ msgid_plural "You will be automatically logged out in %d seconds."
-#~ msgstr[0] "残り %d 秒で自動的にログアウトします。"
-
-#~ msgid "This system will be automatically shut down in %d second."
-#~ msgid_plural "This system will be automatically shut down in %d seconds."
-#~ msgstr[0] "このシステムは残り %d 秒で自動的にシャットダウンします。"
-
-#~ msgid "This system will be automatically restarted in %d second."
-#~ msgid_plural "This system will be automatically restarted in %d seconds."
-#~ msgstr[0] "このシステムは残り %d 秒で自動的に再起動します。"
-
-#~ msgid "You are currently logged in as \"%s\"."
-#~ msgstr "あなたは現在 \"%s\" としてログインしています。"
-
-#~ msgid "Log out of this system now?"
-#~ msgstr "このシステムから今すぐログアウトしますか?"
-
-#~ msgid "_Switch User"
-#~ msgstr "ユーザーを切り替える(_S)"
-
-#~ msgid "Shut down this system now?"
-#~ msgstr "このシステムを今すぐシャットダウンしますか?"
-
-#~ msgid "S_uspend"
-#~ msgstr "サスペンド(_U)"
-
-#~ msgid "_Hibernate"
-#~ msgstr "休止状態(_H)"
-
-#~ msgid "_Restart"
-#~ msgstr "再起動(_R)"
-
-#~ msgid "_Shut Down"
-#~ msgstr "シャットダウン(_S)"
-
-#~ msgid "Restart this system now?"
-#~ msgstr "このシステムを今すぐ再起動しますか?"
-
-#~ msgid "Icon '%s' not found"
-#~ msgstr "'%s' というアイコンが見つかりませんでした"
-
-#~ msgid "GNOME 3 Failed to Load"
-#~ msgstr "GNOME 3 を読み込むのに失敗しました"
-
-#~ msgid ""
-#~ "Unfortunately GNOME 3 failed to start properly and started in the <i>fallback mode</i>.\n"
-#~ "\n"
-#~ "This most likely means your system (graphics hardware or driver) is not capable of delivering the full GNOME 3 experience."
-#~ msgstr ""
-#~ "残念ながら GNOME 3 が正しく起動せず、<i>フォールバックモード</i> で起動しました。\n"
-#~ "\n"
-#~ "おそらく、このシステム (グラフィックのハードウェアやドライバー) は GNOME 3 を満足に動かすことができないようです。"
-
-#~ msgid "Learn more about GNOME 3"
-#~ msgstr "GNOME 3 について詳しく知る"
-
-#~ msgid "Unable to start login session (and unable to connect to the X server)"
-#~ msgstr "ログインセッションを起動できません (X サーバーにも接続できません)"
-
-#~ msgid "<b>Some programs are still running:</b>"
-#~ msgstr "<b>いくつかのプログラムが未だ実行中です:</b>"
-
-#~ msgid "Exited with code %d"
-#~ msgstr "コード %d で終了しました"
-
-#~ msgid "Killed by signal %d"
-#~ msgstr "シグナル %d で終了させられました"
-
-#~ msgid "Stopped by signal %d"
-#~ msgstr "シグナル %d で停止させられました"
-
-#~ msgid ""
-#~ "A problem has occurred and the system can't recover. Some of the extensions below may have caused this.\n"
-#~ "Please try disabling some of these, and then log out and try again."
-#~ msgstr ""
-#~ "問題が発生して、システムの復帰ができません。これは以下の拡張のどれかが引き起こした可能性があります。\n"
-#~ "これらのどれかを無効にして、ログアウトして再度試してください。"
