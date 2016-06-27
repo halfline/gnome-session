@@ -401,6 +401,11 @@ main (int argc, char **argv)
          */
         gsm_util_setenv ("XDG_MENU_PREFIX", "gnome-");
 
+        /* We want to use the GNOME menus which has the designed categories,
+         * not the legacy redhat-menus.
+         */
+        gsm_util_setenv ("XDG_MENU_PREFIX", "gnome-");
+
         client_store = gsm_store_new ();
 
         /* Talk to logind before acquiring a name, since it does synchronous
