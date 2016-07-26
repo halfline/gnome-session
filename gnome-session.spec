@@ -9,7 +9,7 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.21.3
+Version: 3.21.4
 Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
@@ -31,9 +31,11 @@ Requires: gsettings-desktop-schemas >= 0.1.7
 # pull in dbus-x11, see bug 209924
 Requires: dbus-x11
 
+BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(gl)
+BuildRequires: pkgconfig(glesv2)
 BuildRequires: pkgconfig(gnome-desktop-3.0)
-BuildRequires: pkgconfig(gtk+-3.0) >= 2.99.0
+BuildRequires: pkgconfig(gtk+-3.0)
 BuildRequires: pkgconfig(libsystemd)
 BuildRequires: pkgconfig(ice)
 BuildRequires: pkgconfig(json-glib-1.0)
@@ -126,17 +128,18 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_bindir}/*
 %{_libexecdir}/gnome-session-binary
 %{_libexecdir}/gnome-session-check-accelerated
-%{_libexecdir}/gnome-session-check-accelerated-helper
+%{_libexecdir}/gnome-session-check-accelerated-gl-helper
+%{_libexecdir}/gnome-session-check-accelerated-gles-helper
 %{_libexecdir}/gnome-session-failed
 %{_datadir}/gnome-session/
 %{_datadir}/doc/gnome-session/dbus/gnome-session.html
-%{_datadir}/icons/hicolor/*/apps/session-properties.png
-%{_datadir}/icons/hicolor/scalable/apps/session-properties.svg
-%{_datadir}/icons/hicolor/symbolic/apps/session-properties-symbolic.svg
 %{_datadir}/GConf/gsettings/gnome-session.convert
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Jul 26 2016 Kalev Lember <klember@redhat.com> - 3.21.4-1
+- Update to 3.21.4
+
 * Wed Jun 22 2016 Richard Hughes <rhughes@redhat.com> - 3.21.3-1
 - Update to 3.21.3
 
