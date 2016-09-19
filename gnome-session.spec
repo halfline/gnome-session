@@ -7,29 +7,20 @@
 %global with_session_selector 1
 %endif
 
-Summary: GNOME session manager
 Name: gnome-session
 Version: 3.22.0
 Release: 1%{?dist}
+Summary: GNOME session manager
+
+License: GPLv2+
 URL: http://www.gnome.org
-#VCS: git:git://git.gnome.org/gnome-session
 Source0: http://download.gnome.org/sources/gnome-session/3.22/%{name}-%{version}.tar.xz
 
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
 Patch3: gnome-session-3.6.2-swrast.patch
 
-License: GPLv2+
 Group: User Interface/Desktops
-
-Requires: system-logos
-# Needed for gnome-settings-daemon
-Requires: control-center-filesystem
-
-Requires: gsettings-desktop-schemas >= 0.1.7
-
-# pull in dbus-x11, see bug 209924
-Requires: dbus-x11
 
 BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(gl)
@@ -58,6 +49,15 @@ BuildRequires: /usr/bin/xsltproc
 
 # an artificial requires to make sure we get dconf, for now
 Requires: dconf
+
+Requires: system-logos
+# Needed for gnome-settings-daemon
+Requires: control-center-filesystem
+
+Requires: gsettings-desktop-schemas >= 0.1.7
+
+# pull in dbus-x11, see bug 209924
+Requires: dbus-x11
 
 %description
 gnome-session manages a GNOME desktop or GDM login session. It starts up
