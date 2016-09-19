@@ -9,11 +9,11 @@
 
 Summary: GNOME session manager
 Name: gnome-session
-Version: 3.21.90
+Version: 3.22.0
 Release: 1%{?dist}
 URL: http://www.gnome.org
 #VCS: git:git://git.gnome.org/gnome-session
-Source0: http://download.gnome.org/sources/gnome-session/3.21/%{name}-%{version}.tar.xz
+Source0: http://download.gnome.org/sources/gnome-session/3.22/%{name}-%{version}.tar.xz
 
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
@@ -137,6 +137,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Mon Sep 19 2016 Kalev Lember <klember@redhat.com> - 3.22.0-1
+- Update to 3.22.0
+
 * Fri Aug 19 2016 Kalev Lember <klember@redhat.com> - 3.21.90-1
 - Update to 3.21.90
 
