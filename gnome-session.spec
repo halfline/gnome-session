@@ -20,8 +20,6 @@ Source0: http://download.gnome.org/sources/gnome-session/3.22/%{name}-%{version}
 Patch1: gnome-session-3.3.92-nv30.patch
 Patch3: gnome-session-3.6.2-swrast.patch
 
-Group: User Interface/Desktops
-
 BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(gl)
 BuildRequires: pkgconfig(glesv2)
@@ -65,7 +63,6 @@ the other core GNOME components and handles logout and saving the session.
 
 %package xsession
 Summary: Desktop file for gnome-session
-Group: User Interface/Desktops
 Requires: %{name}%{?_isa} = %{version}-%{release}
 
 %description xsession
@@ -73,7 +70,6 @@ Desktop file to add GNOME to display manager session menu.
 
 %package wayland-session
 Summary: Desktop file for wayland based gnome session
-Group: User Interface/Desktops
 Requires: %{name}%{?_isa} = %{version}-%{release}
 Requires: xorg-x11-server-Xwayland%{?_isa}
 
@@ -139,6 +135,7 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %changelog
 * Mon Sep 19 2016 Kalev Lember <klember@redhat.com> - 3.22.0-1
 - Update to 3.22.0
+- Don't set group tags
 
 * Fri Aug 19 2016 Kalev Lember <klember@redhat.com> - 3.21.90-1
 - Update to 3.21.90
