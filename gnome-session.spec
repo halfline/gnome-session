@@ -9,7 +9,7 @@
 
 Name: gnome-session
 Version: 3.23.2
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: GNOME session manager
 
 License: GPLv2+
@@ -19,6 +19,8 @@ Source0: http://download.gnome.org/sources/gnome-session/3.22/%{name}-%{version}
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
 Patch3: gnome-session-3.6.2-swrast.patch
+# https://bugzilla.gnome.org/show_bug.cgi?id=772421
+Patch4: 0001-check-accelerated-gles-Use-eglGetPlatformDisplay-EXT.patch
 
 BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(gl)
@@ -82,6 +84,7 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %setup -q
 %patch1 -p1 -b .nv30
 %patch3 -p1 -b .swrast
+%patch4 -p1 -b .platform
 
 %build
 %configure --enable-docbook-docs                                \
@@ -135,6 +138,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Oct 11 2016 Adam Jackson <ajax@redhat.com> - 3.23.2-2
+- Prefer eglGetPlatformDisplay to eglGetDisplay
+
 * Tue Oct 11 2016 Bastien Nocera <bnocera@redhat.com> - 3.23.2-1
 + gnome-session-3.23.2-1
 - Update to 3.23.2
