@@ -8,7 +8,7 @@
 %endif
 
 Name: gnome-session
-Version: 3.22.0
+Version: 3.23.2
 Release: 1%{?dist}
 Summary: GNOME session manager
 
@@ -56,6 +56,8 @@ Requires: gsettings-desktop-schemas >= 0.1.7
 
 # pull in dbus-x11, see bug 209924
 Requires: dbus-x11
+
+Conflicts: gnome-settings-daemon < 3.23.1
 
 %description
 gnome-session manages a GNOME desktop or GDM login session. It starts up
@@ -133,6 +135,10 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Oct 11 2016 Bastien Nocera <bnocera@redhat.com> - 3.23.2-1
++ gnome-session-3.23.2-1
+- Update to 3.23.2
+
 * Mon Sep 19 2016 Kalev Lember <klember@redhat.com> - 3.22.0-1
 - Update to 3.22.0
 - Don't set group tags
