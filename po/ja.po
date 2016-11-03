@@ -1,5 +1,7 @@
+# translation of ja.po to Japanese
 # gnome-session ja.po.
-# Copyright (C) 1998-2009 Free Software Foundation, Inc.
+# Copyright (C) 1998-2009, 2010 Free Software Foundation, Inc.
+#
 # Yukihiro Nakai <Nakai@abricot.co.jp>, 1998.
 # Yasuyuki Furukawa <yasu@on.cs.keio.ac.jp>, 1999.
 # Eiichiro ITANI <emu@ceres.dti.ne.jp>, 1999.
@@ -10,20 +12,20 @@
 # Ryoichi INAGAKI <ryo1@bc.wakwak.com>, 2002.
 # Satoru SATOH <ss@gnome.gr.jp>, 2006.
 # Takeshi AIHANA <takeshi.aihana@gmail.com>, 2003-2009.
-#
+# Junko Ito <junko.ito@rehdat.com>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-session master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-"
-"session&component=general\n"
-"POT-Creation-Date: 2009-09-08 21:46+0900\n"
-"PO-Revision-Date: 2009-09-08 21:49+0900\n"
-"Last-Translator: Takayuki KUSANO <AE5T-KSN@asahi-net.or.jp>\n"
-"Language-Team: Japanese <gnome-translation@gnome.gr.jp>\n"
+"Project-Id-Version: ja\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-29 13:17+0530\n"
+"PO-Revision-Date: 2010-04-15 10:25+1000\n"
+"Last-Translator: Junko Ito <junko.ito@rehdat.com>\n"
+"Language-Team: Japanese <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #: ../capplet/gsm-app-dialog.c:120
 msgid "Select Command"
@@ -69,7 +71,7 @@ msgstr "名前なし"
 msgid "No description"
 msgstr "(説明なし)"
 
-#: ../capplet/main.c:37 ../gnome-session/main.c:437
+#: ../capplet/main.c:37 ../gnome-session/main.c:438
 msgid "Version of this application"
 msgstr "このアプリのバージョンを表示する"
 
@@ -81,6 +83,14 @@ msgstr "ヘルプ・ドキュメントを表示できませんでした"
 msgid "GNOME Settings Daemon Helper"
 msgstr "GNOME 設定デーモンのヘルパー"
 
+#: ../data/gnome-custom-session.desktop.in.h:1
+msgid "Custom"
+msgstr "カスタム"
+
+#: ../data/gnome-custom-session.desktop.in.h:2
+msgid "This entry lets you select a saved session"
+msgstr "このエントリにより、保存したセッションが選択できます"
+
 #: ../data/gnome.desktop.in.h:1
 msgid "GNOME"
 msgstr "GNOME"
@@ -90,20 +100,31 @@ msgid "This session logs you into GNOME"
 msgstr "このセッションで GNOME にログインします"
 
 #: ../data/gnome-session.schemas.in.in.h:1
+msgid "Amount of time a user can remain idle"
+msgstr "ユーザーがアイドル状態でいられる時間"
+
+#: ../data/gnome-session.schemas.in.in.h:2
 msgid "Default session"
 msgstr "デフォルトのセッション"
 
-#: ../data/gnome-session.schemas.in.in.h:2
+#: ../data/gnome-session.schemas.in.in.h:3
 msgid "File Manager"
 msgstr "ファイル・マネージャ"
 
-#: ../data/gnome-session.schemas.in.in.h:3
+#: ../data/gnome-session.schemas.in.in.h:4
+msgid ""
+"If a user tries to login as root, show a dialog telling them it's a bad idea"
+msgstr ""
+"ユーザーが root でログインしようとすると、再考慮をうながすダイアログを表示し"
+"ます。"
+
+#: ../data/gnome-session.schemas.in.in.h:5
 msgid "If enabled, gnome-session will prompt the user before ending a session."
 msgstr ""
 "これを有効にすると、gnome-session はセッション終了時にユーザの確認待ちになり"
 "ます。"
 
-#: ../data/gnome-session.schemas.in.in.h:4
+#: ../data/gnome-session.schemas.in.in.h:6
 msgid ""
 "If enabled, gnome-session will save the session automatically. Otherwise, "
 "the logout dialog will have an option to save the session."
@@ -111,12 +132,12 @@ msgstr ""
 "これを有効にすると gnome-session はセッションを自動的に保存します。その一方"
 "で、ログアウト・ダイアログではセッション保存のオプションを表示します。"
 
-#: ../data/gnome-session.schemas.in.in.h:5
+#: ../data/gnome-session.schemas.in.in.h:7
 msgid "List of applications that are part of the default session."
 msgstr ""
 "デフォルトのセッションの一部として起動されるアプリケーションのリストです。"
 
-#: ../data/gnome-session.schemas.in.in.h:6
+#: ../data/gnome-session.schemas.in.in.h:8
 msgid ""
 "List of components that are required as part of the session. (Each element "
 "names a key under \"/desktop/gnome/session/required_components\"). The "
@@ -132,35 +153,39 @@ msgstr ""
 "なるコンポーネントをセッション・マネージャが自動的に追加するような仕組みに"
 "なっています。"
 
-#: ../data/gnome-session.schemas.in.in.h:7
+#: ../data/gnome-session.schemas.in.in.h:9
 msgid "Logout prompt"
 msgstr "ログアウト時に確認するかどうか"
 
-#: ../data/gnome-session.schemas.in.in.h:8
+#: ../data/gnome-session.schemas.in.in.h:10
 msgid "Panel"
 msgstr "パネル"
 
-#: ../data/gnome-session.schemas.in.in.h:9
+#: ../data/gnome-session.schemas.in.in.h:11
 msgid "Preferred Image to use for login splash screen"
 msgstr "ログイン時のスプラッシュ・スクリーンに使用するお気に入りの画像"
 
-#: ../data/gnome-session.schemas.in.in.h:10
+#: ../data/gnome-session.schemas.in.in.h:12
 msgid "Required session components"
 msgstr "セッションで必要となるコンポーネント"
 
-#: ../data/gnome-session.schemas.in.in.h:11
+#: ../data/gnome-session.schemas.in.in.h:13
 msgid "Save sessions"
 msgstr "セッションを保存するかどうか"
 
-#: ../data/gnome-session.schemas.in.in.h:12
+#: ../data/gnome-session.schemas.in.in.h:14
 msgid "Show the splash screen"
 msgstr "スプラッシュ・スクリーンを表示するかどうか"
 
-#: ../data/gnome-session.schemas.in.in.h:13
+#: ../data/gnome-session.schemas.in.in.h:15
 msgid "Show the splash screen when the session starts up"
 msgstr "セッションを開始したらスプラッシュ・スクリーンを表示するかどうかです。"
 
-#: ../data/gnome-session.schemas.in.in.h:14
+#: ../data/gnome-session.schemas.in.in.h:16
+msgid "The action to take after the maximum idle time"
+msgstr "最大アイドル時間の後に実行するアクション"
+
+#: ../data/gnome-session.schemas.in.in.h:17
 msgid ""
 "The file manager provides the desktop icons and allows you to interact with "
 "your saved files."
@@ -168,14 +193,32 @@ msgstr ""
 "ファイル・マネージャはデスクトップ・アイコンを持ちファイルシステムに保存した"
 "いろいろなファイルを操作・管理します。"
 
-#: ../data/gnome-session.schemas.in.in.h:15
+#: ../data/gnome-session.schemas.in.in.h:18
+msgid ""
+"The name of the action to take when the maximum allowed idle time has been "
+"reached. The Delay is specified in the \"max_idle_time\" key. Allowed values "
+"are: logout, forced-logout. An empty string disables the action."
+msgstr ""
+"許可される最大アイドル時間に達した時に実行するアクション名になります。 遅延"
+"は \"max_idle_time\" キーに指定されます。 許可される値は logout と forced-"
+"logout になります。 空のストリングはアクションを無効にします。"
+
+#: ../data/gnome-session.schemas.in.in.h:19
+msgid ""
+"The number of minutes a user can remain idle before the max_idle_action is "
+"automatically taken."
+msgstr ""
+"max_idle_action が自動的に実行される前にユーザーがアイドル状態でいられる時間 "
+"(分単位) になります。"
+
+#: ../data/gnome-session.schemas.in.in.h:20
 msgid ""
 "The number of minutes of inactivity before the session is considered idle."
 msgstr ""
 "セッションが待機中になるまでに一時的に無稼働 (Inactivity) な状態になる時間 "
 "(単位は分) です。"
 
-#: ../data/gnome-session.schemas.in.in.h:16
+#: ../data/gnome-session.schemas.in.in.h:21
 msgid ""
 "The panel provides the bar at the top or bottom of the screen containing "
 "menus, the window list, status icons, the clock, etc."
@@ -183,7 +226,7 @@ msgstr ""
 "パネルは画面の上または下にメニューやウィンドウ一覧ボタン、ステータス・アイコ"
 "ン、時計などのデスクトップ・オブジェクトを持つバーを提供してくれます。"
 
-#: ../data/gnome-session.schemas.in.in.h:17
+#: ../data/gnome-session.schemas.in.in.h:22
 msgid ""
 "The window manager is the program that draws the title bar and borders "
 "around windows, and allows you to move and resize windows."
@@ -191,7 +234,7 @@ msgstr ""
 "ウィンドウ・マネージャはウィンドウの周りにタイトルバーや境界線を描画するプロ"
 "グラムで、ウィンドウを移動したり大きさを変更することができます。"
 
-#: ../data/gnome-session.schemas.in.in.h:18
+#: ../data/gnome-session.schemas.in.in.h:23
 msgid ""
 "This is a relative path value based off the $datadir/pixmaps/ directory. Sub-"
 "directories and image names are valid values. Changing this value will "
@@ -201,13 +244,53 @@ msgstr ""
 "ファイル名を指定して下さい。この値を変更すると、次回ログインする際に適応され"
 "ます。"
 
-#: ../data/gnome-session.schemas.in.in.h:19
+#: ../data/gnome-session.schemas.in.in.h:24
 msgid "Time before session is considered idle"
 msgstr "アイドル状態に入るまでの時間"
 
-#: ../data/gnome-session.schemas.in.in.h:20 ../data/gnome-wm.desktop.in.in.h:1
+#: ../data/gnome-session.schemas.in.in.h:25
+msgid "Warn user against running gnome-session from root account"
+msgstr "root アカウントでの gnome-session の実行をユーザーに警告"
+
+#: ../data/gnome-session.schemas.in.in.h:26
+msgid ""
+"When enabled, gnome-session will automatically save the next session at log "
+"out even if auto saving is disabled."
+msgstr ""
+"有効にすると、自動保存が無効であってもログアウト時に gnome-session が次のセッ"
+"ションを自動的に保存します。"
+
+#: ../data/gnome-session.schemas.in.in.h:27 ../data/gnome-wm.desktop.in.in.h:1
 msgid "Window Manager"
 msgstr "ウインドウ・マネージャ"
+
+#: ../data/session-selector.ui.h:1
+msgid "Custom Session"
+msgstr "カスタムセッション"
+
+#: ../data/session-selector.ui.h:2
+msgid "Please choose a custom session to run."
+msgstr "実行するカスタムセッションを選択してください。"
+
+#: ../data/session-selector.ui.h:3
+msgid "Please enter a name for the new session."
+msgstr "新しいセッションの名前を入力してください。"
+
+#: ../data/session-selector.ui.h:4
+msgid "_Continue"
+msgstr "続ける(_C)"
+
+#: ../data/session-selector.ui.h:5 ../data/session-properties.ui.h:8
+msgid "_Name:"
+msgstr "名前(_N):"
+
+#: ../data/session-selector.ui.h:6
+msgid "_New Session"
+msgstr "新しいセッション(_N)"
+
+#: ../data/session-selector.ui.h:7
+msgid "_Remove Session"
+msgstr "セッションを削除(_R)"
 
 #: ../data/gsm-inhibit-dialog.ui.h:1
 msgid "<b>Some programs are still running:</b>"
@@ -256,10 +339,6 @@ msgstr "自動起動するプログラム"
 #: ../data/session-properties.ui.h:7
 msgid "_Automatically remember running applications when logging out"
 msgstr "ログアウト時に実行中のアプリを自動的に記憶しておく(_A)"
-
-#: ../data/session-properties.ui.h:8
-msgid "_Name:"
-msgstr "名前(_N):"
 
 #: ../data/session-properties.ui.h:9
 msgid "_Remember Currently Running Application"
@@ -399,12 +478,14 @@ msgstr "キャンセル"
 msgid "You will be automatically logged out in %d second."
 msgid_plural "You will be automatically logged out in %d seconds."
 msgstr[0] "残り%d秒で自動的にログアウトします。"
+msgstr[1] "残り%d秒で自動的にログアウトします。"
 
 #: ../gnome-session/gsm-logout-dialog.c:282
 #, c-format
 msgid "This system will be automatically shut down in %d second."
 msgid_plural "This system will be automatically shut down in %d seconds."
 msgstr[0] "このシステムは残り%d秒で自動的にシャットダウンします。"
+msgstr[1] "このシステムは残り%d秒で自動的にシャットダウンします。"
 
 #: ../gnome-session/gsm-logout-dialog.c:314
 #, c-format
@@ -443,11 +524,80 @@ msgstr "再起動(_R)"
 msgid "_Shut Down"
 msgstr "シャットダウン(_S)"
 
-#: ../gnome-session/gsm-manager.c:1158 ../gnome-session/gsm-manager.c:1850
+#: ../gnome-session/gsm-manager.c:522
+msgid ""
+"You are currently trying to run as the root super user.  The super user is a "
+"specialized account that is not designed to run a normal user session.  "
+"Various programs will not function properly, and actions performed under "
+"this account can cause unrecoverable damage to the operating system."
+msgstr ""
+"現在、 root スーパーユーザーとして実行しようとしています。 スーパーユーザーは"
+"特殊なアカウントで通常のユーザーセッションの実行するためのアカウントではあり"
+"ません。 正しく機能しないプログラムも多く、このアカウントで実行されるアクショ"
+"ンによってオペレーティングシステムが復旧不可能な損失を受けることがあります。"
+
+#: ../gnome-session/gsm-manager.c:1270 ../gnome-session/gsm-manager.c:1977
 msgid "Not responding"
 msgstr "応答なし"
 
-#: ../gnome-session/gsm-xsmp-client.c:1206
+#: ../gnome-session/gsm-manager.c:2531
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d 時間"
+msgstr[1] "%d 時間"
+
+#: ../gnome-session/gsm-manager.c:2533
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d 分"
+msgstr[1] "%d 分"
+
+#: ../gnome-session/gsm-manager.c:2536
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d 秒"
+msgstr[1] "%d 秒"
+
+#. hour:minutes:seconds
+#: ../gnome-session/gsm-manager.c:2541
+#, c-format
+msgid "%s %s %s"
+msgstr "%s %s %s"
+
+#. minutes:seconds
+#: ../gnome-session/gsm-manager.c:2544
+#, c-format
+msgid "%s %s"
+msgstr "%s %s"
+
+#. seconds
+#: ../gnome-session/gsm-manager.c:2547
+#, c-format
+msgid "%s"
+msgstr "%s"
+
+#. 0 seconds
+#: ../gnome-session/gsm-manager.c:2550
+msgid "0 seconds"
+msgstr "0 秒"
+
+#: ../gnome-session/gsm-manager.c:2578
+#, c-format
+msgid "Automatic logout in %s"
+msgstr "%s で自動ログアウト"
+
+#: ../gnome-session/gsm-manager.c:2579
+msgid ""
+"This session is configured to automatically log out after a period of "
+"inactivity."
+msgstr ""
+"このセッションは一定期間活動がないと自動的にログアウトするように設定されてい"
+"ます。"
+
+#: ../gnome-session/gsm-xsmp-client.c:1217
 msgid "This program is blocking log out."
 msgstr "このプログラムがログアウトできないようにしています。"
 
@@ -465,28 +615,32 @@ msgid "Could not create ICE listening socket: %s"
 msgstr "ICE の監視ソケットを生成できませんでした: %s"
 
 #. Oh well, no X for you!
-#: ../gnome-session/gsm-util.c:354
+#: ../gnome-session/gsm-util.c:349
 #, c-format
 msgid "Unable to start login session (and unable to connect to the X server)"
 msgstr "ログイン・セッションを起動できません (Ｘサーバにも接続できません)"
 
-#: ../gnome-session/main.c:433
+#: ../gnome-session/gsm-util.c:415
+msgid "Do not show me this again"
+msgstr "再度表示しない"
+
+#: ../gnome-session/main.c:434
 msgid "Override standard autostart directories"
 msgstr "標準の自動起動フォルダをオーバーライドする"
 
-#: ../gnome-session/main.c:434
+#: ../gnome-session/main.c:435
 msgid "GConf key used to lookup default session"
 msgstr "GConf のキーを使ってデフォルトのセッションを検索する"
 
-#: ../gnome-session/main.c:435
+#: ../gnome-session/main.c:436
 msgid "Enable debugging code"
 msgstr "デバッグ・モードにする"
 
-#: ../gnome-session/main.c:436
+#: ../gnome-session/main.c:437
 msgid "Do not load user-specified applications"
 msgstr "ユーザが指定したアプリを起動しない"
 
-#: ../gnome-session/main.c:457
+#: ../gnome-session/main.c:458
 msgid " - the GNOME session manager"
 msgstr "- GNOME セッション・マネージャ"
 
@@ -497,6 +651,35 @@ msgstr "- GNOME スプラッシュ・スクリーン"
 #: ../splash/gnome-session-splash.desktop.in.in.in.h:1
 msgid "GNOME Splash Screen"
 msgstr "GNOME スプラッシュ・スクリーン"
+
+#: ../tools/gnome-session-selector.c:59
+#, c-format
+msgid "Session %d"
+msgstr "セッション %d"
+
+#: ../tools/gnome-session-selector.c:90
+msgid ""
+"Session names are not allowed\n"
+"to start with a '.' character"
+msgstr ""
+"セッション名を「.」文字で始める\n"
+"ことはできません"
+
+#: ../tools/gnome-session-selector.c:99
+msgid ""
+"Session names are not allowed\n"
+"to contain '/' characters"
+msgstr ""
+"セッション名に「/」文字を使用\n"
+"することはできません"
+
+#: ../tools/gnome-session-selector.c:111
+msgid ""
+"A session with this name\n"
+"already exists"
+msgstr ""
+"この名前のセッションは\n"
+"既に存在します"
 
 #: ../tools/gnome-session-save.c:65
 msgid "Log out"
@@ -542,23 +725,3 @@ msgstr "セッション・マネージャに接続できませんでした。"
 #: ../tools/gnome-session-save.c:273
 msgid "Program called with conflicting options"
 msgstr "同時には適用できないオプションを指定しました"
-
-#~ msgid "The name of the startup program cannot be empty"
-#~ msgstr "自動起動するプログラムの名前を入力して下さい"
-
-#~ msgid ""
-#~ "Assistive technology support has been requested for this session, but the "
-#~ "accessibility registry was not found. Please ensure that the AT-SPI "
-#~ "package is installed. Your session has been started without assistive "
-#~ "technology support."
-#~ msgstr ""
-#~ "このセッションで支援技術 (Assistive Technology) のサポートが要求されていま"
-#~ "すが、アクセシビリティの機能が登録されていないようです。AT-SPI パッケージ"
-#~ "がインストールされているか確認して下さい。ひとまず、支援技術のサポートなし"
-#~ "でセッションを起動します。"
-
-#~ msgid "AT SPI Registry Wrapper"
-#~ msgstr "AT SPI レジストリのラッパー"
-
-#~ msgid "Sessions Preferences"
-#~ msgstr "セッションのプロパティ"

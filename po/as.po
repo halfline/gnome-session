@@ -582,4 +582,3 @@ msgstr "দ্বন্দ্বযুক্ত বিকল্প সহ প্
 
 #~ msgid "Sessions Preferences"
 #~ msgstr "সেশান সংক্ৰান্ত পৰিবৰ্তন"
-
