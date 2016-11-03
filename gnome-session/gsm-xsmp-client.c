@@ -713,6 +713,17 @@ xsmp_stop (GsmClient *client,
 
         g_debug ("GsmXSMPClient: xsmp_stop ('%s')", xsmp->priv->description);
 
+        /*FIXME: What do we do if the client can't be stoped ?
+         * (probably a cleaner solution exists...)
+         */
+        if (xsmp->priv->conn == NULL) {
+                g_set_error (error,
+                             GSM_CLIENT_ERROR,
+                             GSM_CLIENT_ERROR_NOT_REGISTERED,
+                             "Client is not registered");
+                return FALSE;
+        }
+
         SmsDie (xsmp->priv->conn);
 
         return TRUE;
