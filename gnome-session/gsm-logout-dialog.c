@@ -26,6 +26,7 @@
 
 #include <glib/gi18n.h>
 #include <gtk/gtk.h>
+#include <gconf/gconf-client.h>
 
 #include <devkit-power-gobject/devicekit-power.h>
 
@@ -203,8 +204,18 @@ static gboolean
 gsm_logout_supports_switch_user (GsmLogoutDialog *logout_dialog)
 {
         gboolean ret;
+       GConfClient *client;
+       gboolean disable_user_switching;
 
         ret = gsm_consolekit_can_switch_user (logout_dialog->priv->consolekit);
+
+       client = gconf_client_get_default ();
+       disable_user_switching = gconf_client_get_bool (client,
+                                                       "/desktop/gnome/lockdown/disable_user_switching",
+                                                       NULL);
+
+       if (disable_user_switching)
+               ret = FALSE;
 
         return ret;
 }
