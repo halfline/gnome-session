@@ -1,10 +1,12 @@
+# translation of pt_BR.po to Portuguese
 # Brazilian Portuguese translation of gnome-session.
-# Copyright (C) 1999-2007 Free Software Foundation, Inc.
+# Copyright (C) 1999-2007, 2010 Free Software Foundation, Inc.
 # This file is distributed under the same license as the gnome-session package.
 # Elvis Pfützenreuter <epx@netville.com.br>
 # Sandro Nunes Henrique <sandro@conectiva.com.br>
 # Rodrigo Stulzer Lopes <rodrigo@conectiva.com.br>
 # Ricardo Soares Guimarães <ricardo@conectiva.com.br>
+#
 # Gustavo Maciel Dias Vieira <gustavo@sagui.org>, 2000-2001.
 # Evandro Fernandes Giovanini <evandrofg@ig.com.br>, 2002-2005.
 # Og Maciel <ogmaciel@ubuntu.com>, 2007-2009.
@@ -12,19 +14,20 @@
 # Leonardo Ferreira Fontenelle <leonardof@gnome.org>, 2008.
 # Djavan Fagundes <dnoway@gmail.com>, 2008.
 # André Gondim <andregondim@ubuntu.com>, 2009.
-#
+# Glaucia Cintra <gcintra@redhat.com>, 2010.
 msgid ""
 msgstr ""
-"Project-Id-Version: gnome-session\n"
+"Project-Id-Version: pt_BR\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-09-16 08:20-0300\n"
-"PO-Revision-Date: 2009-07-29 11:43-0300\n"
-"Last-Translator: André Gondim <andregondim@ubuntu.com>\n"
-"Language-Team: Brazilian Portuguese <gnome-br@listas.cipsga.org.br>\n"
+"POT-Creation-Date: 2010-03-29 13:17+0530\n"
+"PO-Revision-Date: 2010-04-19 10:25+1000\n"
+"Last-Translator: Glaucia Cintra <gcintra@redhat.com>\n"
+"Language-Team: Portuguese <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: KBabel 1.11.4\n"
 
 #: ../capplet/gsm-app-dialog.c:120
 msgid "Select Command"
@@ -70,7 +73,7 @@ msgstr "Sem nome:"
 msgid "No description"
 msgstr "Nenhuma descrição"
 
-#: ../capplet/main.c:37 ../gnome-session/main.c:437
+#: ../capplet/main.c:37 ../gnome-session/main.c:438
 msgid "Version of this application"
 msgstr "Versão deste aplicativo"
 
@@ -82,6 +85,14 @@ msgstr "Não é possível exibir documento de ajuda"
 msgid "GNOME Settings Daemon Helper"
 msgstr "Auxiliar do GNOME Settings Daemon (daemon de configurações do GNOME)"
 
+#: ../data/gnome-custom-session.desktop.in.h:1
+msgid "Custom"
+msgstr "Padrão"
+
+#: ../data/gnome-custom-session.desktop.in.h:2
+msgid "This entry lets you select a saved session"
+msgstr "Esta entrada permite que você selecione uma sessão salva"
+
 #: ../data/gnome.desktop.in.h:1
 msgid "GNOME"
 msgstr "GNOME"
@@ -91,20 +102,28 @@ msgid "This session logs you into GNOME"
 msgstr "Essa sessão o leva ao GNOME"
 
 #: ../data/gnome-session.schemas.in.in.h:1
+msgid "Amount of time a user can remain idle"
+msgstr "O tempo que um usuário pode ficar em idle"
+
+#: ../data/gnome-session.schemas.in.in.h:2
 msgid "Default session"
 msgstr "Sessão padrão"
 
-#: ../data/gnome-session.schemas.in.in.h:2
+#: ../data/gnome-session.schemas.in.in.h:3
 msgid "File Manager"
 msgstr "Gerenciador de arquivos"
 
-#: ../data/gnome-session.schemas.in.in.h:3
+#: ../data/gnome-session.schemas.in.in.h:4
+msgid "If a user tries to login as root, show a dialog telling them it's a bad idea"
+msgstr "Se um usuário tentar se autenticar como root, será exibido um diálogo informando-o que não é uma boa idéia"
+
+#: ../data/gnome-session.schemas.in.in.h:5
 msgid "If enabled, gnome-session will prompt the user before ending a session."
 msgstr ""
 "Se habilitado, gnome-session pergunta ao usuário antes de terminar uma "
 "sessão."
 
-#: ../data/gnome-session.schemas.in.in.h:4
+#: ../data/gnome-session.schemas.in.in.h:6
 msgid ""
 "If enabled, gnome-session will save the session automatically. Otherwise, "
 "the logout dialog will have an option to save the session."
@@ -113,11 +132,11 @@ msgstr ""
 "contrário, o diálogo Encerrar sessão irá conter uma opção para salvar a "
 "sessão."
 
-#: ../data/gnome-session.schemas.in.in.h:5
+#: ../data/gnome-session.schemas.in.in.h:7
 msgid "List of applications that are part of the default session."
 msgstr "Lista de aplicativos que são parte da sessão padrão."
 
-#: ../data/gnome-session.schemas.in.in.h:6
+#: ../data/gnome-session.schemas.in.in.h:8
 msgid ""
 "List of components that are required as part of the session. (Each element "
 "names a key under \"/desktop/gnome/session/required_components\"). The "
@@ -133,35 +152,39 @@ msgstr ""
 "gerenciador de sessões automaticamente adicionará os componentes requeridos "
 "de volta a sessão se eles forem removidos."
 
-#: ../data/gnome-session.schemas.in.in.h:7
+#: ../data/gnome-session.schemas.in.in.h:9
 msgid "Logout prompt"
 msgstr "Tela de encerramento de sessão"
 
-#: ../data/gnome-session.schemas.in.in.h:8
+#: ../data/gnome-session.schemas.in.in.h:10
 msgid "Panel"
 msgstr "Painel"
 
-#: ../data/gnome-session.schemas.in.in.h:9
+#: ../data/gnome-session.schemas.in.in.h:11
 msgid "Preferred Image to use for login splash screen"
 msgstr "Imagem preferida para usar como tela inicial ao carregar o ambiente"
 
-#: ../data/gnome-session.schemas.in.in.h:10
+#: ../data/gnome-session.schemas.in.in.h:12
 msgid "Required session components"
 msgstr "Componentes de sessão requeridos"
 
-#: ../data/gnome-session.schemas.in.in.h:11
+#: ../data/gnome-session.schemas.in.in.h:13
 msgid "Save sessions"
 msgstr "Salvar sessões"
 
-#: ../data/gnome-session.schemas.in.in.h:12
+#: ../data/gnome-session.schemas.in.in.h:14
 msgid "Show the splash screen"
 msgstr "Mostrar tela inicial ao entrar"
 
-#: ../data/gnome-session.schemas.in.in.h:13
+#: ../data/gnome-session.schemas.in.in.h:15
 msgid "Show the splash screen when the session starts up"
 msgstr "Mostrar tela inicial ao iniciar a sessão"
 
-#: ../data/gnome-session.schemas.in.in.h:14
+#: ../data/gnome-session.schemas.in.in.h:16
+msgid "The action to take after the maximum idle time"
+msgstr "A ação a tomar após um tempo máximo em ocioso"
+
+#: ../data/gnome-session.schemas.in.in.h:17
 msgid ""
 "The file manager provides the desktop icons and allows you to interact with "
 "your saved files."
@@ -169,13 +192,24 @@ msgstr ""
 "O gerenciador de arquivos fornece os ícones da área de trabalho e permite "
 "que você interaja com os seus arquivos salvos."
 
-#: ../data/gnome-session.schemas.in.in.h:15
+#: ../data/gnome-session.schemas.in.in.h:18
 msgid ""
-"The number of minutes of inactivity before the session is considered idle."
-msgstr ""
-"O número em minutos de inatividade antes da sessão ser considerada ociosa."
+"The name of the action to take when the maximum allowed idle time has been "
+"reached. The Delay is specified in the \"max_idle_time\" key. Allowed values "
+"are: logout, forced-logout. An empty string disables the action."
+msgstr "O nome da ação a tomar quando o tempo máximo permitido a estar como ocioso, foi alcançado. O Atraso é especificado na tecla \"tempo_máx._ocioso\". Valores permitidos são: logout, logout-forçado. Uma faixa vazia irá desativar a ação."
 
-#: ../data/gnome-session.schemas.in.in.h:16
+#: ../data/gnome-session.schemas.in.in.h:19
+msgid ""
+"The number of minutes a user can remain idle before the max_idle_action is "
+"automatically taken."
+msgstr "O número em minutos que um usuário pode ficar em modo ocioso antes da ação_máx_icioso ser efetivada automaticamente."
+
+#: ../data/gnome-session.schemas.in.in.h:20
+msgid "The number of minutes of inactivity before the session is considered idle."
+msgstr "O número em minutos de inatividade antes da sessão ser considerada ociosa."
+
+#: ../data/gnome-session.schemas.in.in.h:21
 msgid ""
 "The panel provides the bar at the top or bottom of the screen containing "
 "menus, the window list, status icons, the clock, etc."
@@ -183,7 +217,7 @@ msgstr ""
 "O painel fornece a barra no topo ou na base da tela contendo menus, lista de "
 "janelas, ícones de status, relógio, etc."
 
-#: ../data/gnome-session.schemas.in.in.h:17
+#: ../data/gnome-session.schemas.in.in.h:22
 msgid ""
 "The window manager is the program that draws the title bar and borders "
 "around windows, and allows you to move and resize windows."
@@ -192,7 +226,7 @@ msgstr ""
 "bordas ao redor das janelas, e permite que você mova e redimensione as "
 "janelas."
 
-#: ../data/gnome-session.schemas.in.in.h:18
+#: ../data/gnome-session.schemas.in.in.h:23
 msgid ""
 "This is a relative path value based off the $datadir/pixmaps/ directory. Sub-"
 "directories and image names are valid values. Changing this value will "
@@ -202,13 +236,51 @@ msgstr ""
 "Sub-diretórios e nomes de imagens são valores válidos. Alterar esses valores "
 "vai afetar a próxima sessão."
 
-#: ../data/gnome-session.schemas.in.in.h:19
+#: ../data/gnome-session.schemas.in.in.h:24
 msgid "Time before session is considered idle"
 msgstr "Tempo antes da sessão ser considerada ociosa"
 
-#: ../data/gnome-session.schemas.in.in.h:20 ../data/gnome-wm.desktop.in.in.h:1
+#: ../data/gnome-session.schemas.in.in.h:25
+msgid "Warn user against running gnome-session from root account"
+msgstr "Avisa usuário sobre execução do gnome-session utilizando uma conta root"
+
+#: ../data/gnome-session.schemas.in.in.h:26
+msgid ""
+"When enabled, gnome-session will automatically save the next session at log "
+"out even if auto saving is disabled."
+msgstr "Se habilitado, gnome-session irá salvar a próxima sessão automaticamente ao Encerrar até mesmo se a opção salvar automaticamente estiver desativada."
+
+#: ../data/gnome-session.schemas.in.in.h:27 ../data/gnome-wm.desktop.in.in.h:1
 msgid "Window Manager"
 msgstr "Gerenciador de janelas"
+
+#: ../data/session-selector.ui.h:1
+msgid "Custom Session"
+msgstr "Sessões Padronizadas"
+
+#: ../data/session-selector.ui.h:2
+msgid "Please choose a custom session to run."
+msgstr "Por favor escolha uma sessão padrão para ser executada."
+
+#: ../data/session-selector.ui.h:3
+msgid "Please enter a name for the new session."
+msgstr "Por favor, insira um nome para a nova sessão."
+
+#: ../data/session-selector.ui.h:4
+msgid "_Continue"
+msgstr "_Continuar"
+
+#: ../data/session-selector.ui.h:5 ../data/session-properties.ui.h:8
+msgid "_Name:"
+msgstr "_Nome:"
+
+#: ../data/session-selector.ui.h:6
+msgid "_New Session"
+msgstr "_Nova Sessão"
+
+#: ../data/session-selector.ui.h:7
+msgid "_Remove Session"
+msgstr "_Remover sessão"
 
 #: ../data/gsm-inhibit-dialog.ui.h:1
 msgid "<b>Some programs are still running:</b>"
@@ -256,12 +328,7 @@ msgstr "Programas iniciais"
 
 #: ../data/session-properties.ui.h:7
 msgid "_Automatically remember running applications when logging out"
-msgstr ""
-"_Automaticamente lembrar aplicativos em execução quando encerrar da sessão"
-
-#: ../data/session-properties.ui.h:8
-msgid "_Name:"
-msgstr "_Nome:"
+msgstr "_Automaticamente lembrar aplicativos em execução quando encerrar da sessão"
 
 #: ../data/session-properties.ui.h:9
 msgid "_Remember Currently Running Application"
@@ -449,11 +516,74 @@ msgstr "_Reiniciar"
 msgid "_Shut Down"
 msgstr "_Desligar"
 
-#: ../gnome-session/gsm-manager.c:1208 ../gnome-session/gsm-manager.c:1900
+#: ../gnome-session/gsm-manager.c:522
+msgid ""
+"You are currently trying to run as the root super user.  The super user is a "
+"specialized account that is not designed to run a normal user session.  "
+"Various programs will not function properly, and actions performed under "
+"this account can cause unrecoverable damage to the operating system."
+msgstr "Você está tentando executar como conta root de super usuário. O super usuário é uma conta especializada que não é designada a execução de uma sessão de usuário normal. Muitos programas não funcionarão adequadamente, e as ações realizadas sob esta conta podem causar danos irrecuperáveis ao sistema operacional."
+
+#: ../gnome-session/gsm-manager.c:1270 ../gnome-session/gsm-manager.c:1977
 msgid "Not responding"
 msgstr "Não respondendo"
 
-#: ../gnome-session/gsm-xsmp-client.c:1206
+#: ../gnome-session/gsm-manager.c:2531
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d hora"
+msgstr[1] "%d hora "
+
+#: ../gnome-session/gsm-manager.c:2533
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d minuto"
+msgstr[1] "%d minuto"
+
+#: ../gnome-session/gsm-manager.c:2536
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d segundo"
+msgstr[1] "%d segundo"
+
+#. hour:minutes:seconds
+#: ../gnome-session/gsm-manager.c:2541
+#, c-format
+msgid "%s %s %s"
+msgstr "%s %s %s"
+
+#. minutes:seconds
+#: ../gnome-session/gsm-manager.c:2544
+#, c-format
+msgid "%s %s"
+msgstr "%s %s"
+
+#. seconds
+#: ../gnome-session/gsm-manager.c:2547
+#, c-format
+msgid "%s"
+msgstr "%s"
+
+#. 0 seconds
+#: ../gnome-session/gsm-manager.c:2550
+msgid "0 seconds"
+msgstr "0 segundos"
+
+#: ../gnome-session/gsm-manager.c:2578
+#, c-format
+msgid "Automatic logout in %s"
+msgstr "Logout automático em %s"
+
+#: ../gnome-session/gsm-manager.c:2579
+msgid ""
+"This session is configured to automatically log out after a period of "
+"inactivity."
+msgstr "Esta sessão é configurada para encerrar automaticamente após um período de inatividade."
+
+#: ../gnome-session/gsm-xsmp-client.c:1217
 msgid "This program is blocking log out."
 msgstr "Este programa está bloqueando o encerramento da sessão."
 
@@ -471,30 +601,34 @@ msgid "Could not create ICE listening socket: %s"
 msgstr "Não foi possível criar o soquete de escuta ICE: %s"
 
 #. Oh well, no X for you!
-#: ../gnome-session/gsm-util.c:354
+#: ../gnome-session/gsm-util.c:349
 #, c-format
 msgid "Unable to start login session (and unable to connect to the X server)"
 msgstr ""
 "Não foi possível iniciar a sessão de login (e não foi possível conectar ao "
 "servidor X)"
 
-#: ../gnome-session/main.c:433
+#: ../gnome-session/gsm-util.c:415
+msgid "Do not show me this again"
+msgstr "Não exibir novamente"
+
+#: ../gnome-session/main.c:434
 msgid "Override standard autostart directories"
 msgstr "Substituir os diretórios padrões de início automático"
 
-#: ../gnome-session/main.c:434
+#: ../gnome-session/main.c:435
 msgid "GConf key used to lookup default session"
 msgstr "A chave do GConf usada para procurar a sessão padrão"
 
-#: ../gnome-session/main.c:435
+#: ../gnome-session/main.c:436
 msgid "Enable debugging code"
 msgstr "Habilitar código de depuração"
 
-#: ../gnome-session/main.c:436
+#: ../gnome-session/main.c:437
 msgid "Do not load user-specified applications"
 msgstr "Não carregar aplicativos especificados pelo usuário"
 
-#: ../gnome-session/main.c:457
+#: ../gnome-session/main.c:458
 msgid " - the GNOME session manager"
 msgstr "- gerenciador de sessões do GNOME"
 
@@ -505,6 +639,35 @@ msgstr "- Tela inicial do GNOME"
 #: ../splash/gnome-session-splash.desktop.in.in.in.h:1
 msgid "GNOME Splash Screen"
 msgstr "Tela inicial do GNOME"
+
+#: ../tools/gnome-session-selector.c:59
+#, c-format
+msgid "Session %d"
+msgstr "Sessão %d"
+
+#: ../tools/gnome-session-selector.c:90
+msgid ""
+"Session names are not allowed\n"
+"to start with a '.' character"
+msgstr ""
+"Não é permitido iniciar os nomes de sessões\n"
+"com um caractere ' '."
+
+#: ../tools/gnome-session-selector.c:99
+msgid ""
+"Session names are not allowed\n"
+"to contain '/' characters"
+msgstr ""
+"Não é permitido conter\n"
+"os caracteres '/' em nomes de sessão"
+
+#: ../tools/gnome-session-selector.c:111
+msgid ""
+"A session with this name\n"
+"already exists"
+msgstr ""
+"Já existe uma sessão\n"
+"com este nome"
 
 #: ../tools/gnome-session-save.c:65
 msgid "Log out"
@@ -551,50 +714,3 @@ msgstr "Não foi possível conectar ao gerenciador de sessões"
 msgid "Program called with conflicting options"
 msgstr "Programa chamado com opções conflitantes"
 
-#~ msgid ""
-#~ "Assistive technology support has been requested for this session, but the "
-#~ "accessibility registry was not found. Please ensure that the AT-SPI "
-#~ "package is installed. Your session has been started without assistive "
-#~ "technology support."
-#~ msgstr ""
-#~ "O suporte para tecnologia assistiva foi requerido para esta sessão, mas o "
-#~ "registro de acessibilidade não foi localizado. Por favor, certifique-se "
-#~ "de que o pacote AT-SPI esteja instalado. Sua sessão foi iniciada sem o "
-#~ "suporte para tecnologia assistiva."
-
-#~ msgid "AT SPI Registry Wrapper"
-#~ msgstr "Wrapper de registro AT-SPI"
-
-#~ msgid "The name of the startup program cannot be empty"
-#~ msgstr "O nome do programa inicial não pode ser vazio"
-
-#~ msgid "Sessions Preferences"
-#~ msgstr "Preferências de sessões"
-
-#~ msgid "Selected option in the log out dialog"
-#~ msgstr "Opção selecionada na caixa de diálogo de encerramento da sessão"
-
-#~ msgid ""
-#~ "This is the option that will be selected in the logout dialog, valid "
-#~ "values are \"logout\" for logging out, \"shutdown\" for halting the "
-#~ "system and \"restart\" for restarting the system."
-#~ msgstr ""
-#~ "Essa é a opção que será selecionada na caixa de diálogo de encerramento "
-#~ "da sessão. Os valores válidos são \"logout\" para encerrar a sessão, "
-#~ "\"shutdown\" para desligar o computador e \"restart\" para reiniciar o "
-#~ "computador."
-
-#~ msgid "Configure your sessions"
-#~ msgstr "Configure suas sessões"
-
-#~ msgid "Sessions"
-#~ msgstr "Sessões"
-
-#~ msgid "GNOME Keyring Daemon Wrapper"
-#~ msgstr "Wrapper do daemon do Chaveiro do GNOME"
-
-#~ msgid "Session management"
-#~ msgstr "Gerenciamento de sessão"
-
-#~ msgid "GNOME GUI Library + EggSMClient"
-#~ msgstr "Biblioteca de interface gráfica do GNOME + EggSMClient"
