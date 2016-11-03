@@ -4,17 +4,17 @@
 #
 # THIRD AUTHOR: Rahul Bhalerao <b.rahul.pm@gmail.com>, 2006.
 # FOURTH AUTHOR: Sandeep Shedmake <sandeep.shedmake@gmail.com>, 2008, 2009.
-# Sandeep Shedmake <sshedmak@redhat.com>, 2009.
+# Sandeep Shedmake <sshedmak@redhat.com>, 2009, 2010.
 # FIRST AUTHOR: Swapnil Hajare <dreamil1000a@yahoo.com>
 # SECOND AUTHOR: Pradeep Deshpande
 msgid ""
 msgstr ""
 "Project-Id-Version: mr\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?product=gnome-session&component=general\n"
-"POT-Creation-Date: 2009-09-07 17:27+0000\n"
-"PO-Revision-Date: 2009-09-12 14:45+0530\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-03-29 13:17+0530\n"
+"PO-Revision-Date: 2010-04-06 12:15+0530\n"
 "Last-Translator: Sandeep Shedmake <sshedmak@redhat.com>\n"
-"Language-Team: Marathi <fedora-trans-mr@redhat.com>\n"
+"Language-Team: Marathi <maajhe-sanganak@freelists.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,7 +58,6 @@ msgid "Startup Applications Preferences"
 msgstr "प्रारंभिक अनुप्रयोग आवड निवड"
 
 #: ../capplet/gsp-app.c:269
-#| msgid "_Name:"
 msgid "No name"
 msgstr "नाव आढळले नाही"
 
@@ -66,7 +65,7 @@ msgstr "नाव आढळले नाही"
 msgid "No description"
 msgstr "वर्णन नाही"
 
-#: ../capplet/main.c:37 ../gnome-session/main.c:437
+#: ../capplet/main.c:37 ../gnome-session/main.c:438
 msgid "Version of this application"
 msgstr "या अनुप्रयोगाची आवृत्ती"
 
@@ -78,6 +77,14 @@ msgstr "मदत दस्तऐवज दाखवण्यास अशक्
 msgid "GNOME Settings Daemon Helper"
 msgstr "GNOME संयोजना डीमन मदतकर्ता"
 
+#: ../data/gnome-custom-session.desktop.in.h:1
+msgid "Custom"
+msgstr "मनपसंत"
+
+#: ../data/gnome-custom-session.desktop.in.h:2
+msgid "This entry lets you select a saved session"
+msgstr "ही नोंदणी साठवलेले सत्र नीवडण्यास परवानगी देते"
+
 #: ../data/gnome.desktop.in.h:1
 msgid "GNOME"
 msgstr "GNOME"
@@ -87,18 +94,26 @@ msgid "This session logs you into GNOME"
 msgstr "GNOME मध्ये दाखल करण्याजोगी सत्र लॉग"
 
 #: ../data/gnome-session.schemas.in.in.h:1
+msgid "Amount of time a user can remain idle"
+msgstr "वापरकर्ता रिकामा राहण्याचा कालावधी"
+
+#: ../data/gnome-session.schemas.in.in.h:2
 msgid "Default session"
 msgstr "पूर्वनिर्धारीत सत्र"
 
-#: ../data/gnome-session.schemas.in.in.h:2
+#: ../data/gnome-session.schemas.in.in.h:3
 msgid "File Manager"
 msgstr "फाइल व्यवस्थापक"
 
-#: ../data/gnome-session.schemas.in.in.h:3
+#: ../data/gnome-session.schemas.in.in.h:4
+msgid "If a user tries to login as root, show a dialog telling them it's a bad idea"
+msgstr "वापरकर्ता रूट म्हणून प्रवेश करण्याचा प्रयत्न करतेवेळी, ही अयोग्य गोष्ट आहे असे संवाद दाखवा"
+
+#: ../data/gnome-session.schemas.in.in.h:5
 msgid "If enabled, gnome-session will prompt the user before ending a session."
 msgstr "जर सत्र सुरू झाले तर, उपयोग कर्त्याला सत्र संपण्याआधी GNOME सूचना देईल."
 
-#: ../data/gnome-session.schemas.in.in.h:4
+#: ../data/gnome-session.schemas.in.in.h:6
 msgid ""
 "If enabled, gnome-session will save the session automatically. Otherwise, "
 "the logout dialog will have an option to save the session."
@@ -106,11 +121,11 @@ msgstr ""
 "जर सत्र सुरू झाले तर, GNOME सत्र चालू असणारे सत्र आपोआप साठवेल. अन्यथात्या सत्राचा साठा "
 "logout dialog द्वारा होऊ शकतो.(बाहेर जाण्याच्या सूचनेद्वारे)."
 
-#: ../data/gnome-session.schemas.in.in.h:5
+#: ../data/gnome-session.schemas.in.in.h:7
 msgid "List of applications that are part of the default session."
 msgstr "पूर्वनिर्धारीत सत्राचे भाग असलेले अनुप्रयोगांची यादी."
 
-#: ../data/gnome-session.schemas.in.in.h:6
+#: ../data/gnome-session.schemas.in.in.h:8
 msgid ""
 "List of components that are required as part of the session. (Each element "
 "names a key under \"/desktop/gnome/session/required_components\"). The "
@@ -124,35 +139,39 @@ msgstr ""
 "वापरकर्त्यांना सत्रा पासून आवश्यक घटक काढण्यास परवानगी देत नाही, व सत्र व्यवस्थापक "
 "आपोआप आवश्क घटक सत्र मध्ये घटक न काढल्यास समाविष्ट करतो."
 
-#: ../data/gnome-session.schemas.in.in.h:7
+#: ../data/gnome-session.schemas.in.in.h:9
 msgid "Logout prompt"
 msgstr "बाहेर जाण्यासाठीचे चिन्ह"
 
-#: ../data/gnome-session.schemas.in.in.h:8
+#: ../data/gnome-session.schemas.in.in.h:10
 msgid "Panel"
 msgstr "तावदान"
 
-#: ../data/gnome-session.schemas.in.in.h:9
+#: ../data/gnome-session.schemas.in.in.h:11
 msgid "Preferred Image to use for login splash screen"
 msgstr "झटकन दिसाऱ्या पडदा करीता निर्धारीत प्रतिमा"
 
-#: ../data/gnome-session.schemas.in.in.h:10
+#: ../data/gnome-session.schemas.in.in.h:12
 msgid "Required session components"
 msgstr "आवश्यक सत्र घटक"
 
-#: ../data/gnome-session.schemas.in.in.h:11
+#: ../data/gnome-session.schemas.in.in.h:13
 msgid "Save sessions"
 msgstr "सत्र साठवा"
 
-#: ../data/gnome-session.schemas.in.in.h:12
+#: ../data/gnome-session.schemas.in.in.h:14
 msgid "Show the splash screen"
 msgstr "झटकन येणारा पडदा दाखवा"
 
-#: ../data/gnome-session.schemas.in.in.h:13
+#: ../data/gnome-session.schemas.in.in.h:15
 msgid "Show the splash screen when the session starts up"
 msgstr "सत्र सुरू झाल्यानंतर झटकन येणारा पडदा दाखवा"
 
-#: ../data/gnome-session.schemas.in.in.h:14
+#: ../data/gnome-session.schemas.in.in.h:16
+msgid "The action to take after the maximum idle time"
+msgstr "कमाल रिकामा वेळनंतर कार्यान्वीतजोगी कृती"
+
+#: ../data/gnome-session.schemas.in.in.h:17
 msgid ""
 "The file manager provides the desktop icons and allows you to interact with "
 "your saved files."
@@ -160,11 +179,24 @@ msgstr ""
 "फाइल व्यवस्थापक डेस्कटॉप चिन्ह पुरवितो व तुम्हाला संचयीत फाइलशी संपर्क साधण्यास सहमती "
 "देतो."
 
-#: ../data/gnome-session.schemas.in.in.h:15
+#: ../data/gnome-session.schemas.in.in.h:18
+msgid ""
+"The name of the action to take when the maximum allowed idle time has been "
+"reached. The Delay is specified in the \"max_idle_time\" key. Allowed values "
+"are: logout, forced-logout. An empty string disables the action."
+msgstr "कमाल स्वीकार्य रिकामा वेळ पोहचल्यवार कार्यान्वीतजोगी कृतीचे नाव. विलंब \"max_idle_time\" किमध्ये निर्देशीत आहे. स्वीकार्य मूल्य: लॉगआऊट, फोर्स्ड्-लॉगआऊट असे आहे. रिकामे अक्षरमाळा कृती बंद करते."
+
+#: ../data/gnome-session.schemas.in.in.h:19
+msgid ""
+"The number of minutes a user can remain idle before the max_idle_action is "
+"automatically taken."
+msgstr "max_idle_action स्वयंपणे स्वीकारल्यावर वापरकर्ता द्वारे निष्क्रीय राहण्याची किमान वेळ."
+
+#: ../data/gnome-session.schemas.in.in.h:20
 msgid "The number of minutes of inactivity before the session is considered idle."
 msgstr "सत्र रिकमे होण्यापूर्वी मिनीटं अंतर्गत निष्क्रीयता कालावधी."
 
-#: ../data/gnome-session.schemas.in.in.h:16
+#: ../data/gnome-session.schemas.in.in.h:21
 msgid ""
 "The panel provides the bar at the top or bottom of the screen containing "
 "menus, the window list, status icons, the clock, etc."
@@ -172,7 +204,7 @@ msgstr ""
 "पटल पडद्याच्या वरील किंवा तळ बाजूस समाविष्ठीत मेन्यू, चौकट यादी, स्थिती चिन्ह, घड्याळ, "
 "इत्यादी करीता पट्टी पुरवितो."
 
-#: ../data/gnome-session.schemas.in.in.h:17
+#: ../data/gnome-session.schemas.in.in.h:22
 msgid ""
 "The window manager is the program that draws the title bar and borders "
 "around windows, and allows you to move and resize windows."
@@ -180,7 +212,7 @@ msgstr ""
 "चौकट व्यवस्थपाक या कार्यक्रम चौकट भोवती शिर्षक पट्टी व किनार काढतो, व वापरकर्त्यास "
 "चौकट हलविण्यास व पुन्ह आकार देण्यास मदत करतो."
 
-#: ../data/gnome-session.schemas.in.in.h:18
+#: ../data/gnome-session.schemas.in.in.h:23
 msgid ""
 "This is a relative path value based off the $datadir/pixmaps/ directory. Sub-"
 "directories and image names are valid values. Changing this value will "
@@ -189,13 +221,51 @@ msgstr ""
 "$datadir/pixmaps/ संचयीका आधारीत संबंधीत मार्ग. उप-संचयीका व प्रतिमा नाव हे बैध मुल्य "
 "आहेत. हे मुल्य बदलविल्यास पुढचे सत्र दाखलनवर प्रभाव पडेल."
 
-#: ../data/gnome-session.schemas.in.in.h:19
+#: ../data/gnome-session.schemas.in.in.h:24
 msgid "Time before session is considered idle"
 msgstr "सत्र रिकामे असण्यापूर्वीचा वेळ"
 
-#: ../data/gnome-session.schemas.in.in.h:20 ../data/gnome-wm.desktop.in.in.h:1
+#: ../data/gnome-session.schemas.in.in.h:25
+msgid "Warn user against running gnome-session from root account"
+msgstr "रूट खात्यापासून वापरकर्त्याला gnome-session चालवण्यास सावध करा"
+
+#: ../data/gnome-session.schemas.in.in.h:26
+msgid ""
+"When enabled, gnome-session will automatically save the next session at log "
+"out even if auto saving is disabled."
+msgstr "सुरू केल्यावर, स्वयं साठवणे बंद असल्यावर, बाहेर पडतेवेळी gnome-session स्वयंपणे पुढील सत्र साठवतो."
+
+#: ../data/gnome-session.schemas.in.in.h:27 ../data/gnome-wm.desktop.in.in.h:1
 msgid "Window Manager"
 msgstr "खिडकी व्यवस्थापक"
+
+#: ../data/session-selector.ui.h:1
+msgid "Custom Session"
+msgstr "मनपसंत सत्र"
+
+#: ../data/session-selector.ui.h:2
+msgid "Please choose a custom session to run."
+msgstr "चालवण्याकरीता कृपया मनपसंत सत्र नीवडा."
+
+#: ../data/session-selector.ui.h:3
+msgid "Please enter a name for the new session."
+msgstr "कृपया नवीन सत्रकरीता नाव द्या."
+
+#: ../data/session-selector.ui.h:4
+msgid "_Continue"
+msgstr "पुढे चला (_C)"
+
+#: ../data/session-selector.ui.h:5 ../data/session-properties.ui.h:8
+msgid "_Name:"
+msgstr "नाव (_N):"
+
+#: ../data/session-selector.ui.h:6
+msgid "_New Session"
+msgstr "नवीन सत्र (_N)"
+
+#: ../data/session-selector.ui.h:7
+msgid "_Remove Session"
+msgstr "सत्र काढून टाका (_R)"
 
 #: ../data/gsm-inhibit-dialog.ui.h:1
 msgid "<b>Some programs are still running:</b>"
@@ -244,10 +314,6 @@ msgstr "आरंभिक कार्यक्रम"
 #: ../data/session-properties.ui.h:7
 msgid "_Automatically remember running applications when logging out"
 msgstr "बाहेर पडतेवेळी आपोआप अनुप्रयोग कार्यरत करणे स्मर्णात ठेवा (_A)"
-
-#: ../data/session-properties.ui.h:8
-msgid "_Name:"
-msgstr "नाव (_N):"
 
 #: ../data/session-properties.ui.h:9
 msgid "_Remember Currently Running Application"
@@ -309,12 +375,10 @@ msgid "ID"
 msgstr "ID"
 
 #: ../egg/eggsmclient.c:252
-#| msgid "Session Management Options"
 msgid "Session management options:"
 msgstr "सत्र व्यवस्थपान पर्याय:"
 
 #: ../egg/eggsmclient.c:253
-#| msgid "Show Session Management options"
 msgid "Show session management options"
 msgstr "सत्र व्यवस्थपान पर्याय दाखवा"
 
@@ -435,11 +499,76 @@ msgstr "पुन्हा सुरू करा (_R)"
 msgid "_Shut Down"
 msgstr "बंद करा (_S)"
 
-#: ../gnome-session/gsm-manager.c:1158 ../gnome-session/gsm-manager.c:1850
+#: ../gnome-session/gsm-manager.c:522
+msgid ""
+"You are currently trying to run as the root super user.  The super user is a "
+"specialized account that is not designed to run a normal user session.  "
+"Various programs will not function properly, and actions performed under "
+"this account can cause unrecoverable damage to the operating system."
+msgstr ""
+"सध्या तुम्ही रूट सुपर यूजर म्हणून चालवत आहात.  सुपर यूजर विशेष खाते आहे ज्याची रचना सर्वसाधारण वापरकर्ता सत्र चालवण्यास केली नाही.  "
+"अनेक कार्यक्रम योग्यप्रकारे कार्य करणार नाही, व या खात्याअंतर्गत कार्यान्वीत केलेली कृती कार्य प्रणालीसाठी धोका निर्माण करू शकते."
+
+#: ../gnome-session/gsm-manager.c:1270 ../gnome-session/gsm-manager.c:1977
 msgid "Not responding"
 msgstr "प्रतिसाद देत नाह"
 
-#: ../gnome-session/gsm-xsmp-client.c:1206
+#: ../gnome-session/gsm-manager.c:2531
+#, c-format
+msgid "%d hour"
+msgid_plural "%d hours"
+msgstr[0] "%d तास"
+msgstr[1] "%d तास"
+
+#: ../gnome-session/gsm-manager.c:2533
+#, c-format
+msgid "%d minute"
+msgid_plural "%d minutes"
+msgstr[0] "%d मिनीट"
+msgstr[1] "%d मिनीट्स्"
+
+#: ../gnome-session/gsm-manager.c:2536
+#, c-format
+msgid "%d second"
+msgid_plural "%d seconds"
+msgstr[0] "%d सेकंद"
+msgstr[1] "%d सेकंद"
+
+#. hour:minutes:seconds
+#: ../gnome-session/gsm-manager.c:2541
+#, c-format
+msgid "%s %s %s"
+msgstr "%s %s %s"
+
+#. minutes:seconds
+#: ../gnome-session/gsm-manager.c:2544
+#, c-format
+msgid "%s %s"
+msgstr "%s %s"
+
+#. seconds
+#: ../gnome-session/gsm-manager.c:2547
+#, c-format
+msgid "%s"
+msgstr "%s"
+
+#. 0 seconds
+#: ../gnome-session/gsm-manager.c:2550
+msgid "0 seconds"
+msgstr "0 सेकंद"
+
+#: ../gnome-session/gsm-manager.c:2578
+#, c-format
+msgid "Automatic logout in %s"
+msgstr "%s मध्ये स्वयं लॉगआऊट करा"
+
+#: ../gnome-session/gsm-manager.c:2579
+msgid ""
+"This session is configured to automatically log out after a period of "
+"inactivity."
+msgstr "निष्क्रीयता वेळ संपल्यावर हे सत्र स्वयंपणे बाहेर पडण्यास संरचीत केले आहे."
+
+#: ../gnome-session/gsm-xsmp-client.c:1217
 msgid "This program is blocking log out."
 msgstr "हा कार्यक्रम बाहेर पडण्यापासून रोखत आहे."
 
@@ -455,28 +584,32 @@ msgid "Could not create ICE listening socket: %s"
 msgstr "ICE सक्रीय सॉकेट बनवू शकला नाही: %s"
 
 #. Oh well, no X for you!
-#: ../gnome-session/gsm-util.c:354
+#: ../gnome-session/gsm-util.c:349
 #, c-format
 msgid "Unable to start login session (and unable to connect to the X server)"
 msgstr "प्रवेश सत्र सुरू करण्यास अपयशी (व X सर्वरशी जुळवणी स्थपीत करणे शक्य नाही)"
 
-#: ../gnome-session/main.c:433
+#: ../gnome-session/gsm-util.c:415
+msgid "Do not show me this again"
+msgstr "मला हे पुनः दाखवू नका"
+
+#: ../gnome-session/main.c:434
 msgid "Override standard autostart directories"
 msgstr "मानक स्वप्रारंभ संचयीकावर खोडून पुन्हा लिहा"
 
-#: ../gnome-session/main.c:434
+#: ../gnome-session/main.c:435
 msgid "GConf key used to lookup default session"
 msgstr "पूर्वनिर्धारीत सत्र करीता GConf कि"
 
-#: ../gnome-session/main.c:435
+#: ../gnome-session/main.c:436
 msgid "Enable debugging code"
 msgstr "डीबगींग कोड कार्यान्वीत करा"
 
-#: ../gnome-session/main.c:436
+#: ../gnome-session/main.c:437
 msgid "Do not load user-specified applications"
 msgstr "वापरकर्ता-निर्देशीत अनुप्रयोग दाखल करू शकले नाही"
 
-#: ../gnome-session/main.c:457
+#: ../gnome-session/main.c:458
 msgid " - the GNOME session manager"
 msgstr " - GNOME सत्र व्यवस्थापक"
 
@@ -487,6 +620,35 @@ msgstr "- GNOME स्पलॅश पडदा"
 #: ../splash/gnome-session-splash.desktop.in.in.in.h:1
 msgid "GNOME Splash Screen"
 msgstr "GNOME स्पलॅश पडदा"
+
+#: ../tools/gnome-session-selector.c:59
+#, c-format
+msgid "Session %d"
+msgstr "सत्र %d"
+
+#: ../tools/gnome-session-selector.c:90
+msgid ""
+"Session names are not allowed\n"
+"to start with a '.' character"
+msgstr ""
+"सत्राचे नाव \n"
+"'.' अक्षरासह सुरू होणे शक्य नाही"
+
+#: ../tools/gnome-session-selector.c:99
+msgid ""
+"Session names are not allowed\n"
+"to contain '/' characters"
+msgstr ""
+"सत्राचे नाव \n"
+"'/' अक्षरासह सुरू होणे अशक्य आहे"
+
+#: ../tools/gnome-session-selector.c:111
+msgid ""
+"A session with this name\n"
+"already exists"
+msgstr ""
+"या नावाचे सत्र \n"
+"आधिपासूनच अस्तित्वात आहे"
 
 #: ../tools/gnome-session-save.c:65
 msgid "Log out"
@@ -531,5 +693,5 @@ msgstr "सत्र संचालकाशी संपर्क झाला
 
 #: ../tools/gnome-session-save.c:273
 msgid "Program called with conflicting options"
-msgstr "मतभेदीय पर्यायसह कार्यक्रमास बोलविले गेले"
+msgstr "मतभेदीय पर्यायसह कार्यक्रमाला कॉल केले"
 
