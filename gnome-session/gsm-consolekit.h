@@ -75,6 +75,7 @@ GQuark           gsm_consolekit_error_quark     (void);
 
 GsmConsolekit   *gsm_consolekit_new             (void) G_GNUC_MALLOC;
 
+gboolean         gsm_consolekit_other_users_logged_in (GsmConsolekit *manager);
 gboolean         gsm_consolekit_can_switch_user (GsmConsolekit *manager);
 
 gboolean         gsm_consolekit_get_restart_privileges (GsmConsolekit *manager);

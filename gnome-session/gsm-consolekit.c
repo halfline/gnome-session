@@ -28,6 +28,10 @@
 #include <glib-object.h>
 #include <glib/gi18n.h>
 
+#ifdef HAVE_POLKIT_GOBJECT
+#include <polkit/polkit.h>
+#endif
+
 #include <dbus/dbus-glib.h>
 #include <dbus/dbus-glib-lowlevel.h>
 
@@ -64,6 +68,11 @@ enum {
         PRIVILEGES_COMPLETED,
         LAST_SIGNAL
 };
+
+typedef enum {
+        SYSTEM_RESTART,
+        SYSTEM_STOP
+} GsmConsoleKitSystemAction;
 
 static guint signals[LAST_SIGNAL] = { 0 };
 
@@ -357,6 +366,63 @@ gsm_consolekit_error_quark (void)
         }
 
         return error_quark;
+}
+
+gboolean
+gsm_consolekit_other_users_logged_in (GsmConsolekit *self)
+{
+        GError    *error;
+        gboolean   res;
+        gboolean   other_users_logged_in = FALSE;
+        GPtrArray *sessions;
+        guint i;
+
+        error = NULL;
+        res = dbus_g_proxy_call_with_timeout (self->priv->ck_proxy,
+                                              "GetSessions",
+                                              INT_MAX,
+                                              &error,
+                                              G_TYPE_INVALID,
+                                              dbus_g_type_get_collection ("GPtrArray", DBUS_TYPE_G_OBJECT_PATH),
+                                              &sessions,
+                                              G_TYPE_INVALID);
+
+        if (!res) {
+                g_warning ("Could not ask ConsoleKit for open sessions: %s",
+                           error->message);
+                g_clear_error (&error);
+                return FALSE;
+        }
+
+        for (i = 0; i < sessions->len && !other_users_logged_in; i++) {
+                DBusGProxy *proxy;
+                guint uid;
+                const char *session = g_ptr_array_index(sessions, i);
+
+                proxy = dbus_g_proxy_new_for_name (self->priv->dbus_connection,
+                                                   CK_NAME,
+                                                   session,
+                                                   CK_SESSION_INTERFACE);
+                res = dbus_g_proxy_call_with_timeout (proxy,
+                                                      "GetUnixUser",
+                                                      INT_MAX,
+                                                      &error,
+                                                      G_TYPE_INVALID,
+                                                      G_TYPE_UINT, &uid,
+                                                      G_TYPE_INVALID);
+
+                if (!res) {
+                        g_warning ("Couldn't get user for session %s: %s",
+                                   session, error->message);
+                        g_clear_error (&error);
+                } else if ((uid_t) uid != getuid ()) {
+                        other_users_logged_in = TRUE;
+                }
+                g_object_unref (proxy);
+        }
+        g_ptr_array_free (sessions, TRUE);
+
+        return other_users_logged_in;
 }
 
 GsmConsolekit *
@@ -748,24 +814,84 @@ gsm_consolekit_can_switch_user (GsmConsolekit *manager)
         return ret;
 }
 
+static gboolean
+get_consolekit_privileges (GsmConsolekit             *manager,
+                           GsmConsoleKitSystemAction  action)
+{
+#ifdef HAVE_POLKIT_GOBJECT
+        PolkitDetails *details;
+        PolkitSubject *subject;
+        gboolean got_consolekit_privileges = FALSE;
+        gboolean other_users_logged_in = FALSE;
+        const char *action_id;
+        PolkitAuthority *authority;
+        PolkitAuthorizationResult *result;
+        PolkitCheckAuthorizationFlags flags;
+        GError *error = NULL;
+
+        other_users_logged_in = gsm_consolekit_other_users_logged_in (manager);
+        details = polkit_details_new ();
+        subject = polkit_unix_process_new (getpid ());
+        flags = POLKIT_CHECK_AUTHORIZATION_FLAGS_ALLOW_USER_INTERACTION;
+
+        switch (action) {
+                case SYSTEM_RESTART:
+                        if (other_users_logged_in) {
+                                action_id = "org.freedesktop.consolekit.system.restart-multiple-users";
+                        } else {
+                                action_id = "org.freedesktop.consolekit.system.restart";
+                        }
+                        break;
+                case SYSTEM_STOP:
+                        if (other_users_logged_in) {
+                                action_id = "org.freedesktop.consolekit.system.stop-multiple-users";
+                        } else {
+                                action_id = "org.freedesktop.consolekit.system.stop";
+                        }
+                        break;
+        }
+
+        authority = polkit_authority_get ();
+        result = polkit_authority_check_authorization_sync (authority,
+                                                            subject,
+                                                            action_id,
+                                                            details,
+                                                            flags,
+                                                            NULL,
+                                                            &error);
+
+        if (result == NULL) {
+                g_warning ("Couldn't check for authorization: %s", error->message);
+                g_clear_error (&error);
+        } else {
+                got_consolekit_privileges = polkit_authorization_result_get_is_authorized (result);
+                g_object_unref (result);
+        }
+
+        g_object_unref (authority);
+        g_object_unref (subject);
+        g_object_unref (details);
+
+	g_signal_emit (G_OBJECT (manager),
+		       signals [PRIVILEGES_COMPLETED],
+		       0, got_consolekit_privileges, TRUE, NULL);
+
+        return TRUE;
+#endif
+
+        return FALSE;
+}
+
 gboolean
 gsm_consolekit_get_restart_privileges (GsmConsolekit *manager)
 {
-	g_signal_emit (G_OBJECT (manager),
-		       signals [PRIVILEGES_COMPLETED],
-		       0, TRUE, TRUE, NULL);
-
-	return TRUE;
+        return get_consolekit_privileges (manager, SYSTEM_RESTART);
 }
 
 gboolean
 gsm_consolekit_get_stop_privileges (GsmConsolekit *manager)
 {
-	g_signal_emit (G_OBJECT (manager),
-		       signals [PRIVILEGES_COMPLETED],
-		       0, TRUE, TRUE, NULL);
-
-	return TRUE;
+        return get_consolekit_privileges (manager, SYSTEM_STOP);
 }
 
 gboolean
