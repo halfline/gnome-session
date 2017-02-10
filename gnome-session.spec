@@ -9,7 +9,7 @@
 
 Name: gnome-session
 Version: 3.23.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: GNOME session manager
 
 License: GPLv2+
@@ -138,6 +138,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.23.2-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
 * Tue Oct 11 2016 Adam Jackson <ajax@redhat.com> - 3.23.2-2
 - Prefer eglGetPlatformDisplay to eglGetDisplay
 
