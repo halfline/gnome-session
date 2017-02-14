@@ -8,8 +8,8 @@
 %endif
 
 Name: gnome-session
-Version: 3.23.2
-Release: 3%{?dist}
+Version: 3.23.4.1
+Release: 1%{?dist}
 Summary: GNOME session manager
 
 License: GPLv2+
@@ -138,6 +138,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Feb 14 2017 Richard Hughes <rhughes@redhat.com> - 3.23.4.1-1
+- Update to 3.23.4.1
+
 * Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.23.2-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
 
