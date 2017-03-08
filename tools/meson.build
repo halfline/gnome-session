@@ -19,8 +19,7 @@ programs = [
 if enable_session_selector
   deps = [
     glib_dep,
-    gtk_dep,
-    dbus_glib_dep
+    gtk_dep
   ]
 
   cflags += '-DGTKBUILDER_DIR="@0@"'.format(session_pkgdatadir)
