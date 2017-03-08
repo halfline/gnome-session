@@ -1,3 +1,5 @@
+subdir('icons')
+
 desktop = 'gnome.desktop'
 
 # FIXME: The same target can not be copied into two directories.
@@ -75,6 +77,7 @@ install_data(
 )
 
 data = files('hardware-compatibility')
+data += files('session-properties.ui')
 
 if enable_session_selector
   data += files('session-selector.ui')
