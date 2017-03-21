@@ -8,7 +8,7 @@
 %endif
 
 Name: gnome-session
-Version: 3.23.92
+Version: 3.24.0
 Release: 1%{?dist}
 Summary: GNOME session manager
 
@@ -138,6 +138,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Mar 21 2017 Kalev Lember <klember@redhat.com> - 3.24.0-1
+- Update to 3.24.0
+
 * Thu Mar 16 2017 Kalev Lember <klember@redhat.com> - 3.23.92-1
 - Update to 3.23.92
 
