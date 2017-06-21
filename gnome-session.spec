@@ -53,6 +53,7 @@ BuildRequires: usermode
 BuildRequires: gettext
 BuildRequires: intltool
 BuildRequires: libtool, autoconf, automake
+BuildRequires: gnome-common
 BuildRequires: xmlto
 BuildRequires: /usr/bin/xsltproc
 BuildRequires: git
@@ -92,7 +93,7 @@ Desktop file to add GNOME on wayland to display manager session menu.
 
 %prep
 %autosetup -S git
-autoreconf -f -i
+NOCONFIGURE=1 gnome-autogen.sh
 
 %build
 %configure --enable-docbook-docs                                \
