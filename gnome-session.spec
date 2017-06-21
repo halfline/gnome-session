@@ -9,7 +9,7 @@
 
 Name: gnome-session
 Version: 3.24.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: GNOME session manager
 
 License: GPLv2+
@@ -21,6 +21,14 @@ Patch1: gnome-session-3.3.92-nv30.patch
 Patch3: gnome-session-3.6.2-swrast.patch
 # https://bugzilla.gnome.org/show_bug.cgi?id=772421
 Patch4: 0001-check-accelerated-gles-Use-eglGetPlatformDisplay-EXT.patch
+
+# https://bugzilla.redhat.com/show_bug.cgi?id=1340203
+Patch5: 0001-manager-add-bus-daemon-dbus-api-xml-file.patch
+Patch6: 0002-system-add-api-for-detecting-if-this-is-the-last-ses.patch
+Patch7: 0003-manager-kill-off-bus-clients-at-log-out.patch
+
+# https://bugzilla.redhat.com/show_bug.cgi?id=1384508
+Patch8: 0001-fail-whale-handle-X-server-dying-before-startup.patch
 
 BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(gl)
@@ -46,6 +54,7 @@ BuildRequires: gettext
 BuildRequires: intltool
 BuildRequires: xmlto
 BuildRequires: /usr/bin/xsltproc
+BuildRequires: git
 
 # an artificial requires to make sure we get dconf, for now
 Requires: dconf
@@ -81,10 +90,7 @@ Requires: xorg-x11-server-Xwayland%{?_isa}
 Desktop file to add GNOME on wayland to display manager session menu.
 
 %prep
-%setup -q
-%patch1 -p1 -b .nv30
-%patch3 -p1 -b .swrast
-%patch4 -p1 -b .platform
+%autosetup -S git
 
 %build
 %configure --enable-docbook-docs                                \
@@ -138,6 +144,13 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Wed Jun 21 2017 Ray Strode <rstrode@redhat.com> - 3.24.1-2
+- Kill bus clients at log out
+  Resolves: #1340203
+
+- Address crash in fail whale
+  Related: #1384508
+
 * Wed Apr 12 2017 Kalev Lember <klember@redhat.com> - 3.24.1-1
 - Update to 3.24.1
 

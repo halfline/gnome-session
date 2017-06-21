@@ -1,0 +1,175 @@
+From 1e3b5a2f4c6cb65dfa94b65a84d1f6c2c9dd61fe Mon Sep 17 00:00:00 2001
+From: Ray Strode <rstrode@redhat.com>
+Date: Tue, 20 Jun 2017 15:32:11 -0400
+Subject: [PATCH 1/3] manager: add bus daemon dbus api xml file
+
+https://bugzilla.gnome.org/show_bug.cgi?id=764029
+---
+ gnome-session/Makefile.am              | 16 ++++++-
+ gnome-session/org.freedesktop.DBus.xml | 76 ++++++++++++++++++++++++++++++++++
+ 2 files changed, 90 insertions(+), 2 deletions(-)
+ create mode 100644 gnome-session/org.freedesktop.DBus.xml
+
+diff --git a/gnome-session/Makefile.am b/gnome-session/Makefile.am
+index e2f81cc8..cf8fb8b0 100644
+--- a/gnome-session/Makefile.am
++++ b/gnome-session/Makefile.am
+@@ -165,59 +165,71 @@ org.gnome.SessionManager.ClientPrivate.h: org.gnome.SessionManager.ClientPrivate
+ org.gnome.SessionManager.ClientPrivate.c: org.gnome.SessionManager.ClientPrivate.h
+ 	@: # generated as a side-effect
+ 
+ org.gnome.SessionManager.App.h: org.gnome.SessionManager.App.xml Makefile.am
+ 	$(AM_V_GEN) gdbus-codegen --interface-prefix org.gnome.SessionManager.App. \
+ 	--generate-c-code org.gnome.SessionManager.App \
+ 	--c-namespace Gsm \
+         --annotate "org.gnome.SessionManager.App" "org.gtk.GDBus.C.Name" ExportedApp \
+ 	$(srcdir)/org.gnome.SessionManager.App.xml
+ org.gnome.SessionManager.App.c: org.gnome.SessionManager.App.h
+ 	@: # generated as a side-effect
+ 
+ org.gnome.SessionManager.Inhibitor.h: org.gnome.SessionManager.Inhibitor.xml Makefile.am
+ 	$(AM_V_GEN) gdbus-codegen --interface-prefix org.gnome.SessionManager.Inhibitor. \
+ 	--generate-c-code org.gnome.SessionManager.Inhibitor \
+ 	--c-namespace Gsm \
+         --annotate "org.gnome.SessionManager.Inhibitor" "org.gtk.GDBus.C.Name" ExportedInhibitor \
+ 	$(srcdir)/org.gnome.SessionManager.Inhibitor.xml
+ org.gnome.SessionManager.Inhibitor.c: org.gnome.SessionManager.Inhibitor.h
+ 	@: # generated as a side-effect
+ 
+ org.gnome.SessionManager.Presence.h: org.gnome.SessionManager.Presence.xml Makefile.am
+ 	$(AM_V_GEN) gdbus-codegen --interface-prefix org.gnome.SessionManager.Presence. \
+ 	--generate-c-code org.gnome.SessionManager.Presence \
+ 	--c-namespace Gsm \
+         --annotate "org.gnome.SessionManager.Presence" "org.gtk.GDBus.C.Name" ExportedPresence \
+ 	$(srcdir)/org.gnome.SessionManager.Presence.xml
+ org.gnome.SessionManager.Presence.c: org.gnome.SessionManager.Presence.h
+ 	@: # generated as a side-effect
+ 
++org.freedesktop.DBus.h org.freedesktop.DBus.c: $(srcdir)/org.freedesktop.DBus.xml Makefile.am
++	$(AM_V_GEN) gdbus-codegen --interface-prefix org.freedesktop.DBus. \
++		--generate-c-code org.freedesktop.DBus \
++		--annotate "org.freedesktop.DBus" "org.gtk.GDBus.C.Name" Bus \
++		--c-namespace Gsm \
++		$(srcdir)/org.freedesktop.DBus.xml \
++		$(NULL)
++
++
+ BUILT_SOURCES =				\
+ 	org.gnome.SessionManager.App.h		\
+ 	org.gnome.SessionManager.App.c		\
+ 	org.gnome.SessionManager.Client.h		\
+ 	org.gnome.SessionManager.Client.c		\
+ 	org.gnome.SessionManager.ClientPrivate.h	\
+ 	org.gnome.SessionManager.ClientPrivate.c	\
+ 	org.gnome.SessionManager.Inhibitor.h	\
+ 	org.gnome.SessionManager.Inhibitor.c	\
+ 	org.gnome.SessionManager.h		\
+ 	org.gnome.SessionManager.c		\
+ 	org.gnome.SessionManager.Presence.h	\
+-	org.gnome.SessionManager.Presence.c
++	org.gnome.SessionManager.Presence.c     \
++	org.freedesktop.DBus.h			\
++	org.freedesktop.DBus.c
+ 
+ EXTRA_DIST +=						\
+ 	README						\
+ 	org.gnome.SessionManager.xml			\
+ 	org.gnome.SessionManager.App.xml		\
+ 	org.gnome.SessionManager.Client.xml		\
+ 	org.gnome.SessionManager.ClientPrivate.xml	\
+ 	org.gnome.SessionManager.Inhibitor.xml		\
+-	org.gnome.SessionManager.Presence.xml
++	org.gnome.SessionManager.Presence.xml		\
++	org.freedesktop.DBus.xml
+ 
+ CLEANFILES =	\
+ 	gnome-session \
+ 	gnome-session.tmp \
+ 	$(BUILT_SOURCES)
+ 
+ -include $(top_srcdir)/git.mk
+diff --git a/gnome-session/org.freedesktop.DBus.xml b/gnome-session/org.freedesktop.DBus.xml
+new file mode 100644
+index 00000000..515dd346
+--- /dev/null
++++ b/gnome-session/org.freedesktop.DBus.xml
+@@ -0,0 +1,76 @@
++<node>
++  <interface name="org.freedesktop.DBus">
++    <method name="Hello">
++      <arg direction="out" type="s" name="assigned_name"/>
++    </method>
++    <method name="RequestName">
++      <arg direction="in" type="s" name="name"/>
++      <arg direction="in" type="u" name="flags"/>
++      <arg direction="out" type="u" name="value"/>
++    </method>
++    <method name="ReleaseName">
++      <arg direction="in" type="s" name="name"/>
++      <arg direction="out" type="u" name="value"/>
++    </method>
++    <method name="StartServiceByName">
++      <arg direction="in" type="s" name="name"/>
++      <arg direction="in" type="u" name="flags"/>
++      <arg direction="out" type="u" name="value"/>
++    </method>
++    <method name="NameHasOwner">
++      <arg direction="in" type="s" name="name"/>
++      <arg direction="out" type="b" name="has_owner"/>
++    </method>
++    <method name="ListNames">
++      <arg direction="out" type="as" name="names"/>
++    </method>
++    <method name="ListActivatableNames">
++      <arg direction="out" type="as" name="activatable_names"/>
++    </method>
++    <method name="AddMatch">
++      <arg direction="in" type="s" name="rule"/>
++    </method>
++    <method name="RemoveMatch">
++      <arg direction="in" type="s" name="rule"/>
++    </method>
++    <method name="GetNameOwner">
++      <arg direction="in" type="s" name="name"/>
++      <arg direction="out" type="s" name="unique_name"/>
++    </method>
++    <method name="ListQueuedOwners">
++      <arg direction="in" type="s" name="name"/>
++      <arg direction="out" type="as" name="queued_owners"/>
++    </method>
++    <method name="GetConnectionUnixUser">
++      <arg direction="in" type="s" name="name"/>
++      <arg direction="out" type="u" name="uid"/>
++    </method>
++    <method name="GetConnectionUnixProcessID">
++      <arg direction="in" type="s" name="name"/>
++      <arg direction="out" type="u" name="pid"/>
++    </method>
++    <method name="GetConnectionSELinuxSecurityContext">
++      <arg direction="in" type="s" name="name"/>
++      <arg direction="out" type="ay" name="security_context"/>
++    </method>
++    <method name="UpdateActivationEnvironment">
++      <arg direction="in" type="a{ss}" name="environment"/>
++    </method>
++    <method name="ReloadConfig">
++    </method>
++    <method name="GetId">
++      <arg direction="out" type="s" name="unique_id"/>
++    </method>
++    <signal name="NameOwnerChanged">
++      <arg type="s" name="name"/>
++      <arg type="s" name="old_owner"/>
++      <arg type="s" name="new_owner"/>
++    </signal>
++    <signal name="NameLost">
++      <arg type="s" name="name"/>
++    </signal>
++    <signal name="NameAcquired">
++      <arg type="s" name="name"/>
++    </signal>
++  </interface>
++</node>
+-- 
+2.13.0
+

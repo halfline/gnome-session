@@ -1,0 +1,458 @@
+From f708bbbf2df41ea9683f7667c745d0297e584968 Mon Sep 17 00:00:00 2001
+From: Ray Strode <rstrode@redhat.com>
+Date: Tue, 20 Jun 2017 16:51:00 -0400
+Subject: [PATCH 2/3] system: add api for detecting if this is the last session
+ for a user
+
+https://bugzilla.gnome.org/show_bug.cgi?id=764029
+---
+ gnome-session/gsm-consolekit.c |  7 +++++
+ gnome-session/gsm-system.c     |  7 +++++
+ gnome-session/gsm-system.h     |  3 ++
+ gnome-session/gsm-systemd.c    | 63 ++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 80 insertions(+)
+
+diff --git a/gnome-session/gsm-consolekit.c b/gnome-session/gsm-consolekit.c
+index 4de5c1eb..3d3891e2 100644
+--- a/gnome-session/gsm-consolekit.c
++++ b/gnome-session/gsm-consolekit.c
+@@ -1012,59 +1012,66 @@ gsm_consolekit_add_inhibitor (GsmSystem        *system,
+ {
+ }
+ 
+ static void
+ gsm_consolekit_remove_inhibitor (GsmSystem   *system,
+                                  const gchar *id)
+ {
+ }
+ 
+ static void
+ gsm_consolekit_prepare_shutdown (GsmSystem *system,
+                                  gboolean   restart)
+ {
+         GsmConsolekit *consolekit = GSM_CONSOLEKIT (system);
+ 
+         consolekit->priv->restarting = restart;
+         g_signal_emit_by_name (system, "shutdown-prepared", TRUE);
+ }
+ 
+ static void
+ gsm_consolekit_complete_shutdown (GsmSystem *system)
+ {
+         GsmConsolekit *consolekit = GSM_CONSOLEKIT (system);
+ 
+         if (consolekit->priv->restarting)
+                 gsm_consolekit_attempt_restart (system);
+         else
+                 gsm_consolekit_attempt_stop (system);
+ }
+ 
++static gboolean
++gsm_consolekit_is_last_session_for_user (GsmSystem *system)
++{
++        return FALSE;
++}
++
+ static void
+ gsm_consolekit_system_init (GsmSystemInterface *iface)
+ {
+         iface->can_switch_user = gsm_consolekit_can_switch_user;
+         iface->can_stop = gsm_consolekit_can_stop;
+         iface->can_restart = gsm_consolekit_can_restart;
+         iface->can_suspend = gsm_consolekit_can_suspend;
+         iface->can_hibernate = gsm_consolekit_can_hibernate;
+         iface->attempt_stop = gsm_consolekit_attempt_stop;
+         iface->attempt_restart = gsm_consolekit_attempt_restart;
+         iface->suspend = gsm_consolekit_suspend;
+         iface->hibernate = gsm_consolekit_hibernate;
+         iface->set_session_idle = gsm_consolekit_set_session_idle;
+         iface->is_login_session = gsm_consolekit_is_login_session;
+         iface->add_inhibitor = gsm_consolekit_add_inhibitor;
+         iface->remove_inhibitor = gsm_consolekit_remove_inhibitor;
+         iface->prepare_shutdown = gsm_consolekit_prepare_shutdown;
+         iface->complete_shutdown = gsm_consolekit_complete_shutdown;
++        iface->is_last_session_for_user = gsm_consolekit_is_last_session_for_user;
+ }
+ 
+ GsmConsolekit *
+ gsm_consolekit_new (void)
+ {
+         GsmConsolekit *manager;
+ 
+         manager = g_object_new (GSM_TYPE_CONSOLEKIT, NULL);
+ 
+         return manager;
+ }
+diff --git a/gnome-session/gsm-system.c b/gnome-session/gsm-system.c
+index c24a9550..a78409d6 100644
+--- a/gnome-session/gsm-system.c
++++ b/gnome-session/gsm-system.c
+@@ -70,60 +70,61 @@ gsm_system_default_init (GsmSystemInterface *iface)
+                                       TRUE,
+                                       G_PARAM_READWRITE | G_PARAM_CONSTRUCT);
+         g_object_interface_install_property (iface, pspec);
+ }
+ 
+ typedef GObject GsmSystemNull;
+ typedef GObjectClass GsmSystemNullClass;
+ 
+ static void do_nothing (void) { }
+ static gboolean return_true (void) { return TRUE; }
+ static gboolean return_false (void) { return TRUE; }
+ 
+ static void
+ gsm_system_null_init_iface (GsmSystemInterface *iface)
+ {
+         iface->can_switch_user   = (void *) return_false;
+         iface->can_stop          = (void *) return_false;
+         iface->can_restart       = (void *) return_false;
+         iface->can_suspend       = (void *) return_false;
+         iface->can_hibernate     = (void *) return_false;
+         iface->attempt_stop      = (void *) do_nothing;
+         iface->attempt_restart   = (void *) do_nothing;
+         iface->suspend           = (void *) do_nothing;
+         iface->hibernate         = (void *) do_nothing;
+         iface->set_session_idle  = (void *) do_nothing;
+         iface->is_login_session  = (void *) return_true;
+         iface->add_inhibitor     = (void *) do_nothing;
+         iface->remove_inhibitor  = (void *) do_nothing;
+         iface->prepare_shutdown  = (void *) do_nothing;
+         iface->complete_shutdown = (void *) do_nothing;
++        iface->is_last_session_for_user = (void *) return_false;
+ }
+ 
+ static void
+ gsm_system_null_init (GsmSystemNull *gsn)
+ {
+ }
+ 
+ static void
+ gsm_system_null_get_property (GObject *object, guint prop_id,
+                               GValue *value, GParamSpec *pspec)
+ {
+         g_value_set_boolean (value, TRUE);
+ }
+ 
+ static void
+ gsm_system_null_class_init (GsmSystemNullClass *class)
+ {
+         class->get_property = gsm_system_null_get_property;
+         class->set_property = (void *) do_nothing;
+ 
+         g_object_class_override_property (class, 1, "active");
+ }
+ 
+ static GType gsm_system_null_get_type (void);
+ G_DEFINE_TYPE_WITH_CODE (GsmSystemNull, gsm_system_null, G_TYPE_OBJECT,
+                          G_IMPLEMENT_INTERFACE (GSM_TYPE_SYSTEM, gsm_system_null_init_iface))
+ 
+ GQuark
+ gsm_system_error_quark (void)
+ {
+@@ -191,60 +192,66 @@ gsm_system_hibernate (GsmSystem *system)
+ }
+ 
+ void
+ gsm_system_set_session_idle (GsmSystem *system,
+                              gboolean   is_idle)
+ {
+         GSM_SYSTEM_GET_IFACE (system)->set_session_idle (system, is_idle);
+ }
+ 
+ void
+ gsm_system_add_inhibitor (GsmSystem        *system,
+                           const gchar      *id,
+                           GsmInhibitorFlag  flag)
+ {
+         GSM_SYSTEM_GET_IFACE (system)->add_inhibitor (system, id, flag);
+ }
+ 
+ void
+ gsm_system_remove_inhibitor (GsmSystem   *system,
+                              const gchar *id)
+ {
+         GSM_SYSTEM_GET_IFACE (system)->remove_inhibitor (system, id);
+ }
+ 
+ gboolean
+ gsm_system_is_login_session (GsmSystem *system)
+ {
+         return GSM_SYSTEM_GET_IFACE (system)->is_login_session (system);
+ }
+ 
++gboolean
++gsm_system_is_last_session_for_user (GsmSystem *system)
++{
++        return GSM_SYSTEM_GET_IFACE (system)->is_last_session_for_user (system);
++}
++
+ /**
+  * gsm_system_is_active:
+  *
+  * Returns: %TRUE if the current session is in the foreground
+  * Since: 3.8
+  */
+ gboolean
+ gsm_system_is_active (GsmSystem *system)
+ {
+         gboolean is_active;
+         g_object_get ((GObject*)system, "active", &is_active, NULL);
+         return is_active;
+ }
+ 
+ void
+ gsm_system_prepare_shutdown  (GsmSystem *system,
+                               gboolean   restart)
+ {
+         GSM_SYSTEM_GET_IFACE (system)->prepare_shutdown (system, restart);
+ }
+ 
+ void
+ gsm_system_complete_shutdown (GsmSystem *system)
+ {
+         GSM_SYSTEM_GET_IFACE (system)->complete_shutdown (system);
+ }
+ 
+ GsmSystem *
+ gsm_get_system (void)
+ {
+diff --git a/gnome-session/gsm-system.h b/gnome-session/gsm-system.h
+index cc1c06a0..3a34b508 100644
+--- a/gnome-session/gsm-system.h
++++ b/gnome-session/gsm-system.h
+@@ -43,83 +43,86 @@ typedef enum   _GsmSystemError     GsmSystemError;
+ struct _GsmSystemInterface
+ {
+         GTypeInterface base_interface;
+ 
+         void (* request_completed)    (GsmSystem *system,
+                                        GError    *error);
+ 
+         void (* shutdown_prepared)    (GsmSystem *system,
+                                        gboolean   success);
+ 
+         gboolean (* can_switch_user)  (GsmSystem *system);
+         gboolean (* can_stop)         (GsmSystem *system);
+         gboolean (* can_restart)      (GsmSystem *system);
+         gboolean (* can_suspend)      (GsmSystem *system);
+         gboolean (* can_hibernate)    (GsmSystem *system);
+         void     (* attempt_stop)     (GsmSystem *system);
+         void     (* attempt_restart)  (GsmSystem *system);
+         void     (* suspend)          (GsmSystem *system);
+         void     (* hibernate)        (GsmSystem *system);
+         void     (* set_session_idle) (GsmSystem *system,
+                                        gboolean   is_idle);
+         gboolean (* is_login_session) (GsmSystem *system);
+         void     (* add_inhibitor)    (GsmSystem        *system,
+                                        const gchar      *id,
+                                        GsmInhibitorFlag  flags);
+         void     (* remove_inhibitor) (GsmSystem        *system,
+                                        const gchar      *id);
+         void     (* prepare_shutdown) (GsmSystem   *system,
+                                        gboolean     restart);
+         void     (* complete_shutdown)(GsmSystem   *system);
++        gboolean (* is_last_session_for_user) (GsmSystem *system);
+ };
+ 
+ enum _GsmSystemError {
+         GSM_SYSTEM_ERROR_RESTARTING = 0,
+         GSM_SYSTEM_ERROR_STOPPING
+ };
+ 
+ GType      gsm_system_get_type         (void);
+ 
+ GQuark     gsm_system_error_quark      (void);
+ 
+ GsmSystem *gsm_get_system              (void);
+ 
+ gboolean   gsm_system_can_switch_user  (GsmSystem *system);
+ 
+ gboolean   gsm_system_can_stop         (GsmSystem *system);
+ 
+ gboolean   gsm_system_can_restart      (GsmSystem *system);
+ 
+ gboolean   gsm_system_can_suspend      (GsmSystem *system);
+ 
+ gboolean   gsm_system_can_hibernate    (GsmSystem *system);
+ 
+ void       gsm_system_attempt_stop     (GsmSystem *system);
+ 
+ void       gsm_system_attempt_restart  (GsmSystem *system);
+ 
+ void       gsm_system_suspend          (GsmSystem *system);
+ 
+ void       gsm_system_hibernate        (GsmSystem *system);
+ 
+ void       gsm_system_set_session_idle (GsmSystem *system,
+                                         gboolean   is_idle);
+ 
+ gboolean   gsm_system_is_login_session (GsmSystem *system);
+ 
++gboolean   gsm_system_is_last_session_for_user (GsmSystem *system);
++
+ gboolean   gsm_system_is_active        (GsmSystem *system);
+ 
+ void       gsm_system_add_inhibitor    (GsmSystem        *system,
+                                         const gchar      *id,
+                                         GsmInhibitorFlag  flags);
+ 
+ void       gsm_system_remove_inhibitor (GsmSystem        *system,
+                                         const gchar      *id);
+ void       gsm_system_prepare_shutdown  (GsmSystem  *system,
+                                          gboolean    restart);
+ void       gsm_system_complete_shutdown (GsmSystem  *system);
+ 
+ 
+ 
+ G_END_DECLS
+ 
+ #endif /* __GSM_SYSTEM_H__ */
+diff --git a/gnome-session/gsm-systemd.c b/gnome-session/gsm-systemd.c
+index ee43bfab..f42767ad 100644
+--- a/gnome-session/gsm-systemd.c
++++ b/gnome-session/gsm-systemd.c
+@@ -862,78 +862,141 @@ gsm_systemd_prepare_shutdown (GsmSystem *system,
+         g_variant_get (res, "(h)", &idx);
+ 
+         systemd->priv->delay_inhibit_fd = g_unix_fd_list_get (fd_list, idx, NULL);
+ 
+         g_debug ("GsmSystemd: got delay inhibitor, fd = %d", systemd->priv->delay_inhibit_fd);
+ 
+         g_variant_unref (res);
+         g_object_unref (fd_list);
+ 
+         systemd->priv->prepare_for_shutdown_expected = TRUE;
+ 
+         g_dbus_proxy_call (systemd->priv->sd_proxy,
+                            restart ? "Reboot" : "PowerOff",
+                            g_variant_new ("(b)", TRUE),
+                            0,
+                            G_MAXINT,
+                            NULL,
+                            reboot_or_poweroff_done,
+                            systemd);
+ }
+ 
+ static void
+ gsm_systemd_complete_shutdown (GsmSystem *system)
+ {
+         GsmSystemd *systemd = GSM_SYSTEMD (system);
+ 
+         /* remove delay inhibitor, if any */
+         drop_delay_inhibitor (systemd);
+ }
+ 
++static gboolean
++gsm_systemd_is_last_session_for_user (GsmSystem *system)
++{
++        char **sessions = NULL;
++        char *session = NULL;
++        gboolean is_last_session;
++        int ret, i;
++
++        ret = sd_pid_get_session (getpid (), &session);
++
++        if (ret != 0) {
++                return FALSE;
++        }
++
++        ret = sd_uid_get_sessions (getuid (), FALSE, &sessions);
++
++        if (ret <= 0) {
++                free (session);
++                return FALSE;
++        }
++
++        is_last_session = TRUE;
++        for (i = 0; sessions[i]; i++) {
++                char *state = NULL;
++                char *type = NULL;
++
++                if (g_strcmp0 (sessions[i], session) == 0)
++                        continue;
++
++                ret = sd_session_get_state (sessions[i], &state);
++
++                if (ret != 0)
++                        continue;
++
++                if (g_strcmp0 (state, "closing") == 0) {
++                        free (state);
++                        continue;
++                }
++                free (state);
++
++                ret = sd_session_get_type (sessions[i], &type);
++
++                if (ret != 0)
++                        continue;
++
++                if (g_strcmp0 (type, "x11") != 0 &&
++                    g_strcmp0 (type, "wayland") != 0) {
++                        free (type);
++                        continue;
++                }
++
++                is_last_session = FALSE;
++        }
++
++        for (i = 0; sessions[i]; i++)
++                free (sessions[i]);
++        free (sessions);
++        free (session);
++
++        return is_last_session;
++}
++
+ static void
+ gsm_systemd_system_init (GsmSystemInterface *iface)
+ {
+         iface->can_switch_user = gsm_systemd_can_switch_user;
+         iface->can_stop = gsm_systemd_can_stop;
+         iface->can_restart = gsm_systemd_can_restart;
+         iface->can_suspend = gsm_systemd_can_suspend;
+         iface->can_hibernate = gsm_systemd_can_hibernate;
+         iface->attempt_stop = gsm_systemd_attempt_stop;
+         iface->attempt_restart = gsm_systemd_attempt_restart;
+         iface->suspend = gsm_systemd_suspend;
+         iface->hibernate = gsm_systemd_hibernate;
+         iface->set_session_idle = gsm_systemd_set_session_idle;
+         iface->is_login_session = gsm_systemd_is_login_session;
+         iface->add_inhibitor = gsm_systemd_add_inhibitor;
+         iface->remove_inhibitor = gsm_systemd_remove_inhibitor;
+         iface->prepare_shutdown = gsm_systemd_prepare_shutdown;
+         iface->complete_shutdown = gsm_systemd_complete_shutdown;
++        iface->is_last_session_for_user = gsm_systemd_is_last_session_for_user;
+ }
+ 
+ GsmSystemd *
+ gsm_systemd_new (void)
+ {
+         GsmSystemd *manager;
+ 
+         /* logind is not running ? */
+         if (access("/run/systemd/seats/", F_OK) < 0)
+                 return NULL;
+ 
+         manager = g_object_new (GSM_TYPE_SYSTEMD, NULL);
+ 
+         return manager;
+ }
+ 
+ static void
+ sd_proxy_signal_cb (GDBusProxy  *proxy,
+                     const gchar *sender_name,
+                     const gchar *signal_name,
+                     GVariant    *parameters,
+                     gpointer     user_data)
+ {
+         GsmSystemd *systemd = user_data;
+         gboolean is_about_to_shutdown;
+ 
+         g_debug ("GsmSystemd: received logind signal: %s", signal_name);
+ 
+         if (g_strcmp0 (signal_name, "PrepareForShutdown") != 0) {
+                 g_debug ("GsmSystemd: ignoring %s signal", signal_name);
+-- 
+2.13.0
+
