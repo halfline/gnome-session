@@ -22,14 +22,6 @@ Patch3: gnome-session-3.6.2-swrast.patch
 # https://bugzilla.gnome.org/show_bug.cgi?id=772421
 Patch4: 0001-check-accelerated-gles-Use-eglGetPlatformDisplay-EXT.patch
 
-# https://bugzilla.redhat.com/show_bug.cgi?id=1340203
-Patch5: 0001-manager-add-bus-daemon-dbus-api-xml-file.patch
-Patch6: 0002-system-add-api-for-detecting-if-this-is-the-last-ses.patch
-Patch7: 0003-manager-kill-off-bus-clients-at-log-out.patch
-
-# https://bugzilla.redhat.com/show_bug.cgi?id=1384508
-Patch8: 0001-fail-whale-handle-X-server-dying-before-startup.patch
-
 # Patches in 3.25.3+
 Patch9: 0001-Fix-use-of-uninitialised-variable-in-get_session_key.patch
 Patch10: 0002-Fix-use-after-free-in-initialize_gio.patch
