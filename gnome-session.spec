@@ -8,13 +8,13 @@
 %endif
 
 Name: gnome-session
-Version: 3.24.1
-Release: 2%{?dist}
+Version: 3.25.3
+Release: 1%{?dist}
 Summary: GNOME session manager
 
 License: GPLv2+
 URL: http://www.gnome.org
-Source0: http://download.gnome.org/sources/gnome-session/3.22/%{name}-%{version}.tar.xz
+Source0: http://download.gnome.org/sources/gnome-session/3.25/%{name}-%{version}.tar.xz
 
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
@@ -29,6 +29,11 @@ Patch7: 0003-manager-kill-off-bus-clients-at-log-out.patch
 
 # https://bugzilla.redhat.com/show_bug.cgi?id=1384508
 Patch8: 0001-fail-whale-handle-X-server-dying-before-startup.patch
+
+# Patches in 3.25.3+
+Patch9: 0001-Fix-use-of-uninitialised-variable-in-get_session_key.patch
+Patch10: 0002-Fix-use-after-free-in-initialize_gio.patch
+Patch11: 0003-client-Prevent-the-GDBusMethodInvocation-from-being-.patch
 
 BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(gl)
@@ -147,6 +152,10 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Mon Jul 10 2017 Bastien Nocera <bnocera@redhat.com> - 3.25.3-1
++ gnome-session-3.25.3-1
+- Update to 3.25.3
+
 * Wed Jun 21 2017 Ray Strode <rstrode@redhat.com> - 3.24.1-2
 - Kill bus clients at log out
   Resolves: #1340203

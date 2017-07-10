@@ -1,0 +1,47 @@
+From 4bb8872e57f1fbf2beece71197303ad4b2975d68 Mon Sep 17 00:00:00 2001
+From: Tomas Popela <tpopela@redhat.com>
+Date: Thu, 29 Jun 2017 14:26:52 +0200
+Subject: [PATCH 1/3] Fix use of uninitialised variable in
+ get_session_keyfile_if_valid()
+
+The length variable is not set before it's used. Remove the check
+for it as it's not needed.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=784339
+---
+ gnome-session/gsm-session-fill.c | 19 ++++++++-----------
+ 1 file changed, 8 insertions(+), 11 deletions(-)
+
+diff --git a/gnome-session/gsm-session-fill.c b/gnome-session/gsm-session-fill.c
+index bcd9205e..af203bbc 100644
+--- a/gnome-session/gsm-session-fill.c
++++ b/gnome-session/gsm-session-fill.c
+@@ -175,17 +175,14 @@ get_session_keyfile_if_valid (const char *path)
+                 goto error;
+         }
+ 
+-        /* check that we do have some required components */
+-        if (len == 0) {
+-                list = g_key_file_get_string_list (keyfile,
+-                                                   GSM_KEYFILE_SESSION_GROUP,
+-                                                   GSM_KEYFILE_REQUIRED_COMPONENTS_KEY,
+-                                                   &len, NULL);
+-                if (list)
+-                        g_strfreev (list);
+-                if (len == 0)
+-                        g_warning ("Session '%s': no component in the session.", path);
+-        }
++        list = g_key_file_get_string_list (keyfile,
++                                           GSM_KEYFILE_SESSION_GROUP,
++                                           GSM_KEYFILE_REQUIRED_COMPONENTS_KEY,
++                                           &len, NULL);
++        if (list)
++                g_strfreev (list);
++        if (len == 0)
++                g_warning ("Session '%s': no component in the session.", path);
+ 
+         return keyfile;
+ 
+-- 
+2.13.0
+
