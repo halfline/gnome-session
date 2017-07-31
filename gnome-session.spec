@@ -8,8 +8,8 @@
 %endif
 
 Name: gnome-session
-Version: 3.25.3
-Release: 2%{?dist}
+Version: 3.25.4
+Release: 1%{?dist}
 Summary: GNOME session manager
 
 License: GPLv2+
@@ -21,11 +21,6 @@ Patch1: gnome-session-3.3.92-nv30.patch
 Patch3: gnome-session-3.6.2-swrast.patch
 # https://bugzilla.gnome.org/show_bug.cgi?id=772421
 Patch4: 0001-check-accelerated-gles-Use-eglGetPlatformDisplay-EXT.patch
-
-# Patches in 3.25.3+
-Patch9: 0001-Fix-use-of-uninitialised-variable-in-get_session_key.patch
-Patch10: 0002-Fix-use-after-free-in-initialize_gio.patch
-Patch11: 0003-client-Prevent-the-GDBusMethodInvocation-from-being-.patch
 
 BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(gl)
@@ -49,11 +44,8 @@ BuildRequires: usermode
 
 BuildRequires: gettext
 BuildRequires: intltool
-BuildRequires: libtool, autoconf, automake
-BuildRequires: gnome-common
 BuildRequires: xmlto
 BuildRequires: /usr/bin/xsltproc
-BuildRequires: git
 
 # an artificial requires to make sure we get dconf, for now
 Requires: dconf
@@ -89,8 +81,7 @@ Requires: xorg-x11-server-Xwayland%{?_isa}
 Desktop file to add GNOME on wayland to display manager session menu.
 
 %prep
-%autosetup -S git
-NOCONFIGURE=1 gnome-autogen.sh
+%autosetup -p1
 
 %build
 %configure --enable-docbook-docs                                \
@@ -144,6 +135,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Mon Jul 31 2017 Kalev Lember <klember@redhat.com> - 3.25.4-1
+- Update to 3.25.4
+
 * Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 3.25.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
