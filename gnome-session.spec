@@ -9,7 +9,7 @@
 
 Name: gnome-session
 Version: 3.26.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: GNOME session manager
 
 License: GPLv2+
@@ -97,21 +97,9 @@ make %{?_smp_mflags} V=1
 
 %find_lang %{po_package}
 
-%post
-/sbin/ldconfig
-touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
+%post -p /sbin/ldconfig
 
-%postun
-/sbin/ldconfig
-if [ $1 -eq 0 ] ; then
-  touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-  gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-  glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
-fi
-
-%posttrans
-gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
+%postun -p /sbin/ldconfig
 
 %files xsession
 %{_datadir}/xsessions/*
@@ -135,6 +123,9 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Thu Jan 11 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 3.26.1-2
+- Remove obsolete scriptlets
+
 * Sun Oct 08 2017 Kalev Lember <klember@redhat.com> - 3.26.1-1
 - Update to 3.26.1
 
