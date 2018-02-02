@@ -9,7 +9,7 @@
 
 Name: gnome-session
 Version: 3.26.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: GNOME session manager
 
 License: GPLv2+
@@ -97,9 +97,7 @@ make %{?_smp_mflags} V=1
 
 %find_lang %{po_package}
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
+%ldconfig_scriptlets
 
 %files xsession
 %{_datadir}/xsessions/*
@@ -123,6 +121,9 @@ make %{?_smp_mflags} V=1
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Fri Feb 02 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 3.26.1-3
+- Switch to %%ldconfig_scriptlets
+
 * Thu Jan 11 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 3.26.1-2
 - Remove obsolete scriptlets
 
