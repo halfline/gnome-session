@@ -87,6 +87,7 @@ Desktop file to add GNOME on wayland to display manager session menu.
 
 %build
 %meson                                                          \
+%if 0%{?with_session_selector}
            -Dsession_selector=true                              \
 %endif
            -Dsystemd=true                                       \
