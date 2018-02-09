@@ -9,7 +9,7 @@
 
 Name: gnome-session
 Version: 3.26.1
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: GNOME session manager
 
 License: GPLv2+
@@ -21,6 +21,8 @@ Patch1: gnome-session-3.3.92-nv30.patch
 Patch3: gnome-session-3.6.2-swrast.patch
 # https://bugzilla.gnome.org/show_bug.cgi?id=772421
 Patch4: 0001-check-accelerated-gles-Use-eglGetPlatformDisplay-EXT.patch
+# https://bugzilla.gnome.org/show_bug.cgi?id=792932
+Patch5: 0001-data-Adjust-to-g-s-d-s-plugin-removals.patch
 
 BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(gl)
@@ -59,7 +61,7 @@ Requires: gsettings-desktop-schemas >= 0.1.7
 # pull in dbus-x11, see bug 209924
 Requires: dbus-x11
 
-Conflicts: gnome-settings-daemon < 3.23.1
+Conflicts: gnome-settings-daemon < 3.27.90
 
 %description
 gnome-session manages a GNOME desktop or GDM login session. It starts up
@@ -121,6 +123,9 @@ make %{?_smp_mflags} V=1
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Fri Feb 09 2018 Bastien Nocera <bnocera@redhat.com> - 3.26.1-5
+- Adjust required session components for gnome-settings-daemon 3.27.90
+
 * Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.26.1-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
