@@ -96,7 +96,7 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %meson_build
 
 %install
-%make_install
+%meson_install
 
 %find_lang %{po_package}
 
