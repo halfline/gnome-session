@@ -86,13 +86,12 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %autosetup -p1
 
 %build
-%configure --enable-docbook-docs                                \
-%if 0%{?with_session_selector}
-           --enable-session-selector                            \
+%meson                                                          \
+           -Dsession_selector=true                              \
 %endif
-           --enable-systemd                                     \
-           --disable-gconf
-make %{?_smp_mflags} V=1
+           -Dsystemd=true                                       \
+           -Dsystemd_journal=true
+%meson_build
 
 %install
 %make_install
@@ -124,6 +123,8 @@ make %{?_smp_mflags} V=1
 
 %changelog
 * Fri Feb 09 2018 Bastien Nocera <bnocera@redhat.com> - 3.27.4-1
+- Update to 3.27.4
+- Use meson as build system
 - Adjust required session components for gnome-settings-daemon 3.27.90
 
 * Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.26.1-4
