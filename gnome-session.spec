@@ -24,6 +24,7 @@ Patch4: 0001-check-accelerated-gles-Use-eglGetPlatformDisplay-EXT.patch
 # https://bugzilla.gnome.org/show_bug.cgi?id=792932
 Patch5: 0001-data-Adjust-to-g-s-d-s-plugin-removals.patch
 
+BuildRequires: meson
 BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(gl)
 BuildRequires: pkgconfig(glesv2)
