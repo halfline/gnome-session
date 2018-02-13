@@ -8,8 +8,8 @@
 %endif
 
 Name: gnome-session
-Version: 3.27.4
-Release: 2%{?dist}
+Version: 3.27.90.1
+Release: 1%{?dist}
 Summary: GNOME session manager
 
 License: GPLv2+
@@ -21,8 +21,6 @@ Patch1: gnome-session-3.3.92-nv30.patch
 Patch3: gnome-session-3.6.2-swrast.patch
 # https://bugzilla.gnome.org/show_bug.cgi?id=772421
 Patch4: 0001-check-accelerated-gles-Use-eglGetPlatformDisplay-EXT.patch
-# https://bugzilla.gnome.org/show_bug.cgi?id=792932
-Patch5: 0001-data-Adjust-to-g-s-d-s-plugin-removals.patch
 
 BuildRequires: meson
 BuildRequires: pkgconfig(egl)
@@ -124,6 +122,9 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Feb 13 2018 Ray Strode <rstrode@redhat.com> - 3.27.90.1-1
+- Update to 3.27.90.1
+
 * Tue Feb 13 2018 Björn Esser <besser82@fedoraproject.org> - 3.27.4-2
 - Rebuild against newer gnome-desktop3 package
 
