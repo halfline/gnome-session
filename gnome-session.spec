@@ -9,7 +9,7 @@
 
 Name: gnome-session
 Version: 3.27.4
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: GNOME session manager
 
 License: GPLv2+
@@ -124,6 +124,9 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Feb 13 2018 Björn Esser <besser82@fedoraproject.org> - 3.27.4-2
+- Rebuild against newer gnome-desktop3 package
+
 * Fri Feb 09 2018 Bastien Nocera <bnocera@redhat.com> - 3.27.4-1
 - Update to 3.27.4
 - Use meson as build system
