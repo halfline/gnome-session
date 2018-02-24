@@ -23,6 +23,7 @@ Patch3: gnome-session-3.6.2-swrast.patch
 Patch4: 0001-check-accelerated-gles-Use-eglGetPlatformDisplay-EXT.patch
 
 BuildRequires: meson
+BuildRequires: gcc
 BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(gl)
 BuildRequires: pkgconfig(glesv2)
