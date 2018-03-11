@@ -8,7 +8,7 @@
 %endif
 
 Name: gnome-session
-Version: 3.27.91
+Version: 3.27.92
 Release: 1%{?dist}
 Summary: GNOME session manager
 
@@ -123,6 +123,9 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Sun Mar 11 2018 Kalev Lember <klember@redhat.com> - 3.27.92-1
+- Update to 3.27.92
+
 * Fri Mar 02 2018 Kalev Lember <klember@redhat.com> - 3.27.91-1
 - Update to 3.27.91
 
