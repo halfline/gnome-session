@@ -8,13 +8,13 @@
 %endif
 
 Name: gnome-session
-Version: 3.27.92
+Version: 3.28.0
 Release: 1%{?dist}
 Summary: GNOME session manager
 
 License: GPLv2+
 URL: http://www.gnome.org
-Source0: http://download.gnome.org/sources/gnome-session/3.27/%{name}-%{version}.tar.xz
+Source0: http://download.gnome.org/sources/gnome-session/3.28/%{name}-%{version}.tar.xz
 
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
@@ -123,6 +123,9 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Mar 13 2018 Kalev Lember <klember@redhat.com> - 3.28.0-1
+- Update to 3.28.0
+
 * Sun Mar 11 2018 Kalev Lember <klember@redhat.com> - 3.27.92-1
 - Update to 3.27.92
 
