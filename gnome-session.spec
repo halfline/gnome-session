@@ -8,13 +8,13 @@
 %endif
 
 Name: gnome-session
-Version: 3.26.1
+Version: 3.28.1
 Release: 1%{?dist}
 Summary: GNOME session manager
 
 License: GPLv2+
 URL: http://www.gnome.org
-Source0: http://download.gnome.org/sources/gnome-session/3.26/%{name}-%{version}.tar.xz
+Source0: http://download.gnome.org/sources/gnome-session/3.28/%{name}-%{version}.tar.xz
 
 # Blacklist NV30: https://bugzilla.redhat.com/show_bug.cgi?id=745202
 Patch1: gnome-session-3.3.92-nv30.patch
@@ -22,6 +22,8 @@ Patch3: gnome-session-3.6.2-swrast.patch
 # https://bugzilla.gnome.org/show_bug.cgi?id=772421
 Patch4: 0001-check-accelerated-gles-Use-eglGetPlatformDisplay-EXT.patch
 
+BuildRequires: meson
+BuildRequires: gcc
 BuildRequires: pkgconfig(egl)
 BuildRequires: pkgconfig(gl)
 BuildRequires: pkgconfig(glesv2)
@@ -59,7 +61,7 @@ Requires: gsettings-desktop-schemas >= 0.1.7
 # pull in dbus-x11, see bug 209924
 Requires: dbus-x11
 
-Conflicts: gnome-settings-daemon < 3.23.1
+Conflicts: gnome-settings-daemon < 3.27.90
 
 %description
 gnome-session manages a GNOME desktop or GDM login session. It starts up
@@ -84,34 +86,20 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %autosetup -p1
 
 %build
-%configure --enable-docbook-docs                                \
+%meson                                                          \
 %if 0%{?with_session_selector}
-           --enable-session-selector                            \
+           -Dsession_selector=true                              \
 %endif
-           --enable-systemd                                     \
-           --disable-gconf
-make %{?_smp_mflags} V=1
+           -Dsystemd=true                                       \
+           -Dsystemd_journal=true
+%meson_build
 
 %install
-%make_install
+%meson_install
 
 %find_lang %{po_package}
 
-%post
-/sbin/ldconfig
-touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-
-%postun
-/sbin/ldconfig
-if [ $1 -eq 0 ] ; then
-  touch --no-create %{_datadir}/icons/hicolor &>/dev/null || :
-  gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-  glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
-fi
-
-%posttrans
-gtk-update-icon-cache %{_datadir}/icons/hicolor &>/dev/null || :
-glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
+%ldconfig_scriptlets
 
 %files xsession
 %{_datadir}/xsessions/*
@@ -135,6 +123,38 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &>/dev/null || :
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Tue Apr 10 2018 Kalev Lember <klember@redhat.com> - 3.28.1-1
+- Update to 3.28.1
+
+* Tue Mar 13 2018 Kalev Lember <klember@redhat.com> - 3.28.0-1
+- Update to 3.28.0
+
+* Sun Mar 11 2018 Kalev Lember <klember@redhat.com> - 3.27.92-1
+- Update to 3.27.92
+
+* Fri Mar 02 2018 Kalev Lember <klember@redhat.com> - 3.27.91-1
+- Update to 3.27.91
+
+* Tue Feb 13 2018 Ray Strode <rstrode@redhat.com> - 3.27.90.1-1
+- Update to 3.27.90.1
+
+* Tue Feb 13 2018 Björn Esser <besser82@fedoraproject.org> - 3.27.4-2
+- Rebuild against newer gnome-desktop3 package
+
+* Fri Feb 09 2018 Bastien Nocera <bnocera@redhat.com> - 3.27.4-1
+- Update to 3.27.4
+- Use meson as build system
+- Adjust required session components for gnome-settings-daemon 3.27.90
+
+* Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 3.26.1-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
+* Fri Feb 02 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 3.26.1-3
+- Switch to %%ldconfig_scriptlets
+
+* Thu Jan 11 2018 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 3.26.1-2
+- Remove obsolete scriptlets
+
 * Sun Oct 08 2017 Kalev Lember <klember@redhat.com> - 3.26.1-1
 - Update to 3.26.1
 
