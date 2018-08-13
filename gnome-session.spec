@@ -9,7 +9,7 @@
 
 Name: gnome-session
 Version: 3.28.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: GNOME session manager
 
 License: GPLv2+
@@ -48,6 +48,7 @@ BuildRequires: gettext
 BuildRequires: intltool
 BuildRequires: xmlto
 BuildRequires: /usr/bin/xsltproc
+BuildRequires: python3-devel
 
 # an artificial requires to make sure we get dconf, for now
 Requires: dconf
@@ -123,6 +124,10 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Mon Aug 13 2018 Ray Strode <rstrode@redhat.com> - 3.28.1-2
+- BuildRequire python3 binary
+  Resolves: #1615527
+
 * Tue Apr 10 2018 Kalev Lember <klember@redhat.com> - 3.28.1-1
 - Update to 3.28.1
 
