@@ -9,7 +9,7 @@
 
 Name: gnome-session
 Version: 3.28.1
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: GNOME session manager
 
 License: GPLv2+
@@ -98,6 +98,11 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %install
 %meson_install
 
+# Rename GNOME to Standard
+sed -i -e 's/Name=GNOME/Name=Standard (Wayland display server)/' $RPM_BUILD_ROOT%{_datadir}/wayland-sessions/gnome.desktop
+sed -i -e 's/Name=GNOME/Name=Standard (X11 display server)/' $RPM_BUILD_ROOT%{_datadir}/xsessions/gnome.desktop
+sed -i -e 's/Name=GNOME/Name=Standard (X11 display server)/' $RPM_BUILD_ROOT%{_datadir}/xsessions/gnome-xorg.desktop
+
 %find_lang %{po_package}
 
 %ldconfig_scriptlets
@@ -124,6 +129,10 @@ Desktop file to add GNOME on wayland to display manager session menu.
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Wed Aug 22 2018  Ray Strode <rstrode@redhat.com> - 3.28.1-3
+- Rename GNOME to Standard
+  Related: #1612915
+
 * Mon Aug 13 2018 Ray Strode <rstrode@redhat.com> - 3.28.1-2
 - BuildRequire python3 binary
   Resolves: #1615527
