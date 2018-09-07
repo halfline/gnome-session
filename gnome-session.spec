@@ -9,7 +9,7 @@
 
 Name: gnome-session
 Version: 3.28.1
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: GNOME session manager
 
 License: GPLv2+
@@ -54,6 +54,7 @@ BuildRequires: python3-devel
 Requires: dconf
 
 Requires: system-logos
+Requires: system-backgrounds
 # Needed for gnome-settings-daemon
 Requires: control-center-filesystem
 
@@ -129,6 +130,10 @@ sed -i -e 's/Name=GNOME/Name=Standard (X11 display server)/' $RPM_BUILD_ROOT%{_d
 %{_datadir}/glib-2.0/schemas/org.gnome.SessionManager.gschema.xml
 
 %changelog
+* Fri Sep 07 2018 Ray Strode <rstrode@redhat.com> - 3.28.1-4
+- Require system-backgrounds
+  Related: #1626388
+
 * Wed Aug 22 2018  Ray Strode <rstrode@redhat.com> - 3.28.1-3
 - Rename GNOME to Standard
   Related: #1612915
